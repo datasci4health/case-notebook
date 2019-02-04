@@ -4,7 +4,7 @@ Man, 51 years old, present to an emergency department complaining of chest pain.
 ++ Start -> Level 1
 
 == Level 1 (dialog) ==
-:Nurse: Doctor, we have a man (51 years old) who entered the emergency department reporting chest pain. His vital signs are ABP: 144x92mmHG; HR: 78bpm; RR: 21rpm; Temp: 37oC; O2Sat: 98%.
+:Nurse: Doctor, we have a man (51 years old) who entered the emergency department reporting chest pain. His vital signs are ABP: 144x92mmHG; HR: 78bpm; RR: 21rpm; Temp: 37oC; O2Sat: 98%. That is it!
 
 :Doctor: Let’s go!
 

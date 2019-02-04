@@ -48,8 +48,6 @@ class DCCTrigger extends DCCBase {
      
      this._presentation = this._shadow.querySelector("#presentation-dcc");
      
-     // this._monitor = document.querySelector("dcc-monitor");
-     
      this._computeTrigger = this._computeTrigger.bind(this);
      this._renderInterface = this._renderInterface.bind(this);
    }
@@ -153,16 +151,13 @@ class DCCTrigger extends DCCBase {
          webLocation.appendChild(triggerElem);
       else
          this._presentation.appendChild(triggerElem);
-
-      // this._presentation.addEventListener("click", this._computeTrigger);
    }
    
    _computeTrigger() {
       if (this.hasAttribute("label") || this.hasAttribute("action")) {
          let eventLabel = (this.hasAttribute("action")) ? this.action : "compute-trigger";
          let message = (this.hasAttribute("label")) ? this.label : this.action;
-         let eventButton = new CustomEvent(eventLabel, {detail: message});
-         document.dispatchEvent(eventButton);
+         window.messageBus.dispatchMessage(eventLabel, message);
       }
    }
 }

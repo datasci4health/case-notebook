@@ -13,7 +13,9 @@ class Translator {
       this._extractAnnotations = this._extractAnnotations.bind(this);
    }
 
-   // Index all knots to guide references
+   /*
+    * Index all knots to guide references
+    */
    _indexKnots(markdown) {
       let knots = {
          _source: markdown
@@ -28,6 +30,8 @@ class Translator {
          else
             label = (label.indexOf(".") < 0 && knotCtx == null) ? label
                     : knotCtx + "." + label;
+         if (kb == 1)
+            this._startKnot = label;
          if (knots[label]) {
             if (!knots._error)
                knots._error = [];
@@ -40,19 +44,30 @@ class Translator {
       return knots;
    }
    
+   /*
+    * Extract annotations of the entire case
+    */
    _extractAnnotations(compiledCase) {
+      for (let kn in compiledCase)
+         if (kn != "_source")
+            this.extractKnotAnnotations(compiledCase[kn]);
+   }
+   
+   /*
+    * Extract annotations of a single node
+    */
+   extractKnotAnnotations(knot) {
       const mdAnnToObj = {
-         knot: this._knotMdToObj,
          ctxopen   : this._contextOpenMdToObj,
          ctxclose  : this._contextCloseMdToObj,
          annotation: this._annotationMdToObj
       };
       
-      let knotSet = compiledCase[0];
-      let currentSet = knotSet;
+      knot.annotations = [];
+      let currentSet = knot.annotations;
       let maintainContext = false;
 
-      let mdfocus = compiledCase._source;
+      let mdfocus = knot._source;
       
       let newSource = "";
       let matchStart;
@@ -79,14 +94,8 @@ class Translator {
             let transObj = mdAnnToObj[selected](
                   Translator.marksAnnotation[selected].exec(toTranslate));
             
-            // hierarquical annotation building inside contexts
+            // hierarchical annotation building inside contexts
             switch (selected) {
-               case "knot":
-                  knotSet = [];
-                  compiledCase[transObj.title].annotations = knotSet;
-                  currentSet = knotSet;
-                  newSource += toTranslate;
-                  break;
                case "ctxopen":
                   currentSet.push(transObj);
                   currentSet = [];
@@ -97,7 +106,8 @@ class Translator {
                   }
                   break;
                case "ctxclose":
-                  currentSet = knotSet;
+                  // currentSet = knotSet;
+                  currentSet = knot.annotations;
                   if (maintainContext)
                      newSource += toTranslate;
                   maintainContext = false;
@@ -120,17 +130,29 @@ class Translator {
       if (mdfocus.length > 0)
          newSource += mdfocus;
       
-      compiledCase._source = newSource;
-      
-      return compiledCase;
+      knot._preparedSource = newSource;
    }
    
-   // Compiles a markdown text to an object representation 
+   /*
+    * Compiles a markdown text to an object representation
+    */
    compileMarkdown(markdown) {
       let compiledCase = this._indexKnots(markdown);
       
-      compiledCase = this._extractAnnotations(compiledCase);
+      this._extractAnnotations(compiledCase);
       
+      for (let kn in compiledCase)
+         if (kn != "_source")
+            this.compileKnotMarkdown(compiledCase[kn]);
+      delete compiledCase._source;
+      
+      return compiledCase;
+   }
+      
+   /*
+    * Compiles a single knot to an object representation
+    */
+   compileKnotMarkdown(knot) {
       const mdToObj = {
             knot   : this._knotMdToObj,
             option : this._optionMdToObj,
@@ -145,11 +167,10 @@ class Translator {
             // score  : this.translateScore
       };
       
-      let mdfocus = compiledCase._source;
-      let compiledKnot = compiledCase;
+      let mdfocus = knot._preparedSource;
+      knot.content = [];
+      let compiledKnot = knot.content;
       
-      this._currentKnot = null;
-      this._currentCategory = null;
       this._objSequence = 0;
       
       let matchStart;
@@ -179,12 +200,8 @@ class Translator {
             
             // attach to a knot array (if it is a knot) or an array inside a knot
             if (selected == "knot") {
-               for (let ka in transObj)
-                  compiledCase[transObj.title][ka] = transObj[ka]; 
-               compiledKnot = [];
-               compiledCase[transObj.title].content = compiledKnot;
-               this._currentKnot = transObj.title;
-               this._currentCategory = (transObj.category) ? transObj.category : null;
+               if (transObj.category)
+                  knot.category = transObj.category;
             } else
                compiledKnot.push(transObj);
             
@@ -197,9 +214,7 @@ class Translator {
       if (mdfocus.length > 0)
          compiledKnot.push(this._stampObject(this._textMdToObj(mdfocus)));
       
-      delete compiledCase._source;
-      
-      return compiledCase;
+      delete knot._prepaedSource;
    }
    
    /*
@@ -211,6 +226,9 @@ class Translator {
       return obj;
    }
 
+   /*
+    * Generate HTML in a single knot
+    */
    generateKnotHTML(knotObj) {
       const objToHTML = {
             // knot   : 
@@ -678,10 +696,12 @@ class Translator {
 }
 
 (function() {
+   // Translator.marksKnot = /^[ \t]*==*[ \t]*(\w[\w \t]*)(?:\(([\w \t]*)\))?[ \t]*=*[ \t]*[\f\n\r]/im;
+   
    Translator.marksKnotTitle = /(^[ \t]*==*[ \t]*(?:\w[\w \t]*)(?:\([\w \t]*\))?[ \t]*=*[ \t]*[\f\n\r])/igm;
 
    Translator.marksAnnotation = {
-     knot   : /^[ \t]*==*[ \t]*(\w[\w \t]*)(?:\(([\w \t]*)\))?[ \t]*=*[ \t]*[\f\n\r]/im,
+     // knot   : /^[ \t]*==*[ \t]*(\w[\w \t]*)(?:\(([\w \t]*)\))?[ \t]*=*[ \t]*[\f\n\r]/im,
      ctxopen : /\{\{([\w \t\+\-\*"=\:%\/]+)(?:#([\w \t\+\-\*"=\%\/]+):([\w \t\+\-\*"=\%\/,]+);([\w \t#,]+)?)?[\f\n\r]/im,
      ctxclose: /\}\}/im,
      annotation: /\{([\w \t\+\-\*"=\:%\/]+)(?:\(([\w \t\+\-\*"=\:%\/]+)\)[ \t]*)?(?:#([\w \t\+\-\*"=\:%\/]+))?\}/im
@@ -690,7 +710,7 @@ class Translator {
    Translator.marksAnnotationInside = /([\w \t\+\-\*"]+)(?:[=\:]([\w \t%]*)(?:\/([\w \t%]*))?)?/im;
 
    Translator.marks = {
-      knot   : Translator.marksAnnotation.knot,
+      knot   : /^[ \t]*==*[ \t]*(\w[\w \t]*)(?:\(([\w \t]*)\))?[ \t]*=*[ \t]*[\f\n\r]/im,
       option : /[ \t]*\+\+[ \t]*([^-&<> \t][^-&<>\n\r\f]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))?[\f\n\r]/im,
       divert : /-(?:(?:&gt;)|>) *(\w[\w. ]*)/im,
       talk   : /^[ \t]*: *(\w[\w ]*):[ \t]*([^\n\r\f]+)[\n\r\f]*/im,

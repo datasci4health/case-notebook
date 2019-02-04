@@ -16,30 +16,22 @@ class AuthorManager {
       this._renderSlide = true;
       this._editor = null;
       
-      // <TODO> Fix this problem - allow asynchronous methods inside the class
-      // this._server = new DCCAuthorServer();
-
-      this.actionButton = this.actionButton.bind(this);
-      let actionListeners = ["control-load", "control-save", "control-play",
-         "control-new-knot", "control-edit-knot", "control-knot-up",
-         "control-knot-down", "control-config"];
-      for (var al in actionListeners)
-         document.addEventListener(actionListeners[al], this.actionButton);
-      
-      this.actionKnotSelected = this.actionKnotSelected.bind(this);
-      document.addEventListener("knot-selected", this.actionKnotSelected);
+      this.controlEvent = this.controlEvent.bind(this);
+      window.messageBus.subscribe("control", this.controlEvent);
    }
    
-   actionButton(event) {
-      switch (event.type) {
-         case "control-load": this.selectCase();
+   controlEvent(topic, message) {
+      switch (topic) {
+         case "control/load": this.selectCase();
                               break;
-         case "control-save": this.saveCase();
+         case "control/save": this.saveCase();
                               break;
-         case "control-edit-knot": this.editKnot();
+         case "control/edit-knot": this.editKnot();
                                    break;
-         case "control-play": this.playCase();
+         case "control/play": this.playCase();
                               break;
+         case "control/knot-selected": this.knotSelected(message);
+                                       break;
       }
    }
    
@@ -49,7 +41,8 @@ class AuthorManager {
    async selectCase() {
       this._resPicker = new DCCResourcePicker();
       this._resourceSelected = this._resourceSelected.bind(this);
-      document.addEventListener("resource-selected", this._resourceSelected);
+      
+      document.addEventListener("control/resource-selected", this._resourceSelected);
       this._resPicker.addSelectionListener(this);
       
       const cases = await this._server.casesList(this._resPicker);
@@ -75,7 +68,7 @@ class AuthorManager {
             let miniature = document.createElement("div");
             miniature.classList.add("navigation-knot");
             miniature.classList.add("std-border");
-            miniature.innerHTML = "<h2><dcc-trigger action='knot-selected' render='none' " +
+            miniature.innerHTML = "<h2><dcc-trigger action='control/knot-selected' render='none' " +
                                       "label = '" + this._compiledCase[kn].title + "'>"
                                   "</dcc-trigger></h2>";
             navigationPanel.appendChild(miniature);
@@ -87,8 +80,10 @@ class AuthorManager {
    /*
     * ACTION: control-edit
     */
-   editKnot() {
+   async editKnot() {
       if (this._knotSelected != null) {
+         if (this._checkKnotModification())
+            await this._generateHTML();
          this._renderSlide = !this._renderSlide;
          this._renderKnot();
       }
@@ -143,30 +138,42 @@ class AuthorManager {
    /*
     * ACTION: knot-selected
     */
-   async actionKnotSelected(event) {
+   async knotSelected(knotTitle) {
       this._htmlTemplate = null;
       
-      if (this._compiledCase[event.detail]) {
+      if (this._compiledCase[knotTitle]) {
          this._checkKnotModification();
-         this._knotSelected = event.detail;
-         this._htmlKnot = this._translator.generateKnotHTML(this._compiledCase[this._knotSelected]);
-         let template = (this._compiledCase[this._knotSelected].category) ?
-                         this._compiledCase[this._knotSelected].category : "knot";
-         
-         this._templateHTML = await this._server.loadTemplate(template);
+         this._knotSelected = knotTitle;
+         await this._generateHTML();
          this._renderKnot();
       }
    }
-
+   
+   /*
+    * Check if the knot was modified to update it
+    */
    _checkKnotModification() {
+      let modified = false;
       if (!this._renderSlide && this._editor != null) {
          let editorText = this._editor.getText();
          editorText = editorText.substring(0, editorText.length - 1);
-         if (this._compiledCase[this._knotSelected]._source != editorText)
+         if (this._compiledCase[this._knotSelected]._source != editorText) {
+            modified = true;
             this._compiledCase[this._knotSelected]._source = editorText;
+            this._translator.extractKnotAnnotations(this._compiledCase[this._knotSelected]);
+            this._translator.compileKnotMarkdown(this._compiledCase[this._knotSelected]);
+         }
       }
+      return modified;
    }
    
+   async _generateHTML() {
+      this._htmlKnot = this._translator.generateKnotHTML(this._compiledCase[this._knotSelected]);
+      let template = (this._compiledCase[this._knotSelected].category) ?
+                      this._compiledCase[this._knotSelected].category : "knot";
+      this._templateHTML = await this._server.loadTemplate(template);
+   }
+
    _renderKnot() {
       let knotPanel = document.querySelector("#knot-panel");
       

@@ -8,27 +8,74 @@ class PlayerManager {
    }
    
    constructor() {
-      this.eventMonitor = this.eventMonitor.bind(this);
-      let actionListeners = ["previous-knot", "control-register", "control-signin"];
-      for (var al in actionListeners)
-         document.addEventListener(actionListeners[al], this.eventMonitor);
+      this.controlEvent = this.controlEvent.bind(this);
+      window.messageBus.subscribe("control", this.controlEvent);
+      this.navigateEvent = this.navigateEvent.bind(this);
+      window.messageBus.subscribe("navigate", this.navigateEvent);
    }
    
-   eventMonitor(event) {
-      console.log("Event: " + event.type);
-      switch (event.type) {
-         case "control-register": this.register(); break;
-         case "control-signin":   this.signIn(); break;
-         case "previous-knot":    window.history.back(); break;
+   /*
+    * Event handlers
+    * **************
+    */
+   
+   controlEvent(topic, message) {
+      switch (topic) {
+         case "control/register": this.register(); break;
+         case "control/signin":   this.signIn(); break;
       }
    }
    
+   navigateEvent(topic, message) {
+      switch (topic) {
+         case "navigate/previous-knot": window.history.back(); break;
+      }
+   }
+
    startKnot() {
       
    }
    
+   /*
+    * Start the tracking record of a case
+    */
+   startCase(caseid) {
+      const profile = retrieveCurrentProfile();
+
+      const currentDateTime = new Date();
+      const casekey = profile.id + "-" + caseid + "-" + generateUID();
+      profile.cases.push(casekey);
+      localStorage.setItem(storePrefix + "current-case", casekey);
+
+      const casetrack = {
+        userid : profile.id,
+        caseid : caseid,
+        start  : currentDateTime.toJSON(),
+        startTime : currentDateTime.getTime(),
+        inputs : {},
+        route : []
+      };
+      localStorage.setItem(storePrefix + casekey, JSON.stringify(casetrack));
+   }
+
+   generateUID() {
+      function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+          .toString(16)
+          .substring(1);
+      }
+      const currentDateTime = new Date();
+      return currentDateTime.toJSON() + "-" +
+             s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+    }
+   
+   /*
+    * Registry related operations
+    * ***************************
+    */
+   
    startGame() {
-      let currentUser = localStorage.getItem(storePrefix + "current-user");
+      let currentUser = this.retrieveCurrentUser();
       if (currentUser == null)
          document.querySelector("#signin-register").style.display = "flex";
       else {
@@ -88,12 +135,30 @@ class PlayerManager {
           document.querySelector("#invalid-id").style.display = "initial";
    }
    
+   /*
+    * Generic services
+    * ****************
+    */
+   
+   retrieveCurrentUser() {
+      return localStorage.getItem(storePrefix + "current-user");
+   }
+   
    retrieveUsers() {
       let usersStr = localStorage.getItem(storePrefix + "users");
       return (usersStr == null) ? {ids: []} : JSON.parse(usersStr);
    }
    
+   retrieveCurrentProfile() {
+      return this.retrieveProfile(this.retrieveCurrentUser());
+   }
+   
    retrieveProfile(userid) {
       return JSON.parse(localStorage.getItem(storePrefix + "profile-" + userid));
    }
+   
+   /*
+    * Tracking player
+    * ***************
+    */
 }
