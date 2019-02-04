@@ -1,11 +1,10 @@
 /**
  * Local component that worls as a proxy to the server functionalities
  */
-const DCCNS_serverAddress = "http://127.0.0.1:8888/";
 
-class DCCNotebookServer {
+class DCCAuthorServer {
    async casesList() {
-      const response = await fetch(DCCNS_serverAddress + "cases-list", {
+      const response = await fetch(DCCAuthorServer.serverAddress + "cases-list", {
          method: "POST",
          headers:{
            "Content-Type": "application/json"
@@ -20,7 +19,7 @@ class DCCNotebookServer {
    }
    
    async loadCase(caseName) {
-      const response = await fetch(DCCNS_serverAddress + "load-case", {
+      const response = await fetch(DCCAuthorServer.serverAddress + "load-case", {
          method: "POST",
          body: JSON.stringify({"caseName": caseName}),
          headers:{
@@ -32,7 +31,7 @@ class DCCNotebookServer {
    }
 
    async saveCase(caseName, caseText) {
-      const response = await fetch(DCCNS_serverAddress + "save-case", {
+      const response = await fetch(DCCAuthorServer.serverAddress + "save-case", {
          method: "POST",
          body: JSON.stringify({"caseName": caseName,
                                "caseText": caseText}),
@@ -45,7 +44,7 @@ class DCCNotebookServer {
    }
 
    async loadTemplate(templateName) {
-      const response = await fetch(DCCNS_serverAddress + "load-template", {
+      const response = await fetch(DCCAuthorServer.serverAddress + "load-template", {
          method: "POST",
          body: JSON.stringify({"templateName": templateName}),
          headers:{
@@ -57,7 +56,7 @@ class DCCNotebookServer {
    }
 
    async prepareCaseHTML(caseName) {
-      const response = await fetch(DCCNS_serverAddress + "prepare-case-html", {
+      const response = await fetch(DCCAuthorServer.serverAddress + "prepare-case-html", {
          method: "POST",
          body: JSON.stringify({"caseName": caseName}),
          headers:{
@@ -69,7 +68,7 @@ class DCCNotebookServer {
    }
 
    async saveKnotHTML(caseName, knotFile, knotHTML) {
-      const response = await fetch(DCCNS_serverAddress + "save-knot-html", {
+      const response = await fetch(DCCAuthorServer.serverAddress + "save-knot-html", {
          method: "POST",
          body: JSON.stringify({"caseName": caseName,
                                "knotFile": knotFile,
@@ -83,7 +82,7 @@ class DCCNotebookServer {
    }
 
    async saveCaseScript(caseName, scriptFile, scriptJS) {
-      const response = await fetch(DCCNS_serverAddress + "save-case-script", {
+      const response = await fetch(DCCAuthorServer.serverAddress + "save-case-script", {
          method: "POST",
          body: JSON.stringify({"caseName": caseName,
                                "scriptFile": scriptFile,
@@ -97,3 +96,6 @@ class DCCNotebookServer {
    }
 }
 
+(function() {
+   DCCAuthorServer.serverAddress = "http://127.0.0.1:8888/";
+})();

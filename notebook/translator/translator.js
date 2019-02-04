@@ -10,16 +10,31 @@ class Translator {
       
       this._annotationMdToObj = this._annotationMdToObj.bind(this);
       this._textObjToHTML = this._textObjToHTML.bind(this);
-      this._extractAnnotations = this._extractAnnotations.bind(this);
    }
 
    /*
+    * Compiles a markdown text to an object representation
+    */
+   compileMarkdown(caseName, markdown) {
+      let compiledCase = this._indexKnots(caseName, markdown);
+      
+      for (let kn in compiledCase.knots) {
+         this.extractKnotAnnotations(compiledCase.knots[kn]);
+         this.compileKnotMarkdown(compiledCase.knots[kn]);
+      }
+      
+      return compiledCase;
+   }
+      
+   /*
     * Index all knots to guide references
     */
-   _indexKnots(markdown) {
-      let knots = {
-         _source: markdown
+   _indexKnots(caseName, markdown) {
+      let compiledCase = {
+         name:  caseName,
+         knots: {}
       };
+      
       let knotCtx = null;
       let knotBlocks = markdown.split(Translator.marksKnotTitle);
       for (var kb = 1; kb < knotBlocks.length; kb += 2) {
@@ -31,26 +46,19 @@ class Translator {
             label = (label.indexOf(".") < 0 && knotCtx == null) ? label
                     : knotCtx + "." + label;
          if (kb == 1)
-            this._startKnot = label;
-         if (knots[label]) {
-            if (!knots._error)
-               knots._error = [];
-            knots.error.push("Duplicate knots title: " + label);
+            compiledCase.startKnot = label;
+         else if (transObj.categories && transObj.categories.indexOf("start") > 0)
+            compiledCase.startKnot = label;
+         if (compiledCase.knots[label]) {
+            if (!compiledCase._error)
+               compiledCase._error = [];
+            compiledCase._error.push("Duplicate knots title: " + label);
          } else {
             transObj._source = knotBlocks[kb] + knotBlocks[kb+1];
-            knots[label] = transObj;
+            compiledCase.knots[label] = transObj;
          }
       }
-      return knots;
-   }
-   
-   /*
-    * Extract annotations of the entire case
-    */
-   _extractAnnotations(compiledCase) {
-      for (let kn in compiledCase)
-         if (kn != "_source")
-            this.extractKnotAnnotations(compiledCase[kn]);
+      return compiledCase;
    }
    
    /*
@@ -134,22 +142,6 @@ class Translator {
    }
    
    /*
-    * Compiles a markdown text to an object representation
-    */
-   compileMarkdown(markdown) {
-      let compiledCase = this._indexKnots(markdown);
-      
-      this._extractAnnotations(compiledCase);
-      
-      for (let kn in compiledCase)
-         if (kn != "_source")
-            this.compileKnotMarkdown(compiledCase[kn]);
-      delete compiledCase._source;
-      
-      return compiledCase;
-   }
-      
-   /*
     * Compiles a single knot to an object representation
     */
    compileKnotMarkdown(knot) {
@@ -214,7 +206,7 @@ class Translator {
       if (mdfocus.length > 0)
          compiledKnot.push(this._stampObject(this._textMdToObj(mdfocus)));
       
-      delete knot._prepaedSource;
+      delete knot._preparedSource;
    }
    
    /*
@@ -287,8 +279,8 @@ class Translator {
     */
    assembleMarkdown(compiledCase) {
       let md = "";
-      for (let cc in compiledCase)
-         md += compiledCase[cc]._source;
+      for (let kn in compiledCase.knots)
+         md += compiledCase[cc].knots._source;
       return md;
    }
    

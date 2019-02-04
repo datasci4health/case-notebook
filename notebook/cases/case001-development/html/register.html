@@ -15,10 +15,12 @@
    <script type="text/javascript" src="js/dccs/editable/dcc-character-editable.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-lively-dialog.js"></script>
    <script type="text/javascript" src="js/dccs/editable/dcc-lively-dialog-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-resource-selector.js"></script>
+   <script type="text/javascript" src="js/dccs/dcc-resource-picker.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-state-selector.js"></script>
    
+   <script type="text/javascript" src="js/dcc-player-server-proxy.js"></script>
    <script type="text/javascript" src="js/player.js"></script>
+   <script type="text/javascript" src="js/case.js"></script>
 </head>
 <body onload="PlayerManager.instance().startKnot()">
    <div class="sty-main-panel">
@@ -44,7 +46,7 @@
 
       <div id="signed-user"  style="display:none">
         <div class="central-buttons">
-           <dcc-trigger link="Case_001.html" label="Proceed"></dcc-trigger>
+           <dcc-trigger action="navigate/start-knot" label="Proceed"></dcc-trigger>
         </div>
       </div>
 

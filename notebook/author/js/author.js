@@ -6,12 +6,12 @@ class AuthorManager {
    constructor() {
       this._translator = new Translator();
       this._compiledCase = null;
+      this._knots = null;
       
-      this._server = new DCCNotebookServer();
+      this._server = new DCCAuthorServer();
       
       this._currentCaseName = null;
       this._knotSelected = null;
-      // this._htmlTemplates = null;
       this._htmlKnot = null;
       this._renderSlide = true;
       this._editor = null;
@@ -61,15 +61,16 @@ class AuthorManager {
       let knotPanel = document.querySelector("#knot-panel");
       knotPanel.removeChild(this._resPicker);
       
-      this._compiledCase = this._translator.compileMarkdown(caseMd);
+      this._compiledCase = this._translator.compileMarkdown(this._currentCaseName, caseMd);
+      this._knots = this._compiledCase.knots;
       
-      for (let kn in this._compiledCase) {
-         if (this._compiledCase[kn].type == "knot") {
+      for (let kn in this._knots) {
+         if (this._knots[kn].type == "knot") {
             let miniature = document.createElement("div");
             miniature.classList.add("navigation-knot");
             miniature.classList.add("std-border");
             miniature.innerHTML = "<h2><dcc-trigger action='control/knot-selected' render='none' " +
-                                      "label = '" + this._compiledCase[kn].title + "'>"
+                                      "label = '" + this._knots[kn].title + "'>"
                                   "</dcc-trigger></h2>";
             navigationPanel.appendChild(miniature);
          }
@@ -115,36 +116,16 @@ class AuthorManager {
     */
    async playCase() {
       await this._server.prepareCaseHTML(this._currentCaseName);
-      this._allKnotTitles = Object.keys(this._compiledCase);
-      this._knotLoop = -1;
+      // this._allKnotTitles = Object.keys(this._compiledCase);
+      // this._knotLoop = -1;
       this._templateSet = {
          player: await this._server.loadTemplate("player")
       };
       
-      for (let kn in this._compiledCase) {
-         
+      for (let kn in this._knots) {
          let htmlName = kn.replace(/ /igm, "_");
          let finalHTML = await this._generateHTMLBuffer(kn);
          finalHTML = this._templateSet.player.replace("{knot}", finalHTML);
-         
-         /*
-         let templates = (this._compiledCase[kn].categories) ?
-               this._compiledCase[kn].categories : ["knot"];
-         for (let tp in templates)
-            if (!this._templateSet[tp])
-               this._templateSet[tp] = await this._server.loadTemplate(tp);
-         let htmlName = kn.replace(/ /igm, "_");
-         let finalHTML = this._translator.generateKnotHTML(this._compiledCase[kn]);
-         for (let tp in templates)
-            finalHTML = this._templateSet[tp].replace("{knot}", finalHTML);
-         finalHTML = this._templateSet.player.replace("{knot}", finalHTML);
-         */
-         
-         /*
-         let finalHTML =  this._templateSet.player.replace("{knot}",
-            this._templateSet[template].replace("{knot}",
-               this._translator.generateKnotHTML(this._compiledCase[kn])));      
-         */
          await this._server.saveKnotHTML(this._currentCaseName,
                                          htmlName + ".html", finalHTML);
       }
@@ -157,9 +138,7 @@ class AuthorManager {
     * ACTION: knot-selected
     */
    async knotSelected(knotTitle) {
-      // this._htmlTemplates = null;
-      
-      if (this._compiledCase[knotTitle]) {
+      if (this._knots[knotTitle]) {
          this._checkKnotModification();
          this._knotSelected = knotTitle;
          this._htmlKnot = await this._generateHTML(this._knotSelected);
@@ -175,11 +154,11 @@ class AuthorManager {
       if (!this._renderSlide && this._editor != null) {
          let editorText = this._editor.getText();
          editorText = editorText.substring(0, editorText.length - 1);
-         if (this._compiledCase[this._knotSelected]._source != editorText) {
+         if (this._knots[this._knotSelected]._source != editorText) {
             modified = true;
-            this._compiledCase[this._knotSelected]._source = editorText;
-            this._translator.extractKnotAnnotations(this._compiledCase[this._knotSelected]);
-            this._translator.compileKnotMarkdown(this._compiledCase[this._knotSelected]);
+            this._knots[this._knotSelected]._source = editorText;
+            this._translator.extractKnotAnnotations(this._knots[this._knotSelected]);
+            this._translator.compileKnotMarkdown(this._knots[this._knotSelected]);
          }
       }
       return modified;
@@ -193,44 +172,24 @@ class AuthorManager {
    }
    
    async _generateHTMLBuffer(knot) {
-      let templates = (this._compiledCase[knot].categories) ?
-                       this._compiledCase[knot].categories : ["knot"];
-      console.log("Templates:");
-      console.log(templates);
+      let templates = (this._knots[knot].categories) ?
+                       this._knots[knot].categories : ["knot"];
       for (let tp in templates)
          if (!this._templateSet[templates[tp]])
             this._templateSet[templates[tp]] =
                await this._server.loadTemplate(templates[tp]);
-      // let htmlName = kn.replace(/ /igm, "_");
-      let finalHTML = this._translator.generateKnotHTML(this._compiledCase[knot]);
+      let finalHTML = this._translator.generateKnotHTML(this._knots[knot]);
       for (let tp in templates)
-         finalHTML = this._templateSet[templates[tp]].replace("{knot}", finalHTML)
-                                                     .replace("{case}", this._currentCaseName);
+         finalHTML = this._templateSet[templates[tp]].replace("{knot}", finalHTML);
       
-      // finalHTML = this._templateSet.player.replace("{knot}", finalHTML);
       return finalHTML;
    }
    
-   /*
-   async _generateHTML() {
-      this._htmlKnot = this._translator.generateKnotHTML(this._compiledCase[this._knotSelected]);
-      let templates = (this._compiledCase[this._knotSelected].categories) ?
-                       this._compiledCase[this._knotSelected].categories : ["knot"];
-      this._templateHTML = await this._server.loadTemplate(template);
-   }
-   */
-
    _renderKnot() {
       let knotPanel = document.querySelector("#knot-panel");
       
       if (this._renderSlide) {
          document.querySelector("#player-panel").innerHTML = "";
-         /*
-         let htmlFinal = this._templateHTML
-                             .replace("{title}", this._compiledCase[this._knotSelected].title)
-                             .replace("{knot}", this._htmlKnot);
-         knotPanel.innerHTML = htmlFinal;
-         */
          knotPanel.innerHTML = this._htmlKnot;
          
          let dccs = document.querySelectorAll("*");
@@ -242,7 +201,7 @@ class AuthorManager {
          this._editor = new Quill('#editor-space', {
             theme: 'snow'
           });
-         this._editor.insertText(0, this._compiledCase[this._knotSelected]._source);
+         this._editor.insertText(0, this._knots[this._knotSelected]._source);
       }
    }
    

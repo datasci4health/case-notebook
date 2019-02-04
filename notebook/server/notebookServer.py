@@ -99,15 +99,6 @@ class NotebookDM(object):
          htmlTargetFile.write(playerTemplate.format(knot = htmlSourceFile.read()))
          htmlSourceFile.close()
          htmlTargetFile.close()
-         # cls.interfaceKnot(f, f, "", "", "")
-         # shutil.copy2((NotebookDM.DIR_TEMPLATES + "{}.html").format(f), (caseDir + "html/{}.html").format(f))
-   
-      # indexTemplate = open("template/casesindex.html", "r", encoding="utf-8")
-      # indexResult = open("html/casesindex.html", "w", encoding="utf-8")
-      # indexResult.write(
-      #     indexTemplate.read().format(title=title, description=description, image=image, firstKnot=firstKnot))
-      # indexTemplate.close()
-      # indexResult.close()
         
    def saveKnotHTML(self, caseName, htmlName, content):
       self.saveFile(NotebookDM.DIR_CASES + caseName + "/html/" + htmlName, content)
