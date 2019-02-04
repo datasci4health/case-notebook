@@ -6,7 +6,7 @@ Man, 51 years old, present to an emergency department complaining of chest pain.
 == Level 1 (dialog) ==
 :Nurse: Doctor, we have a man (51 years old) who entered the emergency department reporting chest pain. His vital signs are ABP: 144x92mmHG; HR: 78bpm; RR: 21rpm; Temp: 37oC; O2Sat: 98%. That is it!
 
-:Doctor: Let’s go!
+:Doctor: Let's go!
 
 :Patient: Doctor, I am feeling chest pain since yesterday. The pain is continuous and is located just in the middle of my chest, worsening when I breathe and when I lay down on my bed. I suffer from arterial hypertension and smoke 20 cigarettes every day. My father had a “heart attack” at my age and I am very worried about it. 
 
@@ -69,7 +69,7 @@ Likelihood ratio (LR) - like sensitivity and specificity, LR describe the discri
 == Pulmonary Embolism Wells Criteria (notice) ==
 ![Pulmonary Embolism Wells Criteria](images/ebm-pulmonary-embolism-wells-criteria.png)
 
-== Check hypothesis 1 (tablet) ==
+== Check hypothesis 1 (presentation,selector) ==
 
 Let us check out your hypothesis.
 
@@ -119,7 +119,7 @@ EKG description
 
 Image zoom.
 
-== Call the supervisor 2 (presnotice) ==
+== Call the supervisor 2 (presentation,notice) ==
 ![EKG-A](images/ampliacao-eletro.gif)
 
 We did not find features that increase the likelihood of myocardial ischemia. Moreover, our patient has a pleuritic chest pain that gets worse when the patient lays down.
