@@ -200,8 +200,8 @@ class Translator {
             
             // attach to a knot array (if it is a knot) or an array inside a knot
             if (selected == "knot") {
-               if (transObj.category)
-                  knot.category = transObj.category;
+               if (transObj.categories)
+                  knot.categories = transObj.categories;
             } else
                compiledKnot.push(transObj);
             
@@ -301,12 +301,12 @@ class Translator {
    
    /*
     * Knot Md to Obj
-    * Input: == [title] ([category]) ==
+    * Input: == [title] ([category],..,[category]) ==
     * Output:
     * {
     *    type: "knot"
     *    title: <title of the knot> #1
-    *    category: <knot category>  #2
+    *    categories: [<set of categories>]  #2
     *    content: [<sub-nodes>] - generated in further routines
     * }
     */
@@ -317,7 +317,7 @@ class Translator {
       };
       
       if (matchArray[2] != null)
-         knot.category = matchArray[2].trim();
+         knot.categories = matchArray[2].trim().split(",");
          
       return knot;
    }
@@ -696,9 +696,7 @@ class Translator {
 }
 
 (function() {
-   // Translator.marksKnot = /^[ \t]*==*[ \t]*(\w[\w \t]*)(?:\(([\w \t]*)\))?[ \t]*=*[ \t]*[\f\n\r]/im;
-   
-   Translator.marksKnotTitle = /(^[ \t]*==*[ \t]*(?:\w[\w \t]*)(?:\([\w \t]*\))?[ \t]*=*[ \t]*[\f\n\r])/igm;
+   Translator.marksKnotTitle = /(^[ \t]*==*[ \t]*(?:\w[\w \t]*)(?:\(\w[\w \t,]*\))?[ \t]*=*[ \t]*[\f\n\r])/igm;
 
    Translator.marksAnnotation = {
      // knot   : /^[ \t]*==*[ \t]*(\w[\w \t]*)(?:\(([\w \t]*)\))?[ \t]*=*[ \t]*[\f\n\r]/im,
@@ -710,7 +708,7 @@ class Translator {
    Translator.marksAnnotationInside = /([\w \t\+\-\*"]+)(?:[=\:]([\w \t%]*)(?:\/([\w \t%]*))?)?/im;
 
    Translator.marks = {
-      knot   : /^[ \t]*==*[ \t]*(\w[\w \t]*)(?:\(([\w \t]*)\))?[ \t]*=*[ \t]*[\f\n\r]/im,
+      knot   : /^[ \t]*==*[ \t]*(\w[\w \t]*)(?:\((\w[\w \t,]*)\))?[ \t]*=*[ \t]*[\f\n\r]/im,
       option : /[ \t]*\+\+[ \t]*([^-&<> \t][^-&<>\n\r\f]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))?[\f\n\r]/im,
       divert : /-(?:(?:&gt;)|>) *(\w[\w. ]*)/im,
       talk   : /^[ \t]*: *(\w[\w ]*):[ \t]*([^\n\r\f]+)[\n\r\f]*/im,

@@ -1,4 +1,4 @@
-== Case 001 (presentation) ==
+== Case 001 (start,presentation) ==
 Man, 51 years old, present to an emergency department complaining of chest pain.
 ![Forklift](images/patient-in-bed.svg)
 ++ Start -> Level 1
@@ -24,7 +24,7 @@ What is your main diagnostic hypothesis?
 
 ++ Submit hypothesis -> Check hypothesis 1
 
-== More information 1 (presnotice) ==
+== More information 1 (presentation,notice) ==
 The patient never felt chest pain before. He exercises regularly and has lost weight in the last three months. He takes amlodipine and losartan regularly.
 
 Two weeks ago, he had an auto-limited gastroenteritis episode. He denies recent travels and surgery .

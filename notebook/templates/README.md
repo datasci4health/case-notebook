@@ -25,7 +25,7 @@ JSON:
 ## Track of a case execution by a user
 Key:
 ```
-<storage prefix> - <current user> - <case id> - <date-time> - <guid>
+<storage prefix> <current user> # <case id> # <date-time> - <guid>
 ```
 JSON:
 ```

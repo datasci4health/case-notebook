@@ -11,7 +11,6 @@ class MessageBus {
    subscribe(topic, address) {
       this._listeners.push({topic: topic,
                             address: address});
-      console.log("subscribe topic: " + topic);
    }
    
    unsubscribe(topic, address) {
@@ -25,8 +24,6 @@ class MessageBus {
    }
    
    dispatchMessage(topic, message) {
-      console.log("message topic: " + topic + "; message: " + message);
-      console.log(this._listeners);
       for (let l in this._listeners)
          if (this._listeners[l].topic == topic ||
              (topic.startsWith(this._listeners[l].topic) &&

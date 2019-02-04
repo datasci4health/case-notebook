@@ -11,7 +11,7 @@ class AuthorManager {
       
       this._currentCaseName = null;
       this._knotSelected = null;
-      this._htmlTemplate = null;
+      // this._htmlTemplates = null;
       this._htmlKnot = null;
       this._renderSlide = true;
       this._editor = null;
@@ -83,7 +83,8 @@ class AuthorManager {
    async editKnot() {
       if (this._knotSelected != null) {
          if (this._checkKnotModification())
-            await this._generateHTML();
+            this._htmlKnot = await this._generateHTML(this._knotSelected);
+            // await this._generateHTML();
          this._renderSlide = !this._renderSlide;
          this._renderKnot();
       }
@@ -116,22 +117,39 @@ class AuthorManager {
       await this._server.prepareCaseHTML(this._currentCaseName);
       this._allKnotTitles = Object.keys(this._compiledCase);
       this._knotLoop = -1;
-      this._templateSet = {};
-      this._templateSet.player = await this._server.loadTemplate("player");
+      this._templateSet = {
+         player: await this._server.loadTemplate("player")
+      };
       
       for (let kn in this._compiledCase) {
-         let template = (this._compiledCase[kn].category) ?
-               this._compiledCase[kn].category : "knot";
-         if (!this._templateSet[template])
-            this._templateSet[template] = await this._server.loadTemplate(template);
+         
          let htmlName = kn.replace(/ /igm, "_");
+         let finalHTML = await this._generateHTMLBuffer(kn);
+         finalHTML = this._templateSet.player.replace("{knot}", finalHTML);
+         
+         /*
+         let templates = (this._compiledCase[kn].categories) ?
+               this._compiledCase[kn].categories : ["knot"];
+         for (let tp in templates)
+            if (!this._templateSet[tp])
+               this._templateSet[tp] = await this._server.loadTemplate(tp);
+         let htmlName = kn.replace(/ /igm, "_");
+         let finalHTML = this._translator.generateKnotHTML(this._compiledCase[kn]);
+         for (let tp in templates)
+            finalHTML = this._templateSet[tp].replace("{knot}", finalHTML);
+         finalHTML = this._templateSet.player.replace("{knot}", finalHTML);
+         */
+         
+         /*
          let finalHTML =  this._templateSet.player.replace("{knot}",
             this._templateSet[template].replace("{knot}",
                this._translator.generateKnotHTML(this._compiledCase[kn])));      
+         */
          await this._server.saveKnotHTML(this._currentCaseName,
                                          htmlName + ".html", finalHTML);
       }
       
+      delete this._templateSet;
       window.open("../cases/" + this._currentCaseName + "/html/index.html", "_blank");
    }
      
@@ -139,12 +157,12 @@ class AuthorManager {
     * ACTION: knot-selected
     */
    async knotSelected(knotTitle) {
-      this._htmlTemplate = null;
+      // this._htmlTemplates = null;
       
       if (this._compiledCase[knotTitle]) {
          this._checkKnotModification();
          this._knotSelected = knotTitle;
-         await this._generateHTML();
+         this._htmlKnot = await this._generateHTML(this._knotSelected);
          this._renderKnot();
       }
    }
@@ -167,22 +185,53 @@ class AuthorManager {
       return modified;
    }
    
+   async _generateHTML(knot) {
+      this._templateSet = {};
+      let finalHTML = await this._generateHTMLBuffer(knot);
+      delete this._templateSet;
+      return finalHTML;
+   }
+   
+   async _generateHTMLBuffer(knot) {
+      let templates = (this._compiledCase[knot].categories) ?
+                       this._compiledCase[knot].categories : ["knot"];
+      console.log("Templates:");
+      console.log(templates);
+      for (let tp in templates)
+         if (!this._templateSet[templates[tp]])
+            this._templateSet[templates[tp]] =
+               await this._server.loadTemplate(templates[tp]);
+      // let htmlName = kn.replace(/ /igm, "_");
+      let finalHTML = this._translator.generateKnotHTML(this._compiledCase[knot]);
+      for (let tp in templates)
+         finalHTML = this._templateSet[templates[tp]].replace("{knot}", finalHTML)
+                                                     .replace("{case}", this._currentCaseName);
+      
+      // finalHTML = this._templateSet.player.replace("{knot}", finalHTML);
+      return finalHTML;
+   }
+   
+   /*
    async _generateHTML() {
       this._htmlKnot = this._translator.generateKnotHTML(this._compiledCase[this._knotSelected]);
-      let template = (this._compiledCase[this._knotSelected].category) ?
-                      this._compiledCase[this._knotSelected].category : "knot";
+      let templates = (this._compiledCase[this._knotSelected].categories) ?
+                       this._compiledCase[this._knotSelected].categories : ["knot"];
       this._templateHTML = await this._server.loadTemplate(template);
    }
+   */
 
    _renderKnot() {
       let knotPanel = document.querySelector("#knot-panel");
       
       if (this._renderSlide) {
          document.querySelector("#player-panel").innerHTML = "";
+         /*
          let htmlFinal = this._templateHTML
                              .replace("{title}", this._compiledCase[this._knotSelected].title)
                              .replace("{knot}", this._htmlKnot);
          knotPanel.innerHTML = htmlFinal;
+         */
+         knotPanel.innerHTML = this._htmlKnot;
          
          let dccs = document.querySelectorAll("*");
          for (let d = 0; d < dccs.length; d++)

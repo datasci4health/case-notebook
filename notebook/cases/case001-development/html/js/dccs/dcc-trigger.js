@@ -155,7 +155,7 @@ class DCCTrigger extends DCCBase {
    
    _computeTrigger() {
       if (this.hasAttribute("label") || this.hasAttribute("action")) {
-         let eventLabel = (this.hasAttribute("action")) ? this.action : "compute-trigger";
+         let eventLabel = (this.hasAttribute("action")) ? this.action : "navigate/trigger";
          let message = (this.hasAttribute("label")) ? this.label : this.action;
          window.messageBus.dispatchMessage(eventLabel, message);
       }

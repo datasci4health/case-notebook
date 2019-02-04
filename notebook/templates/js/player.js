@@ -27,6 +27,7 @@ class PlayerManager {
    }
    
    navigateEvent(topic, message) {
+      this.trackTrigger(message);
       switch (topic) {
          case "navigate/previous-knot": window.history.back(); break;
       }
@@ -40,10 +41,10 @@ class PlayerManager {
     * Start the tracking record of a case
     */
    startCase(caseid) {
-      const profile = retrieveCurrentProfile();
+      const profile = this.retrieveCurrentProfile();
 
       const currentDateTime = new Date();
-      const casekey = profile.id + "-" + caseid + "-" + generateUID();
+      const casekey = profile.id + "#" + caseid + "#" + this.generateUID();
       profile.cases.push(casekey);
       localStorage.setItem(storePrefix + "current-case", casekey);
 
@@ -136,6 +137,21 @@ class PlayerManager {
    }
    
    /*
+    * Tracking player
+    * ***************
+    */
+   
+   trackTrigger(trigger) {
+      const casekey = localStorage.getItem(storePrefix + "current-case");
+      const casetrack = this.retrieveCurrentCase();
+
+      const currentDateTime = new Date();
+      casetrack.route.push("#navigate:" + trigger + "," + currentDateTime.toJSON());
+
+      localStorage.setItem(storePrefix + casekey, JSON.stringify(casetrack));
+   }
+
+   /*
     * Generic services
     * ****************
     */
@@ -157,8 +173,8 @@ class PlayerManager {
       return JSON.parse(localStorage.getItem(storePrefix + "profile-" + userid));
    }
    
-   /*
-    * Tracking player
-    * ***************
-    */
+   retrieveCurrentCase() {
+      const casekey = localStorage.getItem(storePrefix + "current-case");
+      return JSON.parse(localStorage.getItem(storePrefix + casekey));
+   }
 }

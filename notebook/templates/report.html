@@ -1,1 +1,60 @@
-<pre id="report" onload="reportRoute()"></pre>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+   <script type="text/javascript" src="js/dccs/infra/infra.js"></script>
+   <script type="text/javascript" src="js/player.js"></script>
+
+   <style>
+      .sty-report-panel {
+         /* the main box (body) occupies all the visible area */
+         position: absolute;
+         left: 0px;
+         right: 0px;
+         top: 0px;
+         bottom: 0px;
+      
+         /* eliminate margins etc. */
+         margin: 0px;
+         border-width: 0px;
+
+         overflow: scrool;
+
+         border: 1px solid lightgray;
+         border-radius: 5px;
+         padding: 5px;
+      }
+   </style>
+
+   <script>
+      function start() {
+         const player = PlayerManager().instance();
+         var output = "";
+         output += "##current-user: " + player.retrieveCurrentUser() + "\n";
+         output += "##current-case: " + localStorage.getItem(storePrefix + "current-case") + "\n";
+         var users = player.retrieveUsers();
+         for (u in users.ids) {
+             output += "##userid: " + users.ids[u] + "\n";
+             var profileStr = localStorage.getItem(storePrefix + "profile-" + users.ids[u]);
+             output += "##profile: " + profileStr + "\n";
+             if (profileStr != null) {
+                 var profile = JSON.parse(profileStr);
+                 for (c in profile.cases) {
+                     var casetrack = localStorage.getItem(storePrefix + profile.cases[c]);
+                     output += "##case: " + casetrack;
+                 }
+             }
+         }
+         document.querySelector("#report-panel").innerHTML = "<pre>" + output + "</pre>";
+      }
+   </script>
+
+   <title>Report</title>
+</head>
+<body onload="start()">
+
+   <div id="report-panel" class="sty-report-panel">
+   </div>
+
+</body>
+</html>
