@@ -3,7 +3,6 @@
  */
 
 class MessageBus {
-   
    constructor() {
       this._listeners = [];
    }

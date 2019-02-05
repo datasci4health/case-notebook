@@ -20,7 +20,7 @@ Man, 51 years old, present to an emergency department complaining of chest pain.
 
 == Generate hypothesis 1 (tablet) ==
 What is your main diagnostic hypothesis?
-{?1 hypothesis:mesh}
+{?1 hypothesis:mesh#pericarditis,myopericarditis,pericardial inflammation,pericardial infection,pericardial effusion;infarction,myocardial infarction,coronary syndrome,acute coronary syndrome,ischemia,myocardial ischemia,coronary insufficiency,angina,angina pectoris}
 
 ++ Submit hypothesis -> Check hypothesis 1
 

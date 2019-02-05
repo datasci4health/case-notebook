@@ -554,13 +554,15 @@ class Translator {
    
    /*
     * Input Md to Obj
-    * Input: {?[rows] [variable]: [vocabulary]}
+    * Input: {?[rows] [variable] : [vocabulary] # [write answer], ..., [write answer]; [wrong answer], ..., [wrong answer]}
     * Output:
     * {
     *    type: "input"
     *    variable: <variable that will receive the input> #2
     *    rows: <number of rows for the input> #1
     *    vocabulary: <the vocabulary to interpret the input> #3
+    *    right: [<set of right answers>] #4
+    *    wrong: [<set of wrong answers>] #5
     * }
     */
    _inputMdToObj(matchArray) {
@@ -574,6 +576,20 @@ class Translator {
       
       if (matchArray[3] != null)
          input.vocabulary = matchArray[3].trim();
+      
+      if (matchArray[4] != null) {
+         let right = matchArray[4].split(",");
+         for (let r in right)
+            right[r] = right[r].trim();
+         input.right = right;
+      }
+      
+      if (matchArray[5] != null) {
+         let wrong = matchArray[5].split(",");
+         for (let w in wrong)
+            wrong[w] = wrong[w].trim();
+         input.wrong = wrong;
+      }
             
       return input;
    }
@@ -593,7 +609,7 @@ class Translator {
       return Translator.htmlTemplates.input.replace(/\[input-type\]/igm, inputType)
                                            .replace("[input-parameters]", inputParam)
                                            .replace(/\[variable\]/igm, inputObj.variable)
-                                           .replace("[vocabulary", inputObj.vocabulary);
+                                           .replace("[vocabulary]", inputObj.vocabulary);
    }
 
    /*
@@ -692,20 +708,22 @@ class Translator {
 
    Translator.marksAnnotation = {
      // knot   : /^[ \t]*==*[ \t]*(\w[\w \t]*)(?:\(([\w \t]*)\))?[ \t]*=*[ \t]*[\f\n\r]/im,
-     ctxopen : /\{\{([\w \t\+\-\*"=\:%\/]+)(?:#([\w \t\+\-\*"=\%\/]+):([\w \t\+\-\*"=\%\/,]+);([\w \t#,]+)?)?[\f\n\r]/im,
+     ctxopen : /\{\{([\w \t\+\-\*"=\:%\/]+)(?:#([\w \t\+\-\*"=\%\/]+):([\w \t\+\-\*"=\%\/,]+)(?:;([\w \t#,]+))?)?[\f\n\r]/im,
      ctxclose: /\}\}/im,
      annotation: /\{([\w \t\+\-\*"=\:%\/]+)(?:\(([\w \t\+\-\*"=\:%\/]+)\)[ \t]*)?(?:#([\w \t\+\-\*"=\:%\/]+))?\}/im
    };
    
    Translator.marksAnnotationInside = /([\w \t\+\-\*"]+)(?:[=\:]([\w \t%]*)(?:\/([\w \t%]*))?)?/im;
 
+   //
+   
    Translator.marks = {
       knot   : /^[ \t]*==*[ \t]*(\w[\w \t]*)(?:\((\w[\w \t,]*)\))?[ \t]*=*[ \t]*[\f\n\r]/im,
       option : /[ \t]*\+\+[ \t]*([^-&<> \t][^-&<>\n\r\f]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))?[\f\n\r]/im,
       divert : /-(?:(?:&gt;)|>) *(\w[\w. ]*)/im,
       talk   : /^[ \t]*: *(\w[\w ]*):[ \t]*([^\n\r\f]+)[\n\r\f]*/im,
       // image  : /<img src="([\w:.\/\?&#\-]+)" (?:alt="([\w ]+)")?>/im,
-      input  : /\{[ \t]*\?(\d+)?([\w \t]*)(?:\:([\w \t]*))?\}/im,
+      input  : /\{[ \t]*\?(\d+)?([\w \t]*)(?:\:([\w \t]+))?(?:#([\w \t\+\-\*"=\%\/,]+)(?:;([\w \t\+\-\*"=\%\/,]+))?)?\}/im,
       selctxopen : Translator.marksAnnotation.ctxopen,
       selctxclose: Translator.marksAnnotation.ctxclose,
       selector   : Translator.marksAnnotation.annotation
