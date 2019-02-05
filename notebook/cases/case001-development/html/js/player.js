@@ -31,7 +31,7 @@ class PlayerManager {
       this.trackTrigger(message);
       switch (topic) {
          case "navigate/previous-knot": window.history.back(); break;
-         case "navigate/start-knot": window.open(this._server.getStartKnot() + ".html", "_self");
+         case "navigate/start-knot": window.open(this._server.getStartKnot().replace(/ /igm, "_") + ".html", "_self");
       }
    }
 

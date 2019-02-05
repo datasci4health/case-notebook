@@ -3,8 +3,7 @@
  */
 (function() {
 DCCPlayerServer.playerObj = {
-   name:  #name#,
-   start: #start#,
-   knots: {#knots#}
+   currentCase: "case001-development",
+   startKnot:   "Case_001"
 }
 })();

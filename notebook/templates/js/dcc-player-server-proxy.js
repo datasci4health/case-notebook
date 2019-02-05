@@ -8,12 +8,12 @@ class DCCPlayerServer {
     * *************
     */
 
-   getCurrentCase() {
-      return DCCPlayerServer.playerObj.currentCase;
+   getCaseId() {
+      return DCCPlayerServer.playerObj.id;
    }
    
    getStartKnot() {
-      return DCCPlayerServer.playerObj.startKnot;
+      return DCCPlayerServer.playerObj.start;
    }
    
    /*
@@ -22,7 +22,7 @@ class DCCPlayerServer {
     */
    
    generateRunningCase() {
-      const caseid = this.getCurrentCase();
+      const caseid = this.getCaseId();
       const profile = this.getCurrentProfile();
 
       const currentDateTime = new Date();

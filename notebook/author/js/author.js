@@ -115,25 +115,36 @@ class AuthorManager {
     * ACTION: control-play
     */
    async playCase() {
+      let message = document.querySelector("#message-space");
+      message.innerHTML = "Preparing...";
       await this._server.prepareCaseHTML(this._currentCaseName);
-      // this._allKnotTitles = Object.keys(this._compiledCase);
-      // this._knotLoop = -1;
+
       this._templateSet = {
          player: await this._server.loadTemplate("player")
       };
       
+      const total = Object.keys(this._knots).length;
+      let processing = 0;
       for (let kn in this._knots) {
+         processing++;
+         message.innerHTML = "Processed: " + processing + "/" + total; 
          let htmlName = kn.replace(/ /igm, "_");
          let finalHTML = await this._generateHTMLBuffer(kn);
          finalHTML = this._templateSet.player.replace("{knot}", finalHTML);
          await this._server.saveKnotHTML(this._currentCaseName,
                                          htmlName + ".html", finalHTML);
       }
+      message.innerHTML = "Finalizing...";
+      
+      let caseJSON = this._translator.generateCompiledJSON(this._compiledCase);
+      await this._server.saveCaseScript(this._currentCaseName, "case.js", caseJSON);
+      
+      message.innerHTML = "";
       
       delete this._templateSet;
       window.open("../cases/" + this._currentCaseName + "/html/index.html", "_blank");
    }
-     
+   
    /*
     * ACTION: knot-selected
     */

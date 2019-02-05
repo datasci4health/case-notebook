@@ -15,8 +15,8 @@ class Translator {
    /*
     * Compiles a markdown text to an object representation
     */
-   compileMarkdown(caseName, markdown) {
-      let compiledCase = this._indexKnots(caseName, markdown);
+   compileMarkdown(caseId, markdown) {
+      let compiledCase = this._indexKnots(caseId, markdown);
       
       for (let kn in compiledCase.knots) {
          this.extractKnotAnnotations(compiledCase.knots[kn]);
@@ -29,9 +29,9 @@ class Translator {
    /*
     * Index all knots to guide references
     */
-   _indexKnots(caseName, markdown) {
+   _indexKnots(caseId, markdown) {
       let compiledCase = {
-         name:  caseName,
+         id:    caseId,
          knots: {}
       };
       
@@ -46,9 +46,9 @@ class Translator {
             label = (label.indexOf(".") < 0 && knotCtx == null) ? label
                     : knotCtx + "." + label;
          if (kb == 1)
-            compiledCase.startKnot = label;
+            compiledCase.start = label;
          else if (transObj.categories && transObj.categories.indexOf("start") > 0)
-            compiledCase.startKnot = label;
+            compiledCase.start = label;
          if (compiledCase.knots[label]) {
             if (!compiledCase._error)
                compiledCase._error = [];
@@ -238,6 +238,7 @@ class Translator {
       };
 
       let preDoc = "";
+      let html = "";
       if (knotObj != null && knotObj.content != null) {
          // produces a pretext with object slots to process markdown
          for (let kc in knotObj.content)
@@ -248,7 +249,7 @@ class Translator {
                : "@@" + knotObj.content[kc].seq + "@@";
                
          // converts to HTML
-         let html = this._markdownTranslator.makeHtml(preDoc);
+         html = this._markdownTranslator.makeHtml(preDoc);
 
          // replaces the marks
          let current = 0;
@@ -269,9 +270,13 @@ class Translator {
          
          html = html.replace(Translator.contextHTML.open, this._contextSelectorHTMLAdjust);
          html = html.replace(Translator.contextHTML.close, this._contextSelectorHTMLAdjust);
-         
-         return html;
       }
+      return html;
+   }
+   
+   generateCompiledJSON(compiledCase) {
+      return "(function() { DCCPlayerServer.playerObj =" +
+             JSON.stringify(compiledCase) + "})();"; 
    }
    
    /*
