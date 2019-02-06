@@ -31,6 +31,7 @@
 ++ Call the supervisor (action-2) -> Call the supervisor 1
 
 == Call the supervisor 1 (detailed) ==
+:SUPERVISOR Harry:.
 Hi! I am glad that you called me. Chest pain is an important complaint at the emergency department and we have to exclude the fatal causes: myocardial infarction (MI), acute aortic dissection (AAD), pulmonary embolism PE), hypertensive pneumothorax (HP), and Boerhaave Syndrome (BS).
 
 The best way to find out what is happening with your patient, my young padawan, is to gather as much information as possible through history taking and physical examination. We need to search for the signs and symptoms that can guide our clinical reasoning process by changing the pre-test probabilities of each disease.
@@ -44,31 +45,44 @@ Do you know the concept of Likelihood ratio (LR)? -> Likelihood Ratio
 ++ Pulmonary Embolism Wells Criteria
 ++ Back to the Case -> Level 1
 
-
 Hypertensive pneumothorax is more common in tall and thin young adults (primary pneumothorax) or in patients with chronic pulmonary diseases or chest trauma (secondary pneumothorax). On physical examination, we expect asymmetry in lung auscultation and the trachea may be dislocated to the contralateral side of the pneumothorax.
 
 Boerhaave Syndrome is more common in patients who presented vomiting before the chest pain started, were submitted to endoscopic procedures or had chest trauma.
 
 How does this information can help you to solve your case?
 
-== Likelihood Ratio (notice) ==
+++ Back to the case (action-1) -> Level 1 step 3
+
+== Likelihood Ratio (detailed) ==
 
 Likelihood ratio (LR) - like sensitivity and specificity, LR describe the discriminatory power of features in a clinical context, estimating the probability of disease. When the LR is higher than 1, the feature increases the probability; when lower than 1, reduces it.
 
-== Clinical History Myocardial Infarction (notice) ==
+++ Back (action-1) -> Call the supervisor 1
+
+== Clinical History Myocardial Infarction (detailed) ==
 ![Clinical History Myocardial Infarction](images/ebm-clinical-history-myocardial-infarction.png)
 
-== Physical Examination Myocardial Infarction (notice) ==
+++ Back (action-1) -> Call the supervisor 1
+
+== Physical Examination Myocardial Infarction (detailed) ==
 ![Physical Examination Myocardial Infarction](images/ebm-physical-examination-myocardial-infarction.png)
 
-== Clinical History Aortic Dissection (notice) ==
+++ Back (action-1) -> Call the supervisor 1
+
+== Clinical History Aortic Dissection (detailed) ==
 ![Clinical History Aortic Dissection](images/ebm-clinical-history-aortic-dissection.png)
 
-== Physical Examination Aortic Dissection (notice) ==
+++ Back (action-1) -> Call the supervisor 1
+
+== Physical Examination Aortic Dissection (detailed) ==
 ![Physical Examination Aortic Dissection](images/ebm-physical-examination-aortic-dissection.png)
 
-== Pulmonary Embolism Wells Criteria (notice) ==
+++ Back (action-1) -> Call the supervisor 1
+
+== Pulmonary Embolism Wells Criteria (detailed) ==
 ![Pulmonary Embolism Wells Criteria](images/ebm-pulmonary-embolism-wells-criteria.png)
+
+++ Back (action-1) -> Call the supervisor 1
 
 == Check hypothesis 1 (check_input) ==
 
@@ -81,31 +95,34 @@ You perform physical examination: {cardiac and pulmonary auscultation are normal
 }}
 ++ Submit (submit-input) -> Order EKG 
 
-== Order EKG ==
+== Order EKG (decision_eletro) ==
 Our patient denies any recent long trip, immobilization or surgery.
 
 The blood pressure is symmetric in the four limbs. 
 
 Game: What do you want to do?
-++ Generate hypothesis -> Generate hypothesis 2
-++ Get more information -> More information 2
-++ Call the supervisor -> Call the supervisor 2
+++ Generate hypothesis (action-1) -> Generate hypothesis 2
+++ More information (action-2) -> More information 2
+++ Call the supervisor (action-3) -> Call the supervisor 2
 
-EKG:
+++ Magnify (ekg-image) -> Magnify EKG
+
+== Magnify EKG (magnify_eletro) ==
 
 ![EKG](images/ekg-original.png)
 
-== Generate hypothesis 2 (tablet) ==
-What is your main diagnostic hypothesis?
-{?1 hypothesis:mesh}
-++ Submit hypothesis -> Check hypothesis 2
+== Generate hypothesis 2 (input) ==
+:PATIENT Jakob:.
+{?1 hypothesis:mesh#pericarditis,myopericarditis,pericardial inflammation,pericardial infection,pericardial effusion;infarction,myocardial infarction,coronary syndrome,acute coronary syndrome,ischemia,myocardial ischemia,coronary insufficiency,angina,angina pectoris}
 
-== More information 2 (notice) ==
+++ Submit hypothesis (submit-input) -> Check hypothesis 2
+
+== More information 2 (details_eletro) ==
 
 EKG description
 ![EKG Description](images/ekg-description.png)
 
-++ EKG Analysis
+++ EKG Analysis (action-1)
 
 == EKG Analysis (notice) ==
 

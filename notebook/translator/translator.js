@@ -487,9 +487,13 @@ class Translator {
       link = link.replace(/ /igm, "_");
       const location = (obj.rule != null) ? " location='" + obj.rule + "'" : "";
       
+      const optionalImage = "";
+      // <TODO> Temporary
+      /*
       const optionalImage = (obj.rule == null) ?
          " image='images/" + display.toLowerCase().replace(/ /igm, "-") + ".svg'" : 
          "";
+      */
       
       return Translator.htmlTemplates.option.replace("[link]", link)
                                             .replace("[display]", display)

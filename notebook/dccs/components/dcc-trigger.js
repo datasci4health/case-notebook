@@ -167,10 +167,6 @@ class DCCTrigger extends DCCBase {
                                                   .replace("[link]", linkWeb)
                                                   .replace("[label]", this.label);
       
-      let triggerElem = document.createElement("span");
-      triggerElem.innerHTML = triggerWeb;
-      triggerElem.addEventListener("click", this._computeTrigger);
-      
       /*
       if (webLocation != null)
          webLocation.appendChild(triggerElem);
@@ -183,14 +179,18 @@ class DCCTrigger extends DCCBase {
          locationWeb.innerHTML = this.label;
          locationWeb.addEventListener("click", this._computeTrigger);
          locationWeb.style.cursor = "pointer";
-      } else
+      } else {
+         let triggerElem = document.createElement("span");
+         triggerElem.innerHTML = triggerWeb;
+         triggerElem.addEventListener("click", this._computeTrigger);
          this._presentation.appendChild(triggerElem);
+      }
    }
    
    _computeTrigger() {
       if (this.hasAttribute("label") || this.hasAttribute("action")) {
          let eventLabel = (this.hasAttribute("action")) ? this.action : "navigate/trigger";
-         let message = (this.hasAttribute("link")) ? this.link : this.action;
+         let message = (this.hasAttribute("link")) ? this.link : this.label;
          window.messageBus.dispatchMessage(eventLabel, message);
       }
    }

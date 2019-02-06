@@ -98,8 +98,9 @@ class DCCInput extends DCCBase {
 }
 
 (function() {
+   // <TODO> temporary (size = 50)
    DCCInput.templates = {
-   out: "<[input-type] [input-parameters] id='[variable]'></[input-type]>"
+   out: "<[input-type] [input-parameters] id='[variable]' size='50'></[input-type]>"
    };
 
    DCCInput.editableCode = false;
