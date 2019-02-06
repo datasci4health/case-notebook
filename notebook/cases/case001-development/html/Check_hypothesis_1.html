@@ -17,6 +17,8 @@
    <script type="text/javascript" src="js/dccs/editable/dcc-lively-dialog-editable.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-resource-picker.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-state-selector.js"></script>
+   <script type="text/javascript" src="js/dccs/dcc-styler.js"></script>
+   <script type="text/javascript" src="js/dccs/dcc-dialog.js"></script>
    
    <script type="text/javascript" src="js/dcc-player-server-proxy.js"></script>
    <script type="text/javascript" src="js/player.js"></script>
@@ -24,21 +26,16 @@
 </head>
 <body onload="PlayerManager.instance().startKnot()">
    <div class="sty-main-panel">
-      <div class="sty-control-panel std-border">
-      </div>
-      <div class="sty-work-panel">
-         <div id="knot-panel" class="sty-knot-panel std-border"><div class="template-selector">
+      <div class="template-selector">
 <div class="template-selector-inside">
 <div class="template-presentation">
 <p>Let us check out your hypothesis.</p>
 <p>In the next screen, highlight in green the findings that corroborate your hypothesis, 
 in blue those that are neutral and in red the ones speaking against your hypothesis.</p>
-<p><dcc-trigger link='Check_hypothesis_1b.html' label='Proceed' ></dcc-trigger></p>
+<p><dcc-trigger link='Check_hypothesis_1b.html' label='Proceed'  image='images/proceed.svg'></dcc-trigger></p>
 </div>
 </div>
-</div></div>
-         <div id="player-panel" class="sty-player-panel std-border"></div>
-      </div>
+</div>
    </div>
 </body>
 </html>

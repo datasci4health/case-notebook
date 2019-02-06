@@ -451,12 +451,13 @@ class Translator {
    
    /*
     * Option Md to Obj
-    * Input: ++ [label] -> [target]
+    * Input: ++ [label] ([rule]) -> [target]
     * Output:
     * {
     *    type: "option"
     *    label: <label to be displayed -- if there is not an explicit divert, the label is the divert> #1
-    *    target: <target node to divert> #2
+    *    rule:  <rule of the trigger -- determine its position in the knot> #2
+    *    target: <target node to divert> #3
     * }
     */
    _optionMdToObj(matchArray) {
@@ -467,7 +468,9 @@ class Translator {
       if (matchArray[1] != null)
          option.label = matchArray[1].trim();
       if (matchArray[2] != null)
-         option.target = matchArray[2].trim();
+         option.rule = matchArray[2].trim();
+      if (matchArray[3] != null)
+         option.target = matchArray[3].trim();
       
       return option;
    }
@@ -479,21 +482,19 @@ class Translator {
     *   [image] -> image='[image-file].svg' location='control-panel'
     */
    _optionObjToHTML(obj) {
-      let display = (obj.label != null) ? obj.label : obj.target;
+      const display = (obj.label != null) ? obj.label : obj.target;
       let link = (obj.target != null) ? obj.target : obj.label;
       link = link.replace(/ /igm, "_");
+      const location = (obj.rule != null) ? " location='" + obj.rule + "'" : "";
       
-      let optionalImage = "";
-      if (display.endsWith("(control)")) {
-         display = display.replace("(control)", "").trim();
-         optionalImage = " image='images/" + 
-                         display.toLowerCase().replace(/ /igm, "-") +
-                         ".svg' location='player-panel'";
-      }
+      const optionalImage = (obj.rule == null) ?
+         " image='images/" + display.toLowerCase().replace(/ /igm, "-") + ".svg'" : 
+         "";
       
       return Translator.htmlTemplates.option.replace("[link]", link)
                                             .replace("[display]", display)
-                                            .replace("[image]", optionalImage);
+                                            .replace("[image]", optionalImage)
+                                            .replace("[location]", location);
    }
    
    /*
@@ -724,7 +725,7 @@ class Translator {
    
    Translator.marks = {
       knot   : /^[ \t]*==*[ \t]*(\w[\w \t]*)(?:\((\w[\w \t,]*)\))?[ \t]*=*[ \t]*[\f\n\r]/im,
-      option : /[ \t]*\+\+[ \t]*([^-&<> \t][^-&<>\n\r\f]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))?[\f\n\r]/im,
+      option: /[ \t]*\+\+[ \t]*([^\(&> \t][^\(&>\n\r\f]*)?(?:\(([\w \t-]+)\)[ \t]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))?[\f\n\r]/im,
       divert : /-(?:(?:&gt;)|>) *(\w[\w. ]*)/im,
       talk   : /^[ \t]*: *(\w[\w ]*):[ \t]*([^\n\r\f]+)[\n\r\f]*/im,
       // image  : /<img src="([\w:.\/\?&#\-]+)" (?:alt="([\w ]+)")?>/im,

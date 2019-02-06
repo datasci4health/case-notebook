@@ -105,16 +105,18 @@ Markdown text that does not match to any expression.
 
 ## Option
 ### Markdown to Object
-* Sentence: `++ [label] -> [target]`
-* Expression: `[ \t]*\+\+[ \t]*([^-&<> \t][^-&<>\n\r\f]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))?[\f\n\r]`
+* Sentence: `++ [label] ([rule]) -> [target]`
+* Expression: `[ \t]*\+\+[ \t]*([^\(&> \t][^\(&>\n\r\f]*)?(?:\(([\w \t-]+)\)[ \t]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))?[\f\n\r]`
   * Group #1: label
-  * Group #2: target
+  * Group #2: rule
+  * Group #3: target
 ![Option Expression](expressions/option.png)
 * Object:
 ```
 {
    type: "option"
    label: <label to be displayed -- if there is not an explicit target, the label is the target>
+   rule:  <rule of the trigger -- determine its position in the knot>
    target: <target node to divert>
 }
 ```

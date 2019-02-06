@@ -1,16 +1,22 @@
 == Case 001 (start,presentation) ==
 Man, 51 years old, present to an emergency department complaining of chest pain.
 ![Forklift](images/patient-in-bed.svg)
-++ Start -> Level 1
+++ Start -> Level 1 step 1
 
-== Level 1 (dialog) ==
-:Nurse: Doctor, we have a man (51 years old) who entered the emergency department reporting chest pain. His vital signs are ABP: 144x92mmHG; HR: 78bpm; RR: 21rpm; Temp: 37oC; O2Sat: 98%. That is it!
+== Level 1 step 1 (dialog) ==
+:NURSE Agnes: Doctor, we have a man (51 years old) who entered the emergency department reporting chest pain. His vital signs are ABP: 144x92mmHG; HR: 78bpm; RR: 21rpm; Temp: 37oC; O2Sat: 98%.
 
-:Doctor: Let's go!
+++ Let us go! (talk-action) -> Level 1 step 2
 
-:Patient: Doctor, I am feeling chest pain since yesterday. The pain is continuous and is located just in the middle of my chest, worsening when I breathe and when I lay down on my bed. I suffer from arterial hypertension and smoke 20 cigarettes every day. My father had a “heart attack” at my age and I am very worried about it. 
+== Level 1 step 2 (dialog) ==
 
-:Doctor: I did a physical examination and the cardiac and pulmonary auscultation are normal; chest pain does not worse with palpation of the thorax; there is no jugular stasis nor lower limb edema.
+:PATIENT Jacob: Doctor, I am feeling chest pain since yesterday. The pain is continuous and is located just in the middle of my chest, worsening when I breathe and when I lay down on my bed. I suffer from arterial hypertension and smoke 20 cigarettes every day. My father had a “heart attack” at my age and I am very worried about it.
+
+++ Do a physical examination (talk-action) -> Level 1 step 3 
+
+== Level 1 step 3 (dialog) ==
+
+:DOCTOR: I did a physical examination and the cardiac and pulmonary auscultation are normal; chest pain does not worse with palpation of the thorax; there is no jugular stasis nor lower limb edema.
 
 :Jacinto: What do you want to do?
 

@@ -49,16 +49,30 @@ class DCCTrigger extends DCCBase {
      this._presentation = this._shadow.querySelector("#presentation-dcc");
      
      this._computeTrigger = this._computeTrigger.bind(this);
+     this.defineXstyle = this.defineXstyle.bind(this);
      this._renderInterface = this._renderInterface.bind(this);
    }
    
    /* Attribute Handling */
 
    static get observedAttributes() {
-     return ["link", "action", "label", "image", "location", "render"];
+     return ["link", "action", "label", "image", "location", "xstyle", "render"];
    }
 
    connectedCallback() {
+      if (!this.hasAttribute("xstyle")) {
+         window.messageBus.subscribe("dcc/xstyle", this.defineXstyle);
+         window.messageBus.dispatchMessage("dcc/request-xstyle", "");
+      }
+      this._checkRender();
+   }
+
+   defineXstyle(topic, message) {
+      this.xstyle = message;
+      this._checkRender();
+   }
+   
+   _checkRender() {
       if (document.readyState === "complete")
          this._renderInterface();
       else
@@ -109,6 +123,14 @@ class DCCTrigger extends DCCBase {
      this.setAttribute("location", newLocation);
    }
     
+   get xstyle() {
+      return this.getAttribute("xstyle");
+   }
+   
+   set xstyle(newValue) {
+      this.setAttribute("xstyle", newValue);
+   }
+  
    get render() {
       return this.getAttribute("render");
    }
@@ -120,9 +142,11 @@ class DCCTrigger extends DCCBase {
    /* Rendering */
    
    _renderInterface() {
+      /*
       let webLocation = null;
       if (this.hasAttribute("location"))
          webLocation = document.querySelector("#" + this.location);
+      */
       
       let linkWeb = (this.hasAttribute("link")) ? "href='" + this.link + "' " : "";
       
@@ -147,16 +171,26 @@ class DCCTrigger extends DCCBase {
       triggerElem.innerHTML = triggerWeb;
       triggerElem.addEventListener("click", this._computeTrigger);
       
+      /*
       if (webLocation != null)
          webLocation.appendChild(triggerElem);
       else
+         this._presentation.appendChild(triggerElem);
+      */
+
+      if (this.hasAttribute("xstyle") && this.xstyle == "out" && this.hasAttribute("location")) {
+         let locationWeb = document.querySelector("#" + this.location);
+         locationWeb.innerHTML = this.label;
+         locationWeb.addEventListener("click", this._computeTrigger);
+         locationWeb.style.cursor = "pointer";
+      } else
          this._presentation.appendChild(triggerElem);
    }
    
    _computeTrigger() {
       if (this.hasAttribute("label") || this.hasAttribute("action")) {
          let eventLabel = (this.hasAttribute("action")) ? this.action : "navigate/trigger";
-         let message = (this.hasAttribute("label")) ? this.label : this.action;
+         let message = (this.hasAttribute("link")) ? this.link : this.action;
          window.messageBus.dispatchMessage(eventLabel, message);
       }
    }

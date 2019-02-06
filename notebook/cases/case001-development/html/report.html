@@ -17,6 +17,8 @@
    <script type="text/javascript" src="js/dccs/editable/dcc-lively-dialog-editable.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-resource-picker.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-state-selector.js"></script>
+   <script type="text/javascript" src="js/dccs/dcc-styler.js"></script>
+   <script type="text/javascript" src="js/dccs/dcc-dialog.js"></script>
    
    <script type="text/javascript" src="js/dcc-player-server-proxy.js"></script>
    <script type="text/javascript" src="js/player.js"></script>
@@ -24,10 +26,7 @@
 </head>
 <body onload="PlayerManager.instance().startKnot()">
    <div class="sty-main-panel">
-      <div class="sty-control-panel std-border">
-      </div>
-      <div class="sty-work-panel">
-         <div id="knot-panel" class="sty-knot-panel std-border"> <script>
+       <script>
 function produceReport() {
    const server = new DCCPlayerServer();
    let output = "";
@@ -49,9 +48,7 @@ function produceReport() {
 }
 produceReport();
  </script>
-</div>
-         <div id="player-panel" class="sty-player-panel std-border"></div>
-      </div>
+
    </div>
 </body>
 </html>

@@ -17,6 +17,8 @@
    <script type="text/javascript" src="js/dccs/editable/dcc-lively-dialog-editable.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-resource-picker.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-state-selector.js"></script>
+   <script type="text/javascript" src="js/dccs/dcc-styler.js"></script>
+   <script type="text/javascript" src="js/dccs/dcc-dialog.js"></script>
    
    <script type="text/javascript" src="js/dcc-player-server-proxy.js"></script>
    <script type="text/javascript" src="js/player.js"></script>
@@ -24,17 +26,12 @@
 </head>
 <body onload="PlayerManager.instance().startKnot()">
    <div class="sty-main-panel">
-      <div class="sty-control-panel std-border">
-      </div>
-      <div class="sty-work-panel">
-         <div id="knot-panel" class="sty-knot-panel std-border"><p>Our patient denies any recent long trip, immobilization or surgery.</p>
+      <p>Our patient denies any recent long trip, immobilization or surgery.</p>
 <p>The blood pressure is symmetric in the four limbs. </p>
 <p>Game: What do you want to do?
-<dcc-trigger link='Generate_hypothesis_2.html' label='Generate hypothesis' ></dcc-trigger><dcc-trigger link='More_information_2.html' label='Get more information' ></dcc-trigger><dcc-trigger link='Call_the_supervisor_2.html' label='Call the supervisor' ></dcc-trigger>
+<dcc-trigger link='Generate_hypothesis_2.html' label='Generate hypothesis'  image='images/generate-hypothesis.svg'></dcc-trigger><dcc-trigger link='More_information_2.html' label='Get more information'  image='images/get-more-information.svg'></dcc-trigger><dcc-trigger link='Call_the_supervisor_2.html' label='Call the supervisor'  image='images/call-the-supervisor.svg'></dcc-trigger>
 EKG:</p>
-<p><img src="images/ekg-original.png" alt="EKG" /></p></div>
-         <div id="player-panel" class="sty-player-panel std-border"></div>
-      </div>
+<p><img src="images/ekg-original.png" alt="EKG" /></p>
    </div>
 </body>
 </html>

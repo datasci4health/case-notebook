@@ -1,12 +1,12 @@
 (function() {
 Translator.htmlTemplates = {
 option:
-`<dcc-trigger link='[link].html' label='[display]' [image]></dcc-trigger>`,
+`<dcc-trigger link='[link].html' label='[display]' [image][location]></dcc-trigger>`,
 divert:
 `<dcc-link link='[link].html' label='[target]'></dcc-link>`,
 talk:
-`<dcc-lively-talk character='[character]' speech='[speech]'>
-</dcc-lively-talk>`,
+`<dcc-talk character='[character]' speech='[speech]'>
+</dcc-talk>`,
 input:
 `<[input-type] [input-parameters] class='userInput' id='[variable]'
    oninput="followInput('[variable]','[vocabulary]')">

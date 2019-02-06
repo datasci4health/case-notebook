@@ -30,8 +30,13 @@ class PlayerManager {
    navigateEvent(topic, message) {
       this.trackTrigger(message);
       switch (topic) {
-         case "navigate/previous-knot": window.history.back(); break;
-         case "navigate/start-knot": window.open(this._server.getStartKnot().replace(/ /igm, "_") + ".html", "_self");
+         case "navigate/previous-knot": window.history.back();
+                                        break;
+         case "navigate/start-knot": window.open(this._server.getStartKnot().
+                                       replace(/ /igm, "_") + ".html", "_self");
+                                     break;
+         case "navigate/trigger": window.open(message, "_self");
+                                  break;
       }
    }
 
