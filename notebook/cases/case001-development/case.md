@@ -1,17 +1,13 @@
 == Case 001 (start,dialog_left) ==
 :NURSE Agnes: Doctor, we have a man (51 years old) who entered the emergency department reporting chest pain. His vital signs are ABP: 144x92mmHG; HR: 78bpm; RR: 21rpm; Temp: 37oC; O2Sat: 98%.
 
-++ Let us go! (talk-action) -> Level 1 step 2
+++ Let us go! (talk-action) -> Level 1
 
-== Level 1 step 2 (dialog_right) ==
+== Level 1 (decision) ==
 
 :PATIENT Jakob: Doctor, I am feeling chest pain since yesterday. The pain is continuous and is located just in the middle of my chest, worsening when I breathe and when I lay down on my bed. I suffer from arterial hypertension and smoke 20 cigarettes every day. My father had a “heart attack” at my age and I am very worried about it.
 
-++ Do a physical examination (talk-action) -> Level 1 step 3 
-
-== Level 1 step 3 (decision) ==
-
-:PATIENT Jakob: <b>PHYSICAL EXAMINATION</b> <br> The cardiac and pulmonary auscultation are normal; chest pain does not worse with palpation of the thorax; there is no jugular stasis nor lower limb edema.
+<b>PHYSICAL EXAMINATION</b> <br> The cardiac and pulmonary auscultation are normal; chest pain does not worse with palpation of the thorax; there is no jugular stasis nor lower limb edema.
 
 ++ Generate hypothesis (action-1) -> Generate hypothesis 1
 ++ More information (action-2) -> More information 1
@@ -28,14 +24,18 @@
 :PATIENT Jakob: <b>MORE INFORMATION</b> <br> The patient never felt chest pain before. He exercises regularly and has lost weight in the last three months. He takes amlodipine and losartan regularly. Two weeks ago, he had an auto-limited gastroenteritis episode. He denies recent travels and surgery .
 
 ++ Generate hypothesis (action-1) -> Generate hypothesis 1
-++ Call the supervisor (action-2) -> Call the supervisor 1
+++ Call the supervisor (action-2) -> Call the supervisor 1a
 
-== Call the supervisor 1 (detailed) ==
+== Call the supervisor 1a (detailed) ==
 :SUPERVISOR Harry:.
 Hi! I am glad that you called me. Chest pain is an important complaint at the emergency department and we have to exclude the fatal causes: myocardial infarction (MI), acute aortic dissection (AAD), pulmonary embolism PE), hypertensive pneumothorax (HP), and Boerhaave Syndrome (BS).
 
 The best way to find out what is happening with your patient, my young padawan, is to gather as much information as possible through history taking and physical examination. We need to search for the signs and symptoms that can guide our clinical reasoning process by changing the pre-test probabilities of each disease.
 
+++ See likelihood tables (action-1) -> Call the supervisor 1b 
+
+== Call the supervisor 1b (detailed) ==
+:SUPERVISOR Harry:.
 Do you know the concept of Likelihood ratio (LR)? -> Likelihood Ratio
 
 ++ Clinical History Myocardial Infarction
@@ -43,15 +43,18 @@ Do you know the concept of Likelihood ratio (LR)? -> Likelihood Ratio
 ++ Clinical History Aortic Dissection
 ++ Physical Examination Aortic Dissection
 ++ Pulmonary Embolism Wells Criteria
-++ Back to the Case -> Level 1
 
+++ Continue talking (action-1) -> Call the supervisor 1c 
+
+== Call the supervisor 1c (detailed) ==
+:SUPERVISOR Harry:.
 Hypertensive pneumothorax is more common in tall and thin young adults (primary pneumothorax) or in patients with chronic pulmonary diseases or chest trauma (secondary pneumothorax). On physical examination, we expect asymmetry in lung auscultation and the trachea may be dislocated to the contralateral side of the pneumothorax.
 
 Boerhaave Syndrome is more common in patients who presented vomiting before the chest pain started, were submitted to endoscopic procedures or had chest trauma.
 
 How does this information can help you to solve your case?
 
-++ Back to the case (action-1) -> Level 1 step 3
+++ Back to the case (action-1) -> Level 1
 
 == Likelihood Ratio (detailed) ==
 

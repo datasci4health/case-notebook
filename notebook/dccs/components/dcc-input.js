@@ -21,6 +21,7 @@ class DCCInput extends DCCBase {
    }
    
    defineXstyle(topic, message) {
+      window.messageBus.unsubscribe("dcc/xstyle", this.defineXstyle);
       this.xstyle = message;
       this._checkRender();
    }

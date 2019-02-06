@@ -68,6 +68,7 @@ class DCCTrigger extends DCCBase {
    }
 
    defineXstyle(topic, message) {
+      window.messageBus.unsubscribe("dcc/xstyle", this.defineXstyle);
       this.xstyle = message;
       this._checkRender();
    }
@@ -183,6 +184,7 @@ class DCCTrigger extends DCCBase {
          let triggerElem = document.createElement("span");
          triggerElem.innerHTML = triggerWeb;
          triggerElem.addEventListener("click", this._computeTrigger);
+         this._presentation.innerHTML = "";
          this._presentation.appendChild(triggerElem);
       }
    }

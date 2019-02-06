@@ -216,29 +216,24 @@
   <rect
      style="fill:#ba2027"
      y="641"
-     x="968"
+     x="396"
      rx="29.5"
      height="59"
      width="301"
      class="cls-14"
      data-name="Rectangle 18"
      id="Rectangle_18" />
-  <foreignObject
-     data-name="Talk action"
-     x="985"
-     y="640"
-     width="270"
-     height="50">
-     <p xmlns="http://www.w3.org/1999/xhtml"
-        id="talk-action"
-        class="cls-15"
-        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center">
-        action
-     </p>
-  </foreignObject>
+  <text
+     style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
+     class="cls-15"
+     data-name="Ok. I would like to see him. "
+     id="talk-action"
+     x="413"
+     y="679">
+  </text>
   <foreignObject
      data-name="speech"
-     x="492"
+     x="320"
      y="230"
      width="500"
      height="200">
@@ -496,16 +491,16 @@
   </g>
   <image
      xlink:href=""
-     y="139.5152"
-     x="48.912003"
+     y="133.47008"
+     x="904.30768"
      id="talk-character-image"
      preserveAspectRatio="none"
-     height="529.83252"
-     width="613.63934" />
+     height="543.65814"
+     width="375.4201" />
   <rect
      style="fill:#0d4a71"
-     y="641"
-     x="221"
+     y="587"
+     x="1015"
      rx="23.5"
      height="47"
      width="212"
@@ -517,11 +512,6 @@
      class="cls-18"
      data-name="character"
      id="talk-character"
-     x="256"
-     y="673">
-    character
-  </text>
+     x="1050"
+     y="619">character</text>
 </svg>
-<dcc-styler xstyle="out">
-   {knot}
-</dcc-styler>
