@@ -577,8 +577,8 @@ class Translator {
              variable: matchArray[2].trim().replace(/ /igm, "_")
       };
       
-      if (matchArray[1] == null)
-         input.rows = parseInt(insideRows);
+      if (matchArray[1] != null)
+         input.rows = parseInt(matchArray[1]);
       
       if (matchArray[3] != null)
          input.vocabulary = matchArray[3].trim();
@@ -602,20 +602,16 @@ class Translator {
    
    /*
     * Input Obj to HTML
-    * Output: <[input-type] [input-parameters] class='userInput' id='[variable]'
-    *          oninput="followInput('[variable]','[vocabulary]')">
-    *         </[input-type]>
-    *         <span id='[variable]_result'></span>
+    * Output: <dcc-input variable='[variable]' rows='[rows]' [vocabulary]> 
+    *         </dcc-input>
     */
    _inputObjToHTML(inputObj) {
-      let inputType = ((inputObj.rows > 1) ? "textarea" : "input");
-      let inputParam = ((inputObj.rows > 1) ? "style='width:100%' rows=" + rows
-                                            : "type='text'");
+      const rows = (inputObj.rows) ? " rows='" + inputObj.rows + "'" : "";
+      const vocabulary = (inputObj.vocabulary) ? " vocabulary='" + inputObj.vocabulary + "'" : "";
       
-      return Translator.htmlTemplates.input.replace(/\[input-type\]/igm, inputType)
-                                           .replace("[input-parameters]", inputParam)
-                                           .replace(/\[variable\]/igm, inputObj.variable)
-                                           .replace("[vocabulary]", inputObj.vocabulary);
+      return Translator.htmlTemplates.input.replace("[variable]", inputObj.variable)
+                                           .replace("[rows]", rows)
+                                           .replace("[vocabulary]", vocabulary);
    }
 
    /*

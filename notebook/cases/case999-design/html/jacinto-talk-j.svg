@@ -1,33 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-   <meta charset="utf-8"/>
-   <title>Player</title>
-   
-   <link rel="stylesheet" type="text/css" href="css/player.css">
-   <link rel="stylesheet" type="text/css" href="css/presentation.css">
-   <link rel="stylesheet" type="text/css" href="css/templates.css">
-
-   <script type="text/javascript" src="js/dccs/infra/infra.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-trigger.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-character.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-character-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-lively-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-lively-dialog-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-resource-picker.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-state-selector.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-styler.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-input.js"></script>
-   
-   <script type="text/javascript" src="js/dcc-player-server-proxy.js"></script>
-   <script type="text/javascript" src="js/player.js"></script>
-   <script type="text/javascript" src="js/case.js"></script>
-</head>
-<body onload="PlayerManager.instance().startKnot()">
-   <div class="sty-main-panel">
-      <svg
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:xhtml="http://www.w3.org/1999/xhtml"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -41,7 +14,8 @@
    viewBox="0 0 1380.8701 700"
    version="1.1"
    id="svg102"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="jacinto-talk-j.svg">
   <metadata
      id="metadata106">
     <rdf:RDF>
@@ -68,8 +42,8 @@
      id="namedview104"
      showgrid="false"
      inkscape:zoom="0.73125002"
-     inkscape:cx="663.86985"
-     inkscape:cy="295.36755"
+     inkscape:cx="583.50558"
+     inkscape:cy="345.04483"
      inkscape:window-x="67"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -177,8 +151,7 @@
        preserveAspectRatio="xMidYMid slice"
        width="100%"
        height="100%"
-       viewBox="0 0 1920 1080">
-    </pattern>
+       viewBox="0 0 1920 1080" />
     <clipPath
        id="clip-path">
       <rect
@@ -213,6 +186,7 @@
     </clipPath>
   </defs>
   <image
+     sodipodi:absref="/home/santanche/git/case-notebook/notebook/cases/case999-design/html/images/hospital-background.png"
      xlink:href="images/hospital-background.png"
      y="71.079224"
      x="244.12265"
@@ -242,36 +216,25 @@
        data-name="Path 320"
        id="Path_320" />
   </g>
-  <rect
-     style="fill:#ba2027"
-     y="641"
-     x="396"
-     rx="29.5"
-     height="59"
-     width="301"
-     class="cls-14"
-     data-name="Rectangle 18"
-     id="Rectangle_18" />
   <text
      style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
      class="cls-15"
      data-name="Ok. I would like to see him. "
      id="talk-action"
      x="413"
-     y="679">
-  </text>
+     y="679" />
   <foreignObject
      data-name="speech"
      x="320"
      y="230"
      width="500"
      height="200">
-     <p xmlns="http://www.w3.org/1999/xhtml"
-        id="talk-speech"
-        class="cls-15"
-        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff">
+    <xhtml:p
+       id="talk-speech"
+       class="cls-15"
+       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff">
         speech
-     </p>
+     </xhtml:p>
   </foreignObject>
   <rect
      style="fill:#d6d6d6"
@@ -518,7 +481,33 @@
        data-name="Rectangle 94"
        id="Rectangle_94-3" />
   </g>
+  <g
+     style="fill:#ffffff;stroke:#707070"
+     class="cls-4"
+     data-name="Rectangle 36"
+     id="Rectangle_36"
+     transform="translate(298.85041,178.36326)">
+    <rect
+       style="stroke:none"
+       y="0"
+       x="0"
+       id="rect579"
+       rx="12"
+       height="167"
+       width="737"
+       class="cls-23" />
+    <rect
+       style="fill:none"
+       id="rect581"
+       rx="11.5"
+       height="166"
+       width="736"
+       y="0.5"
+       x="0.5"
+       class="cls-24" />
+  </g>
   <image
+     sodipodi:absref="/home/santanche/git/case-notebook/notebook/cases/case999-design/html/images/patient_jakob.png"
      xlink:href="images/patient_jakob.png"
      y="133.47008"
      x="904.30768"
@@ -543,11 +532,49 @@
      id="talk-character"
      x="1050"
      y="619">character</text>
+  <rect
+     style="fill:#ba2027"
+     y="316.41452"
+     x="685.04272"
+     rx="29.5"
+     height="59"
+     width="212"
+     class="cls-14"
+     data-name="Rectangle 18"
+     id="Rectangle_18" />
+  <text
+     style="font-size:20px;font-family:SegoeUI, 'Segoe UI';fill:#ffffff"
+     class="cls-15"
+     data-name="Submit hypothesis"
+     id="Submit_hypothesis"
+     x="710.04272"
+     y="354.41452">
+    <tspan
+       id="tspan5229"
+       y="354.41452"
+       x="710.04272">Submit hypothesis</tspan>
+  </text>
+  <text
+     style="font-size:28px;font-family:SegoeUI, 'Segoe UI';fill:#346e93"
+     class="cls-15"
+     data-name="What is your main diagnostic hypothesis? "
+     id="What_is_your_main_diagnostic_hypothesis_"
+     x="317.84219"
+     y="235.41695">
+    <tspan
+       id="tspan614"
+       y="235.41695"
+       x="317.84219">What is your main diagnostic hypothesis?</tspan>
+  </text>
+  <text
+     style="font-size:30px;font-family:SegoeUI, 'Segoe UI';fill:#707070;stroke:none"
+     class="cls-23"
+     id="input-hypothesis"
+     x="317.11661"
+     y="264.8251">
+    <tspan
+       id="tspan6461"
+       y="296.8251"
+       x="317.11661">diabetes</tspan>
+  </text>
 </svg>
-<dcc-styler xstyle="out">
-   <p><dcc-talk character='PATIENT Jakob' speech='Doctor, I am feeling chest pain since yesterday. The pain is continuous and is located just in the middle of my chest, worsening when I breathe and when I lay down on my bed. I suffer from arterial hypertension and smoke 20 cigarettes every day. My father had a “heart attack” at my age and I am very worried about it.'>
-</dcc-talk><dcc-trigger link='Level_1_step_3.html' label='Do a physical examination'  location='talk-action'></dcc-trigger></p>
-</dcc-styler>
-   </div>
-</body>
-</html>

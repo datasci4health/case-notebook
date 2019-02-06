@@ -8,10 +8,8 @@ talk:
 `<dcc-talk character='[character]' speech='[speech]'>
 </dcc-talk>`,
 input:
-`<[input-type] [input-parameters] class='userInput' id='[variable]'
-   oninput="followInput('[variable]','[vocabulary]')">
-</[input-type]>
-<span id='[variable]_result'></span>`,
+`<dcc-input variable='[variable]'[rows][vocabulary]> 
+</dcc-input>`,
 domain:
 `[natural]`,
 selctxopen:

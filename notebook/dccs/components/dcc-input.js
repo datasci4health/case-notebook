@@ -6,18 +6,32 @@
 class DCCInput extends DCCBase {
    constructor() {
       super();
+      this.defineXstyle = this.defineXstyle.bind(this);
       this._renderInterface = this._renderInterface.bind(this);
       this.submitInput = this.submitInput.bind(this);
    }
    
    connectedCallback() {
+      if (!this.hasAttribute("xstyle")) {
+         window.messageBus.subscribe("dcc/xstyle", this.defineXstyle);
+         window.messageBus.dispatchMessage("dcc/request-xstyle", "");
+      }
+      this._checkRender();
+      window.messageBus.subscribe("get-input/" + this.variable, this.submitInput);
+   }
+   
+   defineXstyle(topic, message) {
+      this.xstyle = message;
+      this._checkRender();
+   }
+   
+   _checkRender() {
       if (document.readyState === "complete")
          this._renderInterface();
       else
          window.addEventListener("load", this._renderInterface);
-      window.messageBus.subscribe("get-input/" + this.variable, this.submitInput);
    }
-   
+
    submitInput(topic, message) {
       const value = document.querySelector("#" + this.variable).value;
       window.messageBus.dispatchMessage("input/" + this.variable, value);
@@ -28,7 +42,7 @@ class DCCInput extends DCCBase {
     */
    
    static get observedAttributes() {
-      return ["variable", "rows", "vocabulary", "outstyle"];
+      return ["variable", "rows", "vocabulary", "xstyle"];
    }
 
    get variable() {
@@ -55,17 +69,14 @@ class DCCInput extends DCCBase {
       this.setAttribute("vocabulary", newValue);
    }
    
-   get outstyle() {
-      return this.hasAttribute("outstyle");
+   get xstyle() {
+      return this.getAttribute("xstyle");
    }
    
-   set outstyle(isOutstyle) {
-      if (outstyle)
-         this.setAttribute("outstyle", "");
-      else
-         this.removeAttribute("outstyle");
+   set xstyle(newValue) {
+      this.setAttribute("xstyle", newValue);
    }
-   
+  
    /* Rendering */
    
    _renderInterface() {
@@ -79,7 +90,7 @@ class DCCInput extends DCCBase {
                                               .replace("[input-parameters]", inputParam)
                                               .replace(/\[variable\]/igm, this.variable);
      
-      if (this.outstyle) {
+      if (this.hasAttribute("xstyle") && this.xstyle == "out") {
          const elem = document.querySelector("#input-" + this.variable);
          elem.innerHTML = finalHTML;
       }

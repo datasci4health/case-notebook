@@ -1,41 +1,36 @@
-== Case 001 (start,presentation) ==
-Man, 51 years old, present to an emergency department complaining of chest pain.
-![Forklift](images/patient-in-bed.svg)
-++ Start -> Level 1 step 1
-
-== Level 1 step 1 (dialog) ==
+== Case 001 (start,dialog_left) ==
 :NURSE Agnes: Doctor, we have a man (51 years old) who entered the emergency department reporting chest pain. His vital signs are ABP: 144x92mmHG; HR: 78bpm; RR: 21rpm; Temp: 37oC; O2Sat: 98%.
 
 ++ Let us go! (talk-action) -> Level 1 step 2
 
-== Level 1 step 2 (dialog) ==
+== Level 1 step 2 (dialog_right) ==
 
-:PATIENT Jacob: Doctor, I am feeling chest pain since yesterday. The pain is continuous and is located just in the middle of my chest, worsening when I breathe and when I lay down on my bed. I suffer from arterial hypertension and smoke 20 cigarettes every day. My father had a “heart attack” at my age and I am very worried about it.
+:PATIENT Jakob: Doctor, I am feeling chest pain since yesterday. The pain is continuous and is located just in the middle of my chest, worsening when I breathe and when I lay down on my bed. I suffer from arterial hypertension and smoke 20 cigarettes every day. My father had a “heart attack” at my age and I am very worried about it.
 
 ++ Do a physical examination (talk-action) -> Level 1 step 3 
 
-== Level 1 step 3 (dialog) ==
+== Level 1 step 3 (decision) ==
 
-:DOCTOR: I did a physical examination and the cardiac and pulmonary auscultation are normal; chest pain does not worse with palpation of the thorax; there is no jugular stasis nor lower limb edema.
+:PATIENT Jakob: <b>PHYSICAL EXAMINATION</b> <br> The cardiac and pulmonary auscultation are normal; chest pain does not worse with palpation of the thorax; there is no jugular stasis nor lower limb edema.
 
-:Jacinto: What do you want to do?
+++ Generate hypothesis (action-1) -> Generate hypothesis 1
+++ More information (action-2) -> More information 1
+++ Call the supervisor (action-3) -> Call the supervisor 1
 
-++ Generate hypothesis (control) -> Generate hypothesis 1
-++ More information (control) -> More information 1
-++ Call the supervisor (control) -> Call the supervisor 1
-
-== Generate hypothesis 1 (tablet) ==
-What is your main diagnostic hypothesis?
+== Generate hypothesis 1 (input) ==
+:PATIENT Jakob:.
 {?1 hypothesis:mesh#pericarditis,myopericarditis,pericardial inflammation,pericardial infection,pericardial effusion;infarction,myocardial infarction,coronary syndrome,acute coronary syndrome,ischemia,myocardial ischemia,coronary insufficiency,angina,angina pectoris}
 
-++ Submit hypothesis -> Check hypothesis 1
+++ Submit hypothesis (submit-input) -> Check hypothesis 1
 
-== More information 1 (presentation,notice) ==
-The patient never felt chest pain before. He exercises regularly and has lost weight in the last three months. He takes amlodipine and losartan regularly.
+== More information 1 (information) ==
 
-Two weeks ago, he had an auto-limited gastroenteritis episode. He denies recent travels and surgery .
+:PATIENT Jakob: <b>MORE INFORMATION</b> <br> The patient never felt chest pain before. He exercises regularly and has lost weight in the last three months. He takes amlodipine and losartan regularly. Two weeks ago, he had an auto-limited gastroenteritis episode. He denies recent travels and surgery .
 
-== Call the supervisor 1 ==
+++ Generate hypothesis (action-1) -> Generate hypothesis 1
+++ Call the supervisor (action-2) -> Call the supervisor 1
+
+== Call the supervisor 1 (detailed) ==
 Hi! I am glad that you called me. Chest pain is an important complaint at the emergency department and we have to exclude the fatal causes: myocardial infarction (MI), acute aortic dissection (AAD), pulmonary embolism PE), hypertensive pneumothorax (HP), and Boerhaave Syndrome (BS).
 
 The best way to find out what is happening with your patient, my young padawan, is to gather as much information as possible through history taking and physical examination. We need to search for the signs and symptoms that can guide our clinical reasoning process by changing the pre-test probabilities of each disease.
@@ -75,16 +70,7 @@ Likelihood ratio (LR) - like sensitivity and specificity, LR describe the discri
 == Pulmonary Embolism Wells Criteria (notice) ==
 ![Pulmonary Embolism Wells Criteria](images/ebm-pulmonary-embolism-wells-criteria.png)
 
-== Check hypothesis 1 (presentation,selector) ==
-
-Let us check out your hypothesis.
-
-In the next screen, highlight in green the findings that corroborate your hypothesis, 
-in blue those that are neutral and in red the ones speaking against your hypothesis.
-
-++ Proceed -> Check hypothesis 1b
-
-== Check hypothesis 1b (selector) ==
+== Check hypothesis 1 (check_input) ==
 
 {{symptoms#contribution to diagnostics: ,+,=,-;lightgrey,green,blue,red
 Nurse: Doctor, please you have to evaluate a {man(male)} ({51 years-old(aging=51)#=}) who entered the emergency department reporting {chest pain#=}.His vital signs are {ABP: 144x92mmHG#=}; {HR: 78bpm#=}; {RR: 21rpm#=}; {Temp: 37oC#=}; {O2Sat: 98%#=}.
@@ -93,7 +79,7 @@ Patient: Doctor, I am feeling chest pain since yesterday. The {pain is continuou
 
 You perform physical examination: {cardiac and pulmonary auscultation are normal#-}; {chest pain does not worse with palpation of the thorax#=}; {there is no jugular stasis#=} {nor lower limb edema#=}.
 }}
-++ Submit -> Order EKG 
+++ Submit (submit-input) -> Order EKG 
 
 == Order EKG ==
 Our patient denies any recent long trip, immobilization or surgery.
