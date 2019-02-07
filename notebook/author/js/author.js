@@ -69,7 +69,7 @@ class AuthorManager {
             let miniature = document.createElement("div");
             miniature.classList.add("navigation-knot");
             miniature.classList.add("std-border");
-            miniature.innerHTML = "<h2><dcc-trigger action='control/knot-selected' render='none' " +
+            miniature.innerHTML = "<h2><dcc-trigger action='control/knot-selected' xstyle='none' " +
                                       "label = '" + this._knots[kn].title + "'>"
                                   "</dcc-trigger></h2>";
             navigationPanel.appendChild(miniature);

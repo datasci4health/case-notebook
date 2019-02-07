@@ -11,7 +11,7 @@
 
 ++ Generate hypothesis (action-1) -> Generate hypothesis 1
 ++ More information (action-2) -> More information 1
-++ Call the supervisor (action-3) -> Call the supervisor 1
+++ Call the supervisor (action-3) -> Call the supervisor 1a
 
 == Generate hypothesis 1 (input) ==
 :PATIENT Jakob:.

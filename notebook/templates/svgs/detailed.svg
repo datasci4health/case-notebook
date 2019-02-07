@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -13,7 +14,7 @@
    version="1.1"
    id="svg102"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="jacinto-talk-l.svg">
+   sodipodi:docname="detailed.svg">
   <metadata
      id="metadata106">
     <rdf:RDF>
@@ -22,7 +23,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -35,16 +36,16 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="731"
+     inkscape:window-width="1299"
      inkscape:window-height="704"
      id="namedview104"
      showgrid="false"
-     inkscape:zoom="0.36562501"
-     inkscape:cx="727.15592"
-     inkscape:cy="176.57909"
+     inkscape:zoom="0.73125002"
+     inkscape:cx="701.82014"
+     inkscape:cy="317.53338"
      inkscape:window-x="67"
      inkscape:window-y="27"
-     inkscape:window-maximized="0"
+     inkscape:window-maximized="1"
      inkscape:current-layer="svg102" />
   <defs
      id="defs14">
@@ -184,13 +185,14 @@
     </clipPath>
   </defs>
   <image
+     sodipodi:absref="/home/santanche/git/case-notebook/notebook/templates/svgs/images/hospital-background.png"
      xlink:href="images/hospital-background.png"
-     y="71.079224"
-     x="20.12265"
-     id="image4087"
-     preserveAspectRatio="none"
+     width="1136.7474"
      height="597.91913"
-     width="1136.7474" />
+     preserveAspectRatio="none"
+     id="image4087"
+     x="20.12265"
+     y="71.079224" />
   <g
      data-name="Seta voltar"
      id="Seta_voltar"
@@ -229,11 +231,13 @@
     <div
        id="detailed-information"
        class="cls-15"
-       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;overflow:scroll" height="420px">
-       <dcc-styler xstyle="out">
+       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;overflow:scroll"
+       height="420px">
+      <dcc-styler
+         xstyle="out">
           {knot}
        </dcc-styler>
-     </div>
+    </div>
   </foreignObject>
   <rect
      style="fill:#d6d6d6"
@@ -525,7 +529,7 @@
     <tspan
        id="tspan4579"
        y="632.35254"
-       x="71.237793"></tspan>
+       x="71.237793" />
   </text>
   <text
      style="font-weight:700;font-size:28px;font-family:Tahoma, Geneva, sans-serif;fill:#346e93"
@@ -540,13 +544,14 @@
        x="59.737793">What do you want to do?</tspan>
   </text>
   <image
-     y="32.929932"
-     x="892.04901"
-     id="talk-character-image"
+     sodipodi:absref="/home/santanche/git/case-notebook/notebook/templates/svgs/images/supervisor_harry.png"
      xlink:href="images/supervisor_harry.png"
-     preserveAspectRatio="none"
+     width="488.82108"
      height="636.06842"
-     width="488.82108" />
+     preserveAspectRatio="none"
+     id="talk-character-image"
+     x="892.04901"
+     y="32.929932" />
   <rect
      style="fill:#0d4a71;stroke-width:1.06254947"
      y="641.17096"

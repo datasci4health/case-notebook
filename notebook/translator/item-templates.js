@@ -3,7 +3,7 @@ Translator.htmlTemplates = {
 option:
 `<dcc-trigger link='[link].html' label='[display]' [image][location]></dcc-trigger>`,
 divert:
-`<dcc-link link='[link].html' label='[target]'></dcc-link>`,
+`<dcc-trigger link='[link].html' label='[display]'></dcc-trigger>`,
 talk:
 `<dcc-talk character='[character]' speech='[speech]'>
 </dcc-talk>`,
