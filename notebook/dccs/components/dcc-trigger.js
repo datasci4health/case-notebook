@@ -43,6 +43,23 @@ class DCCTrigger extends DCCBase {
            max-height: 100%;
            cursor: pointer;
         }
+        
+         .trigger-button-template {
+            border: 1px solid lightgray;
+            border-radius: 5px;
+            margin: 5px;
+            color: #ffffff;   
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+         }
+         
+         .trigger-button-template:hover {
+            color: #aaaaaa;
+            font-weight: bold;
+            cursor: pointer;
+         }
       </style>
       <span id="presentation-dcc"></span>`;
      
