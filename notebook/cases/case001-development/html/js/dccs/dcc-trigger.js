@@ -1,4 +1,9 @@
 /* Trigger DCC
+ * 
+ * xstyle - controls the behavior of the style
+ *   * "in" or not defined -> uses the internal trigger-button style
+ *   * "none" ->  apply a minimal styling (just changes cursor to pointer)
+ *   * 
 **************/
 (function() {
   
@@ -38,6 +43,23 @@ class DCCTrigger extends DCCBase {
            max-height: 100%;
            cursor: pointer;
         }
+        
+        .trigger-button-template {
+   border: 1px solid lightgray;
+   border-radius: 5px;
+   margin: 5px;
+   color: #ffffff;   
+   padding: 14px 25px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+}
+
+.trigger-button-template:hover {
+   color: #aaaaaa;
+   font-weight: bold;
+   cursor: pointer;
+}
       </style>
       <span id="presentation-dcc"></span>`;
      
@@ -56,7 +78,7 @@ class DCCTrigger extends DCCBase {
    /* Attribute Handling */
 
    static get observedAttributes() {
-     return ["link", "action", "label", "image", "location", "xstyle", "render"];
+     return ["link", "action", "label", "image", "location", "xstyle"];
    }
 
    connectedCallback() {
@@ -68,6 +90,7 @@ class DCCTrigger extends DCCBase {
    }
 
    defineXstyle(topic, message) {
+      window.messageBus.unsubscribe("dcc/xstyle", this.defineXstyle);
       this.xstyle = message;
       this._checkRender();
    }
@@ -131,6 +154,7 @@ class DCCTrigger extends DCCBase {
       this.setAttribute("xstyle", newValue);
    }
   
+   /*
    get render() {
       return this.getAttribute("render");
    }
@@ -138,24 +162,23 @@ class DCCTrigger extends DCCBase {
    set render(newValue) {
       this.setAttribute("render", newValue);
    }
+   */
 
    /* Rendering */
    
    _renderInterface() {
-      /*
-      let webLocation = null;
-      if (this.hasAttribute("location"))
-         webLocation = document.querySelector("#" + this.location);
-      */
-      
       let linkWeb = (this.hasAttribute("link")) ? "href='" + this.link + "' " : "";
       
       let renderWeb = "trigger-button";
-      if (this.hasAttribute("render"))
-         if (this.render = "none")
-            renderWeb = "trigger-button-minimal";
-         else
-            renderWeb = this.style;
+      if (this.hasAttribute("xstyle"))
+         switch (this.xstyle) {
+            case "in"  : break;  // already defined
+            case "none": renderWeb = "trigger-button-minimal";
+                         break;
+            case "out":  renderWeb = "trigger-button-template";
+                         break;
+            default:     renderWeb = this.xstyle;
+         }
       
       let triggerWeb = null;
       if (this.hasAttribute("image"))
@@ -166,31 +189,27 @@ class DCCTrigger extends DCCBase {
          triggerWeb = DCCTrigger.templates.regular.replace("[render]", renderWeb)
                                                   .replace("[link]", linkWeb)
                                                   .replace("[label]", this.label);
-      
-      let triggerElem = document.createElement("span");
-      triggerElem.innerHTML = triggerWeb;
-      triggerElem.addEventListener("click", this._computeTrigger);
-      
-      /*
-      if (webLocation != null)
-         webLocation.appendChild(triggerElem);
-      else
-         this._presentation.appendChild(triggerElem);
-      */
 
       if (this.hasAttribute("xstyle") && this.xstyle == "out" && this.hasAttribute("location")) {
          let locationWeb = document.querySelector("#" + this.location);
          locationWeb.innerHTML = this.label;
          locationWeb.addEventListener("click", this._computeTrigger);
          locationWeb.style.cursor = "pointer";
-      } else
-         this._presentation.appendChild(triggerElem);
+      } else {
+         // let triggerElem = document.createElement("span");
+         // triggerElem.innerHTML = triggerWeb;
+         // triggerElem.addEventListener("click", this._computeTrigger);
+         // this._presentation.innerHTML = "";
+         // this._presentation.appendChild(triggerElem);
+         this._presentation.innerHTML = triggerWeb;
+         this._presentation.addEventListener("click", this._computeTrigger);
+      }
    }
    
    _computeTrigger() {
       if (this.hasAttribute("label") || this.hasAttribute("action")) {
          let eventLabel = (this.hasAttribute("action")) ? this.action : "navigate/trigger";
-         let message = (this.hasAttribute("link")) ? this.link : this.action;
+         let message = (this.hasAttribute("link")) ? this.link : this.label;
          window.messageBus.dispatchMessage(eventLabel, message);
       }
    }

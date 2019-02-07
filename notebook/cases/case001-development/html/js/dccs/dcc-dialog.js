@@ -17,6 +17,7 @@ class DCCTalk extends DCCBase {
    }
    
    defineXstyle(topic, message) {
+      window.messageBus.unsubscribe("dcc/xstyle", this.defineXstyle);
       this.xstyle = message;
       this._checkRender();
    }
@@ -64,11 +65,16 @@ class DCCTalk extends DCCBase {
    
    _renderInterface() {
       if (this.hasAttribute("xstyle") && this.xstyle == "out") {
-         document.querySelector("#talk-character").innerHTML = this.character;
-         document.querySelector("#talk-character-image").
-            setAttributeNS("http://www.w3.org/1999/xlink", "href",
+         let character = document.querySelector("#talk-character");
+         if (character != null)
+            character.innerHTML = this.character;
+         let image = document.querySelector("#talk-character-image");
+         if (image != null)
+            image.setAttributeNS("http://www.w3.org/1999/xlink", "href",
                   "images/" + this.character.replace(/ /igm, "_").toLowerCase() + ".png");
-         document.querySelector("#talk-speech").innerHTML = this.speech;
+         let speech = document.querySelector("#talk-speech");
+         if (speech != null)
+           speech.innerHTML = this.speech;
       }
    }
 }

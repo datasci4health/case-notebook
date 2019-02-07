@@ -17,7 +17,7 @@ class MessageBus {
       for (let l = 0; l < this._listeners.length && !found; l++)
          if (this._listeners[l].topic == topic &&
              this._listeners[l].address == address) {
-            this._listeners[l].splice(l, 1 );
+            this._listeners.splice(l, 1);
             found = true;
          }
    }
