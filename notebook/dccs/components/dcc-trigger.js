@@ -5,70 +5,10 @@
  *   * "none" ->  apply a minimal styling (just changes cursor to pointer)
  *   * 
 **************/
-(function() {
-  
+
 class DCCTrigger extends DCCBase {
    constructor() {
      super();
-     
-     let templateHTML = 
-     `<style>
-        .trigger-button-minimal:hover {
-           cursor: pointer;
-        }
-     
-        .trigger-button {
-           border: 1px solid lightgray;
-           border-radius: 5px;
-           margin: 5px;
-           color: #1d1d1b;   
-           /*
-           background-color: #383f4f;
-           color: #e0e9ce;
-           */
-           padding: 14px 25px;
-           text-align: center;
-           text-decoration: none;
-           display: inline-block;
-        }
-        
-        .trigger-button:hover {
-           color: black;
-           font-weight: bold;
-           cursor: pointer;
-        }
-        
-        .trigger-image {
-           max-width: 100%;
-           max-height: 100%;
-           cursor: pointer;
-        }
-        
-         .trigger-button-template {
-            border: 1px solid lightgray;
-            border-radius: 5px;
-            margin: 5px;
-            color: #ffffff;   
-            padding: 14px 25px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-         }
-         
-         .trigger-button-template:hover {
-            color: #aaaaaa;
-            font-weight: bold;
-            cursor: pointer;
-         }
-      </style>
-      <span id="presentation-dcc"></span>`;
-     
-     const template = document.createElement("template");
-     template.innerHTML = templateHTML;
-     this._shadow = this.attachShadow({mode: "open"});
-     this._shadow.appendChild(template.content.cloneNode(true));
-     
-     this._presentation = this._shadow.querySelector("#presentation-dcc");
      
      this._computeTrigger = this._computeTrigger.bind(this);
      this.defineXstyle = this.defineXstyle.bind(this);
@@ -154,56 +94,51 @@ class DCCTrigger extends DCCBase {
       this.setAttribute("xstyle", newValue);
    }
   
-   /*
-   get render() {
-      return this.getAttribute("render");
-   }
-
-   set render(newValue) {
-      this.setAttribute("render", newValue);
-   }
-   */
-
    /* Rendering */
    
    _renderInterface() {
-      let linkWeb = (this.hasAttribute("link")) ? "href='" + this.link + "' " : "";
-      
-      let renderWeb = "trigger-button";
-      if (this.hasAttribute("xstyle"))
-         switch (this.xstyle) {
-            case "in"  : break;  // already defined
+      let xstyle = (this.hasAttribute("xstyle")) ? this.xstyle : "in";
+      if (xstyle == "out" && this.hasAttribute("location")) {
+         this._presentation = document.querySelector("#" + this.location);
+         this._presentation.innerHTML = this.label;
+         this._presentation.style.cursor = "pointer";
+      } else {
+         let linkWeb = (this.hasAttribute("link")) ? "href='" + this.link + "' " : "";
+         
+         let renderWeb;
+         switch (xstyle) {
+            case "in"  : renderWeb = "trigger-button"
+                         break;
             case "none": renderWeb = "trigger-button-minimal";
                          break;
             case "out":  renderWeb = "trigger-button-template";
                          break;
             default:     renderWeb = this.xstyle;
          }
-      
-      let triggerWeb = null;
-      if (this.hasAttribute("image"))
-         triggerWeb = DCCTrigger.templates.image.replace("[link]", linkWeb)
-                                                .replace("[label]", this.label)
-                                                .replace("[image]", this.image);
-      else
-         triggerWeb = DCCTrigger.templates.regular.replace("[render]", renderWeb)
-                                                  .replace("[link]", linkWeb)
-                                                  .replace("[label]", this.label);
+         
+         let triggerWeb = null;
+         if (this.hasAttribute("image"))
+            triggerWeb = DCCTrigger.templates.image.replace("[link]", linkWeb)
+                                                   .replace("[label]", this.label)
+                                                   .replace("[image]", this.image);
+         else
+            triggerWeb = DCCTrigger.templates.regular.replace("[render]", renderWeb)
+                                                     .replace("[link]", linkWeb)
+                                                     .replace("[label]", this.label);
 
-      if (this.hasAttribute("xstyle") && this.xstyle == "out" && this.hasAttribute("location")) {
-         let locationWeb = document.querySelector("#" + this.location);
-         locationWeb.innerHTML = this.label;
-         locationWeb.addEventListener("click", this._computeTrigger);
-         locationWeb.style.cursor = "pointer";
-      } else {
-         // let triggerElem = document.createElement("span");
-         // triggerElem.innerHTML = triggerWeb;
-         // triggerElem.addEventListener("click", this._computeTrigger);
-         // this._presentation.innerHTML = "";
-         // this._presentation.appendChild(triggerElem);
+         const template = document.createElement("template");
+         template.innerHTML = DCCTrigger.templateHTML;
+         
+         let host = this;
+         if (xstyle == "in" || xstyle == "none")
+            host = this.attachShadow({mode: "open"});
+
+         host.appendChild(template.content.cloneNode(true));
+         this._presentation = host.querySelector("#presentation-dcc");
          this._presentation.innerHTML = triggerWeb;
-         this._presentation.addEventListener("click", this._computeTrigger);
       }
+      
+      this._presentation.addEventListener("click", this._computeTrigger);
    }
    
    _computeTrigger() {
@@ -215,6 +150,39 @@ class DCCTrigger extends DCCBase {
    }
 }
 
+(function() {
+
+DCCTrigger.templateHTML = 
+`<style>
+   .trigger-button-minimal:hover {
+      cursor: pointer;
+   }
+
+   .trigger-button {
+      border: 1px solid lightgray;
+      border-radius: 5px;
+      margin: 5px;
+      color: #1d1d1b;   
+      padding: 14px 25px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+   }
+   
+   .trigger-button:hover {
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+   }
+   
+   .trigger-image {
+      max-width: 100%;
+      max-height: 100%;
+      cursor: pointer;
+   }
+</style>
+<span id="presentation-dcc"></span>`;
+   
 DCCTrigger.templates = {
 regular:
 `<a class='[render]' [link]>[label]</a>`,
