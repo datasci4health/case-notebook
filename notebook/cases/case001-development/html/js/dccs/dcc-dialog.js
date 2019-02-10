@@ -11,7 +11,7 @@ class DCCTalk extends DCCBase {
    connectedCallback() {
       if (!this.hasAttribute("xstyle")) {
          window.messageBus.subscribe("dcc/xstyle", this.defineXstyle);
-         window.messageBus.dispatchMessage("dcc/request-xstyle", "");
+         window.messageBus.dispatch("dcc/request-xstyle", "");
       }
       this._checkRender();
    }

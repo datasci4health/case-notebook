@@ -10,6 +10,7 @@
 
    <script type="text/javascript" src="js/dccs/infra/infra.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
+   <script type="text/javascript" src="js/dccs/dcc-block.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-trigger.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-character.js"></script>
    <script type="text/javascript" src="js/dccs/editable/dcc-character-editable.js"></script>
@@ -631,8 +632,9 @@
   </text>
 </svg>
 <dcc-styler xstyle="out">
-   <p><dcc-talk character='PATIENT Jakob' speech='<b>MORE INFORMATION</b> <br> The patient never felt chest pain before. He exercises regularly and has lost weight in the last three months. He takes amlodipine and losartan regularly. Two weeks ago, he had an auto-limited gastroenteritis episode. He denies recent travels and surgery .'>
-</dcc-talk><dcc-trigger link='Generate_hypothesis_1.html' label='Generate hypothesis'  location='action-1'></dcc-trigger><dcc-trigger link='Call_the_supervisor_1a.html' label='Call the supervisor'  location='action-2'></dcc-trigger></p>
+   <p><dcc-talk id='dcc3' character='PATIENT Jakob' speech='<b>MORE INFORMATION</b> <br> The patient never felt chest pain before. He exercises regularly and has lost weight in the last three months. He takes amlodipine and losartan regularly. Two weeks ago, he had an auto-limited gastroenteritis episode. He denies recent travels and surgery .'>
+</dcc-talk><dcc-trigger id='dcc4' type='++' link='Generate_hypothesis_1.html' label='Generate hypothesis'  location='action-1'></dcc-trigger>
+<dcc-trigger id='dcc6' type='++' link='Call_the_supervisor_1a.html' label='Call the supervisor'  location='action-2'></dcc-trigger></p>
 </dcc-styler>
    </div>
 </body>

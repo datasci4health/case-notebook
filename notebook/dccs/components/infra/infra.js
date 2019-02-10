@@ -22,12 +22,23 @@ class MessageBus {
          }
    }
    
-   dispatchMessage(topic, message) {
+   dispatch(topic, message) {
       for (let l in this._listeners)
          if (this._listeners[l].topic == topic ||
              (topic.startsWith(this._listeners[l].topic) &&
               topic[this._listeners[l].topic.length] == "/"))
             this._listeners[l].address(topic, message);
+   }
+   
+   /* Checks if this topic has a subscriber */
+   hasSubscriber(topic) {
+      let hasSub = false;
+      for (let l = 0; !hasSub && l < this._listeners.length; l++)
+         if (this._listeners[l].topic == topic ||
+             (topic.startsWith(this._listeners[l].topic) &&
+              topic[this._listeners[l].topic.length] == "/"))
+            hasSub = true;
+      return hasSub;
    }
 }
 

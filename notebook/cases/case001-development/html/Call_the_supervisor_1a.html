@@ -10,6 +10,7 @@
 
    <script type="text/javascript" src="js/dccs/infra/infra.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
+   <script type="text/javascript" src="js/dccs/dcc-block.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-trigger.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-character.js"></script>
    <script type="text/javascript" src="js/dccs/editable/dcc-character-editable.js"></script>
@@ -260,10 +261,10 @@
        class="cls-15"
        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff" height="420px">
        <dcc-styler xstyle="out">
-          <p><dcc-talk character='SUPERVISOR Harry' speech='.'>
+          <p><dcc-talk id='dcc2' character='SUPERVISOR Harry' speech='.'>
 </dcc-talk>Hi! I am glad that you called me. Chest pain is an important complaint at the emergency department and we have to exclude the fatal causes: myocardial infarction (MI), acute aortic dissection (AAD), pulmonary embolism PE), hypertensive pneumothorax (HP), and Boerhaave Syndrome (BS).</p>
 <p>The best way to find out what is happening with your patient, my young padawan, is to gather as much information as possible through history taking and physical examination. We need to search for the signs and symptoms that can guide our clinical reasoning process by changing the pre-test probabilities of each disease.</p>
-<p><dcc-trigger link='Call_the_supervisor_1b.html' label='See likelihood tables'  location='action-1'></dcc-trigger></p>
+<p><dcc-trigger id='dcc4' type='++' link='Call_the_supervisor_1b.html' label='See likelihood tables'  location='action-1'></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>

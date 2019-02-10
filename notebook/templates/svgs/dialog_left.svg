@@ -207,15 +207,15 @@
   <foreignObject
      data-name="Talk action"
      x="985"
-     y="655"
+     y="640"
      width="270"
-     height="30">
-    <div
+     height="50">
+    <xhtml:p
        id="talk-action"
        class="cls-15"
-       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
+       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center">
         action
-     </div>
+     </xhtml:p>
   </foreignObject>
   <foreignObject
      data-name="speech"
@@ -234,7 +234,7 @@
      xlink:href=""
      y="139.5152"
      x="48.912003"
-     id="talk-image"
+     id="talk-character-image"
      preserveAspectRatio="none"
      height="529.83252"
      width="613.63934" />
@@ -258,6 +258,3 @@
     character
   </text>
 </svg>
-<dcc-styler xstyle="out" locations="talk-action">
-   {knot}
-</dcc-styler>

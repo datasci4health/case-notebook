@@ -10,6 +10,7 @@
 
    <script type="text/javascript" src="js/dccs/infra/infra.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
+   <script type="text/javascript" src="js/dccs/dcc-block.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-trigger.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-character.js"></script>
    <script type="text/javascript" src="js/dccs/editable/dcc-character-editable.js"></script>
@@ -260,10 +261,14 @@
        class="cls-15"
        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff" height="420px">
        <dcc-styler xstyle="out">
-          <p><dcc-talk character='SUPERVISOR Harry' speech='.'>
-</dcc-talk>Do you know the concept of Likelihood ratio (LR)? <dcc-trigger link='Likelihood_Ratio.html' label='Likelihood Ratio'></dcc-trigger></p>
-<p><dcc-trigger link='Clinical_History_Myocardial_Infarction.html' label='Clinical History Myocardial Infarction' ></dcc-trigger><dcc-trigger link='Physical_Examination_Myocardial_Infarction.html' label='Physical Examination Myocardial Infarction' ></dcc-trigger><dcc-trigger link='Clinical_History_Aortic_Dissection.html' label='Clinical History Aortic Dissection' ></dcc-trigger><dcc-trigger link='Physical_Examination_Aortic_Dissection.html' label='Physical Examination Aortic Dissection' ></dcc-trigger><dcc-trigger link='Pulmonary_Embolism_Wells_Criteria.html' label='Pulmonary Embolism Wells Criteria' ></dcc-trigger>
-<dcc-trigger link='Call_the_supervisor_1c.html' label='Continue talking'  location='action-1'></dcc-trigger></p>
+          <p><dcc-talk id='dcc2' character='SUPERVISOR Harry' speech='.'>
+</dcc-talk>Do you know the concept of Likelihood ratio (LR)? <dcc-trigger id='dcc4' link='Likelihood_Ratio.html' label='Likelihood Ratio'></dcc-trigger></p>
+<p><dcc-trigger id='dcc6' type='++' link='Clinical_History_Myocardial_Infarction.html' label='Clinical History Myocardial Infarction' ></dcc-trigger>
+<dcc-trigger id='dcc8' type='++' link='Physical_Examination_Myocardial_Infarction.html' label='Physical Examination Myocardial Infarction' ></dcc-trigger>
+<dcc-trigger id='dcc10' type='++' link='Clinical_History_Aortic_Dissection.html' label='Clinical History Aortic Dissection' ></dcc-trigger>
+<dcc-trigger id='dcc12' type='++' link='Physical_Examination_Aortic_Dissection.html' label='Physical Examination Aortic Dissection' ></dcc-trigger>
+<dcc-trigger id='dcc14' type='++' link='Pulmonary_Embolism_Wells_Criteria.html' label='Pulmonary Embolism Wells Criteria' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc16' type='**' link='Call_the_supervisor_1c.html' label='Continue talking'  location='action-1'></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>

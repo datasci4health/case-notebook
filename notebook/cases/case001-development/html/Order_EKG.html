@@ -10,6 +10,7 @@
 
    <script type="text/javascript" src="js/dccs/infra/infra.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
+   <script type="text/javascript" src="js/dccs/dcc-block.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-trigger.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-character.js"></script>
    <script type="text/javascript" src="js/dccs/editable/dcc-character-editable.js"></script>
@@ -281,8 +282,10 @@
           <p>Our patient denies any recent long trip, immobilization or surgery.</p>
 <p>The blood pressure is symmetric in the four limbs. </p>
 <p>Game: What do you want to do?
-<dcc-trigger link='Generate_hypothesis_2.html' label='Generate hypothesis'  location='action-1'></dcc-trigger><dcc-trigger link='More_information_2.html' label='More information'  location='action-2'></dcc-trigger><dcc-trigger link='Call_the_supervisor_2.html' label='Call the supervisor'  location='action-3'></dcc-trigger>
-<dcc-trigger link='Magnify_EKG.html' label='Magnify'  location='ekg-image'></dcc-trigger></p>
+<dcc-trigger id='dcc3' type='++' link='Generate_hypothesis_2.html' label='Generate hypothesis'  location='action-1'></dcc-trigger>
+<dcc-trigger id='dcc5' type='++' link='More_information_2.html' label='More information'  location='action-2'></dcc-trigger>
+<dcc-trigger id='dcc7' type='++' link='Call_the_supervisor_2.html' label='Call the supervisor'  location='action-3'></dcc-trigger></p>
+<p><dcc-trigger id='dcc9' type='++' link='Magnify_EKG.html' label='Magnify'  location='ekg-image'></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>

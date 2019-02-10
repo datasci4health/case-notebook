@@ -4,15 +4,25 @@
 class DCCStyler extends DCCBase {
    constructor() {
       super();
+      this._locationSet = [];
       this.requestXstyle = this.requestXstyle.bind(this);
+      this.requestLocation = this.requestLocation.bind(this);
    }
 
    connectedCallback() {
-      window.messageBus.subscribe("dcc/request-xstyle", this.requestXstyle);
+      if (this.hasAttribute("xstyle")) {
+         window.messageBus.subscribe("dcc/request-xstyle", this.requestXstyle);
+      }
+      
+      if (this.hasAttribute("locations")) {
+         this._locationSet = this.locations.split(";");
+         window.messageBus.subscribe("dcc/request-location", this.requestLocation);
+      }
    }
 
    disconnectedCallback() {
       window.messageBus.unsubscribe("dcc/request-xstyle", this.requestXstyle);
+      window.messageBus.unsubscribe("dcc/request-location", this.requestLocation);
    }
 
    /*
@@ -20,7 +30,7 @@ class DCCStyler extends DCCBase {
     */
    
    static get observedAttributes() {
-      return ["xstyle"];
+      return ["xstyle", "locations"];
    }
 
    get xstyle() {
@@ -31,9 +41,21 @@ class DCCStyler extends DCCBase {
       this.setAttribute("xstyle", newValue);
    }
    
+   get locations() {
+      return this.getAttribute("locations");
+   }
+   
+   set locations(newValue) {
+      this.setAttribute("locations", newValue);
+   }
+   
    requestXstyle(topic, message) {
-      // <TODO> improve: sending a message again to everybody
-      window.messageBus.dispatchMessage("dcc/xstyle", this.xstyle);
+      window.messageBus.dispatch("dcc/xstyle/" + message, this.xstyle);
+   }
+   
+   requestLocation(topic, message) {
+      window.messageBus.dispatch("dcc/location/" + message,
+            (this._locationSet.length > 0) ? this._locationSet.shift() : "");
    }
 }
       

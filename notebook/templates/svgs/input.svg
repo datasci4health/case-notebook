@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    xmlns:xhtml="http://www.w3.org/1999/xhtml"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -14,7 +15,7 @@
    version="1.1"
    id="svg102"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="decision.svg">
+   sodipodi:docname="input.svg">
   <metadata
      id="metadata106">
     <rdf:RDF>
@@ -41,8 +42,8 @@
      id="namedview104"
      showgrid="false"
      inkscape:zoom="0.73125002"
-     inkscape:cx="766.33563"
-     inkscape:cy="356.58933"
+     inkscape:cx="732.18037"
+     inkscape:cy="364.47074"
      inkscape:window-x="67"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -185,17 +186,19 @@
     </clipPath>
   </defs>
   <image
+     sodipodi:absref="/home/santanche/git/case-notebook/notebook/templates/svgs/images/hospital-background.png"
      xlink:href="images/hospital-background.png"
-     y="71.079224"
-     x="244.12265"
-     id="image4087"
-     preserveAspectRatio="none"
+     width="1136.7474"
      height="597.91913"
-     width="1136.7474" />
+     preserveAspectRatio="none"
+     id="image4087"
+     x="244.12265"
+     y="71.079224" />
   <g
-     data-name="Back arrow"
-     id="back-arrow"
-     transform="translate(-151,-194)">
+     data-name="Seta voltar"
+     id="Back_arrow"
+     transform="translate(-151,-194)"
+     inkscape:label="#Back_Arrow">
     <circle
        style="fill:#346e93"
        transform="translate(151,194)"
@@ -214,93 +217,58 @@
        data-name="Path 320"
        id="Path_320" />
   </g>
-  <foreignObject>
-     <dcc-trigger action="navigate/previous-knot" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
-  </foreignObject>
-  <g
-     style="fill:none;stroke:#ffffff"
-     class="cls-5"
-     data-name="Rectangle 39"
-     id="Rectangle_39"
-     transform="translate(286.08545,285)">
-    <rect
-       style="stroke:none"
-       y="0"
-       x="0"
-       id="rect4545"
-       rx="12"
-       height="129"
-       width="840"
-       class="cls-25" />
-    <rect
-       style="fill:none"
-       id="rect4547"
-       rx="11.5"
-       height="180"
-       width="839"
-       y="0.5"
-       x="0.5"
-       class="cls-26" />
-  </g>
+  <text
+     style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
+     class="cls-15"
+     data-name="Ok. I would like to see him. "
+     id="talk-action"
+     x="413"
+     y="679" />
   <foreignObject
      data-name="speech"
      x="320"
-     y="100"
-     width="550"
-     height="200">
-    <xhtml:p
-       id="talk-speech-1"
-       class="cls-15"
-       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff"></xhtml:p>
-  </foreignObject>
-  <foreignObject
-     data-name="description"
-     x="320"
-     y="280"
+     y="230"
      width="600"
-     height="180">
-    <div
-       id="description"
+     height="50">
+    <xhtml:p
+       id="talk-speech"
        class="cls-15"
        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff">
-      <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
-         <dcc-dialog>
-            {knot}
-         </dcc-dialog>
-      </dcc-styler>
-    </div>
+        speech
+     </xhtml:p>
   </foreignObject>
   <g
      style="fill:#ffffff;stroke:#707070"
      class="cls-4"
      data-name="Rectangle 36"
      id="Rectangle_36"
-     transform="translate(286.08545,485.6859)">
+     transform="translate(298.85041,178.36326)">
     <rect
        style="stroke:none"
        y="0"
        x="0"
-       id="rect4540"
+       id="rect579"
        rx="12"
-       height="144"
-       width="840"
-       class="cls-25" />
+       height="167"
+       width="737"
+       class="cls-23" />
     <rect
        style="fill:none"
-       id="rect4542"
+       id="rect581"
        rx="11.5"
-       height="143"
-       width="839"
+       height="166"
+       width="736"
        y="0.5"
        x="0.5"
-       class="cls-26" />
+       class="cls-24" />
   </g>
   <image
-     xlink:href=""
+     sodipodi:absref="/home/santanche/git/case-notebook/notebook/templates/svgs/images/patient_jakob.png"
+     xlink:href="images/patient_jakob.png"
      width="375.4201"
      height="543.65814"
      preserveAspectRatio="none"
-     id="talk-image-1"
+     id="talk-character-image"
      x="904.30768"
      y="133.47008" />
   <rect
@@ -317,91 +285,46 @@
      style="font-weight:700;font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
      class="cls-18"
      data-name="character"
-     id="talk-character-1"
+     id="talk-character"
      x="1050"
      y="619">character</text>
   <rect
-     style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
-     y="544.35254"
-     x="301.73779"
+     style="fill:#ba2027"
+     y="316.41452"
+     x="685.04272"
      rx="29.5"
      height="59"
      width="212"
-     class="cls-15"
-     visibility="hidden"
-     data-name="Action 1 Wrapper"
-     id="action-1-wrapper" />
-  <rect
-     style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
-     y="544.35254"
-     x="528.73779"
-     rx="29.5"
-     height="59"
-     width="212"
-     class="cls-15"
-     visibility="hidden"
-     data-name="Action 2 Wrapper"
-     id="action-2-wrapper" />
-  <rect
-     style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
-     y="544.35254"
-     x="757.73779"
-     rx="29.5"
-     height="59"
-     width="212"
-     class="cls-15"
-     visibility="hidden"
-     data-name="Action 3 Wrapper"
-     id="action-3-wrapper" />
-  <foreignObject
-     data-name="Action 1"
-     x="308"
-     y="563"
-     width="200"
-     height="30">
-    <div
-       id="action-1"
-       class="cls-16"
-       style="font-size:18px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
-        action
-     </div>
-  </foreignObject>
-  <foreignObject
-     data-name="Action 2"
-     x="535"
-     y="563"
-     width="200"
-     height="30">
-    <div
-       id="action-2"
-       class="cls-16"
-       style="font-size:18px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
-        action
-     </div>
-  </foreignObject>
-  <foreignObject
-     data-name="Action 3"
-     x="763"
-     y="563"
-     width="200"
-     height="30">
-    <div
-       id="action-3"
-       class="cls-16"
-       style="font-size:18px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
-        action
-     </div>
-  </foreignObject>
+     class="cls-14"
+     data-name="Rectangle 18"
+     id="Rectangle_18" />
   <text
-     style="font-weight:700;font-size:28px;font-family:Tahoma, Geneva, sans-serif;fill:#346e93"
-     class="cls-18"
-     data-name="Question"
-     id="Question"
-     x="303.73779"
-     y="492.35257">
+     style="font-size:18px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
+     class="cls-15"
+     data-name="Submit input"
+     id="submit-input"
+     x="710.04272"
+     y="354.41452" />
+  <text
+     style="font-size:28px;font-family:Tahoma, Geneva, sans-serif;fill:#346e93"
+     class="cls-15"
+     data-name="What is your main diagnostic hypothesis? "
+     id="What_is_your_main_diagnostic_hypothesis_"
+     x="317.84219"
+     y="235.41695">
     <tspan
-       id="talk-speech-2"
-       y="522.35254"
-       x="303.73779">Question</tspan>
+       id="tspan614"
+       y="235.41695"
+       x="317.84219">What is your main diagnostic hypothesis?</tspan>
   </text>
+  <foreignObject
+     class="cls-23"
+     x="317.11661"
+     y="264.8251"
+     width="600"
+     height="50">
+    <div
+       style="font-size:30px;font-family:Tahoma, Geneva, sans-serif;fill:#707070;stroke:none"
+       id="input-hypothesis" />
+  </foreignObject>
 </svg>

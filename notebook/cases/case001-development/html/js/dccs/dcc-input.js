@@ -14,7 +14,7 @@ class DCCInput extends DCCBase {
    connectedCallback() {
       if (!this.hasAttribute("xstyle")) {
          window.messageBus.subscribe("dcc/xstyle", this.defineXstyle);
-         window.messageBus.dispatchMessage("dcc/request-xstyle", "");
+         window.messageBus.dispatch("dcc/request-xstyle", "");
       }
       this._checkRender();
       window.messageBus.subscribe("get-input/" + this.variable, this.submitInput);
@@ -35,7 +35,7 @@ class DCCInput extends DCCBase {
 
    submitInput(topic, message) {
       const value = document.querySelector("#" + this.variable).value;
-      window.messageBus.dispatchMessage("input/" + this.variable, value);
+      window.messageBus.dispatch("input/" + this.variable, value);
    }
    
    /*
