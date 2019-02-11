@@ -75,12 +75,26 @@ class DCCPlayerServer {
    trackRoute(item) {
       const casekey = this.getRunningCasekey();
       if (casekey != null) {
-         const casetrack = this.getCaseInstance(casekey);
-         const currentDateTime = new Date();
-         casetrack.route.push(item + "," + currentDateTime.toJSON());
+         let casetrack = this.getCaseInstance(casekey);
+         this._addTrack(casetrack, item);
          this.setCaseInstance(casekey, casetrack);
       }
    }
+   
+   recordInput(variable, value) {
+      const casekey = this.getRunningCasekey();
+      if (casekey != null) {
+         let casetrack = this.getCaseInstance(casekey);
+         this._addTrack(casetrack, "#input(" + variable + "):" + value);
+         casetrack.inputs[variable] = value;
+         this.setCaseInstance(casekey, casetrack);
+      }
+   }
+   
+   _addTrack(casetrack, item) {
+      const currentDateTime = new Date();
+      casetrack.route.push(item + "," + currentDateTime.toJSON());
+   }   
    
    /*
     * User services

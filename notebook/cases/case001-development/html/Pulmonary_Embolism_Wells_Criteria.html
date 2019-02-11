@@ -7,9 +7,11 @@
    <link rel="stylesheet" type="text/css" href="css/player.css">
    <link rel="stylesheet" type="text/css" href="css/presentation.css">
    <link rel="stylesheet" type="text/css" href="css/templates.css">
+   <link rel="stylesheet" type="text/css" href="css/templates-classic.css">
 
    <script type="text/javascript" src="js/dccs/infra/infra.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
+   <script type="text/javascript" src="js/dccs/dcc-block.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-trigger.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-character.js"></script>
    <script type="text/javascript" src="js/dccs/editable/dcc-character-editable.js"></script>
@@ -221,8 +223,8 @@
      height="597.91913"
      width="1136.7474" />
   <g
-     data-name="Seta voltar"
-     id="Seta_voltar"
+     data-name="Back arrow"
+     id="back-arrow"
      transform="translate(-151,-194)">
     <circle
        style="fill:#346e93"
@@ -242,274 +244,32 @@
        data-name="Path 320"
        id="Path_320" />
   </g>
+  <foreignObject>
+     <dcc-trigger action="navigate/previous-knot" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
+  </foreignObject>
   <text
      style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
      class="cls-15"
-     data-name="Ok. I would like to see him. "
+     data-name="Talk action"
      id="talk-action"
      x="413"
      y="679" />
   <foreignObject
      data-name="speech"
-     x="50"
-     y="85"
+     x="60"
+     y="105"
      width="800"
      height="420">
     <div
        id="detailed-information"
        class="cls-15"
        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff" height="420px">
-       <dcc-styler xstyle="out">
+       <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
           <p><img src="images/ebm-pulmonary-embolism-wells-criteria.png" alt="Pulmonary Embolism Wells Criteria" /></p>
-<p><dcc-trigger link='Call_the_supervisor_1.html' label='Back'  location='action-1'></dcc-trigger></p>
+<p><dcc-trigger id='dcc3' type='**' link='Call_the_supervisor_1.html' label='Back' ></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>
-  <rect
-     style="fill:#d6d6d6"
-     y="37"
-     x="245"
-     rx="7.5"
-     height="15"
-     width="212"
-     class="cls-17"
-     data-name="Rectangle 88"
-     id="Rectangle_88" />
-  <rect
-     style="fill:#0d7114"
-     y="37"
-     x="245"
-     rx="7.5"
-     height="15"
-     width="75"
-     class="cls-19"
-     data-name="Rectangle 89"
-     id="Rectangle_89" />
-  <text
-     style="font-size:12px;font-family:Tahoma, Geneva, sans-serif;fill:#545454"
-     class="cls-20"
-     data-name="Progresso no caso"
-     id="Progresso_no_caso"
-     x="245"
-     y="31">
-    <tspan
-       id="tspan68"
-       y="31"
-       x="245">Progress bar</tspan>
-  </text>
-  <text
-     style="font-size:12px;font-family:Tahoma, Geneva, sans-serif;fill:#545454"
-     class="cls-20"
-     data-name="Sua pontuação total"
-     id="Sua_pontuação_total"
-     x="498"
-     y="31">
-    <tspan
-       id="tspan71"
-       y="31"
-       x="498">Points</tspan>
-  </text>
-  <text
-     style="font-size:12px;font-family:Tahoma, Geneva, sans-serif;fill:#545454"
-     class="cls-20"
-     data-name="&quot;Categoria de médico&quot;"
-     id="_Categoria_de_médico_"
-     x="649"
-     y="31">
-    <tspan
-       id="tspan74"
-       y="31"
-       x="649">&quot;Doctor category&quot;</tspan>
-  </text>
-  <text
-     style="font-weight:700;font-size:12px;font-family:Tahoma, Geneva, sans-serif;fill:#545454"
-     class="cls-21"
-     data-name="120.895 pontos"
-     id="_120.895_pontos"
-     x="498"
-     y="49">
-    <tspan
-       id="tspan77"
-       y="49"
-       x="498">X points</tspan>
-  </text>
-  <text
-     style="font-weight:700;font-size:12px;font-family:Tahoma, Geneva, sans-serifUI-Bold, 'Segoe UI';fill:#545454"
-     class="cls-21"
-     data-name="Médico empolgado"
-     id="Médico_empolgado"
-     x="649"
-     y="49">
-    <tspan
-       id="tspan80"
-       y="49"
-       x="649">Excited doctor</tspan>
-  </text>
-  <g
-     transform="translate(-153.615,-84)"
-     data-name="Group 500"
-     id="Group_500">
-    <rect
-       style="fill:#fee611"
-       y="0"
-       x="0"
-       transform="translate(982,105)"
-       height="26"
-       width="26"
-       class="cls-22"
-       data-name="Rectangle 90"
-       id="Rectangle_90" />
-    <rect
-       style="fill:#fee611"
-       y="0"
-       x="0"
-       transform="rotate(45,377.25406,1250.8787)"
-       height="26"
-       width="26"
-       class="cls-22"
-       data-name="Rectangle 91"
-       id="Rectangle_91" />
-    <rect
-       style="fill:#fee611"
-       y="0"
-       x="0"
-       transform="rotate(68,426.16559,793.43794)"
-       height="26"
-       width="26"
-       class="cls-22"
-       data-name="Rectangle 92"
-       id="Rectangle_92" />
-    <rect
-       style="fill:#fee611"
-       y="0"
-       x="0"
-       transform="matrix(0.951,0.309,-0.309,0.951,986.654,101.619)"
-       height="26"
-       width="26"
-       class="cls-22"
-       data-name="Rectangle 93"
-       id="Rectangle_93" />
-    <rect
-       style="fill:#fee611"
-       y="0"
-       x="0"
-       transform="matrix(0.848,0.53,-0.53,0.848,990.864,100.086)"
-       height="26"
-       width="26"
-       class="cls-22"
-       data-name="Rectangle 94"
-       id="Rectangle_94" />
-  </g>
-  <g
-     transform="translate(-103.615,-84)"
-     data-name="Group 501"
-     id="Group_501">
-    <rect
-       style="fill:#fee611"
-       y="0"
-       x="0"
-       transform="translate(982,105)"
-       height="26"
-       width="26"
-       class="cls-22"
-       data-name="Rectangle 90"
-       id="Rectangle_90-2" />
-    <rect
-       style="fill:#fee611"
-       y="0"
-       x="0"
-       transform="rotate(45,377.25406,1250.8787)"
-       height="26"
-       width="26"
-       class="cls-22"
-       data-name="Rectangle 91"
-       id="Rectangle_91-2" />
-    <rect
-       style="fill:#fee611"
-       y="0"
-       x="0"
-       transform="rotate(68,426.16559,793.43794)"
-       height="26"
-       width="26"
-       class="cls-22"
-       data-name="Rectangle 92"
-       id="Rectangle_92-2" />
-    <rect
-       style="fill:#fee611"
-       y="0"
-       x="0"
-       transform="matrix(0.951,0.309,-0.309,0.951,986.654,101.619)"
-       height="26"
-       width="26"
-       class="cls-22"
-       data-name="Rectangle 93"
-       id="Rectangle_93-2" />
-    <rect
-       style="fill:#fee611"
-       y="0"
-       x="0"
-       transform="matrix(0.848,0.53,-0.53,0.848,990.864,100.086)"
-       height="26"
-       width="26"
-       class="cls-22"
-       data-name="Rectangle 94"
-       id="Rectangle_94-2" />
-  </g>
-  <g
-     transform="translate(-48.615,-84)"
-     data-name="Group 502"
-     id="Group_502">
-    <rect
-       style="fill:#fee611"
-       y="0"
-       x="0"
-       transform="translate(982,105)"
-       height="26"
-       width="26"
-       class="cls-22"
-       data-name="Rectangle 90"
-       id="Rectangle_90-3" />
-    <rect
-       style="fill:#fee611"
-       y="0"
-       x="0"
-       transform="rotate(45,377.25406,1250.8787)"
-       height="26"
-       width="26"
-       class="cls-22"
-       data-name="Rectangle 91"
-       id="Rectangle_91-3" />
-    <rect
-       style="fill:#fee611"
-       y="0"
-       x="0"
-       transform="rotate(68,426.16559,793.43794)"
-       height="26"
-       width="26"
-       class="cls-22"
-       data-name="Rectangle 92"
-       id="Rectangle_92-3" />
-    <rect
-       style="fill:#fee611"
-       y="0"
-       x="0"
-       transform="matrix(0.951,0.309,-0.309,0.951,986.654,101.619)"
-       height="26"
-       width="26"
-       class="cls-22"
-       data-name="Rectangle 93"
-       id="Rectangle_93-3" />
-    <rect
-       style="fill:#fee611"
-       y="0"
-       x="0"
-       transform="matrix(0.848,0.53,-0.53,0.848,990.864,100.086)"
-       height="26"
-       width="26"
-       class="cls-22"
-       data-name="Rectangle 94"
-       id="Rectangle_94-3" />
-  </g>
   <g
      style="fill:#ffffff;stroke:#707070"
      class="cls-4"
@@ -543,20 +303,70 @@
      height="59"
      width="212"
      class="cls-15"
-     data-name="Rectangle 18"
-     id="Rectangle_18-6" />
-  <text
-     style="font-size:18px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
-     class="cls-16"
+     visibility="hidden"
+     data-name="Action 1 Wrapper"
+     id="action-1-wrapper" />
+  <rect
+     style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
+     y="596.35254"
+     x="284.73779"
+     rx="29.5"
+     height="59"
+     width="212"
+     class="cls-15"
+     visibility="hidden"
+     data-name="Action 2 Wrapper"
+     id="action-2-wrapper" />
+  <rect
+     style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
+     y="596.35254"
+     x="513.73779"
+     rx="29.5"
+     height="59"
+     width="212"
+     class="cls-15"
+     visibility="hidden"
+     data-name="Action 3 Wrapper"
+     id="action-3-wrapper" />
+  <foreignObject
      data-name="Action 1"
-     id="action-1"
-     x="71.237793"
-     y="632.35254">
-    <tspan
-       id="tspan4579"
-       y="632.35254"
-       x="71.237793"></tspan>
-  </text>
+     x="64"
+     y="615"
+     width="200"
+     height="30">
+    <div
+       id="action-1"
+       class="cls-16"
+       style="font-size:18px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
+        action
+     </div>
+  </foreignObject>
+  <foreignObject
+     data-name="Action 2"
+     x="291"
+     y="615"
+     width="200"
+     height="30">
+    <div
+       id="action-2"
+       class="cls-16"
+       style="font-size:18px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
+        action
+     </div>
+  </foreignObject>
+  <foreignObject
+     data-name="Action 3"
+     x="519"
+     y="615"
+     width="200"
+     height="30">
+    <div
+       id="action-3"
+       class="cls-16"
+       style="font-size:18px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
+        action
+     </div>
+  </foreignObject>
   <text
      style="font-weight:700;font-size:28px;font-family:Tahoma, Geneva, sans-serif;fill:#346e93"
      class="cls-18"
@@ -572,8 +382,8 @@
   <image
      y="32.929932"
      x="892.04901"
-     id="talk-character-image"
-     xlink:href="images/supervisor_harry.png"
+     id="talk-image"
+     xlink:href=""
      preserveAspectRatio="none"
      height="636.06842"
      width="488.82108" />
@@ -593,7 +403,7 @@
      data-name="character"
      id="talk-character"
      x="1067.6239"
-     y="671.17096">SUPERVISOR Harry</text>
+     y="671.17096">character</text>
 </svg>
    </div>
 </body>

@@ -149,7 +149,9 @@ class Translator {
             knot   : this._knotMdToObj,
             option : this._optionMdToObj,
             divert : this._divertMdToObj,
-            talk   : this._talkMdToObj,
+            talk     : this._talkMdToObj,
+            talkopen : this._talkopenMdToObj,
+            talkclose: this._talkcloseMdToObj,
             // image  : this.image,
             input  : this._inputMdToObj,
             selctxopen  : this._selctxopenMdToObj,
@@ -227,7 +229,9 @@ class Translator {
             text   : this._textObjToHTML,
             option : this._optionObjToHTML,
             divert : this._divertObjToHTML,
-            talk   : this._talkObjToHTML,
+            talk        : this._talkObjToHTML,
+            "talk-open" : this._talkopenObjToHTML,
+            "talk-close": this._talkcloseObjToHTML,
             // image  : this.image,
             input  : this._inputObjToHTML,
             "context-open"  : this._selctxopenObjToHTML,
@@ -451,26 +455,28 @@ class Translator {
    
    /*
     * Option Md to Obj
-    * Input: ++ [label] ([rule]) -> [target]
+    * Input: ++ [label] ([rule]) -> [target] or ** [label] ([rule]) -> [target]
     * Output:
     * {
     *    type: "option"
-    *    label: <label to be displayed -- if there is not an explicit divert, the label is the divert> #1
-    *    rule:  <rule of the trigger -- determine its position in the knot> #2
-    *    target: <target node to divert> #3
+    *    subtype: "++" or "**" #1
+    *    label: <label to be displayed -- if there is not an explicit divert, the label is the divert> #2
+    *    rule:  <rule of the trigger -- determine its position in the knot> #3
+    *    target: <target node to divert> #4
     * }
     */
    _optionMdToObj(matchArray) {
       let option = {
-         type: "option"
+         type: "option",
+         subtype: matchArray[1].trim()
       };
       
-      if (matchArray[1] != null)
-         option.label = matchArray[1].trim();
       if (matchArray[2] != null)
-         option.rule = matchArray[2].trim();
+         option.label = matchArray[2].trim();
       if (matchArray[3] != null)
-         option.target = matchArray[3].trim();
+         option.rule = matchArray[3].trim();
+      if (matchArray[4] != null)
+         option.target = matchArray[4].trim();
       
       return option;
    }
@@ -478,8 +484,7 @@ class Translator {
    /*
     * Option Obj to HTML
     * Output:
-    *   <dcc-trigger link='[link].html' label='[display]' [image]></dcc-trigger>
-    *   [image] -> image='[image-file].svg' location='control-panel'
+    *   <dcc-trigger id='dcc[seq]'  type='[subtype]' link='[link].html' label='[display]' [image] [location]></dcc-trigger>
     */
    _optionObjToHTML(obj) {
       const display = (obj.label != null) ? obj.label : obj.target;
@@ -495,7 +500,9 @@ class Translator {
          "";
       */
       
-      return Translator.htmlTemplates.option.replace("[link]", link)
+      return Translator.htmlTemplates.option.replace("[seq]", obj.seq)
+                                            .replace("[subtype]", obj.subtype)
+                                            .replace("[link]", link)
                                             .replace("[display]", display)
                                             .replace("[image]", optionalImage)
                                             .replace("[location]", location);
@@ -520,12 +527,13 @@ class Translator {
    /*
     * Divert Obj to HTML
     * Output:
-    *   <dcc-trigger link='[link].html' label='[display]'></dcc-trigger>
+    *   <dcc-trigger id='dcc[seq]' link='[link].html' label='[display]'></dcc-trigger>
     */
    _divertObjToHTML(obj) {
       let link = obj.target.replace(/ /igm, "_");
       
-      return Translator.htmlTemplates.divert.replace("[link]", link)
+      return Translator.htmlTemplates.divert.replace("[seq]", obj.seq)
+                                            .replace("[link]", link)
                                             .replace("[display]", obj.target);
    }
 
@@ -550,17 +558,67 @@ class Translator {
    /*
     * Talk Obj to HTML
     * Output:
-    * <dcc-lively-talk character='[character]' speech='[speech]'>
-    * </dcc-lively-talk>
+    * <dcc-talk id='dcc[seq]' character='[character]' speech='[speech]'>
+    * </dcc-talk>
     */
    _talkObjToHTML(obj) {
       // let charImg = "images/" + obj.character.toLowerCase()
       //                              .replace(/ /igm, "_") + "-icon.png";
       
       
-      return Translator.htmlTemplates.talk.replace("[character]", obj.character)
+      return Translator.htmlTemplates.talk.replace("[seq]", obj.seq)
+                                          .replace("[character]", obj.character)
                                           .replace("[speech]", obj.speech);
    }   
+   
+   /*
+    * Talk Open Md to Obj
+    * Input: :[character]:
+    * Output:
+    * {
+    *    type: "talk-open"
+    *    character: <identification of the character> #1
+     * }
+    */
+   _talkopenMdToObj(matchArray) {
+      return {
+         type: "talk-open",
+         character: matchArray[1].trim()
+      };
+   }   
+
+   /*
+    * Talk Open Obj to HTML
+    * Output:
+    * <dcc-talk id='dcc[seq]' character='[character]'>
+    */
+   _talkopenObjToHTML(obj) {
+      return Translator.htmlTemplates.talkopen.replace("[seq]", obj.seq)
+                                              .replace("[character]", obj.character);
+   }  
+   
+   /*
+    * Talk Close Md to Obj
+    * Input: ::
+    * Output:
+    * {
+    *    type: "talk-close"
+     * }
+    */
+   _talkcloseMdToObj(matchArray) {
+      return {
+         type: "talk-close"
+      };
+   }   
+
+   /*
+    * Talk Close Obj to HTML
+    * Output:
+    * </dcc-talk>
+    */
+   _talkcloseObjToHTML(obj) {
+      return Translator.htmlTemplates.talkclose;
+   }
    
    /*
     * Input Md to Obj
@@ -606,14 +664,15 @@ class Translator {
    
    /*
     * Input Obj to HTML
-    * Output: <dcc-input variable='[variable]' rows='[rows]' [vocabulary]> 
+    * Output: <dcc-input id='dcc[seq]' variable='[variable]' rows='[rows]' [vocabulary]> 
     *         </dcc-input>
     */
-   _inputObjToHTML(inputObj) {
-      const rows = (inputObj.rows) ? " rows='" + inputObj.rows + "'" : "";
-      const vocabulary = (inputObj.vocabulary) ? " vocabulary='" + inputObj.vocabulary + "'" : "";
+   _inputObjToHTML(obj) {
+      const rows = (obj.rows) ? " rows='" + obj.rows + "'" : "";
+      const vocabulary = (obj.vocabulary) ? " vocabulary='" + obj.vocabulary + "'" : "";
       
-      return Translator.htmlTemplates.input.replace("[variable]", inputObj.variable)
+      return Translator.htmlTemplates.input.replace("[seq]", obj.seq)
+                                           .replace("[variable]", obj.variable)
                                            .replace("[rows]", rows)
                                            .replace("[vocabulary]", vocabulary);
    }
@@ -647,14 +706,15 @@ class Translator {
    
    /*
     * Selector Context Open Obj to HTML
-    * Output: <dcc-group-selector evaluation='[context]/[evaluation]' states='[options]' colors='[colors]'>
+    * Output: <dcc-group-selector id='dcc[seq]' evaluation='[context]/[evaluation]' states='[options]' colors='[colors]'>
     */
    _selctxopenObjToHTML(obj) {
       let evaluation = obj.context + ((obj.evaluation != null) ? "/" + obj.evaluation : "");
       let states = (obj.options != null) ? " states='" + obj.options + "'" : "";
       let colors = (obj.colors != null) ? " colors='" + obj.colors + "'" : "";
       
-      return Translator.htmlTemplates.selctxopen.replace("[evaluation]", evaluation)
+      return Translator.htmlTemplates.selctxopen.replace("[seq]", obj.seq)
+                                                .replace("[evaluation]", evaluation)
                                                 .replace("[states]", states)
                                                 .replace("[colors]", colors);
    }
@@ -702,10 +762,11 @@ class Translator {
    
    /*
     * Selector Obj to HTML
-    * Output: <dcc-state-selector>[expression]</dcc-state-selector>
+    * Output: <dcc-state-selector id='dcc[seq]'>[expression]</dcc-state-selector>
     */
    _selectorObjToHTML(obj) {
-      return Translator.htmlTemplates.selector.replace("[expression]", obj.expression);            
+      return Translator.htmlTemplates.selector.replace("[seq]", obj.seq)
+                                              .replace("[expression]", obj.expression);            
    }
 }
 
@@ -724,10 +785,12 @@ class Translator {
    //
    
    Translator.marks = {
-      knot   : /^[ \t]*==*[ \t]*(\w[\w \t]*)(?:\((\w[\w \t,]*)\))?[ \t]*=*[ \t]*[\f\n\r]/im,
-      option: /[ \t]*\+\+[ \t]*([^\(&> \t][^\(&>\n\r\f]*)?(?:\(([\w \t-]+)\)[ \t]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))?[\f\n\r]/im,
+      knot   : /^[ \t]*==*[ \t]*(\w[\w \t]*)(?:\((\w[\w \t,]*)\))?[ \t]*=*[ \t]*$/im,
+      option: /[ \t]*([\+\*][\+\*])[ \t]*([^\(&> \t][^\(&>\n\r\f]*)?(?:\(([\w \t-]+)\)[ \t]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))?$/im,
       divert : /-(?:(?:&gt;)|>) *(\w[\w. ]*)/im,
-      talk   : /^[ \t]*: *(\w[\w ]*):[ \t]*([^\n\r\f]+)[\n\r\f]*/im,
+      talk   : /^[ \t]*:[ \t]*(\w[\w \t]*):[ \t]*([^\n\r\f]+)$/im,
+      talkopen: /^[ \t]*:[ \t]*(\w[\w \t]*):[ \t]*$/im,
+      talkclose: /[ \t]*:[ \t]*:[ \t]*$/im,
       // image  : /<img src="([\w:.\/\?&#\-]+)" (?:alt="([\w ]+)")?>/im,
       input  : /\{[ \t]*\?(\d+)?([\w \t]*)(?:\:([\w \t]+))?(?:#([\w \t\+\-\*"=\%\/,]+)(?:;([\w \t\+\-\*"=\%\/,]+))?)?\}/im,
       selctxopen : Translator.marksAnnotation.ctxopen,

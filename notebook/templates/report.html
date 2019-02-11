@@ -1,4 +1,5 @@
- <script>
+ <div id="report-panel"></div>
+<script>
 function produceReport() {
    const server = new DCCPlayerServer();
    let output = "";
@@ -16,7 +17,7 @@ function produceReport() {
            }
        }
    }   
-   document.querySelector("#knot-panel").innerHTML = "<pre>" + output + "</pre>";
+   document.querySelector("#report-panel").innerHTML = "<pre>" + output + "</pre>";
 }
 produceReport();
  </script>

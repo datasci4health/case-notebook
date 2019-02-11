@@ -1,35 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-   <meta charset="utf-8"/>
-   <title>Player</title>
-   
-   <link rel="stylesheet" type="text/css" href="css/player.css">
-   <link rel="stylesheet" type="text/css" href="css/presentation.css">
-   <link rel="stylesheet" type="text/css" href="css/templates.css">
-   <link rel="stylesheet" type="text/css" href="css/templates-classic.css">
-
-   <script type="text/javascript" src="js/dccs/infra/infra.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-block.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-trigger.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-character.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-character-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-lively-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-lively-dialog-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-resource-picker.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-state-selector.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-styler.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-input.js"></script>
-   
-   <script type="text/javascript" src="js/dcc-player-server-proxy.js"></script>
-   <script type="text/javascript" src="js/player.js"></script>
-   <script type="text/javascript" src="js/case.js"></script>
-</head>
-<body onload="PlayerManager.instance().startKnot()">
-   <div class="sty-main-panel">
-      <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    xmlns:xhtml="http://www.w3.org/1999/xhtml"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -238,15 +207,15 @@
   <foreignObject
      data-name="Talk action"
      x="985"
-     y="655"
+     y="640"
      width="270"
-     height="30">
-    <div
+     height="50">
+    <xhtml:p
        id="talk-action"
        class="cls-15"
-       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
+       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center">
         action
-     </div>
+     </xhtml:p>
   </foreignObject>
   <foreignObject
      data-name="speech"
@@ -265,7 +234,7 @@
      xlink:href=""
      y="139.5152"
      x="48.912003"
-     id="talk-image"
+     id="talk-character-image"
      preserveAspectRatio="none"
      height="529.83252"
      width="613.63934" />
@@ -289,12 +258,3 @@
     character
   </text>
 </svg>
-<dcc-styler xstyle="out" locations="talk-action">
-   <script>PlayerManager.instance().startCase()</script>
-<p><dcc-talk id='dcc3' character='NURSE Agnes' speech='Doctor, we have a man (51 years old) who entered the emergency department reporting chest pain. His vital signs are ABP: 144x92mmHG; HR: 78bpm; RR: 21rpm; Temp: 37oC; O2Sat: 98%.'>
-</dcc-talk></p>
-<p><dcc-trigger id='dcc5' type='**' link='Level_1.html' label='Let us go!' ></dcc-trigger></p>
-</dcc-styler>
-   </div>
-</body>
-</html>
