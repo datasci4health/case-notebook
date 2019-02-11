@@ -1,11 +1,27 @@
 # # Notebook Server
 It uses the Jupyter Kernel Gateway: https://test-jupyterkernelgateway.readthedocs.io/en/latest/index.html
 
-To start the server run in the terminal:
 ## Linux
+
+### Install
+
+Install the Jupyter Kernel Gateway
+~~~~
+pip3 install jupyter_kernel_gateway
+~~~~
+
+### Run
+
+Go to the server directory inside the Git project:
+~~~~
+cd ~/git/case-notebook/notebook/server`
+~~~~
+
+To start the server run in the terminal:
 ~~~~
 ~/.local/bin/jupyter kernelgateway --KernelGatewayApp.api='kernel_gateway.notebook_http' --KernelGatewayApp.seed_uri='~/git/case-notebook/notebook/server/notebook-server-rest.ipynb' --KernelGatewayApp.allow_origin='*' --KernelGatewayApp.allow_methods='POST, GET, OPTIONS' --KernelGatewayApp.allow_headers='Content-Type'
 ~~~~
+
 ## Windows
 ~~~~
 jupyter kernelgateway --KernelGatewayApp.api='kernel_gateway.notebook_http' --KernelGatewayApp.seed_uri='/Users/<User>/git/case-notebook/notebook/server/notebook-server-rest.ipynb' --KernelGatewayApp.allow_origin='*' --KernelGatewayApp.allow_methods='POST, GET, OPTIONS' --KernelGatewayApp.allow_headers='Content-Type'
