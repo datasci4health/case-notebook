@@ -289,7 +289,7 @@ class Translator {
    assembleMarkdown(compiledCase) {
       let md = "";
       for (let kn in compiledCase.knots)
-         md += compiledCase[cc].knots._source;
+         md += compiledCase.knots[kn]._source;
       return md;
    }
    
