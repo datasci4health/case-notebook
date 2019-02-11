@@ -13,6 +13,8 @@ class PlayerManager {
       window.messageBus.subscribe("control", this.controlEvent);
       this.navigateEvent = this.navigateEvent.bind(this);
       window.messageBus.subscribe("navigate", this.navigateEvent);
+      this.inputEvent = this.inputEvent.bind(this);
+      window.messageBus.subscribe("input", this.inputEvent);
    }
    
    /*
@@ -29,6 +31,7 @@ class PlayerManager {
    
    navigateEvent(topic, message) {
       this.trackTrigger(message);
+      window.messageBus.dispatch("checkout", message);
       switch (topic) {
          case "navigate/previous-knot": window.history.back();
                                         break;
@@ -40,6 +43,10 @@ class PlayerManager {
       }
    }
 
+   inputEvent(topic, message) {
+      this._server.recordInput(topic.substring[6], message);
+   }   
+   
    startKnot() {
       
    }

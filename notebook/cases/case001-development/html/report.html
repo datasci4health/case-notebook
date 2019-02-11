@@ -7,6 +7,7 @@
    <link rel="stylesheet" type="text/css" href="css/player.css">
    <link rel="stylesheet" type="text/css" href="css/presentation.css">
    <link rel="stylesheet" type="text/css" href="css/templates.css">
+   <link rel="stylesheet" type="text/css" href="css/templates-classic.css">
 
    <script type="text/javascript" src="js/dccs/infra/infra.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
@@ -28,7 +29,8 @@
 </head>
 <body onload="PlayerManager.instance().startKnot()">
    <div class="sty-main-panel">
-       <script>
+       <div id="report-panel"></div>
+<script>
 function produceReport() {
    const server = new DCCPlayerServer();
    let output = "";
@@ -46,7 +48,7 @@ function produceReport() {
            }
        }
    }   
-   document.querySelector("#knot-panel").innerHTML = "<pre>" + output + "</pre>";
+   document.querySelector("#report-panel").innerHTML = "<pre>" + output + "</pre>";
 }
 produceReport();
  </script>

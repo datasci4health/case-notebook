@@ -18,7 +18,7 @@
 == Generate hypothesis 1 (input) ==
 What is your main diagnostic hypothesis?
 :PATIENT Jakob:.
-{?1 hypothesis:mesh#pericarditis,myopericarditis,pericardial inflammation,pericardial infection,pericardial effusion;infarction,myocardial infarction,coronary syndrome,acute coronary syndrome,ischemia,myocardial ischemia,coronary insufficiency,angina,angina pectoris}
+{?1 hypothesis1:mesh#pericarditis,myopericarditis,pericardial inflammation,pericardial infection,pericardial effusion;infarction,myocardial infarction,coronary syndrome,acute coronary syndrome,ischemia,myocardial ischemia,coronary insufficiency,angina,angina pectoris}
 
 ** Submit hypothesis -> Check hypothesis 1
 

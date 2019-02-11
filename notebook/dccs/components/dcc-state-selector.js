@@ -27,17 +27,10 @@ class DCCStateSelector extends HTMLElement {
      this._presentationState = this._shadow.querySelector("#presentation-state");
      */
      
-     /* this._group = document.querySelector("dcc-group-selector"); */
-
      this._showState = this._showState.bind(this);
      this._hideState = this._hideState.bind(this);
      this._changeState = this._changeState.bind(this);
      this.defineStates = this.defineStates.bind(this);
-     
-     /*
-     this._updateStates = this._updateStates.bind(this);
-     this._updateColors = this._updateColors.bind(this);
-     */
    }
    
    createdCallback() {
@@ -60,22 +53,6 @@ class DCCStateSelector extends HTMLElement {
          this._pendingRequests++;
       }
       
-      /*
-      this.addEventListener("update-states-event", this._updateStates);
-      this.addEventListener("update-colors-event", this._updateColors);
-      
-      if (this._group != null) {
-         if (!this.hasAttribute("states")) {
-            let eventStates = new CustomEvent("request-states-event", {detail: this});
-            this._group.dispatchEvent(eventStates);
-         }
-         if (!this.hasAttribute("colors")) {
-            let eventColors = new CustomEvent("request-colors-event", {detail: this});
-            this._group.dispatchEvent(eventColors);
-         }
-      }
-      */
-
       this._checkRender();
    }
    
@@ -83,11 +60,6 @@ class DCCStateSelector extends HTMLElement {
       this._presentation.removeEventListener('mouseover', this._showState);
       this._presentation.removeEventListener('mouseout', this._hideState);
       this._presentation.removeEventListener('click', this._changeState);
-      
-      /*
-      this.removeEventListener('update-states-event', this._updateStates);
-      this.removeEventListener('update-colors-event', this._updateColors);
-      */
    }
 
    defineStates(topic, message) {
@@ -137,12 +109,6 @@ class DCCStateSelector extends HTMLElement {
           } else
              this._presentationState.innerHTML = "";
        }
-       /*
-       if (this.colors != null) {
-         const colorsArr = this.colors.split(",");
-         this._presentation.style.backgroundColor = colorsArr[this._currentState];
-       }
-       */
        this._presentation.className =
           DCCStateSelector.elementTag + "-template " +
           DCCStateSelector.elementTag + "-" + this._currentState + "-template";
@@ -169,17 +135,6 @@ class DCCStateSelector extends HTMLElement {
      this._renderInterface();
    }
    
-   /* Container DCC events */
-
-   /*
-   _updateStates(event) {
-     this.states = event.detail;
-   }
-
-   _updateColors(event) {
-     this.colors = event.detail;
-   }
-   */
 }
 
 /* Group Selector DCC
@@ -188,44 +143,20 @@ class DCCGroupSelector extends HTMLElement {
    constructor() {
      super();
      this.requestStates = this.requestStates.bind(this);
-     /*
-     this._sendStates = this._sendStates.bind(this);
-     this._sendColors = this._sendColors.bind(this);
-     */
-   }
+  }
    
    connectedCallback() {
       window.messageBus.subscribe("dcc/request/selector-states", this.requestStates);
-      /*
-      this.addEventListener("request-states-event", this._sendStates);
-      this.addEventListener("request-colors-event", this._sendColors);
-      */
    }
 
    disconnectedCallback() {
       window.messageBus.unsubscribe("dcc/request/selector-states", this.requestStates);
-      /*
-      this.removeEventListener("request-states-event", this._sendStates);
-      this.removeEventListener("request-colors-event", this._sendColors);
-      */
    }
    
    requestStates(topic, message) {
       window.messageBus.dispatch("dcc/selector-states/" + message, this.states);
    }   
    
-   /*
-   _sendStates(event) {
-       let eventStates = new CustomEvent("update-states-event", {detail: this.states});
-       event.detail.dispatchEvent(eventStates);
-   }
-       
-   _sendColors(event) {
-      let eventColors = new CustomEvent("update-colors-event", {detail: this.colors});
-      event.detail.dispatchEvent(eventColors);
-   }
-   */
-
    /*
     * Property handling
     */

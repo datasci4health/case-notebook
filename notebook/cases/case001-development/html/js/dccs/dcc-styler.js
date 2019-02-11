@@ -11,18 +11,18 @@ class DCCStyler extends DCCBase {
 
    connectedCallback() {
       if (this.hasAttribute("xstyle")) {
-         window.messageBus.subscribe("dcc/request-xstyle", this.requestXstyle);
+         window.messageBus.subscribe("dcc/request/xstyle", this.requestXstyle);
       }
       
       if (this.hasAttribute("locations")) {
          this._locationSet = this.locations.split(";");
-         window.messageBus.subscribe("dcc/request-location", this.requestLocation);
+         window.messageBus.subscribe("dcc/request/location", this.requestLocation);
       }
    }
 
    disconnectedCallback() {
-      window.messageBus.unsubscribe("dcc/request-xstyle", this.requestXstyle);
-      window.messageBus.unsubscribe("dcc/request-location", this.requestLocation);
+      window.messageBus.unsubscribe("dcc/request/xstyle", this.requestXstyle);
+      window.messageBus.unsubscribe("dcc/request/location", this.requestLocation);
    }
 
    /*

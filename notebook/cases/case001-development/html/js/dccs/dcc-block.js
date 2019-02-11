@@ -10,7 +10,6 @@ class DCCBlock extends DCCBase {
    constructor() {
      super();
      
-     this.elementTag = DCCTrigger.elementTag;
      this._pendingRequests = 0;
      
      this.defineXstyle = this.defineXstyle.bind(this);
@@ -18,22 +17,16 @@ class DCCBlock extends DCCBase {
      this._renderInterface = this._renderInterface.bind(this);
    }
    
-   /* Attribute Handling */
-
-   static get observedAttributes() {
-     return ["id", "label", "image", "location", "xstyle"];
-   }
-
    connectedCallback() {
-      if (!this.hasAttribute("xstyle") && window.messageBus.hasSubscriber("dcc/request-xstyle")) {
+      if (!this.hasAttribute("xstyle") && window.messageBus.hasSubscriber("dcc/request/xstyle")) {
          window.messageBus.subscribe("dcc/xstyle/" + this.id, this.defineXstyle);
-         window.messageBus.dispatch("dcc/request-xstyle", this.id);
+         window.messageBus.dispatch("dcc/request/xstyle", this.id);
          this._pendingRequests++;
       }
-      if (((!this.hasAttribute("location") || this.location == "#out") &&
-            window.messageBus.hasSubscriber("dcc/request-location"))) {
+      if (!this.hasAttribute("location") &&
+          window.messageBus.hasSubscriber("dcc/request/location")) {
          window.messageBus.subscribe("dcc/location/" + this.id, this.defineLocation);
-         window.messageBus.dispatch("dcc/request-location", this.id);
+         window.messageBus.dispatch("dcc/request/location", this.id);
          this._pendingRequests++;
       }
       this._checkRender();
@@ -62,6 +55,12 @@ class DCCBlock extends DCCBase {
       }
    }
    
+   /* Attribute Handling */
+
+   static get observedAttributes() {
+     return ["id", "label", "image", "location", "xstyle"];
+   }
+
    get id() {
       return this.getAttribute("id");
    }
@@ -104,44 +103,50 @@ class DCCBlock extends DCCBase {
   
    /* Rendering */
    
+   elementTag() {
+      return DCCBlock.elementTag;
+   }
+   
    _renderInterface() {
       let presentation = null;
-      let xstyle = (this.hasAttribute("xstyle")) ? this.xstyle : "in";
-      if (xstyle.startsWith("out") && this.hasAttribute("location")) {
+      if (!this.hasAttribute("xstyle"))
+         this.xstyle = "in";
+
+      let render;
+      switch (this.xstyle) {
+         case "in"  : if (this.hasAttribute("image"))
+                         render = "image-style"
+                      else
+                         render = "regular-style"
+                      break;
+         case "none": render = "";
+                      break;
+         case "out-image":
+         case "out":  render = this.elementTag() + "-template";
+                      break;
+         default:     render = this.xstyle;
+      }
+
+      if (this.xstyle.startsWith("out") &&
+          this.hasAttribute("location") && this.location != "#in") {
          presentation = document.querySelector("#" + this.location);
-         if (xstyle == "out")
-            presentation.innerHTML = this.label;
-         else
-            presentation.title = this.label;
-         // this._presentation.style.cursor = "pointer";
-      } else {
-         let render;
-         switch (xstyle) {
-            case "in"  : if (this.hasAttribute("image"))
-                            render = "image-style"
-                         else
-                            render = "regular-style"
-                         break;
-            case "none": render = "";
-                         break;
-            case "out-image":
-            case "out":  render = this.elemenTag + "-template";
-                         break;
-            default:     render = this.xstyle;
+         this._injectDCC(presentation, render);
+         let wrapper = document.querySelector("#" + this.location + "-wrapper");
+         if (wrapper != null) {
+            if (wrapper.style.display)  // html
+               delete wrapper.style.display;
+            if (wrapper.getAttribute("visibility"))  // svg
+               delete wrapper.removeAttribute("visibility");
          }
-         
+      } else {
          let template = document.createElement("template");
          template.innerHTML = this._generateTemplate(render);
          
          let host = this;
-         if (xstyle == "in" || xstyle == "none")
+         if (this.xstyle == "in" || this.xstyle == "none")
             host = this.attachShadow({mode: "open"});
          host.appendChild(template.content.cloneNode(true));
          presentation = host.querySelector("#presentation-dcc");
-         /*
-         this._presentation = host.querySelector("#presentation-dcc");
-         this._presentation.innerHTML = triggerWeb;
-         */
       }
       return presentation;
    }

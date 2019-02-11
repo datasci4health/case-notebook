@@ -7,6 +7,7 @@
    <link rel="stylesheet" type="text/css" href="css/player.css">
    <link rel="stylesheet" type="text/css" href="css/presentation.css">
    <link rel="stylesheet" type="text/css" href="css/templates.css">
+   <link rel="stylesheet" type="text/css" href="css/templates-classic.css">
 
    <script type="text/javascript" src="js/dccs/infra/infra.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
@@ -224,10 +225,9 @@
      x="244.12265"
      y="71.079224" />
   <g
-     data-name="Seta voltar"
-     id="Back_arrow"
-     transform="translate(-151,-194)"
-     inkscape:label="#Back_Arrow">
+     data-name="Back arrow"
+     id="back-arrow"
+     transform="translate(-151,-194)">
     <circle
        style="fill:#346e93"
        transform="translate(151,194)"
@@ -246,6 +246,9 @@
        data-name="Path 320"
        id="Path_320" />
   </g>
+  <foreignObject>
+     <dcc-trigger action="navigate/previous-knot" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
+  </foreignObject>
   <g
      style="fill:#ffffff;stroke:#707070"
      class="cls-4"
@@ -276,7 +279,7 @@
      width="375.4201"
      height="543.65814"
      preserveAspectRatio="none"
-     id="talk-character-image"
+     id="talk-image"
      x="904.30768"
      y="133.47008" />
   <rect
@@ -306,13 +309,19 @@
      class="cls-14"
      data-name="Rectangle 18"
      id="Rectangle_18" />
-  <text
-     style="font-size:18px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
-     class="cls-15"
+  <foreignObject
      data-name="Submit input"
-     id="submit-input"
-     x="710.04272"
-     y="354.41452" />
+     x="690"
+     y="335"
+     width="200"
+     height="30">
+    <div
+       id="submit-input"
+       class="cls-15"
+       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
+        submit
+     </div>
+  </foreignObject>
   <foreignObject
      data-name="description"
      x="317.84219"
@@ -324,10 +333,11 @@
        class="cls-15"
        style="font-size:28px;font-family:Tahoma, Geneva, sans-serif;color:#346e93">
       <dcc-styler xstyle="out" locations="input-hypothesis;submit-input">
-         <p><dcc-talk id='dcc2' character='PATIENT Jakob' speech='.'>
-</dcc-talk><dcc-input id='dcc3' variable='hypothesis' rows='1' vocabulary='mesh'> 
+         <p><dcc-talk id='dcc3' character='PATIENT Jakob' speech='.'>
+</dcc-talk>
+<dcc-input id='dcc5' variable='hypothesis' rows='1' vocabulary='mesh'> 
 </dcc-input></p>
-<p><dcc-trigger id='dcc5' type='++' link='Check_hypothesis_2.html' label='Submit hypothesis'  location='submit-input'></dcc-trigger></p>
+<p><dcc-trigger id='dcc7' type='++' link='Check_hypothesis_2.html' label='Submit hypothesis'  location='submit-input'></dcc-trigger></p>
       </dcc-styler>
     </div>
   </foreignObject>
@@ -337,9 +347,7 @@
      y="264.8251"
      width="600"
      height="50">
-    <div
-       style="font-size:30px;font-family:Tahoma, Geneva, sans-serif;fill:#707070;stroke:none"
-       id="submit-input">
+    <div id="input-hypothesis">
     </div>
   </foreignObject>
 </svg>

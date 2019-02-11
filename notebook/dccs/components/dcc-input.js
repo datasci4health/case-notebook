@@ -12,6 +12,7 @@ class DCCInput extends DCCBlock {
    connectedCallback() {
       super.connectedCallback();
       window.messageBus.subscribe("get-input/" + this.variable, this.submitInput);
+      window.messageBus.subscribe("checkout", this.submitInput);
    }
    
    submitInput(topic, message) {
@@ -62,7 +63,6 @@ class DCCInput extends DCCBlock {
    }
    
    _generateTemplate(render) {
-      console.log("Render: " + render);
       let elements = null;
       if (this.hasAttribute("rows") && this.rows > 1)
          elements = DCCInput.templateElements.area.replace("[rows]", this.rows)

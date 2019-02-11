@@ -7,6 +7,7 @@
    <link rel="stylesheet" type="text/css" href="css/player.css">
    <link rel="stylesheet" type="text/css" href="css/presentation.css">
    <link rel="stylesheet" type="text/css" href="css/templates.css">
+   <link rel="stylesheet" type="text/css" href="css/templates-classic.css">
 
    <script type="text/javascript" src="js/dccs/infra/infra.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
@@ -252,7 +253,7 @@
      class="cls-5"
      data-name="Rectangle 39"
      id="Rectangle_39"
-     transform="translate(286.08545,303.13463)">
+     transform="translate(286.08545,285)">
     <rect
        style="stroke:none"
        y="0"
@@ -266,7 +267,7 @@
        style="fill:none"
        id="rect4547"
        rx="11.5"
-       height="128"
+       height="180"
        width="839"
        y="0.5"
        x="0.5"
@@ -276,29 +277,34 @@
      data-name="speech"
      x="320"
      y="100"
-     width="500"
+     width="550"
      height="200">
     <xhtml:p
-       id="talk-speech"
+       id="talk-speech-1"
        class="cls-15"
        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff"></xhtml:p>
   </foreignObject>
   <foreignObject
      data-name="description"
      x="320"
-     y="300"
+     y="280"
      width="600"
-     height="200">
+     height="180">
     <div
        id="description"
        class="cls-15"
        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff">
       <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
-         <p><dcc-talk id='dcc3' character='PATIENT Jakob' speech='Doctor, I am feeling chest pain since yesterday. The pain is continuous and is located just in the middle of my chest, worsening when I breathe and when I lay down on my bed. I suffer from arterial hypertension and smoke 20 cigarettes every day. My father had a “heart attack” at my age and I am very worried about it.'>
-</dcc-talk><b>PHYSICAL EXAMINATION</b> <br> The cardiac and pulmonary auscultation are normal; chest pain does not worse with palpation of the thorax; there is no jugular stasis nor lower limb edema.</p>
-<p><dcc-trigger id='dcc5' type='**' link='Generate_hypothesis_1.html' label='Generate hypothesis' ></dcc-trigger>
-<dcc-trigger id='dcc7' type='**' link='More_information_1.html' label='More information' ></dcc-trigger>
-<dcc-trigger id='dcc9' type='**' link='Call_the_supervisor_1a.html' label='Call the supervisor' ></dcc-trigger></p>
+         <dcc-dialog>
+            <p><dcc-talk id='dcc3' character='PATIENT Jakob' speech='Doctor, I am feeling chest pain since yesterday. The pain is continuous and is located just in the middle of my chest, worsening when I breathe and when I lay down on my bed. I suffer from arterial hypertension and smoke 20 cigarettes every day. My father had a “heart attack” at my age and I am very worried about it.'>
+</dcc-talk></p>
+<p><b>PHYSICAL EXAMINATION</b> <br> The cardiac and pulmonary auscultation are normal; chest pain does not worse with palpation of the thorax; there is no jugular stasis nor lower limb edema.</p>
+<p><dcc-talk id='dcc5' character='Jacinto' speech='What do you want to do?'>
+</dcc-talk></p>
+<p><dcc-trigger id='dcc7' type='**' link='Generate_hypothesis_1.html' label='Generate hypothesis' ></dcc-trigger>
+<dcc-trigger id='dcc9' type='**' link='More_information_1.html' label='More information' ></dcc-trigger>
+<dcc-trigger id='dcc11' type='**' link='Call_the_supervisor_1a.html' label='Call the supervisor' ></dcc-trigger></p>
+         </dcc-dialog>
       </dcc-styler>
     </div>
   </foreignObject>
@@ -332,7 +338,7 @@
      width="375.4201"
      height="543.65814"
      preserveAspectRatio="none"
-     id="talk-character-image"
+     id="talk-image-1"
      x="904.30768"
      y="133.47008" />
   <rect
@@ -349,7 +355,7 @@
      style="font-weight:700;font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
      class="cls-18"
      data-name="character"
-     id="talk-character"
+     id="talk-character-1"
      x="1050"
      y="619">character</text>
   <rect
@@ -360,8 +366,9 @@
      height="59"
      width="212"
      class="cls-15"
-     data-name="Rectangle 18"
-     id="Rectangle_18-6" />
+     visibility="hidden"
+     data-name="Action 1 Wrapper"
+     id="action-1-wrapper" />
   <rect
      style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
      y="544.35254"
@@ -370,8 +377,9 @@
      height="59"
      width="212"
      class="cls-15"
-     data-name="Rectangle 37"
-     id="Rectangle_37" />
+     visibility="hidden"
+     data-name="Action 2 Wrapper"
+     id="action-2-wrapper" />
   <rect
      style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
      y="544.35254"
@@ -380,8 +388,9 @@
      height="59"
      width="212"
      class="cls-15"
-     data-name="Rectangle 38"
-     id="Rectangle_38" />
+     visibility="hidden"
+     data-name="Action 3 Wrapper"
+     id="action-3-wrapper" />
   <foreignObject
      data-name="Action 1"
      x="308"
@@ -424,14 +433,14 @@
   <text
      style="font-weight:700;font-size:28px;font-family:Tahoma, Geneva, sans-serif;fill:#346e93"
      class="cls-18"
-     data-name="What do you want to do?"
-     id="What_do_you_want_to_do_"
+     data-name="Question"
+     id="Question"
      x="303.73779"
      y="492.35257">
     <tspan
-       id="tspan4613"
+       id="talk-speech-2"
        y="522.35254"
-       x="303.73779">What do you want to do?</tspan>
+       x="303.73779">Question</tspan>
   </text>
 </svg>
 

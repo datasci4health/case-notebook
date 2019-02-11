@@ -9,16 +9,13 @@
 class DCCTrigger extends DCCBlock {
    constructor() {
      super();
-     
-     this.elementTag = DCCTrigger.elementTag;
-     // this._pendingRequests = 0;
-     
      this._computeTrigger = this._computeTrigger.bind(this);
-     /*
-     this.defineXstyle = this.defineXstyle.bind(this);
-     this.defineLocation = this.defineLocation.bind(this);
-     this._renderInterface = this._renderInterface.bind(this);
-     */
+   }
+   
+   connectedCallback() {
+      if (this.type == "++" && !this.hasAttribute("location"))
+         this.location = "#in";
+      super.connectedCallback();
    }
    
    /* Attribute Handling */
@@ -27,52 +24,6 @@ class DCCTrigger extends DCCBlock {
      return DCCBlock.observedAttributes.concat(["type", "link", "action"]);
    }
 
-   connectedCallback() {
-      if (this.type == "**" && !this.hasAttribute("location"))
-         this.location = "#out";
-      super.connectedCallback();
-      /*
-      if (!this.hasAttribute("xstyle") && window.messageBus.hasSubscriber("dcc/request-xstyle")) {
-         window.messageBus.subscribe("dcc/xstyle/" + this.id, this.defineXstyle);
-         window.messageBus.dispatch("dcc/request-xstyle", this.id);
-         this._pendingRequests++;
-      }
-      if (this.type == "**" &&
-          (!this.hasAttribute("location") && window.messageBus.hasSubscriber("dcc/request-location"))) {
-         window.messageBus.subscribe("dcc/location/" + this.id, this.defineLocation);
-         window.messageBus.dispatch("dcc/request-location", this.id);
-         this._pendingRequests++;
-      }
-      this._checkRender();
-      */
-   }
-   
-   /*
-   defineXstyle(topic, message) {
-      window.messageBus.unsubscribe("dcc/xstyle/" + this.id, this.defineXstyle);
-      this.xstyle = message;
-      this._pendingRequests--;
-      this._checkRender();
-   }
-   
-   defineLocation(topic, message) {
-      window.messageBus.unsubscribe("dcc/location/" + this.id, this.defineLocation);
-      this.location = message;
-      this._pendingRequests--;
-      this._checkRender();
-   }
-   
-   
-   _checkRender() {
-      if (this._pendingRequests == 0) {
-         if (document.readyState === "complete")
-            this._renderInterface();
-         else
-            window.addEventListener("load", this._renderInterface);
-      }
-   }
-   */
-   
    get type() {
       return this.getAttribute("type");
    }
@@ -100,56 +51,23 @@ class DCCTrigger extends DCCBlock {
    /* Rendering */
    
    _renderInterface() {
-      /*
-      let xstyle = (this.hasAttribute("xstyle")) ? this.xstyle : "in";
-      if (xstyle.startsWith("out") && this.hasAttribute("location")) {
-         this._presentation = document.querySelector("#" + this.location);
-         if (xstyle == "out")
-            this._presentation.innerHTML = this.label;
-         else
-            this._presentation.title = this.label;
-         this._presentation.style.cursor = "pointer";
-      } else {
-         let linkWeb = (this.hasAttribute("link")) ? "href='" + this.link + "' " : "";
-         
-         let renderWeb;
-         switch (xstyle) {
-            case "in"  : renderWeb = "trigger-button"
-                         break;
-            case "none": renderWeb = "trigger-button-minimal";
-                         break;
-            case "out-image":
-            case "out":  renderWeb = "trigger-button-template";
-                         break;
-            default:     renderWeb = this.xstyle;
-         }
-         
-         let triggerWeb = null;
-         if (this.hasAttribute("image"))
-            triggerWeb = DCCTrigger.templateElements.image.replace("[link]", linkWeb)
-                                                   .replace("[label]", this.label)
-                                                   .replace("[image]", this.image);
-         else
-            triggerWeb = DCCTrigger.templateElements.regular.replace("[render]", renderWeb)
-                                                     .replace("[link]", linkWeb)
-                                                     .replace("[label]", this.label);
-
-         const template = document.createElement("template");
-         template.innerHTML = DCCTrigger.templateHTML;
-         
-         let host = this;
-         if (xstyle == "in" || xstyle == "none")
-            host = this.attachShadow({mode: "open"});
-
-         host.appendChild(template.content.cloneNode(true));
-         this._presentation = host.querySelector("#presentation-dcc");
-         this._presentation.innerHTML = triggerWeb;
-      }
-      */
       let presentation = super._renderInterface();
       
       presentation.style.cursor = "pointer";
       presentation.addEventListener("click", this._computeTrigger);
+   }
+   
+   /* Rendering */
+   
+   elementTag() {
+      return DCCTrigger.elementTag;
+   }
+
+   _injectDCC(presentation, render) {
+      if (this.xstyle == "out")
+         presentation.innerHTML = this.label;
+      else
+         presentation.title = this.label;
    }
    
    _generateTemplate(render) {
@@ -164,7 +82,6 @@ class DCCTrigger extends DCCBlock {
          elements = DCCTrigger.templateElements.regular.replace("[render]", render)
                                                .replace("[link]", linkWeb)
                                                .replace("[label]", this.label);
-      
       
       return DCCTrigger.templateStyle + elements;
    }
