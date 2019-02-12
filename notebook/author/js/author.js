@@ -18,6 +18,9 @@ class AuthorManager {
       
       this.controlEvent = this.controlEvent.bind(this);
       window.messageBus.subscribe("control", this.controlEvent);
+
+      this._caseLoadSelected = this._caseLoadSelected.bind(this);
+      this._templateLoadSelected = this._templateLoadSelected.bind(this);
    }
    
    controlEvent(topic, message) {
@@ -39,27 +42,26 @@ class AuthorManager {
     * ACTION: control-load (1)
     */
    async selectCase() {
-      this._resPicker = new DCCResourcePicker();
-      this._resourceSelected = this._resourceSelected.bind(this);
+      this._resourcePicker = new DCCResourcePicker();
       
-      document.addEventListener("control/resource-selected", this._resourceSelected);
-      this._resPicker.addSelectionListener(this);
+      window.messageBus.subscribe("dcc/resource-picker/selected", this._caseLoadSelected);
       
-      const cases = await this._server.casesList(this._resPicker);
-      this._resPicker.addSelectList(cases);
+      const cases = await this._server.casesList(this._resourcePicker);
+      this._resourcePicker.addSelectList(cases);
       let knotPanel = document.querySelector("#knot-panel");
-      knotPanel.appendChild(this._resPicker);
+      knotPanel.appendChild(this._resourcePicker);
    }
 
    /*
     * ACTION: control-load (2)
     */
-   async _resourceSelected(event) {
-      this._currentCaseName = event.detail;
+   async _caseLoadSelected(topic, message) {
+      window.messageBus.unsubscribe("dcc/resource-picker/selected", this._caseLoadSelected);
+      this._currentCaseName = message;
       let caseMd = await this._server.loadCase(this._currentCaseName);
       let navigationPanel  = document.querySelector("#navigation-panel");
       let knotPanel = document.querySelector("#knot-panel");
-      knotPanel.removeChild(this._resPicker);
+      knotPanel.removeChild(this._resourcePicker);
       
       this._compiledCase = this._translator.compileMarkdown(this._currentCaseName, caseMd);
       this._knots = this._compiledCase.knots;
@@ -146,6 +148,20 @@ class AuthorManager {
    }
    
    /*
+    * ACTION: config
+    */
+   async config() {
+      this._resourcePicker = new DCCResourcePicker();
+      
+      window.messageBus.subscribe("dcc/resource-picker/selected", this._caseLoadSelected);
+      
+      const cases = await this._server.casesList(this._resourcePicker);
+      this._resourcePicker.addSelectList(cases);
+      let knotPanel = document.querySelector("#knot-panel");
+      knotPanel.appendChild(this._resourcePicker);
+   }
+
+   /*
     * ACTION: knot-selected
     */
    async knotSelected(knotTitle) {
@@ -217,7 +233,9 @@ class AuthorManager {
    }
    
    // <TODO> Temporary
+   /*
    dispatchEvent(event) {
       this._resourceSelected(event);
    }
+   */
 }
