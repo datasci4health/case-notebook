@@ -134,14 +134,8 @@ class DCCResourcePicker extends DCCBase {
          this._resourcePreview.innerHTML = "<img src='" + this._selectList[this._listWeb.value] + "' class='dsty-resource'>"; 
    }
    
-   addSelectionListener(listener) {
-      this._listeners.push(listener);
-   }
-   
    _notify() {
-      let eventSelected = new CustomEvent("resource-selected", {detail: this._listWeb.value});
-      for (var l in this._listeners)
-         this._listeners[l].dispatchEvent(eventSelected);
+      window.messageBus.dispatch("dcc/resource-picker/selected", this._listWeb.value);
    }
 }
 

@@ -44,7 +44,7 @@ class PlayerManager {
    }
 
    inputEvent(topic, message) {
-      this._server.recordInput(topic.substring[6], message);
+      this._server.recordInput(topic.substring(6), message);
    }   
    
    startKnot() {

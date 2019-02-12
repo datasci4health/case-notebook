@@ -29,8 +29,7 @@
 </head>
 <body onload="PlayerManager.instance().startKnot()">
    <div class="sty-main-panel">
-       <div id="report-panel"></div>
-<script>
+       <script>
 function produceReport() {
    const server = new DCCPlayerServer();
    let output = "";
@@ -48,7 +47,7 @@ function produceReport() {
            }
        }
    }   
-   document.querySelector("#report-panel").innerHTML = "<pre>" + output + "</pre>";
+   document.querySelector("#knot-panel").innerHTML = "<pre>" + output + "</pre>";
 }
 produceReport();
  </script>

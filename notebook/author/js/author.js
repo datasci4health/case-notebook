@@ -10,6 +10,7 @@ class AuthorManager {
       
       this._server = new DCCAuthorServer();
       
+      this._currentTemplateFamily = "jacinto";
       this._currentCaseName = null;
       this._knotSelected = null;
       this._htmlKnot = null;
@@ -20,7 +21,7 @@ class AuthorManager {
       window.messageBus.subscribe("control", this.controlEvent);
 
       this._caseLoadSelected = this._caseLoadSelected.bind(this);
-      this._templateLoadSelected = this._templateLoadSelected.bind(this);
+      this._templateFamilySelected = this._templateFamilySelected.bind(this);
    }
    
    controlEvent(topic, message) {
@@ -32,6 +33,8 @@ class AuthorManager {
          case "control/edit-knot": this.editKnot();
                                    break;
          case "control/play": this.playCase();
+                              break;
+         case "control/config": this.config();
                               break;
          case "control/knot-selected": this.knotSelected(message);
                                        break;
@@ -119,10 +122,10 @@ class AuthorManager {
    async playCase() {
       let message = document.querySelector("#message-space");
       message.innerHTML = "Preparing...";
-      await this._server.prepareCaseHTML(this._currentCaseName);
+      await this._server.prepareCaseHTML(this._currentTemplateFamily, this._currentCaseName);
 
       this._templateSet = {
-         player: await this._server.loadTemplate("player")
+         player: await this._server.loadPlayer()
       };
       
       const total = Object.keys(this._knots).length;
@@ -148,19 +151,27 @@ class AuthorManager {
    }
    
    /*
-    * ACTION: config
+    * ACTION: config (1)
     */
    async config() {
       this._resourcePicker = new DCCResourcePicker();
       
-      window.messageBus.subscribe("dcc/resource-picker/selected", this._caseLoadSelected);
+      window.messageBus.subscribe("dcc/resource-picker/selected", this._templateFamilySelected);
       
-      const cases = await this._server.casesList(this._resourcePicker);
-      this._resourcePicker.addSelectList(cases);
-      let knotPanel = document.querySelector("#knot-panel");
-      knotPanel.appendChild(this._resourcePicker);
+      const families = await this._server.templateFamiliesList(this._resourcePicker);
+      this._resourcePicker.addSelectList(families);
+      document.querySelector("#knot-panel").appendChild(this._resourcePicker);
    }
 
+   /*
+    * ACTION: config (2)
+    */
+   async _templateFamilySelected(topic, message) {
+      window.messageBus.unsubscribe("dcc/resource-picker/selected", this._templateFamilySelected);
+      this._currentTemplateFamily = message;
+      document.querySelector("#knot-panel").removeChild(this._resourcePicker);
+   }
+   
    /*
     * ACTION: knot-selected
     */
@@ -204,7 +215,7 @@ class AuthorManager {
       for (let tp in templates)
          if (!this._templateSet[templates[tp]])
             this._templateSet[templates[tp]] =
-               await this._server.loadTemplate(templates[tp]);
+               await this._server.loadTemplate(this._currentTemplateFamily, templates[tp]);
       let finalHTML = this._translator.generateKnotHTML(this._knots[knot]);
       for (let tp in templates)
          finalHTML = this._templateSet[templates[tp]].replace("{knot}", finalHTML);

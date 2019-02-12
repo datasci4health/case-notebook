@@ -3,6 +3,21 @@
  */
 
 class DCCAuthorServer {
+   async templateFamiliesList() {
+      const response = await fetch(DCCAuthorServer.serverAddress + "template-families-list", {
+         method: "POST",
+         headers:{
+           "Content-Type": "application/json"
+         }
+      });
+      const jsonResponse = await response.json();
+      const families = jsonResponse.templateFamiliesList;
+      let finalFamiliesList = {};
+      for (var f in families)
+         finalFamiliesList[families[f]] = "icons/mono-slide.svg";
+      return finalFamiliesList;
+   }
+   
    async casesList() {
       const response = await fetch(DCCAuthorServer.serverAddress + "cases-list", {
          method: "POST",
@@ -43,10 +58,22 @@ class DCCAuthorServer {
       return jsonResponse.versionFile;
    }
 
-   async loadTemplate(templateName) {
+   async loadPlayer() {
+      const response = await fetch(DCCAuthorServer.serverAddress + "load-player", {
+         method: "POST",
+         headers:{
+           "Content-Type": "application/json"
+         }
+      });
+      const jsonResponse = await response.json();
+      return jsonResponse.player;
+   }
+
+   async loadTemplate(templateFamily, templateName) {
       const response = await fetch(DCCAuthorServer.serverAddress + "load-template", {
          method: "POST",
-         body: JSON.stringify({"templateName": templateName}),
+         body: JSON.stringify({"templateFamily": templateFamily,
+                               "templateName": templateName}),
          headers:{
            "Content-Type": "application/json"
          }
@@ -55,10 +82,11 @@ class DCCAuthorServer {
       return jsonResponse.template;
    }
 
-   async prepareCaseHTML(caseName) {
+   async prepareCaseHTML(templateFamily, caseName) {
       const response = await fetch(DCCAuthorServer.serverAddress + "prepare-case-html", {
          method: "POST",
-         body: JSON.stringify({"caseName": caseName}),
+         body: JSON.stringify({"templateFamily": templateFamily,
+                               "caseName": caseName}),
          headers:{
            "Content-Type": "application/json"
          }

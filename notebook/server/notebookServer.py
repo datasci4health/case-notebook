@@ -8,14 +8,21 @@ class NotebookDM(object):
     
    DIR_CASES = "../cases/"
    DIR_SHARED = "../shared/"
+   DIR_PLAYER = "../player/"
    DIR_TEMPLATES = "../templates/"
    DIR_DCCS = "../dccs/components/"
    DIR_AUTHOR = "../author/"
    FILE_CASE_NAME = "case"
    FILE_CASE_EXTENSION = ".md"
    FILE_CASE = FILE_CASE_NAME + FILE_CASE_EXTENSION
-   FILE_PLAYER_TEMPLATE = "player.html";
+   FILE_PLAYER = "player.html"
     
+   def templateFamiliesList(self):
+       directories = glob.glob(NotebookDM.DIR_TEMPLATES + "*/")
+       directories = [d.replace("\\", "/") for d in directories]  # adaptation for Windows
+       directories = [d.replace(NotebookDM.DIR_TEMPLATES, "") for d in directories]
+       return [d.replace("/", "") for d in directories]
+
    def casesList(self):
        directories = glob.glob(NotebookDM.DIR_CASES + "*/")
        directories = [d.replace("\\", "/") for d in directories]  # adaptation for Windows
@@ -60,13 +67,19 @@ class NotebookDM(object):
       
       return versionFile
         
-   def loadTemplate(self, templateName):
-        templateFile = open(NotebookDM.DIR_TEMPLATES + templateName + ".html", "r", encoding="utf-8")
-        templateHTML = templateFile.read()
-        templateFile.close()
-        return templateHTML
+   def loadPlayer(self):
+     templateFile = open(NotebookDM.DIR_PLAYER + NotebookDM.FILE_PLAYER, "r", encoding="utf-8")
+     templateHTML = templateFile.read()
+     templateFile.close()
+     return templateHTML
+   
+   def loadTemplate(self, templateFamily, templateName):
+     templateFile = open(NotebookDM.DIR_TEMPLATES + templateFamily + "/" + templateName + ".html", "r", encoding="utf-8")
+     templateHTML = templateFile.read()
+     templateFile.close()
+     return templateHTML
     
-   def prepareCaseHTML(self, caseName):
+   def prepareCaseHTML(self, templateFamily, caseName):
       caseDir = NotebookDM.DIR_CASES + caseName + "/"
       
       # remake the generated HTML case directory
@@ -74,27 +87,31 @@ class NotebookDM(object):
          shutil.rmtree(caseDir + "html")
       os.mkdir(caseDir + "html")
       
+      # copy player scripts to the case
+      shutil.copytree(NotebookDM.DIR_PLAYER + "js", caseDir + "html/js")
+
       # copy template styles and scripts to the case
-      dirs = ["css", "js"]
+      dirs = ["css", "images"]
       for d in dirs:
-         shutil.copytree(NotebookDM.DIR_TEMPLATES + d, caseDir + "html/" + d)
+         shutil.copytree(NotebookDM.DIR_TEMPLATES + templateFamily + "/" + d, caseDir + "html/" + d)
          
       # copy DCCs to the case
       shutil.copytree(NotebookDM.DIR_DCCS, caseDir + "html/js/dccs")
       
       # copy case-specific and shared images to the case 
-      shutil.copytree(caseDir + "images", caseDir + "html/images")
+      for fi in glob.glob(caseDir + "images/*"):
+         shutil.copy2(fi, caseDir + "html/images")
       for fi in glob.glob(NotebookDM.DIR_SHARED + "images/*"):
          shutil.copy2(fi, caseDir + "html/images")
       
       # copy general case start files to the case directory
       playerTemplateFile = open(
-         NotebookDM.DIR_TEMPLATES + NotebookDM.FILE_PLAYER_TEMPLATE, "r", encoding="utf-8")
+         NotebookDM.DIR_PLAYER + NotebookDM.FILE_PLAYER, "r", encoding="utf-8")
       playerTemplate = playerTemplateFile.read();
       playerTemplateFile.close()
       files = ["index", "signin", "register", "report"]
       for f in files:
-         htmlSourceFile = open((NotebookDM.DIR_TEMPLATES + "{}.html").format(f), "r", encoding="utf-8")
+         htmlSourceFile = open((NotebookDM.DIR_TEMPLATES + templateFamily + "/" + "{}.html").format(f), "r", encoding="utf-8")
          htmlTargetFile = open((caseDir + "html/{}.html").format(f), "w", encoding="utf-8")
          htmlTargetFile.write(playerTemplate.format(knot = htmlSourceFile.read()))
          htmlSourceFile.close()
