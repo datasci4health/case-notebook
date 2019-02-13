@@ -68,16 +68,21 @@ class NotebookDM(object):
       return versionFile
         
    def loadPlayer(self):
-     templateFile = open(NotebookDM.DIR_PLAYER + NotebookDM.FILE_PLAYER, "r", encoding="utf-8")
+     templateFile = open(NotebookDM.DIR_PLAYER + NotebookDM.FILE_PLAYER,
+                         "r", encoding="utf-8")
      templateHTML = templateFile.read()
      templateFile.close()
      return templateHTML
    
    def loadTemplate(self, templateFamily, templateName):
-     templateFile = open(NotebookDM.DIR_TEMPLATES + templateFamily + "/" + templateName + ".html", "r", encoding="utf-8")
-     templateHTML = templateFile.read()
-     templateFile.close()
-     return templateHTML
+      templateHTML = ""
+      templateFileName = NotebookDM.DIR_TEMPLATES + templateFamily + \
+                         "/" + templateName + ".html"
+      if os.path.isfile(templateFileName):
+         templateFile = open(templateFileName, "r", encoding="utf-8")
+         templateHTML = templateFile.read()
+         templateFile.close()
+      return templateHTML
     
    def prepareCaseHTML(self, templateFamily, caseName):
       caseDir = NotebookDM.DIR_CASES + caseName + "/"

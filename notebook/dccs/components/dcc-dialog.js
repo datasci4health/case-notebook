@@ -111,6 +111,18 @@ class DCCTalk extends DCCBase {
             if (speech != null)
               speech.innerHTML = this.speech;
          }
+      } else {
+         let charImg = "images/" + this.character.toLowerCase()
+                        .replace(/ /igm, "_") + ".png";
+         let template = document.createElement("template");
+         
+         const speech = (this.hasAttribute("speech")) ? this.speech : "";
+         template.innerHTML = DCCTalk.templateElements.replace("[image]",charImg)
+                                                      .replace("[character]", this.character)
+                                                      .replace("[speech]", speech);
+         this._shadow = this.attachShadow({mode: "open"});
+         this._shadow.appendChild(template.content.cloneNode(true));
+         this._presentation = this._shadow.querySelector("#presentation-dcc");
       }
    }
    
@@ -150,6 +162,35 @@ class DCCDialog extends DCCBase {
 }
 
 (function() {
+   DCCTalk.templateStyle = 
+      `<style>
+           @media (orientation: landscape) {
+             .dcc-talk-style {
+               display: flex;
+               flex-direction: row;
+             }
+           }
+           
+           @media (orientation: portrait) {
+             .dcc-talk-style {
+               display: flex;
+               flex-direction: column;
+             }
+           }
+         .dcc-character {
+             flex-basis: 100px;
+          }
+          .dcc-speech {
+             flex-basis: 100%;
+          }
+      </style>
+      <div id="presentation-dcc" class="dcc-talk-style"></div>
+      </div>`;
+         
+   DCCTalk.templateElements =
+   `<div><img id='dcc-talk-character' src='[image]' title='[character]' width='100px'></div>
+    <div><div id='dcc-talk-text' class='dcc-speech'>[speech]</div></div>`;
+   
    DCCDialog.editableCode = false;
    customElements.define("dcc-dialog", DCCDialog);
    DCCTalk.editableCode = false;

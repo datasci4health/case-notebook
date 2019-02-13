@@ -85,5 +85,6 @@ body {
 
 .sty-knot-panel {
    flex: 75%;
+   overflow: scroll;
 }
 

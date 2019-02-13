@@ -10,7 +10,7 @@ class AuthorManager {
       
       this._server = new DCCAuthorServer();
       
-      this._currentTemplateFamily = "jacinto";
+      this._currentTemplateFamily = "classic";
       this._currentCaseName = null;
       this._knotSelected = null;
       this._htmlKnot = null;
@@ -213,9 +213,18 @@ class AuthorManager {
       let templates = (this._knots[knot].categories) ?
                        this._knots[knot].categories : ["knot"];
       for (let tp in templates)
-         if (!this._templateSet[templates[tp]])
-            this._templateSet[templates[tp]] =
-               await this._server.loadTemplate(this._currentTemplateFamily, templates[tp]);
+         if (!this._templateSet[templates[tp]]) {
+            const templ = await
+                    this._server.loadTemplate(this._currentTemplateFamily, templates[tp]);
+            if (templ != "")
+               this._templateSet[templates[tp]] = templ;
+            else {
+               if (!this._templateSet["knot"])
+                  this._templateSet["knot"] = await
+                     this._server.loadTemplate(this._currentTemplateFamily, "knot");
+               this._templateSet[templates[tp]] = this._templateSet["knot"];
+            }
+         }
       let finalHTML = this._translator.generateKnotHTML(this._knots[knot]);
       for (let tp in templates)
          finalHTML = this._templateSet[templates[tp]].replace("{knot}", finalHTML);
