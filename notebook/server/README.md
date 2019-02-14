@@ -1,23 +1,58 @@
 # Notebook Server
 
-Javascript proxy: `class DCCAuthorServer` in (`notebook/author/dcc-author-server-proxy.js`)
-REST frontend (Jupyter Kernel Gateway): `notebook/server/notebook-server-rest.ipynb`
-Python server: `notebook/server/notebookServer.py'
+## Three server components
+* Javascript proxy: `class DCCAuthorServer` in (`notebook/author/dcc-author-server-proxy.js`)
+* REST frontend (Jupyter Kernel Gateway): `notebook/server/notebook-server-rest.ipynb`
+* Python server: `notebook/server/notebookServer.py'
 
+## Pipeline
+~~~~
 Javascript proxy -> REST server -> Python server 
+~~~~
 
-Javascript proxy: `templateFamiliesList()`
-REST frontend: `POST /template-families-list`
-Python server: `templateFamiliesList()`
+## Operations
 
-Javascript proxy: `casesList()`
-REST frontend: `POST /cases-list`
-Python server: `casesList()`
+`->` means return value.
 
-Javascript proxy: `loadCase(caseName)`
-REST frontend: `POST /load-case {body: {caseName: <caseName>}}`
-Python server: `loadCase(caseName)`
+### Template Families List
+* Javascript proxy: `templateFamiliesList() -> [<template family 1>,..,<template family n>]`
+* REST frontend: `POST /template-families-list {templateFamiliesList: [<template family 1>,..,<template family n>]}`
+* Python server: `templateFamiliesList() -> [<template family 1>,..,<template family n>]`
 
+### Cases List
+* Javascript proxy: `casesList() -> [<case 1>,..,<case n>]`
+* REST frontend: `POST /cases-list -> {casesList: [<case 1>,..,<case n>]}`
+* Python server: `casesList() -> [<case 1>,..,<case n>]`
+
+### Load Case
+* Javascript proxy: `loadCase(caseName) -> <case markdown>`
+* REST frontend: `POST /load-case {body: {caseName: <case name>}} -> {caseMd: <case markdown>}`
+* Python server: `loadCase(caseName) -> <case markdown>`
+
+### Save Case
+* Javascript proxy: `saveCase(caseName, caseText) -> <version file name>`
+* REST frontend: `POST /load-case {body: {caseName: <case name>, caseText: <case markdown>}} -> {versionFile: <version file name>}`
+* Python server: `saveCase(caseName, content) -> <version file name>`
+
+### Load Player
+* Javascript proxy: `loadPlayer() -> <template HTML>`
+* REST frontend: `POST /load-player -> {player: <template HTML>}`
+* Python server: `loadPlayer() -> <template HTML>`
+
+### Load Template
+* Javascript proxy: `loadTemplate(templateFamily, templateName) -> <template HTML>`
+* REST frontend: `POST /load-template {body: {templateFamily: <template family>, templateName: <template name>}} -> {template: <template HTML>}`
+* Python server: `loadTemplate(templateFamily, templateName) -> <template HTML>`
+
+### Prepare Case HTML
+* Javascript proxy: `prepareCaseHTML(templateFamily, caseName)`
+* REST frontend: `POST /prepare-case-html {body: {templateFamily: <template family>, caseName: <case name>}}`
+* Python server: `prepareCaseHTML(templateFamily, caseName)`
+
+### Save Knot HTML
+* Javascript proxy: `saveKnotHTML(caseName, knotFile, knotHTML)`
+* REST frontend: `POST /save-knot-html {body: {caseName: <case name>, knotFile: <knot file>, knotHTML: <knot HTML>}}`
+* Python server: `saveKnotHTML(caseName, htmlName, content)`
 
 
 # Implementation
