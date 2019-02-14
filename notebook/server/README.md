@@ -45,6 +45,7 @@ Javascript proxy -> REST server -> Python server
 * Python server: `loadTemplate(templateFamily, templateName) -> <template HTML>`
 
 ### Prepare Case HTML
+Prepare the environment/directory for the HTML version of the case, copying images and scripts.
 * Javascript proxy: `prepareCaseHTML(templateFamily, caseName)`
 * REST frontend: `POST /prepare-case-html {body: {templateFamily: <template family>, caseName: <case name>}}`
 * Python server: `prepareCaseHTML(templateFamily, caseName)`
@@ -53,6 +54,11 @@ Javascript proxy -> REST server -> Python server
 * Javascript proxy: `saveKnotHTML(caseName, knotFile, knotHTML)`
 * REST frontend: `POST /save-knot-html {body: {caseName: <case name>, knotFile: <knot file>, knotHTML: <knot HTML>}}`
 * Python server: `saveKnotHTML(caseName, htmlName, content)`
+
+### Save Case Script
+* Javascript proxy: `saveCaseScript(caseName, scriptFile, scriptJS)`
+* REST frontend: `POST /save-case-script {body: {caseName: <case name>, scriptFile: <script file>, scriptJS: <script JS>}}`
+* Python server: `saveCaseScript(caseName, scriptName, content)`
 
 
 # Implementation
