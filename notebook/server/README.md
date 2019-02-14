@@ -1,4 +1,26 @@
-# # Notebook Server
+# Notebook Server
+
+Javascript proxy: `class DCCAuthorServer` in (`notebook/author/dcc-author-server-proxy.js`)
+REST frontend (Jupyter Kernel Gateway): `notebook/server/notebook-server-rest.ipynb`
+Python server: `notebook/server/notebookServer.py'
+
+Javascript proxy -> REST server -> Python server 
+
+Javascript proxy: `templateFamiliesList()`
+REST frontend: `POST /template-families-list`
+Python server: `templateFamiliesList()`
+
+Javascript proxy: `casesList()`
+REST frontend: `POST /cases-list`
+Python server: `casesList()`
+
+Javascript proxy: `loadCase(caseName)`
+REST frontend: `POST /load-case {body: {caseName: <caseName>}}`
+Python server: `loadCase(caseName)`
+
+
+
+# Implementation
 It uses the Jupyter Kernel Gateway: https://test-jupyterkernelgateway.readthedocs.io/en/latest/index.html
 
 ## Linux
@@ -14,7 +36,7 @@ pip3 install jupyter_kernel_gateway
 
 Go to the server directory inside the Git project:
 ~~~~
-cd ~/git/case-notebook/notebook/server`
+cd ~/git/case-notebook/notebook/server
 ~~~~
 
 To start the server run in the terminal:
