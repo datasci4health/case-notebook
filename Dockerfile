@@ -10,4 +10,4 @@ ADD ./notebook .
 EXPOSE 80
 EXPOSE 8888
 
-CMD  service apache2 start ; cd /case-notebook/server ; jupyter kernelgateway --KernelGatewayApp.api='kernel_gateway.notebook_http' --KernelGatewayApp.seed_uri='/var/www/html/case-notebook/server/notebook-server-rest.ipynb' --KernelGatewayApp.allow_origin='*' --ip='0.0.0.0' --KernelGatewayApp.allow_methods='POST, GET, OPTIONS' --KernelGatewayApp.allow_headers='Content-Type' 
+CMD  service apache2 start ; cd /var/www/html/case-notebook/server ; jupyter kernelgateway --KernelGatewayApp.api='kernel_gateway.notebook_http' --KernelGatewayApp.seed_uri='/var/www/html/case-notebook/server/notebook-server-rest.ipynb' --KernelGatewayApp.allow_origin='*' --ip='0.0.0.0' --KernelGatewayApp.allow_methods='POST, GET, OPTIONS' --KernelGatewayApp.allow_headers='Content-Type' 
