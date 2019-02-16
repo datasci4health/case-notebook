@@ -125,5 +125,5 @@ class DCCAuthorServer {
 }
 
 (function() {
-   DCCAuthorServer.serverAddress = "http://143.106.23.113:8888/";
+   DCCAuthorServer.serverAddress = "http://cloud.lis.ic.unicamp.br/case-notebook/v1/server";
 })();
