@@ -125,5 +125,5 @@ class DCCAuthorServer {
 }
 
 (function() {
-   DCCAuthorServer.serverAddress = "http://127.0.0.1:8888/";
+   DCCAuthorServer.serverAddress = "http://143.106.23.113:8888/";
 })();
