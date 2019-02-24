@@ -1,7 +1,9 @@
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/datasci4health/case-notebook/blob/master/LICENSE)
 [![Docker Pulls](https://img.shields.io/docker/pulls/datasci4health/case-notebook.svg?style=flat)](https://cloud.docker.com/u/datasci4health/repository/registry-1.docker.io/datasci4health/case-notebook)
-[![Docker Pulls](https://img.shields.io/docker/automated/datasci4health/case-notebook.svg?style=flat)](https://cloud.docker.com/u/datasci4health/repository/registry-1.docker.io/datasci4health/case-notebook)
-[![Docker Pulls](https://img.shields.io/docker/build/datasci4health/case-notebook.svg?style=flat)](https://cloud.docker.com/u/datasci4health/repository/registry-1.docker.io/datasci4health/case-notebook)
+<!--
+[![Docker Automated](https://img.shields.io/docker/automated/datasci4health/case-notebook.svg?style=flat)](https://cloud.docker.com/u/datasci4health/repository/registry-1.docker.io/datasci4health/case-notebook)
+[![Docker Build](https://img.shields.io/docker/build/datasci4health/case-notebook.svg?style=flat)](https://cloud.docker.com/u/datasci4health/repository/registry-1.docker.io/datasci4health/case-notebook) 
+-->
 
 
 # Case Notebook
