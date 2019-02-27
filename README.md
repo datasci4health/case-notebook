@@ -6,10 +6,17 @@
 
 # Case Notebook
 
-An environment for clinical cases
+An environment for authoring and playing simulated clinical cases.
 
 ## Getting Started
 
+### Directory structure
+
+* **basics** - Contains examples of basic technologies used in the project. Each technology is addressed by a directory.
+* **binder** - Binder environment setup, once you can launch Binder/Jupyter to test some aspects of this project.
+* **data** - Data sources that support the development and execution of clinical cases. Examples: ontologies (e.g., MeSH); Zombie Health support data.
+* **notebook** - Code of the notebook (client and server).
+* **player-interface** - Design essays of the player interface.
 
 ### Via our Cloud 
 
