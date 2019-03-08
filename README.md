@@ -32,6 +32,12 @@ An environment for authoring and playing simulated clinical cases.
 ### Running Locally
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
+-----
+
+## Jupyter Client and REST Server (deprecated)
+
+In the current version, Jupyter works as a REST server, but this solution is being replaced by a new REST server. It was also adopted in the client side in the previous version of the system. Therefore, the following instructions will be soon archived.
+
 Instructions to install Jupyter and Case Notebook in your machine:
 
 ## Linux Installation
