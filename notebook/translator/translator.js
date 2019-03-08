@@ -37,6 +37,7 @@ class Translator {
       
       let knotCtx = null;
       let knotBlocks = markdown.split(Translator.marksKnotTitle);
+      console.log(knotBlocks);
       for (var kb = 1; kb < knotBlocks.length; kb += 2) {
          let transObj = this._knotMdToObj(knotBlocks[kb].match(Translator.marks.knot));
          let label = transObj.title;
@@ -302,23 +303,41 @@ class Translator {
    
    /*
     * Knot Md to Obj
-    * Input: == [title] ([category],..,[category]) ==
+    * Input: ## [title] ([category],..,[category]) ##
+    *        or
+    *        [title] ([category],..,[category])
+    *        =====
     * Output:
     * {
     *    type: "knot"
-    *    title: <title of the knot> #1
-    *    categories: [<set of categories>]  #2
+    *    title: <title of the knot> #2 or #4
+    *    categories: [<set of categories>]  #3 or #5
+    *    level: <level of the knot> #1 or #6
     *    content: [<sub-nodes>] - generated in further routines
     * }
     */
    _knotMdToObj(matchArray) {
       let knot = {
-         type: "knot",
-         title: matchArray[1].trim()
+         type: "knot"
       };
       
       if (matchArray[2] != null)
-         knot.categories = matchArray[2].trim().split(",");
+         knot.title = matchArray[2].trim();
+      else
+         knot.title = matchArray[4].trim();
+      
+      if (matchArray[3] != null)
+         knot.categories = matchArray[3].trim().split(",");
+      else if (matchArray[5] != null)
+         knot.categories = matchArray[5].trim().split(",");
+      
+      if (matchArray[1] != null)
+         knot.level = matchArray[1].trim().length;
+      else
+         if (matchArray[6][0] == "=")
+            knot.level = 1;
+         else
+            knot.level = 2;
          
       return knot;
    }
@@ -771,7 +790,7 @@ class Translator {
 }
 
 (function() {
-   Translator.marksKnotTitle = /(^[ \t]*==*[ \t]*(?:\w[\w \t]*)(?:\(\w[\w \t,]*\))?[ \t]*=*[ \t]*[\f\n\r])/igm;
+   Translator.marksKnotTitle = /((?:^[ \t]*(?:#+)[ \t]*(?:\w[\w \t]*)(?:\((?:\w[\w \t,]*)\))?[ \t]*#*[ \t]*$)|(?:^[ \t]*(?:\w[\w \t]*)(?:\((?:\w[\w \t,]*)\))?[ \t]*[\f\n\r](?:==+|--+)$))/igm;
 
    Translator.marksAnnotation = {
      // knot   : /^[ \t]*==*[ \t]*(\w[\w \t]*)(?:\(([\w \t]*)\))?[ \t]*=*[ \t]*[\f\n\r]/im,
@@ -785,8 +804,8 @@ class Translator {
    //
    
    Translator.marks = {
-      knot   : /^[ \t]*==*[ \t]*(\w[\w \t]*)(?:\((\w[\w \t,]*)\))?[ \t]*=*[ \t]*$/im,
-      option: /[ \t]*([\+\*][\+\*])[ \t]*([^\(&> \t][^\(&>\n\r\f]*)?(?:\(([\w \t-]+)\)[ \t]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))?$/im,
+      knot   : /(?:^[ \t]*(#+)[ \t]*(\w[\w \t]*)(?:\((\w[\w \t,]*)\))?[ \t]*#*[ \t]*$)|(?:^[ \t]*(\w[\w \t]*)(?:\((\w[\w \t,]*)\))?[ \t]*[\f\n\r](==+|--+)$)/im,
+      option : /[ \t]*([\+\*][\+\*])[ \t]*([^\(&> \t][^\(&>\n\r\f]*)?(?:\(([\w \t-]+)\)[ \t]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))?$/im,
       divert : /-(?:(?:&gt;)|>) *(\w[\w. ]*)/im,
       talk   : /^[ \t]*:[ \t]*(\w[\w \t]*):[ \t]*([^\n\r\f]+)$/im,
       talkopen: /^[ \t]*:[ \t]*(\w[\w \t]*):[ \t]*$/im,
