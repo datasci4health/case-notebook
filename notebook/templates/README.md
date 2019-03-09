@@ -1,39 +1,10 @@
 # Templates
 
-# Player
+Templates are organized in template families or family sets. Each family has a subdirectory and they are exclusive alternatives, i.e., only one template family can be used in each translation.
+The families currently available are:
 
-## Storage prefix
-```
-casenote_
-```
+* **classic** - Minimal template without extra format.
 
-## User profile
-Key:
-```
-<storage prefix> profile- <user id>
-```
-JSON:
-```
-{
-   id   : <user id>,
-   name : <name>,
-   age  : <age>,
-   cases  : [<unique ids of the cases played by this user>]
-}
-```
+* **jacinto** - Standard template for Jacinto cases.
 
-## Track of a case execution by a user
-Key:
-```
-<storage prefix> <current user> # <case id> # <date-time> - <guid>
-```
-JSON:
-```
-{
-   userid : <user>,
-   caseid : <case>,
-   start  : <date and time of start>,
-   inputs : {<inputs of the user>},
-   route : [<rout of the user in the case>]
-}
-```
+Each template family has a HTML file for each available knot category. There is always a dafault `knot.html` template used for those knots that do not specify a category, or those that specify unknown categories.

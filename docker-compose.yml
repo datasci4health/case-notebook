@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+
+  case-notebook:
+    image: datasci4health/case-notebook
+    ports:
+      - "80:80"
+      - "8888:8888"
+    environment:                                
+      - CASE_NOTEBOOK_SERVER=http://localhost:8888
+    #restart: always
+

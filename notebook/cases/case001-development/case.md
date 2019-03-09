@@ -1,9 +1,9 @@
-== Case 001 (start,dialog_left) ==
+# Case 001 (start,dialog_left) #
 :NURSE Agnes: Doctor, we have a man (51 years old) who entered the emergency department reporting chest pain. His vital signs are ABP: 144x92mmHG; HR: 78bpm; RR: 21rpm; Temp: 37oC; O2Sat: 98%.
 
 ** Let us go! -> Level 1
 
-== Level 1 (information) ==
+# Level 1 (information) #
 
 :PATIENT Jakob: Doctor, I am feeling chest pain since yesterday. The pain is continuous and is located just in the middle of my chest, worsening when I breathe and when I lay down on my bed. I suffer from arterial hypertension and smoke 20 cigarettes every day. My father had a “heart attack” at my age and I am very worried about it.
 
@@ -15,14 +15,14 @@
 ** More information -> More information 1
 ** Call the supervisor -> Call the supervisor 1a
 
-== Generate hypothesis 1 (input) ==
+# Generate hypothesis 1 (input) #
 What is your main diagnostic hypothesis?
 :PATIENT Jakob:.
 {?1 hypothesis1:mesh#pericarditis,myopericarditis,pericardial inflammation,pericardial infection,pericardial effusion;infarction,myocardial infarction,coronary syndrome,acute coronary syndrome,ischemia,myocardial ischemia,coronary insufficiency,angina,angina pectoris}
 
 ** Submit hypothesis -> Check hypothesis 1
 
-== More information 1 (information) ==
+# More information 1 (information) #
 
 <b>MORE INFORMATION</b> <br> The patient never felt chest pain before. He exercises regularly and has lost weight in the last three months. He takes amlodipine and losartan regularly. Two weeks ago, he had an auto-limited gastroenteritis episode. He denies recent travels and surgery.
 :PATIENT Jakob:.
@@ -32,7 +32,7 @@ What is your main diagnostic hypothesis?
 ** Generate hypothesis -> Generate hypothesis 1
 ** Call the supervisor -> Call the supervisor 1a
 
-== Call the supervisor 1a (detailed) ==
+# Call the supervisor 1a (detailed) #
 :SUPERVISOR Harry:
 Hi! I am glad that you called me. Chest pain is an important complaint at the emergency department and we have to exclude the fatal causes: myocardial infarction (MI), acute aortic dissection (AAD), pulmonary embolism PE), hypertensive pneumothorax (HP), and Boerhaave Syndrome (BS).
 
@@ -41,7 +41,7 @@ The best way to find out what is happening with your patient, my young padawan, 
 
 ** See likelihood tables -> Call the supervisor 1b 
 
-== Call the supervisor 1b (detailed) ==
+# Call the supervisor 1b (detailed) #
 :SUPERVISOR Harry:.
 Do you know the concept of Likelihood ratio (LR)? -> Likelihood Ratio
 
@@ -53,7 +53,7 @@ Do you know the concept of Likelihood ratio (LR)? -> Likelihood Ratio
 
 ** Continue talking -> Call the supervisor 1c 
 
-== Call the supervisor 1c (detailed) ==
+# Call the supervisor 1c (detailed) #
 :SUPERVISOR Harry:.
 Hypertensive pneumothorax is more common in tall and thin young adults (primary pneumothorax) or in patients with chronic pulmonary diseases or chest trauma (secondary pneumothorax). On physical examination, we expect asymmetry in lung auscultation and the trachea may be dislocated to the contralateral side of the pneumothorax.
 
@@ -63,38 +63,38 @@ How does this information can help you to solve your case?
 
 ** Back to the case -> Level 1
 
-== Likelihood Ratio (detailed) ==
+# Likelihood Ratio (detailed) #
 
 Likelihood ratio (LR) - like sensitivity and specificity, LR describe the discriminatory power of features in a clinical context, estimating the probability of disease. When the LR is higher than 1, the feature increases the probability; when lower than 1, reduces it.
 
 ** Back -> Call the supervisor 1
 
-== Clinical History Myocardial Infarction (detailed) ==
+# Clinical History Myocardial Infarction (detailed) #
 ![Clinical History Myocardial Infarction](images/ebm-clinical-history-myocardial-infarction.png)
 
 ** Back -> Call the supervisor 1
 
-== Physical Examination Myocardial Infarction (detailed) ==
+# Physical Examination Myocardial Infarction (detailed) #
 ![Physical Examination Myocardial Infarction](images/ebm-physical-examination-myocardial-infarction.png)
 
 ** Back -> Call the supervisor 1
 
-== Clinical History Aortic Dissection (detailed) ==
+# Clinical History Aortic Dissection (detailed) #
 ![Clinical History Aortic Dissection](images/ebm-clinical-history-aortic-dissection.png)
 
 ** Back -> Call the supervisor 1
 
-== Physical Examination Aortic Dissection (detailed) ==
+# Physical Examination Aortic Dissection (detailed) #
 ![Physical Examination Aortic Dissection](images/ebm-physical-examination-aortic-dissection.png)
 
 ** Back -> Call the supervisor 1
 
-== Pulmonary Embolism Wells Criteria (detailed) ==
+# Pulmonary Embolism Wells Criteria (detailed) #
 ![Pulmonary Embolism Wells Criteria](images/ebm-pulmonary-embolism-wells-criteria.png)
 
 ** Back -> Call the supervisor 1
 
-== Check hypothesis 1 (selector) ==
+# Check hypothesis 1 (selector) #
 
 :Jacinto:Let us check out your hypothesis. Highlight in green the findings that corroborate your hypothesis; in blue those that are neutral; and in red the ones speaking against your hypothesis.
 
@@ -108,7 +108,7 @@ You perform physical examination: {cardiac and pulmonary auscultation are normal
 
 ** Submit -> Order EKG 
 
-== Order EKG (decision_eletro) ==
+# Order EKG (decision_eletro) #
 Our patient denies any recent long trip, immobilization or surgery.
 
 The blood pressure is symmetric in the four limbs. 
@@ -120,39 +120,39 @@ Game: What do you want to do?
 
 ++ Magnify (ekg-image) -> Magnify EKG
 
-== Magnify EKG (magnify_eletro) ==
+# Magnify EKG (magnify_eletro) #
 
 ![EKG](images/ekg-original.png)
 
-== Generate hypothesis 2 (input) ==
+# Generate hypothesis 2 (input) #
 :PATIENT Jakob:.
 {?1 hypothesis:mesh#pericarditis,myopericarditis,pericardial inflammation,pericardial infection,pericardial effusion;infarction,myocardial infarction,coronary syndrome,acute coronary syndrome,ischemia,myocardial ischemia,coronary insufficiency,angina,angina pectoris}
 
 ++ Submit hypothesis (submit-input) -> Check hypothesis 2
 
-== More information 2 (details_eletro) ==
+# More information 2 (details_eletro) #
 
 EKG description
 ![EKG Description](images/ekg-description.png)
 
 ++ EKG Analysis (action-1)
 
-== EKG Analysis (notice) ==
+# EKG Analysis (notice) #
 
 Image zoom.
 
-== Call the supervisor 2 (presentation,notice) ==
+# Call the supervisor 2 (presentation,notice) #
 ![EKG-A](images/ampliacao-eletro.gif)
 
 We did not find features that increase the likelihood of myocardial ischemia. Moreover, our patient has a pleuritic chest pain that gets worse when the patient lays down.
 
 In the EKG we found ST-segment elevation in almost all leads. Also, we found a depression of the PR segment in the DII lead.
 
-== Check hypothesis 2 ==
+# Check hypothesis 2 #
 ![EKG-A](images/ampliacao-eletro.gif)
 ++ Submit -> Final report
 
-== Final report ==
+# Final report #
 # Feedback
 Score: ...
 Evaluation: ...
