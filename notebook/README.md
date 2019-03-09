@@ -2,7 +2,7 @@
 
 ## Directory Map
 
-* **author** - Front-end of the authoring environment that runs in the client side. The `author.html` file is the main module and the Javascript part of the module is in the `[js]` directory.
+* **author** - Front-end of the authoring environment that runs in the client side. The `author.html` plus the `js/author.js` files are the main modules. The Javascript files of the module is in the `[js]` directory.
 
 * **cases** (temporary) - Cases developed using the authoring tool, composed by a markdown file with the case, plus additional resources, e.g., images. Each directory contains all data of a case. The narrative of a case is inside a markdown `case.md` file in the root of the respective case directory. This is a temporary solution since the cases will be stored in a database.
 
