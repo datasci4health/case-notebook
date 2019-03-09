@@ -1,6 +1,8 @@
 # Case Notebook Markdown Extension Language
 
-Language to write narratives in markdown style. 
+Language to write narratives in markdown style.
+
+This is an extension of the markdown language as specified in: https://daringfireball.net/projects/markdown/syntax
 
 # Case
 
@@ -8,20 +10,30 @@ Each case is a set of knots.
 
 # Knot
 
-A knot is an independent unit of narrative. It can be a location, scene or part (state) of a narrative. 
+This is an extension of the markdown language as specified in https://daringfireball.net/projects/markdown/syntax
 
-Knots are declared through their title indicated by at least two equal signs. The following 
-example declares a knot entitled `Emergency Room`.
+Knots are equivalent to markdown headers, as specified in https://daringfireball.net/projects/markdown/syntax#header
 
+The following examples present two alternative approaches do declare a knot entitled `Emergency Room`.
 ```
-== Emergency Roon ==
+Emergency Roon
+==============
+```
+alternative:
+```
+# Emergency Roon
 ```
 
 A knot can be related to a category, which is specified between parenthesis besides 
 the title. For example, to relate the `Emergency Room` to the `information` category.
 
 ```
-== Emergency Roon (information) ==
+Emergency Roon (information)
+============================
+```
+alternative:
+```
+# Emergency Roon (information)
 ```
 
 The category is fundamental to define how the knot is presented. It indicates a template 
