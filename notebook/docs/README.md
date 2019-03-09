@@ -2,15 +2,13 @@
 
 Language to write narratives in markdown style.
 
-This is an extension of the markdown language as specified in: https://daringfireball.net/projects/markdown/syntax
+This is an extension of the markdown language as specified in https://daringfireball.net/projects/markdown/syntax
 
 # Case
 
 Each case is a set of knots.
 
 # Knot
-
-This is an extension of the markdown language as specified in https://daringfireball.net/projects/markdown/syntax
 
 Knots are equivalent to markdown headers, as specified in https://daringfireball.net/projects/markdown/syntax#header
 
