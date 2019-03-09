@@ -2,11 +2,13 @@
 
 ## Directory Map
 
-* **author** - Front-end of the authoring environment that runs in the client side. The `author.html` plus the `js/author.js` files are the main modules. The Javascript files of the module is in the `[js]` directory.
+* **author** - Front-end of the authoring environment that runs in the client side. The `author.html` plus the `js/author.js` files are the main modules. The Javascript files of the module are in the `[js]` directory.
 
 * **cases** (temporary) - Cases developed using the authoring tool, composed by a markdown file with the case, plus additional resources, e.g., images. Each directory contains all data of a case. The narrative of a case is inside a markdown `case.md` file in the root of the respective case directory. This is a temporary solution since the cases will be stored in a database.
 
 * **dccs** - Digital Content Components (DCCs) library. The authoring environment and the generated cases use web components to execute active web tasks, e.g., buttons, animations, inputs, etc. These web components follow the DCC standard and are stored in this directory.
+
+* **docs** - General documentation of the system. For example, the markdown extension is documented in this directory.
 
 * **nbextensions** (deprecated) - Previous version of the authoring environment that was an extension of Jupyter.
 
