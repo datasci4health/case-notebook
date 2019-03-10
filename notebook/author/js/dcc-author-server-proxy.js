@@ -1,5 +1,5 @@
 /**
- * Local component that worls as a proxy to the server functionalities
+ * Local component that works as a proxy to the server functionalities
  */
 
 class DCCAuthorServer {
@@ -125,6 +125,6 @@ class DCCAuthorServer {
 }
 
 (function() {
-   DCCAuthorServer.serverAddress = "http://cloud.lis.ic.unicamp.br/case-notebook/v1/server/";
-   // DCCAuthorServer.serverAddress = "http://127.0.0.1:8888/";
+   // DCCAuthorServer.serverAddress = "http://cloud.lis.ic.unicamp.br/case-notebook/v1/server/";
+   DCCAuthorServer.serverAddress = "http://127.0.0.1:8888/";
 })();

@@ -1,6 +1,6 @@
 /* State Selector DCC
  ********************/
-class DCCStateSelector extends HTMLElement {
+class DCCStateSelector extends DCCBase {
    constructor() {
      super();
      
@@ -9,14 +9,15 @@ class DCCStateSelector extends HTMLElement {
      this._currentState = 0;
      this._stateVisible = false;
      
+     // Without shadow - not working
+     /*
      const text = this.innerHTML;
      this.innerHTML = DCCStateSelector.templateElements;
      this.querySelector("#presentation-text").innerHTML = text;
      this._presentation = this.querySelector("#presentation-dcc");
      this._presentationState = this.querySelector("#presentation-state");
+     */
      
-     // <TODO> Shadow version - future
-     /*
      let template = document.createElement("template");
      template.innerHTML = DCCStateSelector.templateElements;
      
@@ -25,7 +26,7 @@ class DCCStateSelector extends HTMLElement {
      
      this._presentation = this._shadow.querySelector("#presentation-dcc");
      this._presentationState = this._shadow.querySelector("#presentation-state");
-     */
+
      
      this._showState = this._showState.bind(this);
      this._hideState = this._hideState.bind(this);
@@ -139,7 +140,7 @@ class DCCStateSelector extends HTMLElement {
 
 /* Group Selector DCC
  ********************/
-class DCCGroupSelector extends HTMLElement {
+class DCCGroupSelector extends DCCBase {
    constructor() {
      super();
      this.requestStates = this.requestStates.bind(this);
@@ -185,7 +186,10 @@ class DCCGroupSelector extends HTMLElement {
 (function() {
 
 DCCStateSelector.templateElements = 
-`<span id="presentation-dcc">
+`<style>
+   @import "css/dcc-state-selector.css"
+</style>
+<span id="presentation-dcc">
    <span id="presentation-text"><slot></slot></span>
    <span id="presentation-state"></span>
 </span>`;

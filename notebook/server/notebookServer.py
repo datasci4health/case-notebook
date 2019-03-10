@@ -9,6 +9,7 @@ class NotebookDM(object):
    DIR_CASES = "../cases/"
    DIR_SHARED = "../shared/"
    DIR_PLAYER = "../player/"
+   DIR_BUS = "../bus/"
    DIR_TEMPLATES = "../templates/"
    DIR_DCCS = "../dccs/components/"
    DIR_AUTHOR = "../author/"
@@ -94,6 +95,10 @@ class NotebookDM(object):
       
       # copy player scripts to the case
       shutil.copytree(NotebookDM.DIR_PLAYER + "js", caseDir + "html/js")
+      
+      # copy bus scripts to the case 
+      for fb in glob.glob(NotebookDM.DIR_BUS + "*"):
+         shutil.copy2(fb, caseDir + "html/js")
 
       # copy template styles and scripts to the case
       dirs = ["css", "images"]
