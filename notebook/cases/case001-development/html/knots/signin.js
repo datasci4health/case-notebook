@@ -1,4 +1,4 @@
-<div class="panel-left-pict">
+(function() { PlayerManager.instance().presentKnot(`<div class="panel-left-pict">
    <div class="panel-left-pict-image">
       <img  src="images/entrance.jpg">
    </div>
@@ -26,4 +26,4 @@
         </div>
       </div>
    </div>
-</div>
+</div>`) })();

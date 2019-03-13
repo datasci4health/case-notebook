@@ -1,0 +1,1 @@
+(function() { PlayerManager.instance().presentKnot(``) })();

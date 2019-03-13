@@ -1,37 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-   <meta charset="utf-8"/>
-   <title>Player</title>
-   
-   <link rel="stylesheet" type="text/css" href="css/player.css">
-   <link rel="stylesheet" type="text/css" href="css/presentation.css">
-   <link rel="stylesheet" type="text/css" href="css/templates.css">
-   <link rel="stylesheet" type="text/css" href="css/templates-classic.css">
-
-   <script type="text/javascript" src="js/bus.js"></script>
-   
-   <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-block.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-trigger.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-character.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-character-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-lively-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-lively-dialog-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-resource-picker.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-state-selector.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-styler.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-input.js"></script>
-   
-   <script type="text/javascript" src="js/dcc-player-server-proxy.js"></script>
-   <script type="text/javascript" src="js/player.js"></script>
-   <script type="text/javascript" src="js/case.js"></script>
-</head>
-<body onload="PlayerManager.instance().startKnot()">
-   <div class="sty-main-panel">
-      <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
+(function() { PlayerManager.instance().presentKnot(`<svg
    xmlns:xhtml="http://www.w3.org/1999/xhtml"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -47,7 +14,7 @@
    version="1.1"
    id="svg102"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="dialog_left.svg">
+   sodipodi:docname="input.svg">
   <metadata
      id="metadata106">
     <rdf:RDF>
@@ -73,9 +40,9 @@
      inkscape:window-height="704"
      id="namedview104"
      showgrid="false"
-     inkscape:zoom="0.51707185"
-     inkscape:cx="518.3658"
-     inkscape:cy="333.38143"
+     inkscape:zoom="0.73125002"
+     inkscape:cx="732.18037"
+     inkscape:cy="364.47074"
      inkscape:window-x="67"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -226,54 +193,68 @@
      id="image4087"
      x="244.12265"
      y="71.079224" />
-  <rect
-     style="fill:#ba2027"
-     y="641"
-     x="968"
-     rx="29.5"
-     height="59"
-     width="301"
-     class="cls-14"
-     data-name="Rectangle 18"
-     id="Rectangle_18" />
-  <foreignObject
-     data-name="Talk action"
-     x="985"
-     y="655"
-     width="270"
-     height="30">
-    <div
-       id="talk-action"
-       class="cls-15"
-       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
-        action
-     </div>
+  <g
+     data-name="Back arrow"
+     id="back-arrow"
+     transform="translate(-151,-194)">
+    <circle
+       style="fill:#346e93"
+       transform="translate(151,194)"
+       r="36.5"
+       cy="36.5"
+       cx="36.5"
+       class="cls-13"
+       data-name="Ellipse 5"
+       id="Ellipse_5" />
+    <path
+       style="fill:#ffffff"
+       inkscape:connector-curvature="0"
+       transform="translate(-653.108,45.012)"
+       d="m 863.02,182.135 h -30.292 a 0.519,0.519 0 0 1 -0.367,-0.887 l 6.732,-6.732 a 0.519,0.519 0 0 0 0,-0.734 l -4.641,-4.641 a 0.519,0.519 0 0 0 -0.734,0 l -12.995,12.995 h -0.054 v 0.054 l -3.409,3.41 a 0.52,0.52 0 0 0 0,0.735 l 16.457,16.457 a 0.519,0.519 0 0 0 0.734,0 l 4.641,-4.641 a 0.519,0.519 0 0 0 0,-0.734 l -6.788,-6.788 a 0.519,0.519 0 0 1 0.367,-0.887 h 30.349 a 0.519,0.519 0 0 0 0.519,-0.519 v -6.564 a 0.519,0.519 0 0 0 -0.519,-0.524 z"
+       class="cls-12"
+       data-name="Path 320"
+       id="Path_320" />
+  </g>
+  <foreignObject>
+     <dcc-trigger action="navigate/knot/previous" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
   </foreignObject>
-  <foreignObject
-     data-name="speech"
-     x="492"
-     y="230"
-     width="500"
-     height="200">
-    <xhtml:p
-       id="talk-speech"
-       class="cls-15"
-       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff">
-        speech
-     </xhtml:p>
-  </foreignObject>
+  <g
+     style="fill:#ffffff;stroke:#707070"
+     class="cls-4"
+     data-name="Rectangle 36"
+     id="Rectangle_36"
+     transform="translate(298.85041,178.36326)">
+    <rect
+       style="stroke:none"
+       y="0"
+       x="0"
+       id="rect579"
+       rx="12"
+       height="167"
+       width="737"
+       class="cls-23" />
+    <rect
+       style="fill:none"
+       id="rect581"
+       rx="11.5"
+       height="166"
+       width="736"
+       y="0.5"
+       x="0.5"
+       class="cls-24" />
+  </g>
   <image
      xlink:href=""
-     y="139.5152"
-     x="48.912003"
-     id="talk-image"
+     width="375.4201"
+     height="543.65814"
      preserveAspectRatio="none"
-     height="529.83252"
-     width="613.63934" />
+     id="talk-image"
+     x="904.30768"
+     y="133.47008" />
   <rect
      style="fill:#0d4a71"
-     y="641"
-     x="221"
+     y="587"
+     x="1015"
      rx="23.5"
      height="47"
      width="212"
@@ -285,17 +266,58 @@
      class="cls-18"
      data-name="character"
      id="talk-character"
-     x="256"
-     y="673">
-    character
-  </text>
-</svg>
-<dcc-styler xstyle="out" locations="talk-action">
-   <script>PlayerManager.instance().startCase()</script>
-<p><dcc-talk id='dcc3' character='NURSE Agnes' speech='Doctor, we have a man (51 years old) who entered the emergency department reporting chest pain. His vital signs are ABP: 144x92mmHG; HR: 78bpm; RR: 21rpm; Temp: 37oC; O2Sat: 98%.'>
-</dcc-talk></p>
-<p><dcc-trigger id='dcc5' type='**' link='Level_1.html' label='Let us go!' ></dcc-trigger></p>
-</dcc-styler>
-   </div>
-</body>
-</html>
+     x="1050"
+     y="619">character</text>
+  <rect
+     style="fill:#ba2027"
+     y="316.41452"
+     x="685.04272"
+     rx="29.5"
+     height="59"
+     width="212"
+     class="cls-14"
+     data-name="Rectangle 18"
+     id="Rectangle_18" />
+  <foreignObject
+     data-name="Submit input"
+     x="690"
+     y="335"
+     width="200"
+     height="30">
+    <div
+       id="submit-input"
+       class="cls-15"
+       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
+        submit
+     </div>
+  </foreignObject>
+  <foreignObject
+     data-name="description"
+     x="317.84219"
+     y="170"
+     width="600"
+     height="150">
+    <div
+       id="description"
+       class="cls-15"
+       style="font-size:28px;font-family:Tahoma, Geneva, sans-serif;color:#346e93">
+      <dcc-styler xstyle="out" locations="input-hypothesis;submit-input">
+         <p>What is your main diagnostic hypothesis?
+<dcc-talk id='dcc3' character='PATIENT Jakob' speech='.'>
+</dcc-talk>
+<dcc-input id='dcc5' variable='hypothesis1' rows='1' vocabulary='mesh'> 
+</dcc-input></p>
+<p><dcc-trigger id='dcc7' type='**' link='Check_hypothesis_1' label='Submit hypothesis' ></dcc-trigger></p>
+      </dcc-styler>
+    </div>
+  </foreignObject>
+  <foreignObject
+     class="cls-23"
+     x="317.11661"
+     y="264.8251"
+     width="600"
+     height="50">
+    <div id="input-hypothesis">
+    </div>
+  </foreignObject>
+</svg>`) })();

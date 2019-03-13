@@ -1,9 +1,9 @@
 (function() {
 Translator.htmlTemplates = {
 option:
-`<dcc-trigger id='dcc[seq]' type='[subtype]' link='[link].html' label='[display]' [image][location]></dcc-trigger>`,
+`<dcc-trigger id='dcc[seq]' type='[subtype]' link='[link]' label='[display]' [image][location]></dcc-trigger>`,
 divert:
-`<dcc-trigger id='dcc[seq]' type='++' link='[link].html' label='[display]'></dcc-trigger>`,
+`<dcc-trigger id='dcc[seq]' type='++' link='[link]' label='[display]'></dcc-trigger>`,
 talk:
 `<dcc-talk id='dcc[seq]' character='[character]' speech='[speech]'>
 </dcc-talk>`,

@@ -1,36 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-   <meta charset="utf-8"/>
-   <title>Player</title>
-   
-   <link rel="stylesheet" type="text/css" href="css/player.css">
-   <link rel="stylesheet" type="text/css" href="css/presentation.css">
-   <link rel="stylesheet" type="text/css" href="css/templates.css">
-   <link rel="stylesheet" type="text/css" href="css/templates-classic.css">
-
-   <script type="text/javascript" src="js/bus.js"></script>
-   
-   <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-block.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-trigger.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-character.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-character-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-lively-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-lively-dialog-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-resource-picker.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-state-selector.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-styler.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-input.js"></script>
-   
-   <script type="text/javascript" src="js/dcc-player-server-proxy.js"></script>
-   <script type="text/javascript" src="js/player.js"></script>
-   <script type="text/javascript" src="js/case.js"></script>
-</head>
-<body onload="PlayerManager.instance().startKnot()">
-   <div class="sty-main-panel">
-      <svg
+(function() { PlayerManager.instance().presentKnot(`<svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -273,21 +241,17 @@
   <foreignObject
      data-name="speech"
      x="320"
-     y="300"
-     width="550"
-     height="200">
+     y="100"
+     width="700"
+     height="400">
     <div
        id="talk-speech"
        class="cls-15"
        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff">
        <dcc-styler xstyle="out">
-          <p>Our patient denies any recent long trip, immobilization or surgery.</p>
-<p>The blood pressure is symmetric in the four limbs. </p>
-<p>Game: What do you want to do?
-<dcc-trigger id='dcc3' type='++' link='Generate_hypothesis_2.html' label='Generate hypothesis'  location='action-1'></dcc-trigger>
-<dcc-trigger id='dcc5' type='++' link='More_information_2.html' label='More information'  location='action-2'></dcc-trigger>
-<dcc-trigger id='dcc7' type='++' link='Call_the_supervisor_2.html' label='Call the supervisor'  location='action-3'></dcc-trigger></p>
-<p><dcc-trigger id='dcc9' type='++' link='Magnify_EKG.html' label='Magnify'  location='ekg-image'></dcc-trigger></p>
+          <p>EKG description
+<img src="images/ekg-description.png" alt="EKG Description" /></p>
+<p><dcc-trigger id='dcc3' type='++' link='EKG_Analysis' label='EKG Analysis'  location='action-1'></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>
@@ -578,48 +542,12 @@
      class="cls-15"
      data-name="Rectangle 18"
      id="Rectangle_18-6" />
-  <rect
-     style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
-     y="544.35254"
-     x="528.73779"
-     rx="29.5"
-     height="59"
-     width="212"
-     class="cls-15"
-     data-name="Rectangle 37"
-     id="Rectangle_37" />
-  <rect
-     style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
-     y="544.35254"
-     x="757.73779"
-     rx="29.5"
-     height="59"
-     width="212"
-     class="cls-15"
-     data-name="Rectangle 38"
-     id="Rectangle_38" />
   <text
      style="font-size:18px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
      class="cls-16"
      data-name="Action 1"
      id="action-1"
      x="315.23779"
-     y="580.35254">
-  </text>
-  <text
-     style="font-size:18px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
-     class="cls-16"
-     data-name="Action 2"
-     id="action-2"
-     x="557.73779"
-     y="580.35254">
-  </text>
-  <text
-     style="font-size:18px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
-     class="cls-16"
-     data-name="Action 3"
-     id="action-3"
-     x="786.73779"
      y="580.35254">
   </text>
   <text
@@ -659,98 +587,5 @@
        id="rect1520"
        style="fill:none" />
   </g>
-  <text
-     id="EKG_Click_on_EKG_image_to_expand_it."
-     data-name="EKG           Click on EKG image to expand it."
-     class="cls-21"
-     style="font-weight:700;font-size:19.14048195px;font-family:SegoeUI-Bold, 'Segoe UI';fill:#ffffff;stroke-width:1.0633601"
-     x="883.84467"
-     y="154.01192">
-    <tspan
-       x="995.21039"
-       y="174.21574"
-       id="tspan1523"
-       style="stroke-width:1.0633601">EKG</tspan>
-    <tspan
-       class="cls-22"
-       id="tspan1539"
-       style="font-weight:400;font-family:SegoeUI, 'Segoe UI';fill:#fee611;stroke-width:1.0633601">
-      <tspan
-         x="1013.0429"
-         y="199.73639"
-         id="tspan1525"
-         style="stroke-width:1.0633601" />
-      <tspan
-         x="1013.0429"
-         y="225.25703"
-         id="tspan1527"
-         style="stroke-width:1.0633601" />
-      <tspan
-         x="1013.0429"
-         y="250.77769"
-         id="tspan1529"
-         style="stroke-width:1.0633601" />
-      <tspan
-         x="1013.0429"
-         y="276.29831"
-         id="tspan1531"
-         style="stroke-width:1.0633601" />
-      <tspan
-         x="1013.0429"
-         y="301.81897"
-         id="tspan1533"
-         style="stroke-width:1.0633601" />
-      <tspan
-         x="1013.0429"
-         y="327.3396"
-         id="tspan1535"
-         style="stroke-width:1.0633601" />
-      <tspan
-         x="1013.0429"
-         y="352.86023"
-         id="tspan1537"
-         style="stroke-width:1.0633601" />
-    </tspan>
-    <tspan
-       class="cls-23"
-       id="tspan1547"
-       style="font-weight:400;font-size:12.76032066px;font-family:SegoeUI, 'Segoe UI';stroke:none;stroke-width:1.0633601">
-      <tspan
-         x="1013.0429"
-         y="372.00073"
-         id="tspan1541"
-         style="stroke-width:1.0633601" />
-      <tspan
-         x="1013.0429"
-         y="389.0145"
-         id="tspan1543"
-         style="stroke-width:1.0633601" />
-      <tspan
-         x="922.02246"
-         y="406.02826"
-         id="tspan1545"
-         style="stroke-width:1.0633601">Click on EKG image to expand it.</tspan>
-    </tspan>
-  </text>
-  <rect
-     id="Image_3"
-     data-name="Image 3"
-     class="cls-24"
-     width="311.56448"
-     height="198.84833"
-     x="857.26068"
-     y="185.91272"
-     style="fill:url(#pattern1818);stroke-width:1.0633601" />
-  <image
-     xlink:href="images/ekg-original.png"
-     width="311.56448"
-     height="198.84833"
-     x="857.26068"
-     y="185.91272"
-     id="ekg-image"
-     preserveAspectRatio="none" />
 
-</svg>
-   </div>
-</body>
-</html>
+</svg>`) })();

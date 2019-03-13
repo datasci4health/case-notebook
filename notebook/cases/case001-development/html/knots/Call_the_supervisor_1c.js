@@ -1,36 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-   <meta charset="utf-8"/>
-   <title>Player</title>
-   
-   <link rel="stylesheet" type="text/css" href="css/player.css">
-   <link rel="stylesheet" type="text/css" href="css/presentation.css">
-   <link rel="stylesheet" type="text/css" href="css/templates.css">
-   <link rel="stylesheet" type="text/css" href="css/templates-classic.css">
-
-   <script type="text/javascript" src="js/bus.js"></script>
-   
-   <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-block.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-trigger.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-character.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-character-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-lively-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-lively-dialog-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-resource-picker.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-state-selector.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-styler.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-input.js"></script>
-   
-   <script type="text/javascript" src="js/dcc-player-server-proxy.js"></script>
-   <script type="text/javascript" src="js/player.js"></script>
-   <script type="text/javascript" src="js/case.js"></script>
-</head>
-<body onload="PlayerManager.instance().startKnot()">
-   <div class="sty-main-panel">
-      <svg
+(function() { PlayerManager.instance().presentKnot(`<svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -246,7 +214,7 @@
        id="Path_320" />
   </g>
   <foreignObject>
-     <dcc-trigger action="navigate/previous-knot" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
+     <dcc-trigger action="navigate/knot/previous" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
   </foreignObject>
   <text
      style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
@@ -266,8 +234,12 @@
        class="cls-15"
        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff" height="420px">
        <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
-          <p><img src="images/ebm-physical-examination-aortic-dissection.png" alt="Physical Examination Aortic Dissection" /></p>
-<p><dcc-trigger id='dcc3' type='**' link='Call_the_supervisor_1.html' label='Back' ></dcc-trigger></p>
+          <p><dcc-talk id='dcc3' character='SUPERVISOR Harry' speech='.'>
+</dcc-talk>
+Hypertensive pneumothorax is more common in tall and thin young adults (primary pneumothorax) or in patients with chronic pulmonary diseases or chest trauma (secondary pneumothorax). On physical examination, we expect asymmetry in lung auscultation and the trachea may be dislocated to the contralateral side of the pneumothorax.</p>
+<p>Boerhaave Syndrome is more common in patients who presented vomiting before the chest pain started, were submitted to endoscopic procedures or had chest trauma.</p>
+<p>How does this information can help you to solve your case?</p>
+<p><dcc-trigger id='dcc5' type='**' link='Level_1' label='Back to the case' ></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>
@@ -405,7 +377,4 @@
      id="talk-character"
      x="1067.6239"
      y="671.17096">character</text>
-</svg>
-   </div>
-</body>
-</html>
+</svg>`) })();

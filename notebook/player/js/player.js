@@ -9,12 +9,18 @@ class PlayerManager {
    
    constructor() {
       this._server = new DCCPlayerServer();
+      this._tracker = new Tracker();
+      this._history = [];
+      
       this.controlEvent = this.controlEvent.bind(this);
-      window.messageBus.subscribe("control", this.controlEvent);
+      window.messageBus.ext.subscribe("control/#", this.controlEvent);
       this.navigateEvent = this.navigateEvent.bind(this);
-      window.messageBus.subscribe("navigate", this.navigateEvent);
+      window.messageBus.ext.subscribe("navigate/#", this.navigateEvent);
       this.inputEvent = this.inputEvent.bind(this);
-      window.messageBus.subscribe("input", this.inputEvent);
+      window.messageBus.ext.subscribe("input/#", this.inputEvent);
+      
+      // tracking
+      this.trackTyping = this.trackTyping.bind(this);
    }
    
    /*
@@ -31,24 +37,60 @@ class PlayerManager {
    
    navigateEvent(topic, message) {
       this.trackTrigger(message);
-      window.messageBus.dispatch("checkout", message);
+      window.messageBus.ext.publish("checkout", message);
       switch (topic) {
-         case "navigate/previous-knot": window.history.back();
+         case "navigate/knot/previous": if (this._history.length > 0) {
+                                           this._history.pop();
+                                           const last = this._history[this._history.length - 1]; 
+                                           this.loadKnot(last);
+                                        }
                                         break;
-         case "navigate/start-knot": window.open(this._server.getStartKnot().
+         case "navigate/knot/start": this.loadKnot(this._server.getStartKnot().
+                                                 replace(/ /igm, "_"));
+                                     break;
+         case "navigate/trigger": this.loadKnot(message);
+                                  break;
+      }
+      /*
+      switch (topic) {
+         case "navigate/knot/previous": window.history.back();
+                                        break;
+         case "navigate/knot/start": window.open(this._server.getStartKnot().
                                        replace(/ /igm, "_") + ".html", "_self");
                                      break;
          case "navigate/trigger": window.open(message, "_self");
                                   break;
       }
+      */
    }
 
    inputEvent(topic, message) {
       this._server.recordInput(topic.substring(6), message);
    }   
    
-   startKnot() {
+   startPlayer() {
+      this._mainPanel = document.querySelector("#main-panel");
       
+      this.loadKnot("index");
+   }
+   
+   loadKnot(knotName) {
+      console.log("Loading " + knotName + "...");
+      this._currentKnot = knotName;
+      this._knotScript = document.createElement("script");
+      this._knotScript.src = "knots/" + knotName + ".js";
+      document.head.appendChild(this._knotScript);
+      this._history.push(this._currentKnot);
+   }
+   
+   presentKnot(knot) {
+      this._mainPanel.innerHTML = knot;
+
+      document.head.removeChild(this._knotScript);
+      
+      // <TODO> Improve the strategy
+      if (this._currentKnot == "index")
+         this.startGame();
    }
    
    /*
@@ -57,6 +99,8 @@ class PlayerManager {
     */
    
    startGame() {
+      this._history = [];
+      
       this._server.resetRunningCase();
       let currentUser = this._server.getCurrentUser();
       if (currentUser == null)
@@ -130,5 +174,13 @@ class PlayerManager {
    
    trackTrigger(trigger) {
       this._server.trackRoute("#nav:" + trigger);
+   }
+   
+   startTrackTyping(variable) {
+      window.messageBus.ext.subscribe("/" + variable + "/typed", this.trackTyping);
+   }
+   
+   trackTyping(topic, message) {
+      console.log("track typing: " + message.value);
    }
 }

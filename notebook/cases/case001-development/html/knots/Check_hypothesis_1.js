@@ -1,36 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-   <meta charset="utf-8"/>
-   <title>Player</title>
-   
-   <link rel="stylesheet" type="text/css" href="css/player.css">
-   <link rel="stylesheet" type="text/css" href="css/presentation.css">
-   <link rel="stylesheet" type="text/css" href="css/templates.css">
-   <link rel="stylesheet" type="text/css" href="css/templates-classic.css">
-
-   <script type="text/javascript" src="js/bus.js"></script>
-   
-   <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-block.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-trigger.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-character.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-character-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-lively-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-lively-dialog-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-resource-picker.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-state-selector.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-styler.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-input.js"></script>
-   
-   <script type="text/javascript" src="js/dcc-player-server-proxy.js"></script>
-   <script type="text/javascript" src="js/player.js"></script>
-   <script type="text/javascript" src="js/case.js"></script>
-</head>
-<body onload="PlayerManager.instance().startKnot()">
-   <div class="sty-main-panel">
-      <svg
+(function() { PlayerManager.instance().presentKnot(`<svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -246,94 +214,84 @@
        id="Path_320" />
   </g>
   <foreignObject>
-     <dcc-trigger action="navigate/previous-knot" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
-  </foreignObject>
-  <text
-     style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
-     class="cls-15"
-     data-name="Talk action"
-     id="talk-action"
-     x="413"
-     y="679" />
-  <foreignObject
-     data-name="speech"
-     x="60"
-     y="105"
-     width="800"
-     height="420">
-    <div
-       id="detailed-information"
-       class="cls-15"
-       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff" height="420px">
-       <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
-          <p><img src="images/ebm-clinical-history-myocardial-infarction.png" alt="Clinical History Myocardial Infarction" /></p>
-<p><dcc-trigger id='dcc3' type='**' link='Call_the_supervisor_1.html' label='Back' ></dcc-trigger></p>
-       </dcc-styler>
-     </div>
+     <dcc-trigger action="navigate/knot/previous" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
   </foreignObject>
   <g
      style="fill:#ffffff;stroke:#707070"
      class="cls-4"
-     data-name="Rectangle 36"
-     id="Rectangle_36"
-     transform="translate(42.08545,537.6859)">
+     data-name="Statement"
+     id="Statement"
+     transform="translate(50,105)">
     <rect
        style="stroke:none"
        y="0"
        x="0"
-       id="rect4540"
+       id="rect18"
        rx="12"
-       height="144"
-       width="840"
+       height="108"
+       width="800"
        class="cls-25" />
     <rect
        style="fill:none"
-       id="rect4542"
+       id="rect20"
        rx="11.5"
-       height="143"
-       width="839"
+       height="107"
+       width="800"
        y="0.5"
        x="0.5"
        class="cls-26" />
   </g>
+  <foreignObject
+     data-name="Talk Speech"
+     x="70"
+     y="127.1966"
+     width="750"
+     height="80">
+    <div
+       id="talk-speech"
+       class="cls-15"
+       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#346e93" height="420px">
+       Speech
+    </div>
+  </foreignObject>
+  <foreignObject
+     data-name="Selector"
+     x="70"
+     y="230"
+     width="800"
+     height="420">
+    <div
+       id="selector"
+       class="cls-15"
+       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff" height="420px">
+       <dcc-styler xstyle="out" locations="action-1">
+          <p><dcc-talk id='dcc3' character='Jacinto' speech='Let us check out your hypothesis. Highlight in green the findings that corroborate your hypothesis; in blue those that are neutral; and in red the ones speaking against your hypothesis.'>
+</dcc-talk></p>
+<dcc-group-selector id='dcc5' evaluation='symptoms/contribution to diagnostics' states=' ,+,=,-'>
+<p>Nurse: Doctor, please you have to evaluate a man (<dcc-state-selector id='dcc7'>51 years-old</dcc-state-selector>) who entered the emergency department reporting <dcc-state-selector id='dcc9'>chest pain</dcc-state-selector>.His vital signs are <dcc-state-selector id='dcc11'>ABP: 144x92mmHG</dcc-state-selector>; <dcc-state-selector id='dcc13'>HR: 78bpm</dcc-state-selector>; <dcc-state-selector id='dcc15'>RR: 21rpm</dcc-state-selector>; <dcc-state-selector id='dcc17'>Temp: 37oC</dcc-state-selector>; <dcc-state-selector id='dcc19'>O2Sat: 98%</dcc-state-selector>.</p>
+<p>Patient: Doctor, I am feeling chest pain since yesterday. The <dcc-state-selector id='dcc21'>pain is continuous</dcc-state-selector> and <dcc-state-selector id='dcc23'>is located just in the middle of my chest</dcc-state-selector>, <dcc-state-selector id='dcc25'>worsening when I breathe</dcc-state-selector> and <dcc-state-selector id='dcc27'>when I lay down on my bed</dcc-state-selector>. I have <dcc-state-selector id='dcc29'>arterial hypertension</dcc-state-selector> and <dcc-state-selector id='dcc31'>I smoke 20 cigarettes</dcc-state-selector> every day. <dcc-state-selector id='dcc33'>My father had a "heart attack"</dcc-state-selector> at my age and I am very worried about it.</p>
+<p>You perform physical examination: <dcc-state-selector id='dcc35'>cardiac and pulmonary auscultation are normal</dcc-state-selector>; <dcc-state-selector id='dcc37'>chest pain does not worse with palpation of the thorax</dcc-state-selector>; <dcc-state-selector id='dcc39'>there is no jugular stasis</dcc-state-selector> <dcc-state-selector id='dcc41'>nor lower limb edema</dcc-state-selector>.</p>
+</dcc-group-selector>
+<p><dcc-trigger id='dcc45' type='**' link='Order_EKG' label='Submit' ></dcc-trigger></p>
+       </dcc-styler>
+     </div>
+  </foreignObject>
   <rect
      style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
-     y="596.35254"
-     x="57.737793"
+     y="641"
+     x="396"
      rx="29.5"
      height="59"
-     width="212"
+     width="301"
      class="cls-15"
-     visibility="hidden"
+     
      data-name="Action 1 Wrapper"
      id="action-1-wrapper" />
-  <rect
-     style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
-     y="596.35254"
-     x="284.73779"
-     rx="29.5"
-     height="59"
-     width="212"
-     class="cls-15"
-     visibility="hidden"
-     data-name="Action 2 Wrapper"
-     id="action-2-wrapper" />
-  <rect
-     style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
-     y="596.35254"
-     x="513.73779"
-     rx="29.5"
-     height="59"
-     width="212"
-     class="cls-15"
-     visibility="hidden"
-     data-name="Action 3 Wrapper"
-     id="action-3-wrapper" />
   <foreignObject
      data-name="Action 1"
-     x="64"
-     y="615"
-     width="200"
+     x="402"
+     y="658"
+     width="285"
      height="30">
     <div
        id="action-1"
@@ -342,70 +300,5 @@
         action
      </div>
   </foreignObject>
-  <foreignObject
-     data-name="Action 2"
-     x="291"
-     y="615"
-     width="200"
-     height="30">
-    <div
-       id="action-2"
-       class="cls-16"
-       style="font-size:18px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
-        action
-     </div>
-  </foreignObject>
-  <foreignObject
-     data-name="Action 3"
-     x="519"
-     y="615"
-     width="200"
-     height="30">
-    <div
-       id="action-3"
-       class="cls-16"
-       style="font-size:18px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
-        action
-     </div>
-  </foreignObject>
-  <text
-     style="font-weight:700;font-size:28px;font-family:Tahoma, Geneva, sans-serif;fill:#346e93"
-     class="cls-18"
-     data-name="What do you want to do?"
-     id="What_do_you_want_to_do_"
-     x="59.737793"
-     y="544.35254">
-    <tspan
-       id="tspan4613"
-       y="574.35254"
-       x="59.737793">What do you want to do?</tspan>
-  </text>
-  <image
-     y="32.929932"
-     x="892.04901"
-     id="talk-image"
-     xlink:href=""
-     preserveAspectRatio="none"
-     height="636.06842"
-     width="488.82108" />
-  <rect
-     style="fill:#0d4a71;stroke-width:1.06254947"
-     y="641.17096"
-     x="1054.6239"
-     rx="26.531769"
-     height="47"
-     width="239.35043"
-     class="cls-16"
-     data-name="Rectangle 40"
-     id="Rectangle_40" />
-  <text
-     style="font-weight:700;font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
-     class="cls-18"
-     data-name="character"
-     id="talk-character"
-     x="1067.6239"
-     y="671.17096">character</text>
-</svg>
-   </div>
-</body>
-</html>
+
+</svg>`) })();

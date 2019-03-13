@@ -1,36 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-   <meta charset="utf-8"/>
-   <title>Player</title>
-   
-   <link rel="stylesheet" type="text/css" href="css/player.css">
-   <link rel="stylesheet" type="text/css" href="css/presentation.css">
-   <link rel="stylesheet" type="text/css" href="css/templates.css">
-   <link rel="stylesheet" type="text/css" href="css/templates-classic.css">
-
-   <script type="text/javascript" src="js/bus.js"></script>
-   
-   <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-block.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-trigger.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-character.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-character-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-lively-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-lively-dialog-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-resource-picker.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-state-selector.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-styler.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-input.js"></script>
-   
-   <script type="text/javascript" src="js/dcc-player-server-proxy.js"></script>
-   <script type="text/javascript" src="js/player.js"></script>
-   <script type="text/javascript" src="js/case.js"></script>
-</head>
-<body onload="PlayerManager.instance().startKnot()">
-   <div class="sty-main-panel">
-      <svg
+(function() { PlayerManager.instance().presentKnot(`<svg
    xmlns:xhtml="http://www.w3.org/1999/xhtml"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -248,7 +216,7 @@
        id="Path_320" />
   </g>
   <foreignObject>
-     <dcc-trigger action="navigate/previous-knot" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
+     <dcc-trigger action="navigate/knot/previous" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
   </foreignObject>
   <g
      style="fill:#ffffff;stroke:#707070"
@@ -334,12 +302,11 @@
        class="cls-15"
        style="font-size:28px;font-family:Tahoma, Geneva, sans-serif;color:#346e93">
       <dcc-styler xstyle="out" locations="input-hypothesis;submit-input">
-         <p>What is your main diagnostic hypothesis?
-<dcc-talk id='dcc3' character='PATIENT Jakob' speech='.'>
+         <p><dcc-talk id='dcc3' character='PATIENT Jakob' speech='.'>
 </dcc-talk>
-<dcc-input id='dcc5' variable='hypothesis1' rows='1' vocabulary='mesh'> 
+<dcc-input id='dcc5' variable='hypothesis' rows='1' vocabulary='mesh'> 
 </dcc-input></p>
-<p><dcc-trigger id='dcc7' type='**' link='Check_hypothesis_1.html' label='Submit hypothesis' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc7' type='++' link='Check_hypothesis_2' label='Submit hypothesis'  location='submit-input'></dcc-trigger></p>
       </dcc-styler>
     </div>
   </foreignObject>
@@ -352,7 +319,4 @@
     <div id="input-hypothesis">
     </div>
   </foreignObject>
-</svg>
-   </div>
-</body>
-</html>
+</svg>`) })();

@@ -90,7 +90,7 @@ class DCCTrigger extends DCCBlock {
       if (this.hasAttribute("label") || this.hasAttribute("action")) {
          let eventLabel = (this.hasAttribute("action")) ? this.action : "navigate/trigger";
          let message = (this.hasAttribute("link")) ? this.link : this.label;
-         window.messageBus.dispatch(eventLabel, message);
+         window.messageBus.ext.publish(eventLabel, message);
       }
    }
 }

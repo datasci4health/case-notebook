@@ -135,7 +135,7 @@ class DCCResourcePicker extends DCCBase {
    }
    
    _notify() {
-      window.messageBus.dispatch("dcc/resource-picker/selected", this._listWeb.value);
+      window.messageBus.ext.publish("dcc/resource-picker/selected", this._listWeb.value);
    }
 }
 

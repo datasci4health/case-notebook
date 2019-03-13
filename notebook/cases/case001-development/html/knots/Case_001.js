@@ -1,4 +1,6 @@
+(function() { PlayerManager.instance().presentKnot(`<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
+   xmlns:xhtml="http://www.w3.org/1999/xhtml"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -13,7 +15,7 @@
    version="1.1"
    id="svg102"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="jacinto-talk-l.svg">
+   sodipodi:docname="dialog_left.svg">
   <metadata
      id="metadata106">
     <rdf:RDF>
@@ -22,7 +24,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -35,16 +37,16 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="731"
+     inkscape:window-width="1299"
      inkscape:window-height="704"
      id="namedview104"
      showgrid="false"
-     inkscape:zoom="0.36562501"
-     inkscape:cx="727.15592"
-     inkscape:cy="176.57909"
+     inkscape:zoom="0.51707185"
+     inkscape:cx="518.3658"
+     inkscape:cy="333.38143"
      inkscape:window-x="67"
      inkscape:window-y="27"
-     inkscape:window-maximized="0"
+     inkscape:window-maximized="1"
      inkscape:current-layer="svg102" />
   <defs
      id="defs14">
@@ -184,114 +186,81 @@
     </clipPath>
   </defs>
   <image
+     sodipodi:absref="/home/santanche/git/case-notebook/notebook/templates/svgs/images/hospital-background.png"
      xlink:href="images/hospital-background.png"
-     y="71.079224"
-     x="20.12265"
-     id="image4087"
-     preserveAspectRatio="none"
+     width="1136.7474"
      height="597.91913"
-     width="1136.7474" />
-  <g
-     data-name="Back arrow"
-     id="back-arrow"
-     transform="translate(-151,-194)">
-    <circle
-       style="fill:#346e93"
-       transform="translate(151,194)"
-       r="36.5"
-       cy="36.5"
-       cx="36.5"
-       class="cls-13"
-       data-name="Ellipse 5"
-       id="Ellipse_5" />
-    <path
-       style="fill:#ffffff"
-       inkscape:connector-curvature="0"
-       transform="translate(-653.108,45.012)"
-       d="m 863.02,182.135 h -30.292 a 0.519,0.519 0 0 1 -0.367,-0.887 l 6.732,-6.732 a 0.519,0.519 0 0 0 0,-0.734 l -4.641,-4.641 a 0.519,0.519 0 0 0 -0.734,0 l -12.995,12.995 h -0.054 v 0.054 l -3.409,3.41 a 0.52,0.52 0 0 0 0,0.735 l 16.457,16.457 a 0.519,0.519 0 0 0 0.734,0 l 4.641,-4.641 a 0.519,0.519 0 0 0 0,-0.734 l -6.788,-6.788 a 0.519,0.519 0 0 1 0.367,-0.887 h 30.349 a 0.519,0.519 0 0 0 0.519,-0.519 v -6.564 a 0.519,0.519 0 0 0 -0.519,-0.524 z"
-       class="cls-12"
-       data-name="Path 320"
-       id="Path_320" />
-  </g>
-  <foreignObject>
-     <dcc-trigger action="navigate/knot/previous" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
-  </foreignObject>
-  <g
-     style="fill:#ffffff;stroke:#707070"
-     class="cls-4"
-     data-name="Statement"
-     id="Statement"
-     transform="translate(50,105)">
-    <rect
-       style="stroke:none"
-       y="0"
-       x="0"
-       id="rect18"
-       rx="12"
-       height="108"
-       width="800"
-       class="cls-25" />
-    <rect
-       style="fill:none"
-       id="rect20"
-       rx="11.5"
-       height="107"
-       width="800"
-       y="0.5"
-       x="0.5"
-       class="cls-26" />
-  </g>
-  <foreignObject
-     data-name="Talk Speech"
-     x="70"
-     y="127.1966"
-     width="750"
-     height="80">
-    <div
-       id="talk-speech"
-       class="cls-15"
-       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#346e93" height="420px">
-       Speech
-    </div>
-  </foreignObject>
-  <foreignObject
-     data-name="Selector"
-     x="70"
-     y="230"
-     width="800"
-     height="420">
-    <div
-       id="selector"
-       class="cls-15"
-       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff" height="420px">
-       <dcc-styler xstyle="out" locations="action-1">
-          {knot}
-       </dcc-styler>
-     </div>
-  </foreignObject>
+     preserveAspectRatio="none"
+     id="image4087"
+     x="244.12265"
+     y="71.079224" />
   <rect
-     style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
+     style="fill:#ba2027"
      y="641"
-     x="396"
+     x="968"
      rx="29.5"
      height="59"
      width="301"
-     class="cls-15"
-     
-     data-name="Action 1 Wrapper"
-     id="action-1-wrapper" />
+     class="cls-14"
+     data-name="Rectangle 18"
+     id="Rectangle_18" />
   <foreignObject
-     data-name="Action 1"
-     x="402"
-     y="658"
-     width="285"
+     data-name="Talk action"
+     x="985"
+     y="655"
+     width="270"
      height="30">
     <div
-       id="action-1"
-       class="cls-16"
-       style="font-size:18px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
+       id="talk-action"
+       class="cls-15"
+       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
         action
      </div>
   </foreignObject>
-
+  <foreignObject
+     data-name="speech"
+     x="492"
+     y="230"
+     width="500"
+     height="200">
+    <xhtml:p
+       id="talk-speech"
+       class="cls-15"
+       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff">
+        speech
+     </xhtml:p>
+  </foreignObject>
+  <image
+     xlink:href=""
+     y="139.5152"
+     x="48.912003"
+     id="talk-image"
+     preserveAspectRatio="none"
+     height="529.83252"
+     width="613.63934" />
+  <rect
+     style="fill:#0d4a71"
+     y="641"
+     x="221"
+     rx="23.5"
+     height="47"
+     width="212"
+     class="cls-16"
+     data-name="Rectangle 40"
+     id="Rectangle_40" />
+  <text
+     style="font-weight:700;font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
+     class="cls-18"
+     data-name="character"
+     id="talk-character"
+     x="256"
+     y="673">
+    character
+  </text>
 </svg>
+<dcc-styler xstyle="out" locations="talk-action">
+   <script>PlayerManager.instance().startCase()</script>
+<p><dcc-talk id='dcc3' character='NURSE Agnes' speech='Doctor, we have a man (51 years old) who entered the emergency department reporting chest pain. His vital signs are ABP: 144x92mmHG; HR: 78bpm; RR: 21rpm; Temp: 37oC; O2Sat: 98%.'>
+</dcc-talk></p>
+<p><dcc-trigger id='dcc5' type='**' link='Level_1' label='Let us go!' ></dcc-trigger></p>
+</dcc-styler>`) })();

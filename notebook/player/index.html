@@ -10,6 +10,7 @@
    <link rel="stylesheet" type="text/css" href="css/templates-classic.css">
 
    <script type="text/javascript" src="js/bus.js"></script>
+   <script type="text/javascript" src="js/tracker.js"></script>
    
    <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-block.js"></script>
@@ -28,11 +29,9 @@
    <script type="text/javascript" src="js/player.js"></script>
    <script type="text/javascript" src="js/case.js"></script>
 </head>
-<body onload="PlayerManager.instance().startKnot()">
-   <div class="sty-main-panel">
-      <p>Score: …
-Evaluation: …
-Two columns</p>
+<body onload="PlayerManager.instance().startPlayer()">
+   <div id="main-panel" class="sty-main-panel">
+      
    </div>
 </body>
 </html>

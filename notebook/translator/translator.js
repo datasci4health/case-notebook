@@ -37,7 +37,6 @@ class Translator {
       
       let knotCtx = null;
       let knotBlocks = markdown.split(Translator.marksKnotTitle);
-      console.log(knotBlocks);
       for (var kb = 1; kb < knotBlocks.length; kb += 2) {
          let transObj = this._knotMdToObj(knotBlocks[kb].match(Translator.marks.knot));
          let label = transObj.title;

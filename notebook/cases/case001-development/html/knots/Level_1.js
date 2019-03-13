@@ -1,36 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-   <meta charset="utf-8"/>
-   <title>Player</title>
-   
-   <link rel="stylesheet" type="text/css" href="css/player.css">
-   <link rel="stylesheet" type="text/css" href="css/presentation.css">
-   <link rel="stylesheet" type="text/css" href="css/templates.css">
-   <link rel="stylesheet" type="text/css" href="css/templates-classic.css">
-
-   <script type="text/javascript" src="js/bus.js"></script>
-   
-   <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-block.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-trigger.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-character.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-character-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-lively-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-lively-dialog-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-resource-picker.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-state-selector.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-styler.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-input.js"></script>
-   
-   <script type="text/javascript" src="js/dcc-player-server-proxy.js"></script>
-   <script type="text/javascript" src="js/player.js"></script>
-   <script type="text/javascript" src="js/case.js"></script>
-</head>
-<body onload="PlayerManager.instance().startKnot()">
-   <div class="sty-main-panel">
-      <svg
+(function() { PlayerManager.instance().presentKnot(`<svg
+   xmlns:xhtml="http://www.w3.org/1999/xhtml"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -45,7 +14,7 @@
    version="1.1"
    id="svg102"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="jacinto-talk-l.svg">
+   sodipodi:docname="decision.svg">
   <metadata
      id="metadata106">
     <rdf:RDF>
@@ -54,7 +23,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -67,16 +36,16 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="731"
+     inkscape:window-width="1299"
      inkscape:window-height="704"
      id="namedview104"
      showgrid="false"
-     inkscape:zoom="0.36562501"
-     inkscape:cx="727.15592"
-     inkscape:cy="176.57909"
+     inkscape:zoom="0.73125002"
+     inkscape:cx="766.33563"
+     inkscape:cy="356.58933"
      inkscape:window-x="67"
      inkscape:window-y="27"
-     inkscape:window-maximized="0"
+     inkscape:window-maximized="1"
      inkscape:current-layer="svg102" />
   <defs
      id="defs14">
@@ -218,7 +187,7 @@
   <image
      xlink:href="images/hospital-background.png"
      y="71.079224"
-     x="20.12265"
+     x="244.12265"
      id="image4087"
      preserveAspectRatio="none"
      height="597.91913"
@@ -246,37 +215,74 @@
        id="Path_320" />
   </g>
   <foreignObject>
-     <dcc-trigger action="navigate/previous-knot" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
+     <dcc-trigger action="navigate/knot/previous" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
   </foreignObject>
-  <text
-     style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
-     class="cls-15"
-     data-name="Talk action"
-     id="talk-action"
-     x="413"
-     y="679" />
+  <g
+     style="fill:none;stroke:#ffffff"
+     class="cls-5"
+     data-name="Rectangle 39"
+     id="Rectangle_39"
+     transform="translate(286.08545,285)">
+    <rect
+       style="stroke:none"
+       y="0"
+       x="0"
+       id="rect4545"
+       rx="12"
+       height="129"
+       width="840"
+       class="cls-25" />
+    <rect
+       style="fill:none"
+       id="rect4547"
+       rx="11.5"
+       height="180"
+       width="839"
+       y="0.5"
+       x="0.5"
+       class="cls-26" />
+  </g>
   <foreignObject
      data-name="speech"
-     x="60"
-     y="105"
-     width="800"
-     height="420">
-    <div
-       id="detailed-information"
+     x="320"
+     y="100"
+     width="550"
+     height="200">
+    <xhtml:p
+       id="talk-speech-1"
        class="cls-15"
-       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff" height="420px">
-       <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
-          <p><img src="images/ebm-physical-examination-myocardial-infarction.png" alt="Physical Examination Myocardial Infarction" /></p>
-<p><dcc-trigger id='dcc3' type='**' link='Call_the_supervisor_1.html' label='Back' ></dcc-trigger></p>
-       </dcc-styler>
-     </div>
+       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff"></xhtml:p>
+  </foreignObject>
+  <foreignObject
+     data-name="description"
+     x="320"
+     y="280"
+     width="600"
+     height="180">
+    <div
+       id="description"
+       class="cls-15"
+       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff">
+      <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
+         <dcc-dialog>
+            <p><dcc-talk id='dcc3' character='PATIENT Jakob' speech='Doctor, I am feeling chest pain since yesterday. The pain is continuous and is located just in the middle of my chest, worsening when I breathe and when I lay down on my bed. I suffer from arterial hypertension and smoke 20 cigarettes every day. My father had a “heart attack” at my age and I am very worried about it.'>
+</dcc-talk></p>
+<p><b>PHYSICAL EXAMINATION</b> <br> The cardiac and pulmonary auscultation are normal; chest pain does not worse with palpation of the thorax; there is no jugular stasis nor lower limb edema.</p>
+<p><dcc-talk id='dcc5' character='Jacinto' speech='What do you want to do?'>
+</dcc-talk></p>
+<p><dcc-trigger id='dcc7' type='**' link='Generate_hypothesis_1' label='Generate hypothesis' ></dcc-trigger>
+<dcc-trigger id='dcc9' type='**' link='More_information_1' label='More information' ></dcc-trigger>
+<dcc-trigger id='dcc11' type='**' link='Call_the_supervisor_1a' label='Call the supervisor' ></dcc-trigger></p>
+         </dcc-dialog>
+      </dcc-styler>
+    </div>
   </foreignObject>
   <g
      style="fill:#ffffff;stroke:#707070"
      class="cls-4"
      data-name="Rectangle 36"
      id="Rectangle_36"
-     transform="translate(42.08545,537.6859)">
+     transform="translate(286.08545,485.6859)">
     <rect
        style="stroke:none"
        y="0"
@@ -296,10 +302,35 @@
        x="0.5"
        class="cls-26" />
   </g>
+  <image
+     xlink:href=""
+     width="375.4201"
+     height="543.65814"
+     preserveAspectRatio="none"
+     id="talk-image-1"
+     x="904.30768"
+     y="133.47008" />
+  <rect
+     style="fill:#0d4a71"
+     y="587"
+     x="1015"
+     rx="23.5"
+     height="47"
+     width="212"
+     class="cls-16"
+     data-name="Rectangle 40"
+     id="Rectangle_40" />
+  <text
+     style="font-weight:700;font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
+     class="cls-18"
+     data-name="character"
+     id="talk-character-1"
+     x="1050"
+     y="619">character</text>
   <rect
      style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
-     y="596.35254"
-     x="57.737793"
+     y="544.35254"
+     x="301.73779"
      rx="29.5"
      height="59"
      width="212"
@@ -309,8 +340,8 @@
      id="action-1-wrapper" />
   <rect
      style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
-     y="596.35254"
-     x="284.73779"
+     y="544.35254"
+     x="528.73779"
      rx="29.5"
      height="59"
      width="212"
@@ -320,8 +351,8 @@
      id="action-2-wrapper" />
   <rect
      style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
-     y="596.35254"
-     x="513.73779"
+     y="544.35254"
+     x="757.73779"
      rx="29.5"
      height="59"
      width="212"
@@ -331,8 +362,8 @@
      id="action-3-wrapper" />
   <foreignObject
      data-name="Action 1"
-     x="64"
-     y="615"
+     x="308"
+     y="563"
      width="200"
      height="30">
     <div
@@ -344,8 +375,8 @@
   </foreignObject>
   <foreignObject
      data-name="Action 2"
-     x="291"
-     y="615"
+     x="535"
+     y="563"
      width="200"
      height="30">
     <div
@@ -357,8 +388,8 @@
   </foreignObject>
   <foreignObject
      data-name="Action 3"
-     x="519"
-     y="615"
+     x="763"
+     y="563"
      width="200"
      height="30">
     <div
@@ -371,41 +402,14 @@
   <text
      style="font-weight:700;font-size:28px;font-family:Tahoma, Geneva, sans-serif;fill:#346e93"
      class="cls-18"
-     data-name="What do you want to do?"
-     id="What_do_you_want_to_do_"
-     x="59.737793"
-     y="544.35254">
+     data-name="Question"
+     id="Question"
+     x="303.73779"
+     y="492.35257">
     <tspan
-       id="tspan4613"
-       y="574.35254"
-       x="59.737793">What do you want to do?</tspan>
+       id="talk-speech-2"
+       y="522.35254"
+       x="303.73779">Question</tspan>
   </text>
-  <image
-     y="32.929932"
-     x="892.04901"
-     id="talk-image"
-     xlink:href=""
-     preserveAspectRatio="none"
-     height="636.06842"
-     width="488.82108" />
-  <rect
-     style="fill:#0d4a71;stroke-width:1.06254947"
-     y="641.17096"
-     x="1054.6239"
-     rx="26.531769"
-     height="47"
-     width="239.35043"
-     class="cls-16"
-     data-name="Rectangle 40"
-     id="Rectangle_40" />
-  <text
-     style="font-weight:700;font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
-     class="cls-18"
-     data-name="character"
-     id="talk-character"
-     x="1067.6239"
-     y="671.17096">character</text>
 </svg>
-   </div>
-</body>
-</html>
+`) })();

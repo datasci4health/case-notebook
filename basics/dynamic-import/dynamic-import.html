@@ -19,7 +19,7 @@
          window.messageBus.subscribe("/dcc-trigger/on", display);
       }
       function display(topic, message) {
-         var scriptTag = document.createElement("script");
+         let scriptTag = document.createElement("script");
          scriptTag.src = "js/dcc-state-selector.js";
          document.head.appendChild(scriptTag);
          

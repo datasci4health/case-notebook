@@ -1,36 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-   <meta charset="utf-8"/>
-   <title>Player</title>
-   
-   <link rel="stylesheet" type="text/css" href="css/player.css">
-   <link rel="stylesheet" type="text/css" href="css/presentation.css">
-   <link rel="stylesheet" type="text/css" href="css/templates.css">
-   <link rel="stylesheet" type="text/css" href="css/templates-classic.css">
-
-   <script type="text/javascript" src="js/bus.js"></script>
-   
-   <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-block.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-trigger.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-character.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-character-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-lively-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-lively-dialog-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-resource-picker.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-state-selector.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-styler.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-input.js"></script>
-   
-   <script type="text/javascript" src="js/dcc-player-server-proxy.js"></script>
-   <script type="text/javascript" src="js/player.js"></script>
-   <script type="text/javascript" src="js/case.js"></script>
-</head>
-<body onload="PlayerManager.instance().startKnot()">
-   <div class="sty-main-panel">
-      <svg
+(function() { PlayerManager.instance().presentKnot(`<svg
    xmlns:xhtml="http://www.w3.org/1999/xhtml"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -247,7 +215,7 @@
        id="Path_320" />
   </g>
   <foreignObject>
-     <dcc-trigger action="navigate/previous-knot" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
+     <dcc-trigger action="navigate/knot/previous" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
   </foreignObject>
   <g
      style="fill:none;stroke:#ffffff"
@@ -297,14 +265,13 @@
        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff">
       <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
          <dcc-dialog>
-            <p><dcc-talk id='dcc3' character='PATIENT Jakob' speech='Doctor, I am feeling chest pain since yesterday. The pain is continuous and is located just in the middle of my chest, worsening when I breathe and when I lay down on my bed. I suffer from arterial hypertension and smoke 20 cigarettes every day. My father had a “heart attack” at my age and I am very worried about it.'>
+            <p><b>MORE INFORMATION</b> <br> The patient never felt chest pain before. He exercises regularly and has lost weight in the last three months. He takes amlodipine and losartan regularly. Two weeks ago, he had an auto-limited gastroenteritis episode. He denies recent travels and surgery.
+<dcc-talk id='dcc3' character='PATIENT Jakob' speech='.'>
 </dcc-talk></p>
-<p><b>PHYSICAL EXAMINATION</b> <br> The cardiac and pulmonary auscultation are normal; chest pain does not worse with palpation of the thorax; there is no jugular stasis nor lower limb edema.</p>
 <p><dcc-talk id='dcc5' character='Jacinto' speech='What do you want to do?'>
 </dcc-talk></p>
-<p><dcc-trigger id='dcc7' type='**' link='Generate_hypothesis_1.html' label='Generate hypothesis' ></dcc-trigger>
-<dcc-trigger id='dcc9' type='**' link='More_information_1.html' label='More information' ></dcc-trigger>
-<dcc-trigger id='dcc11' type='**' link='Call_the_supervisor_1a.html' label='Call the supervisor' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc7' type='**' link='Generate_hypothesis_1' label='Generate hypothesis' ></dcc-trigger>
+<dcc-trigger id='dcc9' type='**' link='Call_the_supervisor_1a' label='Call the supervisor' ></dcc-trigger></p>
          </dcc-dialog>
       </dcc-styler>
     </div>
@@ -444,7 +411,4 @@
        x="303.73779">Question</tspan>
   </text>
 </svg>
-
-   </div>
-</body>
-</html>
+`) })();

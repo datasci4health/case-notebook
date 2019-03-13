@@ -1,36 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-   <meta charset="utf-8"/>
-   <title>Player</title>
-   
-   <link rel="stylesheet" type="text/css" href="css/player.css">
-   <link rel="stylesheet" type="text/css" href="css/presentation.css">
-   <link rel="stylesheet" type="text/css" href="css/templates.css">
-   <link rel="stylesheet" type="text/css" href="css/templates-classic.css">
-
-   <script type="text/javascript" src="js/bus.js"></script>
-   
-   <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-block.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-trigger.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-character.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-character-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-lively-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/editable/dcc-lively-dialog-editable.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-resource-picker.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-state-selector.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-styler.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-dialog.js"></script>
-   <script type="text/javascript" src="js/dccs/dcc-input.js"></script>
-   
-   <script type="text/javascript" src="js/dcc-player-server-proxy.js"></script>
-   <script type="text/javascript" src="js/player.js"></script>
-   <script type="text/javascript" src="js/case.js"></script>
-</head>
-<body onload="PlayerManager.instance().startKnot()">
-   <div class="sty-main-panel">
-      <svg
+(function() { PlayerManager.instance().presentKnot(`<svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -246,7 +214,7 @@
        id="Path_320" />
   </g>
   <foreignObject>
-     <dcc-trigger action="navigate/previous-knot" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
+     <dcc-trigger action="navigate/knot/previous" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
   </foreignObject>
   <text
      style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
@@ -268,13 +236,13 @@
        <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
           <p><dcc-talk id='dcc3' character='SUPERVISOR Harry' speech='.'>
 </dcc-talk>
-Do you know the concept of Likelihood ratio (LR)? <dcc-trigger id='dcc5' type='++' link='Likelihood_Ratio.html' label='Likelihood Ratio'></dcc-trigger></p>
-<p><dcc-trigger id='dcc7' type='++' link='Clinical_History_Myocardial_Infarction.html' label='Clinical History Myocardial Infarction' ></dcc-trigger>
-<dcc-trigger id='dcc9' type='++' link='Physical_Examination_Myocardial_Infarction.html' label='Physical Examination Myocardial Infarction' ></dcc-trigger>
-<dcc-trigger id='dcc11' type='++' link='Clinical_History_Aortic_Dissection.html' label='Clinical History Aortic Dissection' ></dcc-trigger>
-<dcc-trigger id='dcc13' type='++' link='Physical_Examination_Aortic_Dissection.html' label='Physical Examination Aortic Dissection' ></dcc-trigger>
-<dcc-trigger id='dcc15' type='++' link='Pulmonary_Embolism_Wells_Criteria.html' label='Pulmonary Embolism Wells Criteria' ></dcc-trigger></p>
-<p><dcc-trigger id='dcc17' type='**' link='Call_the_supervisor_1c.html' label='Continue talking' ></dcc-trigger></p>
+Do you know the concept of Likelihood ratio (LR)? <dcc-trigger id='dcc5' type='++' link='Likelihood_Ratio' label='Likelihood Ratio'></dcc-trigger></p>
+<p><dcc-trigger id='dcc7' type='++' link='Clinical_History_Myocardial_Infarction' label='Clinical History Myocardial Infarction' ></dcc-trigger>
+<dcc-trigger id='dcc9' type='++' link='Physical_Examination_Myocardial_Infarction' label='Physical Examination Myocardial Infarction' ></dcc-trigger>
+<dcc-trigger id='dcc11' type='++' link='Clinical_History_Aortic_Dissection' label='Clinical History Aortic Dissection' ></dcc-trigger>
+<dcc-trigger id='dcc13' type='++' link='Physical_Examination_Aortic_Dissection' label='Physical Examination Aortic Dissection' ></dcc-trigger>
+<dcc-trigger id='dcc15' type='++' link='Pulmonary_Embolism_Wells_Criteria' label='Pulmonary Embolism Wells Criteria' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc17' type='**' link='Call_the_supervisor_1c' label='Continue talking' ></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>
@@ -412,7 +380,4 @@ Do you know the concept of Likelihood ratio (LR)? <dcc-trigger id='dcc5' type='+
      id="talk-character"
      x="1067.6239"
      y="671.17096">character</text>
-</svg>
-   </div>
-</body>
-</html>
+</svg>`) })();

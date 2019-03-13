@@ -10,6 +10,7 @@
    <link rel="stylesheet" type="text/css" href="css/templates-classic.css">
 
    <script type="text/javascript" src="js/bus.js"></script>
+   <script type="text/javascript" src="js/tracker.js"></script>
    
    <script type="text/javascript" src="js/dccs/dcc-base.js"></script>
    <script type="text/javascript" src="js/dccs/dcc-block.js"></script>
@@ -28,35 +29,9 @@
    <script type="text/javascript" src="js/player.js"></script>
    <script type="text/javascript" src="js/case.js"></script>
 </head>
-<body onload="PlayerManager.instance().startKnot()">
-   <div class="sty-main-panel">
-      <div class="panel-left-pict">
-   <div class="panel-left-pict-image">
-      <img  src="images/entrance.jpg">
-   </div>
-
-   <div class="panel-left-pict-text">
-      <h1>Welcome to Phil Muchbetter</h1>
-
-      <div id="signin-register" class="central-buttons" style="display:none">
-         <dcc-trigger link="signin.html" label="Sign In"></dcc-trigger>
-         <dcc-trigger link="register.html" label="Register"></dcc-trigger>
-      </div>
+<body onload="PlayerManager.instance().startPlayer()">
+   <div id="main-panel" class="sty-main-panel">
       
-      <div id="signed-user"  style="display:none">
-         <p id="user-id" >User id (e-mail): </p>
-         <p id="user-name" >Name: </p>
-         <div id="signin-register" class="central-buttons">
-            <dcc-trigger action="navigate/start-knot" label="Proceed"></dcc-trigger>
-            <dcc-trigger link="signin.html" label="Change User"></dcc-trigger>
-         </div>
-      </div>
-   </div>
-   
-   <script type="text/javascript">PlayerManager.instance().startGame();</script>
-  
-</div>
-
    </div>
 </body>
 </html>

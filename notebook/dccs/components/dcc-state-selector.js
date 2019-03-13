@@ -48,9 +48,9 @@ class DCCStateSelector extends DCCBase {
       this._presentation.addEventListener("click", this._changeState);
       
       // <TODO> limited: considers only one group per page
-      if (!this.hasAttribute("states") && window.messageBus.hasSubscriber("dcc/request/selector-states")) {
-         window.messageBus.subscribe("dcc/selector-states/" + this.id, this.defineStates);
-         window.messageBus.dispatch("dcc/request/selector-states", this.id);
+      if (!this.hasAttribute("states") && window.messageBus.ext.hasSubscriber("dcc/request/selector-states")) {
+         window.messageBus.ext.subscribe("dcc/selector-states/" + this.id, this.defineStates);
+         window.messageBus.ext.publish("dcc/request/selector-states", this.id);
          this._pendingRequests++;
       }
       
@@ -64,7 +64,7 @@ class DCCStateSelector extends DCCBase {
    }
 
    defineStates(topic, message) {
-      window.messageBus.unsubscribe("dcc/selector-states/" + this.id, this.defineStates);
+      window.messageBus.ext.unsubscribe("dcc/selector-states/" + this.id, this.defineStates);
       this.states = message;
       this._pendingRequests--;
       this._checkRender();
@@ -147,15 +147,15 @@ class DCCGroupSelector extends DCCBase {
   }
    
    connectedCallback() {
-      window.messageBus.subscribe("dcc/request/selector-states", this.requestStates);
+      window.messageBus.ext.subscribe("dcc/request/selector-states", this.requestStates);
    }
 
    disconnectedCallback() {
-      window.messageBus.unsubscribe("dcc/request/selector-states", this.requestStates);
+      window.messageBus.ext.unsubscribe("dcc/request/selector-states", this.requestStates);
    }
    
    requestStates(topic, message) {
-      window.messageBus.dispatch("dcc/selector-states/" + message, this.states);
+      window.messageBus.ext.publish("dcc/selector-states/" + message, this.states);
    }   
    
    /*

@@ -14,7 +14,7 @@
    
    <script>
       function start() {
-         window.messageBus.subscribe("input/diagnostics", showResult);
+         window.messageBus.ext.subscribe("input/diagnostics", showResult);
       }
       function showResult(topic, message) {
          document.querySelector("#result").innerHTML =
