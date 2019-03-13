@@ -9,13 +9,14 @@ class NotebookDM(object):
    DIR_CASES = "../cases/"
    DIR_SHARED = "../shared/"
    DIR_PLAYER = "../player/"
+   DIR_BUS = "../bus/"
    DIR_TEMPLATES = "../templates/"
    DIR_DCCS = "../dccs/components/"
    DIR_AUTHOR = "../author/"
    FILE_CASE_NAME = "case"
    FILE_CASE_EXTENSION = ".md"
    FILE_CASE = FILE_CASE_NAME + FILE_CASE_EXTENSION
-   FILE_PLAYER = "player.html"
+   FILE_PLAYER = "index.html"
     
    def templateFamiliesList(self):
        directories = glob.glob(NotebookDM.DIR_TEMPLATES + "*/")
@@ -67,12 +68,12 @@ class NotebookDM(object):
       
       return versionFile
         
-   def loadPlayer(self):
-     templateFile = open(NotebookDM.DIR_PLAYER + NotebookDM.FILE_PLAYER,
-                         "r", encoding="utf-8")
-     templateHTML = templateFile.read()
-     templateFile.close()
-     return templateHTML
+   # def loadPlayer(self):
+   #   templateFile = open(NotebookDM.DIR_PLAYER + NotebookDM.FILE_PLAYER,
+   #                       "r", encoding="utf-8")
+   #   templateHTML = templateFile.read()
+   #   templateFile.close()
+   #   return templateHTML
    
    def loadTemplate(self, templateFamily, templateName):
       templateHTML = ""
@@ -91,9 +92,15 @@ class NotebookDM(object):
       if os.path.isdir(caseDir + "html"):
          shutil.rmtree(caseDir + "html")
       os.mkdir(caseDir + "html")
+      os.mkdir(caseDir + "html/knots")
       
-      # copy player scripts to the case
+      # copy the player and its scripts to the case
+      shutil.copy2(NotebookDM.DIR_PLAYER + NotebookDM.FILE_PLAYER, caseDir + "html")
       shutil.copytree(NotebookDM.DIR_PLAYER + "js", caseDir + "html/js")
+      
+      # copy bus scripts to the case 
+      for fb in glob.glob(NotebookDM.DIR_BUS + "*"):
+         shutil.copy2(fb, caseDir + "html/js")
 
       # copy template styles and scripts to the case
       dirs = ["css", "images"]
@@ -110,20 +117,20 @@ class NotebookDM(object):
          shutil.copy2(fi, caseDir + "html/images")
       
       # copy general case start files to the case directory
-      playerTemplateFile = open(
-         NotebookDM.DIR_PLAYER + NotebookDM.FILE_PLAYER, "r", encoding="utf-8")
-      playerTemplate = playerTemplateFile.read();
-      playerTemplateFile.close()
-      files = ["index", "signin", "register", "report"]
-      for f in files:
-         htmlSourceFile = open((NotebookDM.DIR_TEMPLATES + templateFamily + "/" + "{}.html").format(f), "r", encoding="utf-8")
-         htmlTargetFile = open((caseDir + "html/{}.html").format(f), "w", encoding="utf-8")
-         htmlTargetFile.write(playerTemplate.format(knot = htmlSourceFile.read()))
-         htmlSourceFile.close()
-         htmlTargetFile.close()
+      # playerTemplateFile = open(
+      #    NotebookDM.DIR_PLAYER + NotebookDM.FILE_PLAYER, "r", encoding="utf-8")
+      # playerTemplate = playerTemplateFile.read();
+      # playerTemplateFile.close()
+      # files = ["index", "signin", "register", "report"]
+      # for f in files:
+      #    htmlSourceFile = open((NotebookDM.DIR_TEMPLATES + templateFamily + "/" + "{}.html").format(f), "r", encoding="utf-8")
+      #    htmlTargetFile = open((caseDir + "html/{}.html").format(f), "w", encoding="utf-8")
+      #    htmlTargetFile.write(playerTemplate.format(knot = htmlSourceFile.read()))
+      #    htmlSourceFile.close()
+      #    htmlTargetFile.close()
         
    def saveKnotHTML(self, caseName, htmlName, content):
-      self.saveFile(NotebookDM.DIR_CASES + caseName + "/html/" + htmlName, content)
+      self.saveFile(NotebookDM.DIR_CASES + caseName + "/html/knots/" + htmlName, content)
       
    def saveCaseScript(self, caseName, scriptName, content):
       self.saveFile(NotebookDM.DIR_CASES + caseName + "/html/js/" + scriptName, content)

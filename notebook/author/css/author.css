@@ -43,8 +43,8 @@ body {
 }
 
 .sty-message-space {
-   flex: 20%;
-   max-width: 20%;
+   flex: 25%;
+   max-width: 25%;
    max-height: 48px;
    font-size: 20pt;
    font-weight: bold;

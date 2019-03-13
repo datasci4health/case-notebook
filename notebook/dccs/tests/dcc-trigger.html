@@ -9,21 +9,24 @@
          color: black;
       }
    </style>
+    <script type="text/javascript" src="../../bus/bus.js"></script>
+   
    <script type="text/javascript" src="../components/dcc-base.js"></script>
+   <script type="text/javascript" src="../components/dcc-block.js"></script>
    <script type="text/javascript" src="../components/dcc-trigger.js"></script>
    <script>
-      function startListener() {
-         document.addEventListener("button-on", display);
-      }
-      function display(event) {
-         document.querySelector("#message").innerHTML = event.detail;
-      }
+   function startListener() {
+      window.messageBus.ext.subscribe("/button", display);
+   }
+   function display(topic, message) {
+      document.querySelector("#message").innerHTML = message;
+   }
    </script>
 </head>
 <body onload="startListener()">
-   <dcc-trigger action="button-on" label="On"></dcc-trigger>
+   <dcc-trigger action="/button/on" label="On"></dcc-trigger>
    <div style="width: 100px"><dcc-trigger link="#" label="Generate Hypothesis" image="images/icon-hypothesis.svg"></dcc-trigger></div>
-   <dcc-trigger action="button-on" label="On" render="none"></dcc-trigger>
+   <dcc-trigger action="/button/off" label="Off" render="none"></dcc-trigger>
    
    <h1 id="message"></h1>
 </html>

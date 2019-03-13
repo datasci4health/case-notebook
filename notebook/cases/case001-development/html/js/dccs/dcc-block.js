@@ -18,29 +18,29 @@ class DCCBlock extends DCCBase {
    }
    
    connectedCallback() {
-      if (!this.hasAttribute("xstyle") && window.messageBus.hasSubscriber("dcc/request/xstyle")) {
-         window.messageBus.subscribe("dcc/xstyle/" + this.id, this.defineXstyle);
-         window.messageBus.dispatch("dcc/request/xstyle", this.id);
+      if (!this.hasAttribute("xstyle") && window.messageBus.ext.hasSubscriber("dcc/request/xstyle")) {
+         window.messageBus.ext.subscribe("dcc/xstyle/" + this.id, this.defineXstyle);
+         window.messageBus.ext.publish("dcc/request/xstyle", this.id);
          this._pendingRequests++;
       }
       if (!this.hasAttribute("location") &&
-          window.messageBus.hasSubscriber("dcc/request/location")) {
-         window.messageBus.subscribe("dcc/location/" + this.id, this.defineLocation);
-         window.messageBus.dispatch("dcc/request/location", this.id);
+          window.messageBus.ext.hasSubscriber("dcc/request/location")) {
+         window.messageBus.ext.subscribe("dcc/location/" + this.id, this.defineLocation);
+         window.messageBus.ext.publish("dcc/request/location", this.id);
          this._pendingRequests++;
       }
       this._checkRender();
    }
 
    defineXstyle(topic, message) {
-      window.messageBus.unsubscribe("dcc/xstyle/" + this.id, this.defineXstyle);
+      window.messageBus.ext.unsubscribe("dcc/xstyle/" + this.id, this.defineXstyle);
       this.xstyle = message;
       this._pendingRequests--;
       this._checkRender();
    }
    
    defineLocation(topic, message) {
-      window.messageBus.unsubscribe("dcc/location/" + this.id, this.defineLocation);
+      window.messageBus.ext.unsubscribe("dcc/location/" + this.id, this.defineLocation);
       this.location = message;
       this._pendingRequests--;
       this._checkRender();
@@ -155,7 +155,7 @@ class DCCBlock extends DCCBase {
       if (this.hasAttribute("label") || this.hasAttribute("action")) {
          let eventLabel = (this.hasAttribute("action")) ? this.action : "navigate/trigger";
          let message = (this.hasAttribute("link")) ? this.link : this.label;
-         window.messageBus.dispatch(eventLabel, message);
+         window.messageBus.ext.publish(eventLabel, message);
       }
    }
 }

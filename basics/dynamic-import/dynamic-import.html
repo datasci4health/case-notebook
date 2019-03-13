@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8"/>
+   <title>DCC Link Test</title>
+   <style>
+      body {
+         font-family: "Trebuchet MS", Helvetica, sans-serif;
+         color: black;
+      }
+   </style>
+    <script type="text/javascript" src="js/bus.js"></script>
+   
+   <script type="text/javascript" src="js/dcc-base.js"></script>
+   <script type="text/javascript" src="js/dcc-block.js"></script>
+   <script type="text/javascript" src="js/dcc-trigger.js"></script>
+   <script>
+      function startListener() {
+         window.messageBus.subscribe("/dcc-trigger/on", display);
+      }
+      function display(topic, message) {
+         let scriptTag = document.createElement("script");
+         scriptTag.src = "js/dcc-state-selector.js";
+         document.head.appendChild(scriptTag);
+         
+         document.querySelector("#selector").innerHTML =
+            `This is the <dcc-state-selector states=" ,+,-,=" colors="lightgrey,green,red,blue">selector 1</dcc-state-selector> and this is
+             the <dcc-state-selector states=" ,+,-,=" colors="lightgrey,green,red,blue">selector 2</dcc-state-selector>.`;
+      }
+   </script>
+</head>
+<body onload="startListener()">
+   <dcc-trigger action="/dcc-trigger/on" label="Import Selector"></dcc-trigger>
+   
+   <hr>
+   
+   <span id="selector"></span>
+</html>

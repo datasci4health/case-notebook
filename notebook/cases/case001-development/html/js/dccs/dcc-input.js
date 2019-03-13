@@ -7,17 +7,25 @@ class DCCInput extends DCCBlock {
    constructor() {
       super();
       this.submitInput = this.submitInput.bind(this);
+      this.inputChanged = this.inputChanged.bind(this);
+      this.inputTyped = this.inputTyped.bind(this);
    }
    
    connectedCallback() {
       super.connectedCallback();
-      window.messageBus.subscribe("get-input/" + this.variable, this.submitInput);
-      window.messageBus.subscribe("checkout", this.submitInput);
+
+      window.messageBus.ext.subscribe("get-input/" + this.variable, this.submitInput);
+      window.messageBus.ext.subscribe("checkout", this.submitInput);
    }
    
+   /*
+    * <TODO> Redesign
+    */
    submitInput(topic, message) {
+      /*
       const value = document.querySelector("#" + this.variable).value;
-      window.messageBus.dispatch("input/" + this.variable, value);
+      window.messageBus.ext.publish("input/" + this.variable, value);
+      */
    }
    
    /*
@@ -52,6 +60,20 @@ class DCCInput extends DCCBlock {
       this.setAttribute("vocabulary", newValue);
    }
    
+   /* Event handling */
+   
+   inputTyped() {
+      window.messageBus.ext.publish("/" + this.variable + "/typed",
+                                    {sourceType: "dcc-input",
+                                     value: this._inputVariable.value});
+   }
+
+   inputChanged() {
+      window.messageBus.ext.publish("/" + this.variable + "/changed",
+                                    {sourceType: "dcc-input",
+                                     value: this._inputVariable.value});
+   }
+   
    /* Rendering */
    
    elementTag() {
@@ -60,6 +82,9 @@ class DCCInput extends DCCBlock {
    
    _injectDCC(presentation, render) {
       presentation.innerHTML = this._generateTemplate(render);
+      this._inputVariable = presentation.querySelector("#" + this.variable);
+      this._inputVariable.addEventListener("input", this.inputTyped);
+      this._inputVariable.addEventListener("change", this.inputChanged);
    }
    
    _generateTemplate(render) {

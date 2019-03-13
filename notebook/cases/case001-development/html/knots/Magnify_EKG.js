@@ -1,0 +1,1 @@
+(function() { PlayerManager.instance().presentKnot(`<p><img src="images/ekg-original.png" alt="EKG" /></p>`) })();

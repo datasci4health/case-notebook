@@ -1,6 +1,8 @@
+/*
 function startSystem() {
    let dm = new AuthorManager();
 }
+*/
 
 class AuthorManager {
    constructor() {
@@ -10,7 +12,7 @@ class AuthorManager {
       
       this._server = new DCCAuthorServer();
       
-      this._currentTemplateFamily = "classic";
+      this._currentTemplateFamily = "jacinto";
       this._currentCaseName = null;
       this._knotSelected = null;
       this._htmlKnot = null;
@@ -18,7 +20,7 @@ class AuthorManager {
       this._editor = null;
       
       this.controlEvent = this.controlEvent.bind(this);
-      window.messageBus.subscribe("control", this.controlEvent);
+      window.messageBus.ext.subscribe("control/#", this.controlEvent);
 
       this._caseLoadSelected = this._caseLoadSelected.bind(this);
       this._templateFamilySelected = this._templateFamilySelected.bind(this);
@@ -30,13 +32,13 @@ class AuthorManager {
                               break;
          case "control/save": this.saveCase();
                               break;
-         case "control/edit-knot": this.editKnot();
+         case "control/knot/edit": this.editKnot();
                                    break;
          case "control/play": this.playCase();
                               break;
          case "control/config": this.config();
                               break;
-         case "control/knot-selected": this.knotSelected(message);
+         case "control/knot/selected": this.knotSelected(message);
                                        break;
       }
    }
@@ -47,7 +49,7 @@ class AuthorManager {
    async selectCase() {
       this._resourcePicker = new DCCResourcePicker();
       
-      window.messageBus.subscribe("dcc/resource-picker/selected", this._caseLoadSelected);
+      window.messageBus.ext.subscribe("dcc/resource-picker/selected", this._caseLoadSelected);
       
       const cases = await this._server.casesList(this._resourcePicker);
       this._resourcePicker.addSelectList(cases);
@@ -59,7 +61,7 @@ class AuthorManager {
     * ACTION: control-load (2)
     */
    async _caseLoadSelected(topic, message) {
-      window.messageBus.unsubscribe("dcc/resource-picker/selected", this._caseLoadSelected);
+      window.messageBus.ext.unsubscribe("dcc/resource-picker/selected", this._caseLoadSelected);
       this._currentCaseName = message;
       let caseMd = await this._server.loadCase(this._currentCaseName);
       let navigationPanel  = document.querySelector("#navigation-panel");
@@ -74,7 +76,7 @@ class AuthorManager {
             let miniature = document.createElement("div");
             miniature.classList.add("navigation-knot");
             miniature.classList.add("std-border");
-            miniature.innerHTML = "<h2><dcc-trigger action='control/knot-selected' xstyle='none' " +
+            miniature.innerHTML = "<h2><dcc-trigger action='control/knot/selected' xstyle='none' " +
                                       "label = '" + this._knots[kn].title + "'>"
                                   "</dcc-trigger></h2>";
             navigationPanel.appendChild(miniature);
@@ -124,20 +126,34 @@ class AuthorManager {
       message.innerHTML = "Preparing...";
       await this._server.prepareCaseHTML(this._currentTemplateFamily, this._currentCaseName);
 
+      this._templateSet = {};
+      /*
       this._templateSet = {
          player: await this._server.loadPlayer()
       };
+      */
       
-      const total = Object.keys(this._knots).length;
+      const htmlSet = Object.assign(
+                         {"index": "",
+                          "signin": "",
+                          "register": "",
+                          "report": ""},
+                         this._knots);
+      const total = Object.keys(htmlSet).length;
       let processing = 0;
-      for (let kn in this._knots) {
+      for (let kn in htmlSet) {
          processing++;
          message.innerHTML = "Processed: " + processing + "/" + total; 
          let htmlName = kn.replace(/ /igm, "_");
-         let finalHTML = await this._generateHTMLBuffer(kn);
-         finalHTML = this._templateSet.player.replace("{knot}", finalHTML);
+         let finalHTML = "";
+         if (processing > 4)
+            finalHTML = await this._generateHTMLBuffer(kn);
+         else
+            finalHTML = await this._server.loadTemplate(this._currentTemplateFamily, kn);
+         // finalHTML = this._templateSet.player.replace("{knot}", finalHTML);
+         finalHTML = AuthorManager.jsonKnot.replace("{knot}", finalHTML);
          await this._server.saveKnotHTML(this._currentCaseName,
-                                         htmlName + ".html", finalHTML);
+                                         htmlName + ".js", finalHTML);
       }
       message.innerHTML = "Finalizing...";
       
@@ -156,7 +172,7 @@ class AuthorManager {
    async config() {
       this._resourcePicker = new DCCResourcePicker();
       
-      window.messageBus.subscribe("dcc/resource-picker/selected", this._templateFamilySelected);
+      window.messageBus.ext.subscribe("dcc/resource-picker/selected", this._templateFamilySelected);
       
       const families = await this._server.templateFamiliesList(this._resourcePicker);
       this._resourcePicker.addSelectList(families);
@@ -167,7 +183,7 @@ class AuthorManager {
     * ACTION: config (2)
     */
    async _templateFamilySelected(topic, message) {
-      window.messageBus.unsubscribe("dcc/resource-picker/selected", this._templateFamilySelected);
+      window.messageBus.ext.unsubscribe("dcc/resource-picker/selected", this._templateFamilySelected);
       this._currentTemplateFamily = message;
       document.querySelector("#knot-panel").removeChild(this._resourcePicker);
    }
@@ -259,3 +275,9 @@ class AuthorManager {
    }
    */
 }
+
+(function() {
+   AuthorManager.jsonKnot = "(function() { PlayerManager.instance().presentKnot(`{knot}`) })();";
+   
+   new AuthorManager();
+})();
