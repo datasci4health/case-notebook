@@ -2,7 +2,9 @@
 
 Language to write narratives in markdown style.
 
-This is an extension of the markdown language as specified in https://daringfireball.net/projects/markdown/syntax
+
+This is an extension of the markdown language as specified in: https://daringfireball.net/projects/markdown/syntax
+
 
 # Case
 
