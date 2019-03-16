@@ -48,13 +48,18 @@ class DCCStateSelector extends DCCBase {
       this._presentation.addEventListener("click", this._changeState);
       
       // <TODO> limited: considers only one group per page
-      if (!this.hasAttribute("states") && window.messageBus.ext.hasSubscriber("dcc/request/selector-states")) {
-         window.messageBus.ext.subscribe("dcc/selector-states/" + this.id, this.defineStates);
-         window.messageBus.ext.publish("dcc/request/selector-states", this.id);
+      if (!this.hasAttribute("states") && window.messageBus.int.hasSubscriber("dcc/request/selector-states")) {
+         window.messageBus.int.subscribe("dcc/selector-states/" + this.id, this.defineStates);
+         window.messageBus.int.publish("dcc/request/selector-states", this.id);
          this._pendingRequests++;
       }
       
       this._checkRender();
+
+      window.messageBus.ext.publish("/var/" + this.id + "/subinput/ready",
+                                    {sourceType: DCCStateSelector.elementTag,
+                                     id: this.id,
+                                     content: this.innerHTML});
    }
    
    disconnectedCallback() {
@@ -64,7 +69,7 @@ class DCCStateSelector extends DCCBase {
    }
 
    defineStates(topic, message) {
-      window.messageBus.ext.unsubscribe("dcc/selector-states/" + this.id, this.defineStates);
+      window.messageBus.int.unsubscribe("dcc/selector-states/" + this.id, this.defineStates);
       this.states = message;
       this._pendingRequests--;
       this._checkRender();
@@ -80,8 +85,16 @@ class DCCStateSelector extends DCCBase {
     */
    
    static get observedAttributes() {
-      return ["states", "colors"];
+      return ["id", "states", "colors"];
     }
+
+   get id() {
+      return this.getAttribute("id");
+    }
+
+   set id(newValue) {
+      this.setAttribute("id", newValue);
+   }
 
    get states() {
      return this.getAttribute("states");
@@ -132,6 +145,10 @@ class DCCStateSelector extends DCCBase {
      if (this.states != null) {
        const statesArr = this.states.split(",");
        this._currentState = (this._currentState + 1) % statesArr.length;
+       window.messageBus.ext.publish("/var/" + this.id + "/state_changed",
+             {sourceType: DCCInput.elementTag,
+              id: this.id,
+              state: statesArr[this._currentState]});
      }
      this._renderInterface();
    }
@@ -147,15 +164,19 @@ class DCCGroupSelector extends DCCBase {
   }
    
    connectedCallback() {
-      window.messageBus.ext.subscribe("dcc/request/selector-states", this.requestStates);
+      window.messageBus.int.subscribe("dcc/request/selector-states", this.requestStates);
+      
+      window.messageBus.ext.publish("/var/" + this.context + "/group_input/ready",
+                                    {sourceType: DCCGroupSelector.elementTag,
+                                     context: this.context});
    }
 
    disconnectedCallback() {
-      window.messageBus.ext.unsubscribe("dcc/request/selector-states", this.requestStates);
+      window.messageBus.int.unsubscribe("dcc/request/selector-states", this.requestStates);
    }
    
    requestStates(topic, message) {
-      window.messageBus.ext.publish("dcc/selector-states/" + message, this.states);
+      window.messageBus.int.publish("dcc/selector-states/" + message, this.states);
    }   
    
    /*
@@ -163,7 +184,15 @@ class DCCGroupSelector extends DCCBase {
     */
 
    static get observedAttributes() {
-    return ["states", "colors"];
+    return ["context", "states", "colors"];
+   }
+
+   get context() {
+      return this.getAttribute("context");
+    }
+
+   set context(newValue) {
+      this.setAttribute("context", newValue);
    }
 
    get states() {

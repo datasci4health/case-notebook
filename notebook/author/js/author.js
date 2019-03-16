@@ -134,7 +134,7 @@ class AuthorManager {
       */
       
       const htmlSet = Object.assign(
-                         {"index": "",
+                         {"entry": "",
                           "signin": "",
                           "register": "",
                           "report": ""},

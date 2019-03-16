@@ -724,14 +724,15 @@ class Translator {
    
    /*
     * Selector Context Open Obj to HTML
-    * Output: <dcc-group-selector id='dcc[seq]' evaluation='[context]/[evaluation]' states='[options]' colors='[colors]'>
+    * Output: <dcc-group-selector id='dcc[seq]' context='[context]' evaluation='[evaluation]' states='[options]' colors='[colors]'>
     */
    _selctxopenObjToHTML(obj) {
-      let evaluation = obj.context + ((obj.evaluation != null) ? "/" + obj.evaluation : "");
+      let evaluation = (obj.evaluation != null) ? " evaluation='" + obj.evaluation + "'" : "";
       let states = (obj.options != null) ? " states='" + obj.options + "'" : "";
       let colors = (obj.colors != null) ? " colors='" + obj.colors + "'" : "";
       
       return Translator.htmlTemplates.selctxopen.replace("[seq]", obj.seq)
+                                                .replace("[context]", obj.context)
                                                 .replace("[evaluation]", evaluation)
                                                 .replace("[states]", states)
                                                 .replace("[colors]", colors);

@@ -9,7 +9,6 @@ class MessageBus {
    }
    
    subscribe(topic, callback) {
-      console.log("subscribe: " + topic);
       let status = true;
       
       // Topic Filter: transform wildcards in regular expressions
@@ -21,7 +20,6 @@ class MessageBus {
                                regexp: new RegExp(reTopic),
                                callback: callback});
          
-         console.log("subscribe regexp: " + reTopic);
       } else 
          this._listeners.push({topic: topic,
                                callback: callback});
