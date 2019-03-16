@@ -27,7 +27,7 @@ domain:
 selctxopen:
 `
 
-<dcc-group-selector id='dcc[seq]' evaluation='[evaluation]'[states][colors]>
+<dcc-group-selector id='dcc[seq]' context='[context]' [evaluation][states][colors]>
 
 `,
 selctxclose:

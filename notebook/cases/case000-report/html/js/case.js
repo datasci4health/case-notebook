@@ -1,0 +1,1 @@
+(function() { DCCPlayerServer.playerObj ={"id":"case001-development","knots":{"Case Report":{"type":"knot","title":"Case Report","categories":["start","report"],"level":1,"_source":"# Case Report (start,report) #\nReport:\n\n","annotations":[],"content":[{"type":"text","content":"\nReport:\n\n","seq":2}]}},"start":"Case Report"}})();

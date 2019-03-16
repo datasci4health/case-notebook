@@ -133,6 +133,15 @@ class DCCPlayerServer {
       localStorage.setItem(DCCPlayerServer.storePrefix + "profile-" + profile.id, JSON.stringify(profile));
    }
    
+   /*
+    * General services
+    * ****************
+    * <TODO> provisory
+    */
+   getPlayerObj() {
+      return DCCPlayerServer.playerObj;
+   }
+
 }
 
 (function() {

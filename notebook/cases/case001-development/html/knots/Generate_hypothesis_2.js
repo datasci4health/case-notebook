@@ -304,7 +304,7 @@
       <dcc-styler xstyle="out" locations="input-hypothesis;submit-input">
          <p><dcc-talk id='dcc3' character='PATIENT Jakob' speech='.'>
 </dcc-talk>
-<dcc-input id='dcc5' variable='hypothesis' rows='1' vocabulary='mesh'> 
+<dcc-input id='dcc5' variable='hypothesis2' rows='1' vocabulary='mesh'> 
 </dcc-input></p>
 <p><dcc-trigger id='dcc7' type='++' link='Check_hypothesis_2' label='Submit hypothesis'  location='submit-input'></dcc-trigger></p>
       </dcc-styler>

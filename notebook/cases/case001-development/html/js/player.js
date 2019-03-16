@@ -9,15 +9,22 @@ class PlayerManager {
    
    constructor() {
       this._server = new DCCPlayerServer();
-      this._tracker = new Tracker();
+      this._tracker = new Tracker(this._server);
       this._history = [];
       
       this.controlEvent = this.controlEvent.bind(this);
       window.messageBus.ext.subscribe("control/#", this.controlEvent);
       this.navigateEvent = this.navigateEvent.bind(this);
       window.messageBus.ext.subscribe("navigate/#", this.navigateEvent);
+      
+      // <TODO> temporary
+      this.produceReport = this.produceReport.bind(this);
+      window.messageBus.int.subscribe("/report/get", this.produceReport);
+      
+      /*
       this.inputEvent = this.inputEvent.bind(this);
       window.messageBus.ext.subscribe("input/#", this.inputEvent);
+      */
       
       // tracking
       this.trackTyping = this.trackTyping.bind(this);
@@ -37,7 +44,7 @@ class PlayerManager {
    
    navigateEvent(topic, message) {
       this.trackTrigger(message);
-      window.messageBus.ext.publish("checkout", message);
+      // window.messageBus.ext.publish("checkout", message);
       switch (topic) {
          case "navigate/knot/previous": if (this._history.length > 0) {
                                            this._history.pop();
@@ -45,11 +52,13 @@ class PlayerManager {
                                            this.loadKnot(last);
                                         }
                                         break;
-         case "navigate/knot/start": this.loadKnot(this._server.getStartKnot().
-                                                 replace(/ /igm, "_"));
+         case "navigate/knot/start": this.startCase();
+                                     this.loadKnot(this._server.getStartKnot().
+                                                      replace(/ /igm, "_"));
                                      break;
-         case "navigate/trigger": this.loadKnot(message);
-                                  break;
+         case "navigate/trigger":  window.messageBus.ext.publish("/control/input/submit"); // <TODO> provisory
+                                   this.loadKnot(message);
+                                   break;
       }
       /*
       switch (topic) {
@@ -64,9 +73,11 @@ class PlayerManager {
       */
    }
 
+   /*
    inputEvent(topic, message) {
       this._server.recordInput(topic.substring(6), message);
-   }   
+   } 
+   */  
    
    startPlayer() {
       this._mainPanel = document.querySelector("#main-panel");
@@ -75,7 +86,6 @@ class PlayerManager {
    }
    
    loadKnot(knotName) {
-      console.log("Loading " + knotName + "...");
       this._currentKnot = knotName;
       this._knotScript = document.createElement("script");
       this._knotScript.src = "knots/" + knotName + ".js";
@@ -183,4 +193,30 @@ class PlayerManager {
    trackTyping(topic, message) {
       console.log("track typing: " + message.value);
    }
+   
+   // <TODO> provisory
+   
+   produceReport(topic, message) {
+      console.log("report...");
+      const server = this._server;
+      
+      let output = {
+         currentUser: server.getCurrentUser(),
+         runningCase: server.getRunningCasekey(),
+         users: {}
+      }
+      
+      const users = server.getUsers();
+      for (let u in users.ids) {
+         let profile = server.getProfile(users.ids[u]);
+         if (profile != null) {
+            profile.caseTracks = {};
+            for (let c in profile.cases)
+                profile.caseTracks[profile.cases[c]] = server.getCaseInstance(profile.cases[c]);
+         }
+         output.users[users.ids[u]] = profile;
+      }
+      
+      window.messageBus.int.publish("/report", output);
+   }   
 }

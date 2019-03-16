@@ -7,12 +7,14 @@ class DCCInput extends DCCBlock {
    constructor() {
       super();
       this.submitInput = this.submitInput.bind(this);
-      this.inputChanged = this.inputChanged.bind(this);
       this.inputTyped = this.inputTyped.bind(this);
+      this.inputChanged = this.inputChanged.bind(this);
    }
    
    connectedCallback() {
       super.connectedCallback();
+      
+      window.messageBus.ext.publish("/var/" + this.variable + "/input/ready", DCCInput.elementTag);
 
       window.messageBus.ext.subscribe("get-input/" + this.variable, this.submitInput);
       window.messageBus.ext.subscribe("checkout", this.submitInput);
@@ -63,14 +65,14 @@ class DCCInput extends DCCBlock {
    /* Event handling */
    
    inputTyped() {
-      window.messageBus.ext.publish("/" + this.variable + "/typed",
-                                    {sourceType: "dcc-input",
+      window.messageBus.ext.publish("/var/" + this.variable + "/typed",
+                                    {sourceType: DCCInput.elementTag,
                                      value: this._inputVariable.value});
    }
 
    inputChanged() {
-      window.messageBus.ext.publish("/" + this.variable + "/changed",
-                                    {sourceType: "dcc-input",
+      window.messageBus.ext.publish("/var/" + this.variable + "/changed",
+                                    {sourceType: DCCInput.elementTag,
                                      value: this._inputVariable.value});
    }
    

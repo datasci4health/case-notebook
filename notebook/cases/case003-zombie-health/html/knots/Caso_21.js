@@ -1,0 +1,1 @@
+(function() { PlayerManager.instance().presentKnot(`<p>Parabéns você chegou ao final do jogo! Foi sugado por um buraco negro e vai começar tudo de novo em outra dimensão!</p>`) })();
