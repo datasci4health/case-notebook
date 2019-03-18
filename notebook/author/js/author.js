@@ -30,13 +30,13 @@ class AuthorManager {
    }
    
    /*
-    * `/control/case/load`
-    * `/control/case/save`
-    * `/control/case/play`
-    * `/control/knot/edit`
-    * `/control/config/edit`
+    * `control/case/load`
+    * `control/case/save`
+    * `control/case/play`
+    * `control/knot/edit`
+    * `control/config/edit`
 
-    * `/knot/<knot>/selected`
+    * `knot/<knot>/selected`
 
     */
    controlEvent(topic, message) {
