@@ -214,7 +214,7 @@
        id="Path_320" />
   </g>
   <foreignObject>
-     <dcc-trigger action="navigate/knot/previous" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
+     <dcc-trigger action="knot/</navigate" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
   </foreignObject>
   <text
      style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"

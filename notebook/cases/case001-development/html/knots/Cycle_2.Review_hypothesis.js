@@ -14,7 +14,7 @@
    version="1.1"
    id="svg102"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="decision.svg">
+   sodipodi:docname="input.svg">
   <metadata
      id="metadata106">
     <rdf:RDF>
@@ -41,8 +41,8 @@
      id="namedview104"
      showgrid="false"
      inkscape:zoom="0.73125002"
-     inkscape:cx="766.33563"
-     inkscape:cy="356.58933"
+     inkscape:cx="732.18037"
+     inkscape:cy="364.47074"
      inkscape:window-x="67"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -185,13 +185,14 @@
     </clipPath>
   </defs>
   <image
+     sodipodi:absref="/home/santanche/git/case-notebook/notebook/templates/svgs/images/hospital-background.png"
      xlink:href="images/hospital-background.png"
-     y="71.079224"
-     x="244.12265"
-     id="image4087"
-     preserveAspectRatio="none"
+     width="1136.7474"
      height="597.91913"
-     width="1136.7474" />
+     preserveAspectRatio="none"
+     id="image4087"
+     x="244.12265"
+     y="71.079224" />
   <g
      data-name="Back arrow"
      id="back-arrow"
@@ -218,96 +219,36 @@
      <dcc-trigger action="knot/</navigate" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
   </foreignObject>
   <g
-     style="fill:none;stroke:#ffffff"
-     class="cls-5"
-     data-name="Rectangle 39"
-     id="Rectangle_39"
-     transform="translate(286.08545,285)">
-    <rect
-       style="stroke:none"
-       y="0"
-       x="0"
-       id="rect4545"
-       rx="12"
-       height="129"
-       width="840"
-       class="cls-25" />
-    <rect
-       style="fill:none"
-       id="rect4547"
-       rx="11.5"
-       height="180"
-       width="839"
-       y="0.5"
-       x="0.5"
-       class="cls-26" />
-  </g>
-  <foreignObject
-     data-name="speech"
-     x="320"
-     y="100"
-     width="550"
-     height="200">
-    <xhtml:p
-       id="talk-speech-1"
-       class="cls-15"
-       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff"></xhtml:p>
-  </foreignObject>
-  <foreignObject
-     data-name="description"
-     x="320"
-     y="280"
-     width="600"
-     height="180">
-    <div
-       id="description"
-       class="cls-15"
-       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff">
-      <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
-         <dcc-dialog>
-            <p><dcc-talk id='dcc3' character='PATIENT Jakob' speech='Doctor, I am feeling chest pain since yesterday. The pain is continuous and is located just in the middle of my chest, worsening when I breathe and when I lay down on my bed. I suffer from arterial hypertension and smoke 20 cigarettes every day. My father had a “heart attack” at my age and I am very worried about it.'>
-</dcc-talk></p>
-<p><b>PHYSICAL EXAMINATION</b> <br> The cardiac and pulmonary auscultation are normal; chest pain does not worse with palpation of the thorax; there is no jugular stasis nor lower limb edema.</p>
-<p><dcc-talk id='dcc5' character='Jacinto' speech='What do you want to do?'>
-</dcc-talk></p>
-<p><dcc-trigger id='dcc7' type='**' link='Cycle_1.Generate_hypothesis' label='Generate hypothesis' ></dcc-trigger>
-<dcc-trigger id='dcc9' type='**' link='Cycle_1.More_information' label='More information' ></dcc-trigger>
-<dcc-trigger id='dcc11' type='**' link='Cycle_1.Call_the_supervisor_A' label='Call the supervisor' ></dcc-trigger></p>
-         </dcc-dialog>
-      </dcc-styler>
-    </div>
-  </foreignObject>
-  <g
      style="fill:#ffffff;stroke:#707070"
      class="cls-4"
      data-name="Rectangle 36"
      id="Rectangle_36"
-     transform="translate(286.08545,485.6859)">
+     transform="translate(298.85041,178.36326)">
     <rect
        style="stroke:none"
        y="0"
        x="0"
-       id="rect4540"
+       id="rect579"
        rx="12"
-       height="144"
-       width="840"
-       class="cls-25" />
+       height="167"
+       width="737"
+       class="cls-23" />
     <rect
        style="fill:none"
-       id="rect4542"
+       id="rect581"
        rx="11.5"
-       height="143"
-       width="839"
+       height="166"
+       width="736"
        y="0.5"
        x="0.5"
-       class="cls-26" />
+       class="cls-24" />
   </g>
   <image
      xlink:href=""
      width="375.4201"
      height="543.65814"
      preserveAspectRatio="none"
-     id="talk-image-1"
+     id="talk-image"
      x="904.30768"
      y="133.47008" />
   <rect
@@ -324,92 +265,59 @@
      style="font-weight:700;font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
      class="cls-18"
      data-name="character"
-     id="talk-character-1"
+     id="talk-character"
      x="1050"
      y="619">character</text>
   <rect
-     style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
-     y="544.35254"
-     x="301.73779"
+     style="fill:#ba2027"
+     y="316.41452"
+     x="685.04272"
      rx="29.5"
      height="59"
      width="212"
-     class="cls-15"
-     visibility="hidden"
-     data-name="Action 1 Wrapper"
-     id="action-1-wrapper" />
-  <rect
-     style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
-     y="544.35254"
-     x="528.73779"
-     rx="29.5"
-     height="59"
-     width="212"
-     class="cls-15"
-     visibility="hidden"
-     data-name="Action 2 Wrapper"
-     id="action-2-wrapper" />
-  <rect
-     style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
-     y="544.35254"
-     x="757.73779"
-     rx="29.5"
-     height="59"
-     width="212"
-     class="cls-15"
-     visibility="hidden"
-     data-name="Action 3 Wrapper"
-     id="action-3-wrapper" />
+     class="cls-14"
+     data-name="Rectangle 18"
+     id="Rectangle_18" />
   <foreignObject
-     data-name="Action 1"
-     x="308"
-     y="563"
+     data-name="Submit input"
+     x="690"
+     y="335"
      width="200"
      height="30">
     <div
-       id="action-1"
-       class="cls-16"
-       style="font-size:18px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
-        action
+       id="submit-input"
+       class="cls-15"
+       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
+        submit
      </div>
   </foreignObject>
   <foreignObject
-     data-name="Action 2"
-     x="535"
-     y="563"
-     width="200"
-     height="30">
+     data-name="description"
+     x="317.84219"
+     y="170"
+     width="600"
+     height="150">
     <div
-       id="action-2"
-       class="cls-16"
-       style="font-size:18px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
-        action
-     </div>
+       id="description"
+       class="cls-15"
+       style="font-size:28px;font-family:Tahoma, Geneva, sans-serif;color:#346e93">
+      <dcc-styler xstyle="out" locations="input-hypothesis;submit-input">
+         <p>If you whant to review your hypothesis, type below the new hypothesis.
+<dcc-talk id='dcc3' character='PATIENT Jakob' speech='.'>
+</dcc-talk>
+<dcc-input id='dcc5' variable='Cycle_2.Review_hypothesis.hypothesis' rows='1' vocabulary='mesh'> 
+</dcc-input></p>
+<p><dcc-trigger id='dcc7' type='**' link='Final.Final_report' label='Submit' ></dcc-trigger></p>
+      </dcc-styler>
+    </div>
   </foreignObject>
   <foreignObject
-     data-name="Action 3"
-     x="763"
-     y="563"
-     width="200"
-     height="30">
-    <div
-       id="action-3"
-       class="cls-16"
-       style="font-size:18px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
-        action
-     </div>
+     class="cls-23"
+     x="317.11661"
+     y="270"
+     width="600"
+     height="50">
+    <div id="input-hypothesis">
+    </div>
   </foreignObject>
-  <text
-     style="font-weight:700;font-size:28px;font-family:Tahoma, Geneva, sans-serif;fill:#346e93"
-     class="cls-18"
-     data-name="Question"
-     id="Question"
-     x="303.73779"
-     y="492.35257">
-    <tspan
-       id="talk-speech-2"
-       y="522.35254"
-       x="303.73779">Question</tspan>
-  </text>
-</svg>
-`) })();
+</svg>`) })();
