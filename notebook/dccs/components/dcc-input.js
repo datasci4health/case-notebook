@@ -14,7 +14,7 @@ class DCCInput extends DCCBlock {
    connectedCallback() {
       super.connectedCallback();
       
-      window.messageBus.ext.publish("/var/" + this.variable + "/input/ready", DCCInput.elementTag);
+      window.messageBus.ext.publish("var/" + this.variable + "/input/ready", DCCInput.elementTag);
 
       window.messageBus.ext.subscribe("get-input/" + this.variable, this.submitInput);
       window.messageBus.ext.subscribe("checkout", this.submitInput);
@@ -65,13 +65,13 @@ class DCCInput extends DCCBlock {
    /* Event handling */
    
    inputTyped() {
-      window.messageBus.ext.publish("/var/" + this.variable + "/typed",
+      window.messageBus.ext.publish("var/" + this.variable + "/typed",
                                     {sourceType: DCCInput.elementTag,
                                      value: this._inputVariable.value});
    }
 
    inputChanged() {
-      window.messageBus.ext.publish("/var/" + this.variable + "/changed",
+      window.messageBus.ext.publish("var/" + this.variable + "/changed",
                                     {sourceType: DCCInput.elementTag,
                                      value: this._inputVariable.value});
    }
@@ -84,7 +84,9 @@ class DCCInput extends DCCBlock {
    
    _injectDCC(presentation, render) {
       presentation.innerHTML = this._generateTemplate(render);
-      this._inputVariable = presentation.querySelector("#" + this.variable);
+      const selector = "#" + this.variable.replace(/\./g, "\\.");
+      console.log("dcc-input variable: " + selector);
+      this._inputVariable = presentation.querySelector(selector);
       this._inputVariable.addEventListener("input", this.inputTyped);
       this._inputVariable.addEventListener("change", this.inputChanged);
    }

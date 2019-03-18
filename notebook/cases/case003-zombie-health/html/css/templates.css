@@ -1,110 +1,53 @@
 @charset "UTF-8";
 
-/* Panel Left Picture (template) */
-/*********************************/
-
-.panel-left-pict {
-   display: flex;
-   flex-direction: row;
-   flex: 100%;
-   max-height: 100%;
-   width: 100%;
-}
-
-.panel-left-pict-image {
-   /*
-   flex-basis: auto;
-   max-height: 100%;
-   width: auto;
-   */
-}
-
-.panel-left-pict-image img {
-   max-height: 100%;
-}
-
-.panel-left-pict-text {
-   /* flex: 70%; */
-}
-
-/* Presentation (template) */
+/* Template Panels Jacinto */
 /***************************/
 
-.template-presentation {
-   display: flex;
-   flex-direction: column;
-   font-size: 20pt;
-   width: 100%;
+/* Trigger DCC */
+
+.dcc-trigger-template {
+   border: 1px solid lightgray;
+   border-radius: 5px;
+   margin: 5px;
+   color: #eeee;   
+   padding: 14px 25px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+}
+.dcc-trigger-template:hover {
+   color: #ffff;
+   font-weight: bold;
+   cursor: pointer;
 }
 
-.template-presentation img, .template-presentation dcc-trigger {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+/* Input DCC */
+
+.dcc-input-template {
+   font-size:28px;
+   font-family:Tahoma, Geneva, sans-serif;
+   fill:#707070;
+   stroke:none;
 }
 
-/* Tablet (template) */
-/*********************/
+/* Selector DCC */
 
-.template-tablet {
-   width: 100%;
-   height: 100%;
-   
-   position: relative;
-   animation-name: template-tablet-displacement;
-   animation-duration: 2s;
-   background-image: url(../images/tablet.svg);
-   background-repeat: no-repeat;
-   background-size: 100% 100%;   
+.dcc-state-selector-template:hover {
+   cursor: pointer;
 }
 
-@keyframes template-tablet-displacement {
-   from {left: 100%;}
-   to {left: 0%;}
+.dcc-state-selector-0-template {
+   background-color: lightgrey;
 }
 
-.template-tablet-inside {
-   display: flex;
-   flex-direction: column;
-   font-size: 20pt;
-   width: auto;
-   height: 90%;
-   padding: 4% 15% 0% 10%;
-   overflow: scrool;
+.dcc-state-selector-1-template {
+   background-color: green;
 }
 
-.template-tablet-inside img, .template-tablet-inside dcc-trigger {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+.dcc-state-selector-2-template {
+   background-color: blue;
 }
 
-/* Selector (template) */
-/***********************/
-
-.template-selector {
-   width: 100%;
-   height: 100%;
-   
-   background-image: url(../images/tablet.svg);
-   background-repeat: no-repeat;
-   background-size: 100% 100%;   
-}
-
-.template-selector-inside {
-   width: auto;
-   height: 90%;
-   
-   padding: 4% 15% 0% 10%;
-   overflow: scrool;
-   font-size: 12pt;
-}
-
-.template-selector-inside img, .template-selector-inside dcc-trigger {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+.dcc-state-selector-3-template {
+   background-color: red;
 }

@@ -14,8 +14,8 @@ class MessageBus {
       // Topic Filter: transform wildcards in regular expressions
       if (topic.indexOf("+") > 0 || topic.indexOf("#") > 0) {
          const reTopic = topic.replace("/", "\\/")
-                              .replace("+", "\\w+")
-                              .replace("#", "[\\w\\/]+");
+                              .replace("+", "[\\w -.]+")
+                              .replace("#", "[\\w\\/ -.]+");
          this._listeners.push({topic: topic,
                                regexp: new RegExp(reTopic),
                                callback: callback});
@@ -38,6 +38,7 @@ class MessageBus {
    }
    
    publish(topic, message) {
+      // console.log("-- publish topic: " + topic + "; message: " + message);
       for (let l in this._listeners)
          if (this.matchTopic(l, topic))
             this._listeners[l].callback(topic, message);
@@ -61,6 +62,22 @@ class MessageBus {
          matched = true;
       return matched;
    }
+   
+
+   /* Message analysis services */
+   
+   /*
+    * Returns the label at a specific level of the message.
+    */
+   static extractLevel(topic, level) {
+      let label = null;
+      if (topic != null) {
+         const levelSet = topic.split("/");
+         if (level <= levelSet.length)
+            label = levelSet[level-1];
+      }
+      return label;
+   }   
 }
 
 (function() {

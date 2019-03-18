@@ -5,12 +5,6 @@ body {
     font-size: 14pt;
 }
 
-.std-border {
-   border: 1px solid lightgray;
-   border-radius: 5px;
-   margin: 5px;
-}
-
 .sty-main-panel {
    /* the main box (body) occupies all the visible area */
    position: absolute;
@@ -28,41 +22,25 @@ body {
    flex-direction: column;
 }
 
-.sty-control-panel {
-   flex: 10%;
-   max-height: 48px;
-   display: flex;
-   flex-direction: row;
+.panel_center {
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    margin-top: 60px;
+    background-color: transparent;
 }
 
-.control-button {
-   flex: 10%;
-   max-width: 48px;
-   max-height: 48px;
-   margin-right: 10px;
+.panel_inner_center {
+   position: absolute;
+   top: 0px;
+   bottom: 0px;
+   left: 0px;
+   right: 0px;
+   margin-left: 10%;
+   margin-right: 10%;
+    background-color: #fbfcd2;
 }
 
-.sty-work-panel {
-   flex: 90%;
-   height: 90%;
-   max-height: 90%;
-   height: 100%;
-   display: flex;
-}
-
-@media (orientation: landscape) {
-   .work-panel {
-      flex-direction: row;
-   }
-}
-
-@media (orientation: portrait) {
-   .work-panel {
-      flex-direction: column;
-   }
-}
-
-.sty-knot-panel {
-   flex: 90%;
-   max-height: 100%;
-}

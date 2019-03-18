@@ -109,9 +109,9 @@ class DCCReport extends DCCBase {
              <div class="dsty-field-value dsty-border">[value]</div>
           </div>`;
       
-      const entries = entry.replace("[name]",  caseobj.knots["Generate hypothesis 1"].content.variable))
+      const entries = entry.replace("[name]",  caseobj.knots["Generate hypothesis 1"].content.variable)
                            .replace("[value]", caseobj.knots["Generate hypothesis 1"].content.right)
-                           .replace("[name]",  caseobj.knots["Generate hypothesis 2"].content.variable))
+                           .replace("[name]",  caseobj.knots["Generate hypothesis 2"].content.variable)
                            .replace("[value]", caseobj.knots["Generate hypothesis 2"].content.right);
       
       templateHTML = templateHTML.replace("[entries]", entries);
@@ -119,7 +119,8 @@ class DCCReport extends DCCBase {
       templateHTML = templateHTML.replace("[images]", this._imageElements())
                                  .replace("[character]", this.character)
                                  .replace("[role]", this.role)
-      */                           .replace("[description]", this.description);
+                                .replace("[description]", this.description);
+                                */
 
       // building the template
       const template = document.createElement("template");

@@ -56,9 +56,8 @@ class DCCStateSelector extends DCCBase {
       
       this._checkRender();
 
-      window.messageBus.ext.publish("/var/" + this.id + "/subinput/ready",
+      window.messageBus.ext.publish("var/" + this.id + "/subinput/ready",
                                     {sourceType: DCCStateSelector.elementTag,
-                                     id: this.id,
                                      content: this.innerHTML});
    }
    
@@ -145,9 +144,8 @@ class DCCStateSelector extends DCCBase {
      if (this.states != null) {
        const statesArr = this.states.split(",");
        this._currentState = (this._currentState + 1) % statesArr.length;
-       window.messageBus.ext.publish("/var/" + this.id + "/state_changed",
+       window.messageBus.ext.publish("var/" + this.id + "/state_changed",
              {sourceType: DCCInput.elementTag,
-              id: this.id,
               state: statesArr[this._currentState]});
      }
      this._renderInterface();
@@ -166,9 +164,8 @@ class DCCGroupSelector extends DCCBase {
    connectedCallback() {
       window.messageBus.int.subscribe("dcc/request/selector-states", this.requestStates);
       
-      window.messageBus.ext.publish("/var/" + this.context + "/group_input/ready",
-                                    {sourceType: DCCGroupSelector.elementTag,
-                                     context: this.context});
+      window.messageBus.ext.publish("var/" + this.context + "/group_input/ready",
+                                    DCCGroupSelector.elementTag);
    }
 
    disconnectedCallback() {

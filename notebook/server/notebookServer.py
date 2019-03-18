@@ -105,14 +105,16 @@ class NotebookDM(object):
       # copy template styles and scripts to the case
       dirs = ["css", "images"]
       for d in dirs:
-         shutil.copytree(NotebookDM.DIR_TEMPLATES + templateFamily + "/" + d, caseDir + "html/" + d)
+         if os.path.isdir(NotebookDM.DIR_TEMPLATES + templateFamily + "/" + d):
+            shutil.copytree(NotebookDM.DIR_TEMPLATES + templateFamily + "/" + d, caseDir + "html/" + d)
          
       # copy DCCs to the case
       shutil.copytree(NotebookDM.DIR_DCCS, caseDir + "html/js/dccs")
       
-      # copy case-specific and shared images to the case 
-      for fi in glob.glob(caseDir + "images/*"):
-         shutil.copy2(fi, caseDir + "html/images")
+      # copy case-specific and shared images to the case
+      if os.path.isdir(caseDir + "images"): 
+         for fi in glob.glob(caseDir + "images/*"):
+            shutil.copy2(fi, caseDir + "html/images")
       for fi in glob.glob(NotebookDM.DIR_SHARED + "images/*"):
          shutil.copy2(fi, caseDir + "html/images")
       

@@ -20,7 +20,7 @@ class Translator {
       
       for (let kn in compiledCase.knots) {
          this.extractKnotAnnotations(compiledCase.knots[kn]);
-         this.compileKnotMarkdown(compiledCase.knots[kn]);
+         this.compileKnotMarkdown(compiledCase.knots, kn);
       }
       
       return compiledCase;
@@ -35,27 +35,38 @@ class Translator {
          knots: {}
       };
       
-      let knotCtx = null;
+      let knotCtx = [];
       let knotBlocks = markdown.split(Translator.marksKnotTitle);
       for (var kb = 1; kb < knotBlocks.length; kb += 2) {
          let transObj = this._knotMdToObj(knotBlocks[kb].match(Translator.marks.knot));
+         transObj.render = true;
          let label = transObj.title;
-         if (knotBlocks[kb].indexOf("==") >= 0)
-            knotCtx = label;
-         else
-            label = (label.indexOf(".") < 0 && knotCtx == null) ? label
-                    : knotCtx + "." + label;
+         if (transObj.level == 1)
+            knotCtx[0] = {label: label, obj: transObj};
+         else {
+            let upper = -1;
+            for (let l = transObj.level-2; l >=0 && upper == -1; l--)
+               if (knotCtx[l] != null)
+                  upper = l;
+            
+            if (upper != -1) {
+               label = knotCtx[upper].label + "." + label;
+               knotCtx[upper].obj.render = false;
+            }
+            knotCtx[transObj.level-1] = label;
+         }
+         let knotId = label.replace(/ /g, "_");
          if (kb == 1)
-            compiledCase.start = label;
-         else if (transObj.categories && transObj.categories.indexOf("start") > 0)
-            compiledCase.start = label;
-         if (compiledCase.knots[label]) {
+            compiledCase.start = knotId;
+         else if (transObj.categories && transObj.categories.indexOf("start") >= 0)
+            compiledCase.start = knotId;
+         if (compiledCase.knots[knotId]) {
             if (!compiledCase._error)
                compiledCase._error = [];
             compiledCase._error.push("Duplicate knots title: " + label);
          } else {
             transObj._source = knotBlocks[kb] + knotBlocks[kb+1];
-            compiledCase.knots[label] = transObj;
+            compiledCase.knots[knotId] = transObj;
          }
       }
       return compiledCase;
@@ -144,7 +155,7 @@ class Translator {
    /*
     * Compiles a single knot to an object representation
     */
-   compileKnotMarkdown(knot) {
+   compileKnotMarkdown(knotSet, knotId) {
       const mdToObj = {
             knot   : this._knotMdToObj,
             option : this._optionMdToObj,
@@ -160,6 +171,8 @@ class Translator {
             // annotation : this.annotationMdToObj
             // score  : this.translateScore
       };
+      
+      let knot = knotSet[knotId];
       
       let mdfocus = knot._preparedSource;
       knot.content = [];
@@ -207,6 +220,28 @@ class Translator {
       } while (matchStart > -1);
       if (mdfocus.length > 0)
          compiledKnot.push(this._stampObject(this._textMdToObj(mdfocus)));
+      
+      // giving context to links and variables
+      for (let c in compiledKnot) {
+         if (compiledKnot[c].type == "input")
+            compiledKnot[c].variable = knotId + "." + compiledKnot[c].variable;
+         else if (compiledKnot[c].type == "context-open")
+            compiledKnot[c].context = knotId + "." + compiledKnot[c].context;
+         else if (compiledKnot[c].type == "option" || compiledKnot[c].type == "divert") {
+            let target = (compiledKnot[c].target != null)
+                            ? compiledKnot[c].target : compiledKnot[c].label;
+            target = target.replace(/ /g, "_");
+            let prefix = knotId;
+            let lastDot = prefix.lastIndexOf(".");
+            while (lastDot > -1) {
+               prefix = prefix.substring(0, lastDot);
+               if (knotSet[prefix + "." + target])
+                  target = prefix + "." + target;
+               lastDot = prefix.lastIndexOf(".");
+            }
+            compiledKnot[c].target = target;
+         }  
+      }
       
       delete knot._preparedSource;
    }
@@ -506,8 +541,6 @@ class Translator {
     */
    _optionObjToHTML(obj) {
       const display = (obj.label != null) ? obj.label : obj.target;
-      let link = (obj.target != null) ? obj.target : obj.label;
-      link = link.replace(/ /igm, "_");
       const location = (obj.rule != null) ? " location='" + obj.rule + "'" : "";
       
       const optionalImage = "";
@@ -520,7 +553,7 @@ class Translator {
       
       return Translator.htmlTemplates.option.replace("[seq]", obj.seq)
                                             .replace("[subtype]", obj.subtype)
-                                            .replace("[link]", link)
+                                            .replace("[link]", obj.target)
                                             .replace("[display]", display)
                                             .replace("[image]", optionalImage)
                                             .replace("[location]", location);
@@ -548,10 +581,8 @@ class Translator {
     *   <dcc-trigger id='dcc[seq]' link='[link].html' label='[display]'></dcc-trigger>
     */
    _divertObjToHTML(obj) {
-      let link = obj.target.replace(/ /igm, "_");
-      
       return Translator.htmlTemplates.divert.replace("[seq]", obj.seq)
-                                            .replace("[link]", link)
+                                            .replace("[link]", obj.target)
                                             .replace("[display]", obj.target);
    }
 

@@ -61,7 +61,7 @@
    <script>
       function start() {
          window.quill = new Quill('#editor', {theme: 'snow'});
-         window.messageBus.int.subscribe("button-translate", translate);
+         window.messageBus.ext.subscribe("control/translate/example", translate);
       }
       function translate(topic, message) {
          let mkTranslator = new Translator();
@@ -82,18 +82,18 @@
 
    <div class="translator-panel">
       <div id="editor" class="editor-panel">
-=== Syncope of a Forklift Driver ===<br>
+# Syncope of a Forklift Driver<br>
 Young man had a syncope while driving a forklift.<br>
 ![Forklift](images/case-forklift.png)<br>
 ++ Only label<br>
 ++ -> Emergency room<br>
 ++ Label -> Divert<br>
 
-=== Get vital data (notice) ===<br>
+# Get vital data (notice)<br>
 You enter the emergency room and the patient is laid on the bed, {conscious}(consciousness=yes), {oriented}(orientation), but {distressed}(suffering). {Respiratory rate= 32 mov/min}; {Heart rate= 150bpm}; {Blood pressure= 82x66mmHg}; {Oxygen saturation= 82%}.
       </div>
    
-      <div class="button-panel"><dcc-trigger action="button-translate" label="Translate"></dcc-trigger></div>
+      <div class="button-panel"><dcc-trigger action="control/translate/example" label="Translate"></dcc-trigger></div>
    
       <div class="results-panel">
          <pre id="object-results" class="results-subpanel std-border"></pre>

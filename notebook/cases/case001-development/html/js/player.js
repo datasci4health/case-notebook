@@ -9,7 +9,8 @@ class PlayerManager {
    
    constructor() {
       this._server = new DCCPlayerServer();
-      this._tracker = new Tracker(this._server);
+      this._tracker = new Tracker();
+      this._state = new PlayState();
       this._history = [];
       
       this.controlEvent = this.controlEvent.bind(this);
@@ -53,10 +54,12 @@ class PlayerManager {
                                         }
                                         break;
          case "navigate/knot/start": this.startCase();
-                                     this.loadKnot(this._server.getStartKnot().
-                                                      replace(/ /igm, "_"));
+                                     const startKnot = this._server.getStartKnot();
+                                     this._history.push(startKnot);
+                                     this.loadKnot(startKnot);
                                      break;
-         case "navigate/trigger":  window.messageBus.ext.publish("/control/input/submit"); // <TODO> provisory
+         case "navigate/trigger":  window.messageBus.ext.publish("control/input/submit"); // <TODO> provisory
+                                   this._history.push(message);
                                    this.loadKnot(message);
                                    break;
       }
@@ -82,7 +85,7 @@ class PlayerManager {
    startPlayer() {
       this._mainPanel = document.querySelector("#main-panel");
       
-      this.loadKnot("index");
+      this.loadKnot("entry");
    }
    
    loadKnot(knotName) {
@@ -90,7 +93,6 @@ class PlayerManager {
       this._knotScript = document.createElement("script");
       this._knotScript.src = "knots/" + knotName + ".js";
       document.head.appendChild(this._knotScript);
-      this._history.push(this._currentKnot);
    }
    
    presentKnot(knot) {
@@ -99,7 +101,7 @@ class PlayerManager {
       document.head.removeChild(this._knotScript);
       
       // <TODO> Improve the strategy
-      if (this._currentKnot == "index")
+      if (this._currentKnot == "entry")
          this.startGame();
    }
    
@@ -217,6 +219,7 @@ class PlayerManager {
          output.users[users.ids[u]] = profile;
       }
       
-      window.messageBus.int.publish("/report", output);
+      window.messageBus.int.publish("/report", {caseobj: server.getPlayerObj(),
+                                                result: output});
    }   
 }

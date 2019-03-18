@@ -20,26 +20,41 @@ class AuthorManager {
       this._editor = null;
       
       this.controlEvent = this.controlEvent.bind(this);
-      window.messageBus.ext.subscribe("control/#", this.controlEvent);
+      window.messageBus.ext.subscribe("control/#", this.controlEvent)
+      
+      this.selectKnot = this.selectKnot.bind(this);
+      window.messageBus.ext.subscribe("knot/+/selected", this.selectKnot);
 
       this._caseLoadSelected = this._caseLoadSelected.bind(this);
       this._templateFamilySelected = this._templateFamilySelected.bind(this);
    }
    
+   /*
+    * `/control/case/load`
+    * `/control/case/save`
+    * `/control/case/play`
+    * `/control/knot/edit`
+    * `/control/config/edit`
+
+    * `/knot/<knot>/selected`
+
+    */
    controlEvent(topic, message) {
       switch (topic) {
-         case "control/load": this.selectCase();
-                              break;
-         case "control/save": this.saveCase();
-                              break;
+         case "control/case/load": this.selectCase();
+                                    break;
+         case "control/case/save": this.saveCase();
+                                    break;
          case "control/knot/edit": this.editKnot();
-                                   break;
-         case "control/play": this.playCase();
-                              break;
-         case "control/config": this.config();
-                              break;
-         case "control/knot/selected": this.knotSelected(message);
-                                       break;
+                                    break;
+         case "control/case/play": this.playCase();
+                                    break;
+         case "control/config/edit": this.config();
+                                     break;
+         /*
+         case "control/knot/selected": this.selectKnot(message);
+                                        break;
+         */
       }
    }
    
@@ -76,13 +91,19 @@ class AuthorManager {
             let miniature = document.createElement("div");
             miniature.classList.add("navigation-knot");
             miniature.classList.add("std-border");
-            miniature.innerHTML = "<h2><dcc-trigger action='control/knot/selected' xstyle='none' " +
-                                      "label = '" + this._knots[kn].title + "'>"
-                                  "</dcc-trigger></h2>";
+            const dot = this._knots[kn].title.lastIndexOf(".");
+            const title = (dot == -1) ? this._knots[kn].title : this._knots[kn].title.substring(dot);
+            if (this._knots[kn].render)
+               miniature.innerHTML = "<h3><dcc-trigger action='knot/" + kn + "/selected' xstyle='none' " +
+                                         "label = '" + title + "'>" +
+                                     "</dcc-trigger></h3>";
+            else
+               miniature.innerHTML = "<h2 style='background-color: lightgray'>" + title + "</h2>";
             navigationPanel.appendChild(miniature);
          }
             
       }
+      console.log(this._knots);
    }
 
    /*
@@ -134,26 +155,28 @@ class AuthorManager {
       */
       
       const htmlSet = Object.assign(
-                         {"entry": "",
-                          "signin": "",
-                          "register": "",
-                          "report": ""},
+                         {"entry": {render: true},
+                          "signin": {render: true},
+                          "register": {render: true},
+                          "report": {render: true}},
                          this._knots);
       const total = Object.keys(htmlSet).length;
       let processing = 0;
       for (let kn in htmlSet) {
          processing++;
-         message.innerHTML = "Processed: " + processing + "/" + total; 
-         let htmlName = kn.replace(/ /igm, "_");
-         let finalHTML = "";
-         if (processing > 4)
-            finalHTML = await this._generateHTMLBuffer(kn);
-         else
-            finalHTML = await this._server.loadTemplate(this._currentTemplateFamily, kn);
-         // finalHTML = this._templateSet.player.replace("{knot}", finalHTML);
-         finalHTML = AuthorManager.jsonKnot.replace("{knot}", finalHTML);
-         await this._server.saveKnotHTML(this._currentCaseName,
-                                         htmlName + ".js", finalHTML);
+         message.innerHTML = "Processed: " + processing + "/" + total;
+         if (htmlSet[kn].render) {
+            // let htmlName = kn.replace(/ /igm, "_");
+            let finalHTML = "";
+            if (processing > 4)
+               finalHTML = await this._generateHTMLBuffer(kn);
+            else
+               finalHTML = await this._server.loadTemplate(this._currentTemplateFamily, kn);
+            // finalHTML = this._templateSet.player.replace("{knot}", finalHTML);
+            finalHTML = AuthorManager.jsonKnot.replace("{knot}", finalHTML);
+            await this._server.saveKnotHTML(this._currentCaseName,
+                                            kn + ".js", finalHTML);
+         }
       }
       message.innerHTML = "Finalizing...";
       
@@ -191,10 +214,12 @@ class AuthorManager {
    /*
     * ACTION: knot-selected
     */
-   async knotSelected(knotTitle) {
-      if (this._knots[knotTitle]) {
+   async selectKnot(topic, message) {
+      console.log("selected - topic: " + topic + "; message: " + message);
+      const knotId = MessageBus.extractLevel(topic, 2);
+      if (knotId != null) {
          this._checkKnotModification();
-         this._knotSelected = knotTitle;
+         this._knotSelected = knotId;
          this._htmlKnot = await this._generateHTML(this._knotSelected);
          this._renderKnot();
       }

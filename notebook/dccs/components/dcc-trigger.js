@@ -71,7 +71,8 @@ class DCCTrigger extends DCCBlock {
    }
    
    _generateTemplate(render) {
-      let linkWeb = (this.hasAttribute("link")) ? "href='" + this.link + "' " : "";
+      // let linkWeb = (this.hasAttribute("link")) ? "href='" + this.link + "' " : "";
+      let linkWeb = "";
       let elements = null;
       if (this.hasAttribute("image"))
          elements = DCCTrigger.templateElements.image.replace("[render]", render)
@@ -123,11 +124,11 @@ class DCCTrigger extends DCCBlock {
       
    DCCTrigger.templateElements = {
    regular:
-   `<a id='presentation-dcc' class='[render]' [link]>[label]</a>`,
+   `<span id='presentation-dcc' class='[render]' [link]>[label]</span>`,
    image:
-   `<a id='presentation-dcc' [link] style='cursor:pointer'>
+   `<span id='presentation-dcc' [link] style='cursor:pointer'>
       <img width='100%' height='100%' class='[render]' src='[image]' title='[label]'>
-   </a>`
+   </span>`
    };
 
    DCCTrigger.elementTag = "dcc-trigger";

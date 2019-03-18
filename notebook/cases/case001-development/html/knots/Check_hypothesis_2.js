@@ -1,2 +1,0 @@
-(function() { PlayerManager.instance().presentKnot(`<p><img src="images/ampliacao-eletro.gif" alt="EKG-A" />
-<dcc-trigger id='dcc3' type='++' link='Final_report' label='Submit' ></dcc-trigger></p>`) })();
