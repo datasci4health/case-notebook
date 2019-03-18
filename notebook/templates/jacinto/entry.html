@@ -15,7 +15,7 @@
          <p id="user-id" >User id (e-mail): </p>
          <p id="user-name" >Name: </p>
          <div id="signin-register" class="central-buttons">
-            <dcc-trigger action="navigate/knot/start" label="Proceed"></dcc-trigger>
+            <dcc-trigger action="knot/<</navigate" label="Proceed"></dcc-trigger>
             <dcc-trigger link="signin.html" label="Change User"></dcc-trigger>
          </div>
       </div>

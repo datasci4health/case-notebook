@@ -89,9 +89,9 @@ class DCCTrigger extends DCCBlock {
    
    _computeTrigger() {
       if (this.hasAttribute("label") || this.hasAttribute("action")) {
-         let eventLabel = (this.hasAttribute("action")) ? this.action : "navigate/trigger";
-         let message = (this.hasAttribute("link")) ? this.link : this.label;
-         window.messageBus.ext.publish(eventLabel, message);
+         const message = (this.hasAttribute("link")) ? this.link : this.label;
+         const topic = (this.hasAttribute("action")) ? this.action : "knot/" + message + "/navigate";
+         window.messageBus.ext.publish(topic, message);
       }
    }
 }

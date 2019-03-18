@@ -214,7 +214,7 @@
        id="Path_320" />
   </g>
   <foreignObject>
-     <dcc-trigger action="navigate/knot/previous" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
+     <dcc-trigger action="knot/</navigate" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
   </foreignObject>
   <g
      style="fill:#ffffff;stroke:#707070"
@@ -267,7 +267,7 @@
        <dcc-styler xstyle="out" locations="action-1">
           <p><dcc-talk id='dcc3' character='Jacinto' speech='Let us check out your hypothesis. Highlight in green the findings that corroborate your hypothesis; in blue those that are neutral; and in red the ones speaking against your hypothesis.'>
 </dcc-talk></p>
-<p><dcc-group-selector id='dcc5' context='Cycle_1.Check_hypothesis.symptoms1'  evaluation='contribution to diagnostics' states=' ,+,=,-'></p>
+<p><dcc-group-selector id='dcc5' context='Cycle_1.Check_hypothesis.symptoms'  evaluation='contribution to diagnostics' states=' ,+,=,-'></p>
 <p>Nurse: Doctor, please you have to evaluate a man (<dcc-state-selector id='dcc7'>51 years-old</dcc-state-selector>) who entered the emergency department reporting <dcc-state-selector id='dcc9'>chest pain</dcc-state-selector>.His vital signs are <dcc-state-selector id='dcc11'>ABP: 144x92mmHG</dcc-state-selector>; <dcc-state-selector id='dcc13'>HR: 78bpm</dcc-state-selector>; <dcc-state-selector id='dcc15'>RR: 21rpm</dcc-state-selector>; <dcc-state-selector id='dcc17'>Temp: 37oC</dcc-state-selector>; <dcc-state-selector id='dcc19'>O2Sat: 98%</dcc-state-selector>.</p>
 <p>Patient: Doctor, I am feeling chest pain since yesterday. The <dcc-state-selector id='dcc21'>pain is continuous</dcc-state-selector> and <dcc-state-selector id='dcc23'>is located just in the middle of my chest</dcc-state-selector>, <dcc-state-selector id='dcc25'>worsening when I breathe</dcc-state-selector> and <dcc-state-selector id='dcc27'>when I lay down on my bed</dcc-state-selector>. I have <dcc-state-selector id='dcc29'>arterial hypertension</dcc-state-selector> and <dcc-state-selector id='dcc31'>I smoke 20 cigarettes</dcc-state-selector> every day. <dcc-state-selector id='dcc33'>My father had a "heart attack"</dcc-state-selector> at my age and I am very worried about it.</p>
 <p>You perform physical examination: <dcc-state-selector id='dcc35'>cardiac and pulmonary auscultation are normal</dcc-state-selector>; <dcc-state-selector id='dcc37'>chest pain does not worse with palpation of the thorax</dcc-state-selector>; <dcc-state-selector id='dcc39'>there is no jugular stasis</dcc-state-selector> <dcc-state-selector id='dcc41'>nor lower limb edema</dcc-state-selector>.</p>

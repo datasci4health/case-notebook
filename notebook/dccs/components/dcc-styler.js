@@ -11,18 +11,18 @@ class DCCStyler extends DCCBase {
 
    connectedCallback() {
       if (this.hasAttribute("xstyle")) {
-         window.messageBus.ext.subscribe("dcc/request/xstyle", this.requestXstyle);
+         window.messageBus.int.subscribe("dcc/request/xstyle", this.requestXstyle);
       }
       
       if (this.hasAttribute("locations")) {
          this._locationSet = this.locations.split(";");
-         window.messageBus.ext.subscribe("dcc/request/location", this.requestLocation);
+         window.messageBus.int.subscribe("dcc/request/location", this.requestLocation);
       }
    }
 
    disconnectedCallback() {
-      window.messageBus.ext.unsubscribe("dcc/request/xstyle", this.requestXstyle);
-      window.messageBus.ext.unsubscribe("dcc/request/location", this.requestLocation);
+      window.messageBus.int.unsubscribe("dcc/request/xstyle", this.requestXstyle);
+      window.messageBus.int.unsubscribe("dcc/request/location", this.requestLocation);
    }
 
    /*
@@ -50,11 +50,11 @@ class DCCStyler extends DCCBase {
    }
    
    requestXstyle(topic, message) {
-      window.messageBus.ext.publish("dcc/xstyle/" + message, this.xstyle);
+      window.messageBus.int.publish("dcc/xstyle/" + message, this.xstyle);
    }
    
    requestLocation(topic, message) {
-      window.messageBus.ext.publish("dcc/location/" + message,
+      window.messageBus.int.publish("dcc/location/" + message,
             (this._locationSet.length > 0) ? this._locationSet.shift() : "");
    }
 }

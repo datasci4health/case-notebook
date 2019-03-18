@@ -10,6 +10,9 @@ class DCCResourcePicker extends DCCBase {
    }
    
    connectedCallback() {
+      if (this.resource == null)
+         this.resource = "resource";
+
       let templateHTML = 
          `<style>
             .dsty-border {
@@ -95,7 +98,7 @@ class DCCResourcePicker extends DCCBase {
     **********/
     
     static get observedAttributes() {
-       return ["preview"];
+       return ["preview", "resource"];
     }
    
     get preview() {
@@ -103,11 +106,19 @@ class DCCResourcePicker extends DCCBase {
        return returnValue;
     }
     
+    set resource(newValue) {
+       this.setAttribute("resource", newValue);
+    }
+    
+    get resource() {
+       return this.getAttribute("resource");
+    }
+    
     set preview(newValue) {
        this.setAttribute("preview", newValue);
     }
-    
-   addSelectList(selectList) {
+
+    addSelectList(selectList) {
       this._selectList = selectList;
       if (this._listWeb != null)
          this._showSelectList();
@@ -135,11 +146,14 @@ class DCCResourcePicker extends DCCBase {
    }
    
    _notify() {
-      window.messageBus.ext.publish("dcc/resource-picker/selected", this._listWeb.value);
+      window.messageBus.ext.publish("control/" + this.resource + "/selected",
+                                    {sourceType: DCCResourcePicker.elementTag,
+                                     selected: this._listWeb.value});
    }
 }
 
 (function() {
    DCCResourcePicker.editableCode = false;
-   customElements.define("dcc-resource-picker", DCCResourcePicker);
+   DCCResourcePicker.elementTag = "dcc-resource-picker";
+   customElements.define(DCCResourcePicker.elementTag, DCCResourcePicker);
 })();

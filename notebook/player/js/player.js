@@ -16,7 +16,7 @@ class PlayerManager {
       this.controlEvent = this.controlEvent.bind(this);
       window.messageBus.ext.subscribe("control/#", this.controlEvent);
       this.navigateEvent = this.navigateEvent.bind(this);
-      window.messageBus.ext.subscribe("navigate/#", this.navigateEvent);
+      window.messageBus.ext.subscribe("knot/+/navigate", this.navigateEvent);
       
       // <TODO> temporary
       this.produceReport = this.produceReport.bind(this);
@@ -46,22 +46,27 @@ class PlayerManager {
    navigateEvent(topic, message) {
       this.trackTrigger(message);
       // window.messageBus.ext.publish("checkout", message);
+      if (this._currentKnot != null) {
+         window.messageBus.ext.publish("control/input/submit"); // <TODO> provisory
+         window.messageBus.ext.publish("knot/" + this._currentKnot + "/end");
+      }
       switch (topic) {
-         case "navigate/knot/previous": if (this._history.length > 0) {
+         case "knot/</navigate": if (this._history.length > 0) {
                                            this._history.pop();
                                            const last = this._history[this._history.length - 1]; 
                                            this.loadKnot(last);
                                         }
                                         break;
-         case "navigate/knot/start": this.startCase();
-                                     const startKnot = this._server.getStartKnot();
-                                     this._history.push(startKnot);
-                                     this.loadKnot(startKnot);
-                                     break;
-         case "navigate/trigger":  window.messageBus.ext.publish("control/input/submit"); // <TODO> provisory
-                                   this._history.push(message);
-                                   this.loadKnot(message);
-                                   break;
+         case "knot/<</navigate": this.startCase();
+                                  const startKnot = this._server.getStartKnot();
+                                  this._history.push(startKnot);
+                                  this.loadKnot(startKnot);
+                                  break;
+         default: if (MessageBus.matchFilter(topic, "knot/+/navigate")) {
+                     this._history.push(message);
+                     this.loadKnot(message);
+                  }
+                  break;
       }
       /*
       switch (topic) {
@@ -93,6 +98,7 @@ class PlayerManager {
       this._knotScript = document.createElement("script");
       this._knotScript.src = "knots/" + knotName + ".js";
       document.head.appendChild(this._knotScript);
+      window.messageBus.ext.publish("knot/" + knotName + "/start");
    }
    
    presentKnot(knot) {
@@ -176,7 +182,13 @@ class PlayerManager {
     * Start the tracking record of a case
     */
    startCase() {
-      this._server.generateRunningCase();
+      // <TODO> this._runningCase is provisory
+      const runningCase = this._server.generateRunningCase();
+      
+      console.log("************* Running case");
+      console.log(runningCase);
+      
+      window.messageBus.ext.defineRunningCase(runningCase);
    }
    
    /*

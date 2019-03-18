@@ -6,7 +6,7 @@
 class DCCInput extends DCCBlock {
    constructor() {
       super();
-      this.submitInput = this.submitInput.bind(this);
+      // this.submitInput = this.submitInput.bind(this);
       this.inputTyped = this.inputTyped.bind(this);
       this.inputChanged = this.inputChanged.bind(this);
    }
@@ -16,19 +16,16 @@ class DCCInput extends DCCBlock {
       
       window.messageBus.ext.publish("var/" + this.variable + "/input/ready", DCCInput.elementTag);
 
-      window.messageBus.ext.subscribe("get-input/" + this.variable, this.submitInput);
-      window.messageBus.ext.subscribe("checkout", this.submitInput);
+      // window.messageBus.ext.subscribe("get-input/" + this.variable, this.submitInput);
+      // window.messageBus.ext.subscribe("checkout", this.submitInput);
    }
    
    /*
-    * <TODO> Redesign
-    */
    submitInput(topic, message) {
-      /*
       const value = document.querySelector("#" + this.variable).value;
       window.messageBus.ext.publish("input/" + this.variable, value);
-      */
    }
+   */
    
    /*
     * Property handling
@@ -85,7 +82,6 @@ class DCCInput extends DCCBlock {
    _injectDCC(presentation, render) {
       presentation.innerHTML = this._generateTemplate(render);
       const selector = "#" + this.variable.replace(/\./g, "\\.");
-      console.log("dcc-input variable: " + selector);
       this._inputVariable = presentation.querySelector(selector);
       this._inputVariable.addEventListener("input", this.inputTyped);
       this._inputVariable.addEventListener("change", this.inputChanged);

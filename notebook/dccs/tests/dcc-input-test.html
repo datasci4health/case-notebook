@@ -14,7 +14,7 @@
    
    <script>
       function start() {
-         window.messageBus.ext.subscribe("input/diagnostics", showResult);
+         window.messageBus.ext.subscribe("var/diagnostics/changed", showResult);
       }
       function showResult(topic, message) {
          document.querySelector("#result").innerHTML =
@@ -25,12 +25,10 @@
 </head>
 <body onload="start()">
    <div class="scene-screen">
-      <dcc-input variable="diagnostics" outstyle></dcc-input>
+      <dcc-input variable="diagnostics"></dcc-input>
       
       Type your diagnostics:
       <div class="std-border" id="input-diagnostics"></div>
-      
-      <dcc-trigger action="get-input/diagnostics" label="Submit"></dcc-trigger>
       
       <div id="result"></div>
       
