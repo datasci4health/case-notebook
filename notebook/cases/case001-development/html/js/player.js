@@ -9,13 +9,14 @@ class PlayerManager {
    
    constructor() {
       this._server = new DCCPlayerServer();
-      this._tracker = new Tracker(this._server);
+      this._tracker = new Tracker();
+      this._state = new PlayState();
       this._history = [];
       
       this.controlEvent = this.controlEvent.bind(this);
       window.messageBus.ext.subscribe("control/#", this.controlEvent);
       this.navigateEvent = this.navigateEvent.bind(this);
-      window.messageBus.ext.subscribe("navigate/#", this.navigateEvent);
+      window.messageBus.ext.subscribe("knot/+/navigate", this.navigateEvent);
       
       // <TODO> temporary
       this.produceReport = this.produceReport.bind(this);
@@ -45,20 +46,27 @@ class PlayerManager {
    navigateEvent(topic, message) {
       this.trackTrigger(message);
       // window.messageBus.ext.publish("checkout", message);
+      if (this._currentKnot != null) {
+         window.messageBus.ext.publish("control/input/submit"); // <TODO> provisory
+         window.messageBus.ext.publish("knot/" + this._currentKnot + "/end");
+      }
       switch (topic) {
-         case "navigate/knot/previous": if (this._history.length > 0) {
+         case "knot/</navigate": if (this._history.length > 0) {
                                            this._history.pop();
                                            const last = this._history[this._history.length - 1]; 
                                            this.loadKnot(last);
                                         }
                                         break;
-         case "navigate/knot/start": this.startCase();
-                                     this.loadKnot(this._server.getStartKnot().
-                                                      replace(/ /igm, "_"));
-                                     break;
-         case "navigate/trigger":  window.messageBus.ext.publish("/control/input/submit"); // <TODO> provisory
-                                   this.loadKnot(message);
-                                   break;
+         case "knot/<</navigate": this.startCase();
+                                  const startKnot = this._server.getStartKnot();
+                                  this._history.push(startKnot);
+                                  this.loadKnot(startKnot);
+                                  break;
+         default: if (MessageBus.matchFilter(topic, "knot/+/navigate")) {
+                     this._history.push(message);
+                     this.loadKnot(message);
+                  }
+                  break;
       }
       /*
       switch (topic) {
@@ -82,7 +90,7 @@ class PlayerManager {
    startPlayer() {
       this._mainPanel = document.querySelector("#main-panel");
       
-      this.loadKnot("index");
+      this.loadKnot("entry");
    }
    
    loadKnot(knotName) {
@@ -90,7 +98,7 @@ class PlayerManager {
       this._knotScript = document.createElement("script");
       this._knotScript.src = "knots/" + knotName + ".js";
       document.head.appendChild(this._knotScript);
-      this._history.push(this._currentKnot);
+      window.messageBus.ext.publish("knot/" + knotName + "/start");
    }
    
    presentKnot(knot) {
@@ -99,7 +107,7 @@ class PlayerManager {
       document.head.removeChild(this._knotScript);
       
       // <TODO> Improve the strategy
-      if (this._currentKnot == "index")
+      if (this._currentKnot == "entry")
          this.startGame();
    }
    
@@ -174,7 +182,13 @@ class PlayerManager {
     * Start the tracking record of a case
     */
    startCase() {
-      this._server.generateRunningCase();
+      // <TODO> this._runningCase is provisory
+      const runningCase = this._server.generateRunningCase();
+      
+      console.log("************* Running case");
+      console.log(runningCase);
+      
+      window.messageBus.ext.defineRunningCase(runningCase);
    }
    
    /*
@@ -217,6 +231,7 @@ class PlayerManager {
          output.users[users.ids[u]] = profile;
       }
       
-      window.messageBus.int.publish("/report", output);
+      window.messageBus.int.publish("/report", {caseobj: server.getPlayerObj(),
+                                                result: output});
    }   
 }

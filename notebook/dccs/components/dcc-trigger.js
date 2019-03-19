@@ -71,7 +71,8 @@ class DCCTrigger extends DCCBlock {
    }
    
    _generateTemplate(render) {
-      let linkWeb = (this.hasAttribute("link")) ? "href='" + this.link + "' " : "";
+      // let linkWeb = (this.hasAttribute("link")) ? "href='" + this.link + "' " : "";
+      let linkWeb = "";
       let elements = null;
       if (this.hasAttribute("image"))
          elements = DCCTrigger.templateElements.image.replace("[render]", render)
@@ -88,9 +89,9 @@ class DCCTrigger extends DCCBlock {
    
    _computeTrigger() {
       if (this.hasAttribute("label") || this.hasAttribute("action")) {
-         let eventLabel = (this.hasAttribute("action")) ? this.action : "navigate/trigger";
-         let message = (this.hasAttribute("link")) ? this.link : this.label;
-         window.messageBus.ext.publish(eventLabel, message);
+         const message = (this.hasAttribute("link")) ? this.link : this.label;
+         const topic = (this.hasAttribute("action")) ? this.action : "knot/" + message + "/navigate";
+         window.messageBus.ext.publish(topic, message);
       }
    }
 }
@@ -123,11 +124,11 @@ class DCCTrigger extends DCCBlock {
       
    DCCTrigger.templateElements = {
    regular:
-   `<a id='presentation-dcc' class='[render]' [link]>[label]</a>`,
+   `<span id='presentation-dcc' class='[render]' [link]>[label]</span>`,
    image:
-   `<a id='presentation-dcc' [link] style='cursor:pointer'>
+   `<span id='presentation-dcc' [link] style='cursor:pointer'>
       <img width='100%' height='100%' class='[render]' src='[image]' title='[label]'>
-   </a>`
+   </span>`
    };
 
    DCCTrigger.elementTag = "dcc-trigger";

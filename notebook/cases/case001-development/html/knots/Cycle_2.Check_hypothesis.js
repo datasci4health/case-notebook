@@ -1,0 +1,2 @@
+(function() { PlayerManager.instance().presentKnot(`<p><img src="images/ampliacao-eletro.gif" alt="EKG-A" />
+<dcc-trigger id='dcc3' type='**' link='Cycle_2.Review_hypothesis' label='Submit' ></dcc-trigger></p>`) })();

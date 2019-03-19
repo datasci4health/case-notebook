@@ -3,26 +3,26 @@
  */
 
 class Tracker {
-   constructor(server) {
-      this._server = server;
+   constructor() {
+      // this._server = server;
       this._variables = {};
       this._groupInput = null;
       
       this.inputReady = this.inputReady.bind(this);
-      window.messageBus.ext.subscribe("/var/+/input/ready", this.inputReady);
+      window.messageBus.ext.subscribe("var/+/input/ready", this.inputReady);
       this.groupinputReady = this.groupinputReady.bind(this);
-      window.messageBus.ext.subscribe("/var/+/group_input/ready", this.groupinputReady);
+      window.messageBus.ext.subscribe("var/+/group_input/ready", this.groupinputReady);
       this.subinputReady = this.subinputReady.bind(this);
-      window.messageBus.ext.subscribe("/var/+/subinput/ready", this.subinputReady);
+      window.messageBus.ext.subscribe("var/+/subinput/ready", this.subinputReady);
       this.inputTyped = this.inputTyped.bind(this);
-      window.messageBus.ext.subscribe("/var/+/typed", this.inputTyped);
+      window.messageBus.ext.subscribe("var/+/typed", this.inputTyped);
       this.inputChanged = this.inputChanged.bind(this);
-      window.messageBus.ext.subscribe("/var/+/changed", this.inputChanged);
+      window.messageBus.ext.subscribe("var/+/changed", this.inputChanged);
       this.stateChanged = this.stateChanged.bind(this);
-      window.messageBus.ext.subscribe("/var/+/state_changed", this.stateChanged);
+      window.messageBus.ext.subscribe("var/+/state_changed", this.stateChanged);
       
       this.submitVariables = this.submitVariables.bind(this);
-      window.messageBus.ext.subscribe("/control/input/submit", this.submitVariables);
+      window.messageBus.ext.subscribe("control/input/submit", this.submitVariables);
    }
    
    inputReady(topic, message) {
@@ -32,7 +32,7 @@ class Tracker {
    
    groupinputReady(topic, message) {
       this._updateVariable(topic, {});
-      this._groupInput = message.context;
+      this._groupInput = MessageBus.extractLevel(topic, 2);
       console.log("input: " + message.context);
    }
    
@@ -40,9 +40,11 @@ class Tracker {
       console.log("variables");
       console.log(this._variables);
 
-      if (this._groupInput != null)
-         this._variables[this._groupInput][message.id] =
+      if (this._groupInput != null) {
+         const id = MessageBus.extractLevel(topic, 2);
+         this._variables[this._groupInput][id] =
             {content: message.content, state: " "};
+      }
    }
    
    inputTyped(topic, message) {
@@ -56,8 +58,10 @@ class Tracker {
    }
    
    stateChanged(topic, message) {
-      if (this._groupInput != null)
-         this._variables[this._groupInput][message.id].state = message.state;
+      if (this._groupInput != null) {
+         const id = MessageBus.extractLevel(topic, 2);
+         this._variables[this._groupInput][id].state = message.state;
+      }
       
       console.log("variables");
       console.log(this._variables);
@@ -66,15 +70,17 @@ class Tracker {
    submitVariables(topic, message) {
       for (let v in this._variables) {
          console.log("variavel: " + v + " -- " + this._variables[v]);
-         this._server.recordInput(v, this._variables[v]);
+         // this._server.recordInput(v, this._variables[v]);
+         window.messageBus.ext.publish("var/" + v + "/set", this._variables[v]);
       }
    }
    
    _updateVariable(topic, value) {
-      let v = /^\/var\/(\w+)\//.exec(topic);
+      let v = MessageBus.extractLevel(topic, 2); 
+       //  /^\/var\/(\w+)\//.exec(topic);
       if (v != null) {
-         this._variables[v[1]] = value;
-         console.log("update variable " + v[1] + " with " + value);
+         this._variables[v] = value;
+         console.log("update variable " + v + " with " + value);
       }
    }
 }

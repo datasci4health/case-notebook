@@ -42,13 +42,17 @@ class DCCStateSelector extends DCCBase {
      this._renderInterface();
    }
    
-   connectedCallback() {
+   async connectedCallback() {
       this._presentation.addEventListener("mouseover", this._showState);
       this._presentation.addEventListener("mouseout", this._hideState);
       this._presentation.addEventListener("click", this._changeState);
       
       // <TODO> limited: considers only one group per page
+      this.completeId = this.id;  
       if (!this.hasAttribute("states") && window.messageBus.int.hasSubscriber("dcc/request/selector-states")) {
+         this.context = await window.messageBus.int.request("dcc/selector-context/request", this.id, "dcc/selector-context/" + this.id);
+         this.completeId = this.context.message + "." + this.id;
+
          window.messageBus.int.subscribe("dcc/selector-states/" + this.id, this.defineStates);
          window.messageBus.int.publish("dcc/request/selector-states", this.id);
          this._pendingRequests++;
@@ -56,9 +60,8 @@ class DCCStateSelector extends DCCBase {
       
       this._checkRender();
 
-      window.messageBus.ext.publish("/var/" + this.id + "/subinput/ready",
+      window.messageBus.ext.publish("var/" + this.completeId + "/subinput/ready",
                                     {sourceType: DCCStateSelector.elementTag,
-                                     id: this.id,
                                      content: this.innerHTML});
    }
    
@@ -145,9 +148,8 @@ class DCCStateSelector extends DCCBase {
      if (this.states != null) {
        const statesArr = this.states.split(",");
        this._currentState = (this._currentState + 1) % statesArr.length;
-       window.messageBus.ext.publish("/var/" + this.id + "/state_changed",
+       window.messageBus.ext.publish("var/" + this.completeId + "/state_changed",
              {sourceType: DCCInput.elementTag,
-              id: this.id,
               state: statesArr[this._currentState]});
      }
      this._renderInterface();
@@ -160,24 +162,31 @@ class DCCStateSelector extends DCCBase {
 class DCCGroupSelector extends DCCBase {
    constructor() {
      super();
+     this.requestContext = this.requestContext.bind(this); 
      this.requestStates = this.requestStates.bind(this);
   }
    
    connectedCallback() {
+      window.messageBus.int.subscribe("dcc/selector-context/request", this.requestContext);
       window.messageBus.int.subscribe("dcc/request/selector-states", this.requestStates);
       
-      window.messageBus.ext.publish("/var/" + this.context + "/group_input/ready",
-                                    {sourceType: DCCGroupSelector.elementTag,
-                                     context: this.context});
+      window.messageBus.ext.publish("var/" + this.context + "/group_input/ready",
+                                    DCCGroupSelector.elementTag);
    }
 
    disconnectedCallback() {
+      window.messageBus.int.unsubscribe("dcc/selector-context/request", this.requestContext);
       window.messageBus.int.unsubscribe("dcc/request/selector-states", this.requestStates);
    }
+   
    
    requestStates(topic, message) {
       window.messageBus.int.publish("dcc/selector-states/" + message, this.states);
    }   
+   
+   requestContext(topic, message) {
+      window.messageBus.int.publish("dcc/selector-context/" + message, this.context);
+   }
    
    /*
     * Property handling

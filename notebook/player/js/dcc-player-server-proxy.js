@@ -26,7 +26,8 @@ class DCCPlayerServer {
       const profile = this.getCurrentProfile();
 
       const currentDateTime = new Date();
-      const casekey = profile.id + "#" + caseid + "#" + this.generateUID();
+      const caseuid = this.generateUID();
+      const casekey = profile.id + "#" + caseid + "#" + caseuid;
       profile.cases.push(casekey);
       this.setProfile(profile);
       this.setRunningCasekey(casekey);
@@ -39,6 +40,8 @@ class DCCPlayerServer {
         route : []
       };
       this.setCaseInstance(casekey, casetrack);
+      
+      return {runningId: caseuid, track: casetrack};
    }
    
    generateUID() {

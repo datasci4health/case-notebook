@@ -17,7 +17,7 @@
 
       <div id="signed-user"  style="display:none">
         <div class="central-buttons">
-           <dcc-trigger action="navigate/knot/start" label="Proceed"></dcc-trigger>
+           <dcc-trigger action="knot/<</navigate" label="Proceed"></dcc-trigger>
         </div>
       </div>
 
