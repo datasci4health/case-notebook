@@ -1,4 +1,4 @@
-(function() { PlayerManager.instance().presentKnot(`<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -246,16 +246,7 @@
        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff">
       <dcc-styler xstyle="out" locations="talk-image-1;action-1;action-2;action-3">
          <dcc-dialog>
-            <p>Our patient denies any recent long trip, immobilization or surgery.</p>
-<p>The blood pressure is symmetric in the four limbs. </p>
-<p><dcc-talk id='dcc3' character='EKG' speech='.'>
-</dcc-talk></p>
-<p><dcc-trigger id='dcc5' type='**' link='Cycle_2.Magnify_EKG' label='Magnify' ></dcc-trigger></p>
-<p><dcc-talk id='dcc7' character='Game' speech='What do you want to do?'>
-</dcc-talk>
-<dcc-trigger id='dcc9' type='**' link='Cycle_2.Generate_hypothesis' label='Generate hypothesis' ></dcc-trigger>
-<dcc-trigger id='dcc11' type='**' link='Cycle_2.More_information' label='More information' ></dcc-trigger>
-<dcc-trigger id='dcc13' type='**' link='Cycle_2.Call_the_supervisor' label='Call the supervisor' ></dcc-trigger></p>
+            {knot}
          </dcc-dialog>
       </dcc-styler>
      </div>
@@ -485,4 +476,3 @@
      width="311.56448"
      id="talk-image-1" />
 </svg>
-`) })();

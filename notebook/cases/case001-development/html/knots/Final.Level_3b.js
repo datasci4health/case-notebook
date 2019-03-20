@@ -1,5 +1,4 @@
-(function() { PlayerManager.instance().presentKnot(`<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
+(function() { PlayerManager.instance().presentKnot(`<svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -14,7 +13,7 @@
    version="1.1"
    id="svg102"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="decision_eletro.svg">
+   sodipodi:docname="jacinto-talk-l.svg">
   <metadata
      id="metadata106">
     <rdf:RDF>
@@ -23,7 +22,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -36,16 +35,16 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1299"
+     inkscape:window-width="731"
      inkscape:window-height="704"
      id="namedview104"
      showgrid="false"
-     inkscape:zoom="0.73125002"
-     inkscape:cx="769.15321"
-     inkscape:cy="366.73652"
+     inkscape:zoom="0.36562501"
+     inkscape:cx="727.15592"
+     inkscape:cy="176.57909"
      inkscape:window-x="67"
      inkscape:window-y="27"
-     inkscape:window-maximized="1"
+     inkscape:window-maximized="0"
      inkscape:current-layer="svg102" />
   <defs
      id="defs14">
@@ -183,32 +182,15 @@
          x="0"
          y="0" />
     </clipPath>
-    <pattern
-       inkscape:collect="always"
-       xlink:href="#pattern-3"
-       id="pattern1818"
-       patternTransform="matrix(1.0633601,0,0,1.0633601,857.26069,185.91272)" />
-    <pattern
-       id="pattern-3"
-       preserveAspectRatio="none"
-       width="100%"
-       height="100%"
-       viewBox="0 0 1305 831">
-      <image
-         id="image1266"
-         height="831"
-         width="1305"
-         xlink:href="" />
-    </pattern>
   </defs>
   <image
      xlink:href="images/hospital-background.png"
-     width="1136.7474"
-     height="597.91913"
-     preserveAspectRatio="none"
+     y="71.079224"
+     x="20.12265"
      id="image4087"
-     x="244.12265"
-     y="71.079224" />
+     preserveAspectRatio="none"
+     height="597.91913"
+     width="1136.7474" />
   <g
      data-name="Back arrow"
      id="back-arrow"
@@ -234,30 +216,29 @@
   <foreignObject>
      <dcc-trigger action="knot/</navigate" label="Previous Knot" xstyle="out-image" location="back-arrow"></dcc-trigger>
   </foreignObject>
+  <text
+     style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
+     class="cls-15"
+     data-name="Talk action"
+     id="talk-action"
+     x="413"
+     y="679" />
   <foreignObject
-     data-name="description"
-     x="300"
-     y="200"
-     width="530"
-     height="200">
+     data-name="speech"
+     x="60"
+     y="105"
+     width="800"
+     height="420">
     <div
-       id="description"
+       id="detailed-information"
        class="cls-15"
-       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff">
-      <dcc-styler xstyle="out" locations="talk-image-1;action-1;action-2;action-3">
-         <dcc-dialog>
-            <p>Our patient denies any recent long trip, immobilization or surgery.</p>
-<p>The blood pressure is symmetric in the four limbs. </p>
-<p><dcc-talk id='dcc3' character='EKG' speech='.'>
-</dcc-talk></p>
-<p><dcc-trigger id='dcc5' type='**' link='Cycle_2.Magnify_EKG' label='Magnify' ></dcc-trigger></p>
-<p><dcc-talk id='dcc7' character='Game' speech='What do you want to do?'>
-</dcc-talk>
-<dcc-trigger id='dcc9' type='**' link='Cycle_2.Generate_hypothesis' label='Generate hypothesis' ></dcc-trigger>
-<dcc-trigger id='dcc11' type='**' link='Cycle_2.More_information' label='More information' ></dcc-trigger>
-<dcc-trigger id='dcc13' type='**' link='Cycle_2.Call_the_supervisor' label='Call the supervisor' ></dcc-trigger></p>
-         </dcc-dialog>
-      </dcc-styler>
+       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff" height="420px">
+       <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
+          <p>My young Dr, the EKG interpretation was very helpful to solve our case.
+We found a diffuse ST-segment elevation, and a PR-segment depression in DII lead.  These findings, associated to the clinical scenario, strongly indicate the main hypothesis of Acute Pericarditis.</p>
+<p><dcc-trigger id='dcc3' type='**' link='Final.Level_3c' label='Next' ></dcc-trigger>
+<dcc-trigger id='dcc5' type='**' link='Final.Final_report' label='Return' ></dcc-trigger></p>
+       </dcc-styler>
      </div>
   </foreignObject>
   <g
@@ -265,7 +246,7 @@
      class="cls-4"
      data-name="Rectangle 36"
      id="Rectangle_36"
-     transform="translate(286.08545,485.6859)">
+     transform="translate(42.08545,537.6859)">
     <rect
        style="stroke:none"
        y="0"
@@ -287,8 +268,8 @@
   </g>
   <rect
      style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
-     y="544.35254"
-     x="301.73779"
+     y="596.35254"
+     x="57.737793"
      rx="29.5"
      height="59"
      width="212"
@@ -298,8 +279,8 @@
      id="action-1-wrapper" />
   <rect
      style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
-     y="544.35254"
-     x="528.73779"
+     y="596.35254"
+     x="284.73779"
      rx="29.5"
      height="59"
      width="212"
@@ -309,8 +290,8 @@
      id="action-2-wrapper" />
   <rect
      style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
-     y="544.35254"
-     x="757.73779"
+     y="596.35254"
+     x="513.73779"
      rx="29.5"
      height="59"
      width="212"
@@ -320,8 +301,8 @@
      id="action-3-wrapper" />
   <foreignObject
      data-name="Action 1"
-     x="308"
-     y="563"
+     x="64"
+     y="615"
      width="200"
      height="30">
     <div
@@ -333,8 +314,8 @@
   </foreignObject>
   <foreignObject
      data-name="Action 2"
-     x="535"
-     y="563"
+     x="291"
+     y="615"
      width="200"
      height="30">
     <div
@@ -346,8 +327,8 @@
   </foreignObject>
   <foreignObject
      data-name="Action 3"
-     x="763"
-     y="563"
+     x="519"
+     y="615"
      width="200"
      height="30">
     <div
@@ -360,129 +341,38 @@
   <text
      style="font-weight:700;font-size:28px;font-family:Tahoma, Geneva, sans-serif;fill:#346e93"
      class="cls-18"
-     data-name="speech"
-     id="talk-speech-2"
-     x="300"
-     y="525">
+     data-name="What do you want to do?"
+     id="What_do_you_want_to_do_"
+     x="59.737793"
+     y="544.35254">
     <tspan
        id="tspan4613"
-       y="522.35254"
-       x="303.73779">speech</tspan>
+       y="574.35254"
+       x="59.737793">What do you want to do?</tspan>
   </text>
-  <g
-     id="Rectangle_39"
-     data-name="Rectangle 39"
-     class="cls-20"
-     style="font-size:12px;font-family:Tahoma, Geneva, sans-serif;fill:none;stroke:#ffffff"
-     transform="matrix(1.0633601,0,0,1.0633601,857.26066,146.56839)">
-    <rect
-       class="cls-25"
-       width="293"
-       height="259"
-       rx="12"
-       id="rect1518"
-       x="0"
-       y="0"
-       style="stroke:none" />
-    <rect
-       class="cls-26"
-       x="0.5"
-       y="0.5"
-       width="292"
-       height="258"
-       rx="11.5"
-       id="rect1520"
-       style="fill:none" />
-  </g>
-  <text
-     id="EKG_Click_on_EKG_image_to_expand_it."
-     data-name="EKG           Click on EKG image to expand it."
-     class="cls-21"
-     style="font-weight:700;font-size:19.14048195px;font-family:SegoeUI-Bold, 'Segoe UI';fill:#ffffff;stroke-width:1.0633601"
-     x="883.84467"
-     y="154.01192">
-    <tspan
-       x="995.21039"
-       y="174.21574"
-       id="tspan1523"
-       style="stroke-width:1.0633601">EKG</tspan>
-    <tspan
-       class="cls-22"
-       id="tspan1539"
-       style="font-weight:400;font-family:SegoeUI, 'Segoe UI';fill:#fee611;stroke-width:1.0633601">
-      <tspan
-         x="1013.0429"
-         y="199.73639"
-         id="tspan1525"
-         style="stroke-width:1.0633601" />
-      <tspan
-         x="1013.0429"
-         y="225.25703"
-         id="tspan1527"
-         style="stroke-width:1.0633601" />
-      <tspan
-         x="1013.0429"
-         y="250.77769"
-         id="tspan1529"
-         style="stroke-width:1.0633601" />
-      <tspan
-         x="1013.0429"
-         y="276.29831"
-         id="tspan1531"
-         style="stroke-width:1.0633601" />
-      <tspan
-         x="1013.0429"
-         y="301.81897"
-         id="tspan1533"
-         style="stroke-width:1.0633601" />
-      <tspan
-         x="1013.0429"
-         y="327.3396"
-         id="tspan1535"
-         style="stroke-width:1.0633601" />
-      <tspan
-         x="1013.0429"
-         y="352.86023"
-         id="tspan1537"
-         style="stroke-width:1.0633601" />
-    </tspan>
-    <tspan
-       class="cls-23"
-       id="tspan1547"
-       style="font-weight:400;font-size:12.76032066px;font-family:SegoeUI, 'Segoe UI';stroke:none;stroke-width:1.0633601">
-      <tspan
-         x="1013.0429"
-         y="372.00073"
-         id="tspan1541"
-         style="stroke-width:1.0633601" />
-      <tspan
-         x="1013.0429"
-         y="389.0145"
-         id="tspan1543"
-         style="stroke-width:1.0633601" />
-      <tspan
-         x="922.02246"
-         y="406.02826"
-         id="tspan1545"
-         style="stroke-width:1.0633601">Click on EKG image to expand it.</tspan>
-    </tspan>
-  </text>
-  <rect
-     id="Image_3"
-     data-name="Image 3"
-     class="cls-24"
-     width="311.56448"
-     height="198.84833"
-     x="857.26068"
-     y="185.91272"
-     style="fill:url(#pattern1818);stroke-width:1.0633601" />
   <image
+     y="32.929932"
+     x="892.04901"
+     id="talk-image"
      xlink:href=""
      preserveAspectRatio="none"
-     y="185.91272"
-     x="857.26068"
-     height="198.84833"
-     width="311.56448"
-     id="talk-image-1" />
-</svg>
-`) })();
+     height="636.06842"
+     width="488.82108" />
+  <rect
+     style="fill:#0d4a71;stroke-width:1.06254947"
+     y="641.17096"
+     x="1054.6239"
+     rx="26.531769"
+     height="47"
+     width="239.35043"
+     class="cls-16"
+     data-name="Rectangle 40"
+     id="Rectangle_40" />
+  <text
+     style="font-weight:700;font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ffffff"
+     class="cls-18"
+     data-name="character"
+     id="talk-character"
+     x="1067.6239"
+     y="671.17096">character</text>
+</svg>`) })();

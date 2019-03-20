@@ -749,6 +749,11 @@ class Translator {
          context.options = matchArray[3];
       if (matchArray[4] != null)
          context.colors = matchArray[4].trim();
+      
+      // <TODO> weak strategy -- improve
+      this._lastSelectorContext = context.context;
+      this._lastSelectorEvaluation = context.evaluation;
+      console.log("1. last context: " + this._lastSelectorContext);
 
       return context;
    }
@@ -787,6 +792,10 @@ class Translator {
     * Output: </dcc-group-selector>
     */
    _selctxcloseObjToHTML(obj) {
+      // console.log("3. last context: " + this._lastSelectorContext);
+      // <TODO> weak strategy -- improve
+      // delete this._lastSelectorContext;
+      
       return Translator.htmlTemplates.selctxclose;
    }
 
@@ -807,6 +816,15 @@ class Translator {
       };
       if (matchArray[3] != null)
          selector.value = matchArray[3].trim();
+
+      // <TODO> weak strategy -- improve
+      if (this._lastSelectorContext) {
+         if (this._lastSelectorContext == "answers")
+            selector.present = "answer";
+         else if (this._lastSelectorContext == "player")
+            selector.present = this._lastSelectorEvaluation;
+      }
+      console.log("2. last context: " + this._lastSelectorContext);
       return selector;
    }
    
@@ -815,8 +833,17 @@ class Translator {
     * Output: <dcc-state-selector id='dcc[seq]'>[expression]</dcc-state-selector>
     */
    _selectorObjToHTML(obj) {
+      let answer="";
+      if (obj.present) {
+         if (obj.present == "answer")
+            answer = " answer='" + obj.value + "'";
+         else
+            answer = " player='" + obj.present + "'";
+      } 
+      
       return Translator.htmlTemplates.selector.replace("[seq]", obj.seq)
-                                              .replace("[expression]", obj.expression);            
+                                              .replace("[expression]", obj.expression)
+                                              .replace("[answer]", answer);            
    }
 }
 
@@ -825,7 +852,7 @@ class Translator {
 
    Translator.marksAnnotation = {
      // knot   : /^[ \t]*==*[ \t]*(\w[\w \t]*)(?:\(([\w \t]*)\))?[ \t]*=*[ \t]*[\f\n\r]/im,
-     ctxopen : /\{\{([\w \t\+\-\*"=\:%\/]+)(?:#([\w \t\+\-\*"=\%\/]+):([\w \t\+\-\*"=\%\/,]+)(?:;([\w \t#,]+))?)?[\f\n\r]/im,
+     ctxopen : /\{\{([\w \t\+\-\*\."=\:%\/]+)(?:#([\w \t\+\-\*\."=\%\/]+):([\w \t\+\-\*"=\%\/,]+)(?:;([\w \t#,]+))?)?[\f\n\r]/im,
      ctxclose: /\}\}/im,
      annotation: /\{([\w \t\+\-\*"=\:%\/]+)(?:\(([\w \t\+\-\*"=\:%\/]+)\)[ \t]*)?(?:#([\w \t\+\-\*"=\:%\/]+))?\}/im
    };

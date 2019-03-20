@@ -102,6 +102,8 @@ class PlayerManager {
    }
    
    presentKnot(knot) {
+      window.messageBus.page = new MessageBus(false);
+      
       this._mainPanel.innerHTML = knot;
 
       document.head.removeChild(this._knotScript);
@@ -185,8 +187,8 @@ class PlayerManager {
       // <TODO> this._runningCase is provisory
       const runningCase = this._server.generateRunningCase();
       
-      console.log("************* Running case");
-      console.log(runningCase);
+      // console.log("************* Running case");
+      // console.log(runningCase);
       
       window.messageBus.ext.defineRunningCase(runningCase);
    }

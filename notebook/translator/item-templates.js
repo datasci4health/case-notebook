@@ -37,6 +37,6 @@ selctxclose:
 
 `,
 selector:
-`<dcc-state-selector id='dcc[seq]'>[expression]</dcc-state-selector>`
+`<dcc-state-selector id='dcc[seq]'[answer]>[expression]</dcc-state-selector>`
 };
 })();

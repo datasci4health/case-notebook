@@ -6,6 +6,8 @@ function startSystem() {
 
 class AuthorManager {
    constructor() {
+      window.messageBus.page = new MessageBus(false);
+      
       this._translator = new Translator();
       this._compiledCase = null;
       this._knots = null;

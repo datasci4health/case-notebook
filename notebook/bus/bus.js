@@ -41,10 +41,12 @@ class MessageBus {
    }
    
    async publish(topic, message) {
+      /*
       if (this._externalized)
          console.log("== external topic: " + topic);
       else
          console.log("   -- internal topic: " + topic);
+      */
       for (let l in this._listeners)
          if (this.matchTopic(l, topic))
             this._listeners[l].callback(topic, message);
@@ -60,10 +62,12 @@ class MessageBus {
             extTopic = this._runningCase.runningId + "/" + topic;
          }
          
+         /*
          console.log("### REST: " + extTopic);
          console.log(extMessage);
          
          console.log("server: " + MessageBus.serverAddress + "/message");
+         */
          
          const response = await fetch(MessageBus.serverAddress + "/message", {
             method: "POST",
@@ -74,9 +78,9 @@ class MessageBus {
               "Content-Type": "application/json"
             }
           });
-          console.log(response);
+          // console.log(response);
           const status = await response.json();
-          console.log(status);
+          // console.log(status);
       }
    }
    
@@ -154,6 +158,6 @@ class MessageBus {
 (function() {
    window.messageBus = {
       int: new MessageBus(false),
-      ext: new MessageBus(true)
+      ext: new MessageBus(false)
    };
 })();
