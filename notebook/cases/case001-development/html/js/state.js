@@ -28,7 +28,7 @@ class PlayState {
    }
    
    variableSubGet(topic, value) {
-      console.log("sub solicitado: " + topic + ";" + value);
+      // console.log("sub solicitado: " + topic + ";" + value);
       const id = MessageBus.extractLevel(topic, 2);
       if (id != null) {
          let result = null;
@@ -36,7 +36,7 @@ class PlayState {
             for (let v in this._state.variables[id])
                if (this._state.variables[id][v].content == value)
                   result = this._state.variables[id][v].state;
-         console.log("-- sub resultado: " + result);
+         // console.log("-- sub resultado: " + result);
          window.messageBus.ext.publish("var/" + id + "/sub", result);
       }
    }
@@ -45,7 +45,7 @@ class PlayState {
       const id = MessageBus.extractLevel(topic, 2);
       if (id != null)
          this._state.variables[id] = value;
-      console.log("Variables updated:");
-      console.log(this._state);
+      // console.log("Variables updated:");
+      // console.log(this._state);
    }
 }

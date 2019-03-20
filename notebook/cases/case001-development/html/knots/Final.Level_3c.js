@@ -234,15 +234,25 @@
        class="cls-15"
        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff" height="420px">
        <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
-          <p>In the following table, we provide the diagnostic criteria for acute pericaditis and myopericarditis:</p>
-<p><img src="images/ebm-pericarditis.png" alt="Clinical History Myocardial Infarction" /></p>
-<p>Cooper LT, Imazio M. Management of myopericarditis. Expert Rev Cardiovasc Ther 2013; 11(2): 193-201.</p>
-<p>Our patient fullfill the following criteria: 1 and 3. So, acute pericarditis is the main diagnostic hypothesis.</p>
-<p><dcc-trigger id='dcc3' type='**' link='Final.Final_report' label='Return' ></dcc-trigger>
-In the following table, we provide the diagnostic criteria for acute pericaditis and myopericarditis:</p>
-<p><img src="images/ebm-pericarditis.png" alt="Clinical History Myocardial Infarction" /></p>
-<p>Cooper LT, Imazio M. Management of myopericarditis. Expert Rev Cardiovasc Ther 2013; 11(2): 193-201.</p>
-<p>Our patient fullfill the following criteria: 1 and 3. So, acute pericarditis is the main diagnostic hypothesis.</p>
+          <div style="font-size: 18px">
+In the following table, we provide the diagnostic criteria for acute pericaditis and myopericarditis:
+
+![Clinical History Myocardial Infarction](images/ebm-pericarditis.png)
+
+Cooper LT, Imazio M. Management of myopericarditis. Expert Rev Cardiovasc Ther 2013; 11(2): 193-201.
+
+Our patient fullfill the following criteria: 1 and 3. So, acute pericarditis is the main diagnostic hypothesis.
+</div>
+<p><dcc-trigger id='dcc3' type='**' link='Final.Final_report' label='Return' ></dcc-trigger></p>
+<div style="font-size: 18px">
+In the following table, we provide the diagnostic criteria for acute pericaditis and myopericarditis:
+
+![Clinical History Myocardial Infarction](images/ebm-pericarditis.png)
+
+Cooper LT, Imazio M. Management of myopericarditis. Expert Rev Cardiovasc Ther 2013; 11(2): 193-201.
+
+Our patient fullfill the following criteria: 1 and 3. So, acute pericarditis is the main diagnostic hypothesis.
+</div>
 <p>** Return -&gt; Final report  </p>
        </dcc-styler>
      </div>
