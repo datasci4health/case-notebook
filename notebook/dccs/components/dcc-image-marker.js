@@ -187,8 +187,26 @@ class DCCGroupMarker extends DCCBase {
       template.innerHTML = templateHTML;
       let shadow = this.attachShadow({mode: "open"});
       shadow.appendChild(template.content.cloneNode(true));
+      
+      this._imageG = shadow.querySelector("#imageG");
+      
+      /*
+      this._image = shadow.querySelector("#image-src");
       this._imageMap = shadow.querySelector("#image-map");
+      this._imageCanvas = shadow.querySelector("#image-canvas");
+      this._canvas = this._imageCanvas.getContext("2d")
+      */
 
+      /*
+      console.log("image width: " + this._image.clientWidth);
+      console.log("image height: " + this._image.clientHeight);
+      console.log("canvas width: " + this._imageCanvas.width);
+      console.log("canvas height: " + this._imageCanvas.height);
+      
+      this._propX = this._image.clientWidth / this._imageCanvas.width;
+      this._propY = this._image.clientHeight / this._imageCanvas.height;
+      */
+      
       window.messageBus.page.subscribe("dcc/marker-context/request", this.requestContext);
       window.messageBus.page.subscribe("dcc/marker-states/request", this.requestStates);
       window.messageBus.page.subscribe("dcc/marker-spot/set", this.setMarkerSpot);
@@ -254,6 +272,18 @@ class DCCGroupMarker extends DCCBase {
    
    /* Event handling */
    setMarkerSpot(topic, message) {
+      /*
+      let area = document.createElement("rect");
+      var rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      area.alt = message.label;
+      area.title = message.label;
+      area.coords = message.coords;
+      area.shape = "rect";
+      area.addEventListener("mouseover", message.handler);
+      this._imageMap.appendChild(area);
+      */
+
+      /*
       let area = document.createElement("area");
       area.alt = message.label;
       area.title = message.label;
@@ -261,6 +291,17 @@ class DCCGroupMarker extends DCCBase {
       area.shape = "rect";
       area.addEventListener("mouseover", message.handler);
       this._imageMap.appendChild(area);
+      
+      console.log(area.coords);
+      
+      let coordsArr = message.coords.split(",");
+      let x1 = parseInt(coordsArr[0]),
+          y1 = parseInt(coordsArr[1]),
+          x2 = parseInt(coordsArr[2]),
+          y2 = parseInt(coordsArr[3]);
+      this._canvas.rect(x1, y1, x2-x1, y2-y1);
+      this._canvas.stroke();
+      */
    }
 }
 
@@ -270,18 +311,59 @@ DCCImageMarker.elementTag = "dcc-image-marker";
 customElements.define(DCCImageMarker.elementTag, DCCImageMarker);
 
 DCCGroupMarker.templateElements =
+  `<svg width="1600" height="1000">
+   <g id="imageG">
+    <image
+       y="0"
+       x="0"
+       id="image4598"
+       xlink:href="[image]"
+       preserveAspectRatio="xMidYMid"
+       height="1000"
+       width="1600" />
+    <rect
+       id="rect10"
+       width="1600"
+       height="1000"
+       x="0"
+       y="0"
+       style="opacity:0.08399999;fill:#0000ff;stroke-width:0.89027536" />
+  </g>
+  </svg>`;
+
+/*
+DCCGroupMarker.templateElements =
   `<style>
-      .image-spot {
-         background-color: red;
+      .outsideWrapper{ 
+          position: absolute;
+          width:100%; top:0px; bottom:0px; 
+          margin:20px 60px; 
+          border:1px solid blue;}
+      .insideWrapper{ 
+          width:100%; height:100%; 
+          position:relative;}
+      .coveredImage{ 
+          width:100%; height:100%; 
+          position:absolute; top:0px; left:0px;
       }
-      .image-spot:hover {
-         cursor: pointer;
+      .coveringCanvas{ 
+          width:100%; height:100%; 
+          position:absolute; top:0px; left:0px;
+          background-color: rgba(255,0,0,.1);
       }
    </style>
-   <img src="[image]" width="100%" height="100%" usemap="#imagemap">
+   <div class="outsideWrapper">
+    <div class="insideWrapper">
+        <img id="image-src" class="coveredImage" src="[image]" usemap="#imagemap">
+        <canvas id="image-canvas" class="coveringCanvas"></canvas>
+    </div>
+   </div>
    <map id="image-map" name="imagemap" class="image-spot"></map>`;
+*/
 
 DCCGroupMarker.elementTag = "dcc-group-marker";
 customElements.define(DCCGroupMarker.elementTag, DCCGroupMarker);
+
+// <canvas id="image-canvas" class="coveringCanvas"></canvas>
 
 })();
