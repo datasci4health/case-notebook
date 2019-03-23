@@ -116,7 +116,7 @@ Markdown text that does not match to any expression.
 ## Option
 ### Markdown to Object
 * Sentence: `+ [label] ([rule]) -> [target]` or `* [label] ([rule]) -> [target]`
-* Expression: `[ \t]*([\+\*][\+\*])[ \t]*([^\(&> \t][^\(&>\n\r\f]*)?(?:\(([\w \t-]+)\)[ \t]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))?$`
+* Expression: `^[ \t]*([\+\*])[ \t]*([^\(&> \t][^\(&>\n\r\f]*)?(?:\(([\w \t-]+)\)[ \t]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))$`
   * Group #1: subtype
   * Group #2: label
   * Group #3: rule
