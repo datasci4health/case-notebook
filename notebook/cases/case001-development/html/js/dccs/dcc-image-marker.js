@@ -272,16 +272,18 @@ class DCCGroupMarker extends DCCBase {
    
    /* Event handling */
    setMarkerSpot(topic, message) {
-      /*
-      let area = document.createElement("rect");
-      var rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-      area.alt = message.label;
-      area.title = message.label;
-      area.coords = message.coords;
-      area.shape = "rect";
-      area.addEventListener("mouseover", message.handler);
-      this._imageMap.appendChild(area);
-      */
+      let rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+      let coordsArr = message.coords.split(",");
+      let x1 = parseInt(coordsArr[0]),
+          y1 = parseInt(coordsArr[1]),
+          x2 = parseInt(coordsArr[2]),
+          y2 = parseInt(coordsArr[3]);
+      rect.setAttributeNS(null, 'x', x1);
+      rect.setAttributeNS(null, 'y', y1);
+      rect.setAttributeNS(null, 'width', x2-x1);
+      rect.setAttributeNS(null, 'height', y2-y1);
+      rect.addEventListener("mouseover", message.handler);
+      this._imageG.appendChild(rect);
 
       /*
       let area = document.createElement("area");
