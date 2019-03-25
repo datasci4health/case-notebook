@@ -237,8 +237,8 @@
           <p>After checking the hypothesis you reviewed your answer to: <dcc-expression expression="Cycle_1.Review_hypothesis.hypothesis"></dcc-expression>.</p>
 <p>In acute pericarditis, patients are usually young, most cases are reported under 50 years old, but it can be diagnosed at any age. There is no vital signs features that increase the probability of this condition. Some patients may present fever and tachycardia, but it´s not common signs. So, when vital signs are normal, we cannot confirm or exclude this diagnosis.</p>
 <p>In clinical history, two features increase the probability of the chest pain being related to a pericardial disease: worsening with breathing; and worsening when the patient lay down. </p>
-<p><dcc-trigger id='dcc3' type='**' link='Final.Level_2c' label='Next' ></dcc-trigger>
-<dcc-trigger id='dcc5' type='**' link='Final.Final_report' label='Return' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc3' type='*' link='Final.Level_2c' label='Next' ></dcc-trigger>
+<dcc-trigger id='dcc5' type='*' link='Final.Final_report' label='Return' ></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>

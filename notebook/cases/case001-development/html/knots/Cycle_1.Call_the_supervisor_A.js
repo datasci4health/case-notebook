@@ -246,7 +246,7 @@ Hi! I am glad that you called me. Chest pain is an important complaint at the em
 </dcc-talk>
 
 </p>
-<p><dcc-trigger id='dcc7' type='**' link='Cycle_1.Call_the_supervisor_B' label='See likelihood tables' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc7' type='*' link='Cycle_1.Call_the_supervisor_B' label='See likelihood tables' ></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>

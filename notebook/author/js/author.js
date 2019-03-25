@@ -217,7 +217,7 @@ class AuthorManager {
     */
    async config() {
       this._resourcePicker = new DCCResourcePicker();
-      this._resourcePicker.resource = "template";
+      this._resourcePicker.resource = "template_family";
       
       window.messageBus.ext.subscribe("control/template_family/selected", this._templateFamilySelected);
       
@@ -232,7 +232,7 @@ class AuthorManager {
     * ACTION: config (2)
     */
    async _templateFamilySelected(topic, message) {
-      window.messageBus.ext.unsubscribe("control/template/selected", this._templateFamilySelected);
+      window.messageBus.ext.unsubscribe("control/template_family/selected", this._templateFamilySelected);
       this._currentTemplateFamily = message.selected;
       document.querySelector("#knot-panel").removeChild(this._resourcePicker);
    }

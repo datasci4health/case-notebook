@@ -236,8 +236,8 @@
        <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
           <p>My young Dr, the EKG interpretation was very helpful to solve our case.</p>
 <p>We found a diffuse ST-segment elevation, and a PR-segment depression in DII lead.  These findings, associated to the clinical scenario, strongly indicate the main hypothesis of Acute Pericarditis.</p>
-<p><dcc-trigger id='dcc3' type='**' link='Final.Level_3b' label='Next' ></dcc-trigger>
-<dcc-trigger id='dcc5' type='**' link='Final.Final_report' label='Return' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc3' type='*' link='Final.Level_3b' label='Next' ></dcc-trigger>
+<dcc-trigger id='dcc5' type='*' link='Final.Final_report' label='Return' ></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>

@@ -236,13 +236,13 @@
        <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
           <p><dcc-talk id='dcc3' character='SUPERVISOR Harry' speech='.'>
 </dcc-talk>
-Do you know the concept of Likelihood ratio (LR)? <dcc-trigger id='dcc5' type='++' link='Cycle_1.Likelihood_Ratio' label='Cycle_1.Likelihood_Ratio'></dcc-trigger></p>
-<p><dcc-trigger id='dcc7' type='++' link='Cycle_1.Clinical_History_Myocardial_Infarction' label='Clinical History Myocardial Infarction' ></dcc-trigger>
-<dcc-trigger id='dcc9' type='++' link='Cycle_1.Physical_Examination_Myocardial_Infarction' label='Physical Examination Myocardial Infarction' ></dcc-trigger>
-<dcc-trigger id='dcc11' type='++' link='Cycle_1.Clinical_History_Aortic_Dissection' label='Clinical History Aortic Dissection' ></dcc-trigger>
-<dcc-trigger id='dcc13' type='++' link='Cycle_1.Physical_Examination_Aortic_Dissection' label='Physical Examination Aortic Dissection' ></dcc-trigger>
-<dcc-trigger id='dcc15' type='++' link='Cycle_1.Pulmonary_Embolism_Wells_Criteria' label='Pulmonary Embolism Wells Criteria' ></dcc-trigger></p>
-<p><dcc-trigger id='dcc17' type='**' link='Cycle_1.Call_the_supervisor_C' label='Continue talking' ></dcc-trigger></p>
+Do you know the concept of Likelihood ratio (LR)? <dcc-trigger id='dcc5' type='++' link='Cycle_1.Likelihood_Ratio' label='Likelihood Ratio'></dcc-trigger></p>
+<p><dcc-trigger id='dcc7' type='+' link='Cycle_1.Clinical_History_Myocardial_Infarction' label='Clinical History Myocardial Infarction' ></dcc-trigger>
+<dcc-trigger id='dcc9' type='+' link='Cycle_1.Physical_Examination_Myocardial_Infarction' label='Physical Examination Myocardial Infarction' ></dcc-trigger>
+<dcc-trigger id='dcc11' type='+' link='Cycle_1.Clinical_History_Aortic_Dissection' label='Clinical History Aortic Dissection' ></dcc-trigger>
+<dcc-trigger id='dcc13' type='+' link='Cycle_1.Physical_Examination_Aortic_Dissection' label='Physical Examination Aortic Dissection' ></dcc-trigger>
+<dcc-trigger id='dcc15' type='+' link='Cycle_1.Pulmonary_Embolism_Wells_Criteria' label='Pulmonary Embolism Wells Criteria' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc17' type='*' link='Cycle_1.Call_the_supervisor_C' label='Continue talking' ></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>

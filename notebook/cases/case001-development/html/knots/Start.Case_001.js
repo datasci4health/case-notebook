@@ -262,5 +262,5 @@
    <script>PlayerManager.instance().startCase()</script>
 <p><dcc-talk id='dcc3' character='NURSE Agnes' speech='Doctor, we have a man (51 years old) who entered the emergency department reporting chest pain. His vital signs are ABP: 144x92mmHG; HR: 78bpm; RR: 21rpm; Temp: 37oC; O2Sat: 98%.'>
 </dcc-talk></p>
-<p><dcc-trigger id='dcc5' type='**' link='Cycle_1.Begin' label='Let us go!' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc5' type='*' link='Cycle_1.Begin' label='Let us go!' ></dcc-trigger></p>
 </dcc-styler>`) })();

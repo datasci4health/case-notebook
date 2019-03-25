@@ -247,13 +247,15 @@
       <dcc-styler xstyle="out" locations="talk-image-1;action-1;action-2;action-3">
          <dcc-dialog>
             <p><img src="images/ekg-description.png" alt="EKG Description" /></p>
-<p><dcc-trigger id='dcc3' type='**' link='Cycle_2.EKG_Analysis' label='EKG Analysis' ></dcc-trigger></p>
-<p><dcc-talk id='dcc5' character='EKG' speech='.'>
+<ul>
+<li>EKG Analysis</li>
+</ul>
+<p><dcc-talk id='dcc3' character='EKG' speech='.'>
 </dcc-talk></p>
-<p><dcc-talk id='dcc7' character='Game' speech='What do you want to do?'>
+<p><dcc-talk id='dcc5' character='Game' speech='What do you want to do?'>
 </dcc-talk>
-<dcc-trigger id='dcc9' type='**' link='Cycle_2.Order_EKG' label='Back' ></dcc-trigger>
-<dcc-trigger id='dcc11' type='**' link='Cycle_2.EKG_Analysis' label='Analyze EKG' ></dcc-trigger></p>
+<dcc-trigger id='dcc7' type='*' link='Cycle_2.Order_EKG' label='Back' ></dcc-trigger>
+<dcc-trigger id='dcc9' type='*' link='Cycle_2.EKG_Analysis' label='Analyze EKG' ></dcc-trigger></p>
          </dcc-dialog>
       </dcc-styler>
      </div>

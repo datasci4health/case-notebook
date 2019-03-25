@@ -150,7 +150,7 @@
    <dcc-image-marker id="V" label="V" coords="1004,248,1133,323" image="images/ekg-detail-01.png"></dcc-image-marker>
    <dcc-image-marker id="VI" label="VI" coords="1010,460,1130,538" image="images/ekg-detail-01.png"></dcc-image-marker>
 </dcc-group-marker></p>
-<p><dcc-trigger id='dcc3' type='**' link='Cycle_2.Order_EKG' label='Return' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc3' type='*' link='Cycle_2.Order_EKG' label='Return' ></dcc-trigger></p>
       </dcc-styler>
   </foreignObject>
   <rect

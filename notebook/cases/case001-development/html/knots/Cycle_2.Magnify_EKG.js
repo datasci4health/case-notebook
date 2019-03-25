@@ -180,7 +180,7 @@
    <dcc-dialog>
       <p><dcc-talk id='dcc3' character='EKG' speech='.'>
 </dcc-talk></p>
-<p><dcc-trigger id='dcc5' type='**' link='Cycle_2.Order_EKG' label='Return' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc5' type='*' link='Cycle_2.Order_EKG' label='Return' ></dcc-trigger></p>
    </dcc-dialog>
 </dcc-styler>
 `) })();

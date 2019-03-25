@@ -237,9 +237,9 @@
           <p>Congratulations, my young Dr. you could helped your patient providing his diagnosis. Now, Let's review all levels of this case.</p>
 <p><dcc-talk id='dcc3' character='Computer' speech='Select a final report level:'>
 </dcc-talk></p>
-<p><dcc-trigger id='dcc5' type='**' link='Final.Level_1' label='Level 1' ></dcc-trigger>
-<dcc-trigger id='dcc7' type='**' link='Final.Level_2a' label='Level 2a' ></dcc-trigger>
-<dcc-trigger id='dcc9' type='**' link='Final.Level_3a' label='Level 3a' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc5' type='*' link='Final.Level_1' label='Level 1' ></dcc-trigger>
+<dcc-trigger id='dcc7' type='*' link='Final.Level_2a' label='Level 2a' ></dcc-trigger>
+<dcc-trigger id='dcc9' type='*' link='Final.Level_3a' label='Level 3a' ></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>

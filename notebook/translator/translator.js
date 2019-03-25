@@ -228,9 +228,11 @@ class Translator {
          else if (compiledKnot[c].type == "context-open")
             compiledKnot[c].context = knotId + "." + compiledKnot[c].context;
          else if (compiledKnot[c].type == "option" || compiledKnot[c].type == "divert") {
+            /*
             let target = (compiledKnot[c].target != null)
                             ? compiledKnot[c].target : compiledKnot[c].label;
-            target = target.replace(/ /g, "_");
+            */
+            let target = compiledKnot[c].target.replace(/ /g, "_");
             let prefix = knotId;
             let lastDot = prefix.lastIndexOf(".");
             while (lastDot > -1) {
@@ -508,7 +510,7 @@ class Translator {
    
    /*
     * Option Md to Obj
-    * Input: ++ [label] ([rule]) -> [target] or ** [label] ([rule]) -> [target]
+    * Input: + [label] ([rule]) -> [target] or * [label] ([rule]) -> [target]
     * Output:
     * {
     *    type: "option"
@@ -526,10 +528,18 @@ class Translator {
       
       if (matchArray[2] != null)
          option.label = matchArray[2].trim();
+      else {
+         option.label = matchArray[4].trim();
+         const lastDot = option.label.lastIndexOf(".");
+         if (lastDot > -1)
+            option.label = option.label.substr(lastDot + 1);
+      }
       if (matchArray[3] != null)
          option.rule = matchArray[3].trim();
       if (matchArray[4] != null)
          option.target = matchArray[4].trim();
+      else
+         option.target = matchArray[2].trim();
       
       return option;
    }
@@ -540,7 +550,7 @@ class Translator {
     *   <dcc-trigger id='dcc[seq]'  type='[subtype]' link='[link].html' label='[display]' [image] [location]></dcc-trigger>
     */
    _optionObjToHTML(obj) {
-      const display = (obj.label != null) ? obj.label : obj.target;
+      // const display = (obj.label != null) ? obj.label : obj.target;
       const location = (obj.rule != null) ? " location='" + obj.rule + "'" : "";
       
       const optionalImage = "";
@@ -554,7 +564,7 @@ class Translator {
       return Translator.htmlTemplates.option.replace("[seq]", obj.seq)
                                             .replace("[subtype]", obj.subtype)
                                             .replace("[link]", obj.target)
-                                            .replace("[display]", display)
+                                            .replace("[display]", obj.label)
                                             .replace("[image]", optionalImage)
                                             .replace("[location]", location);
    }
@@ -569,9 +579,16 @@ class Translator {
     * }
     */
    _divertMdToObj(matchArray) {
+      const target = matchArray[1].trim();
+      let label = target;
+      const lastDot = label.lastIndexOf(".");
+      if (lastDot > -1)
+         label = label.substr(lastDot + 1);
+      
       return {
          type: "divert",
-         target: matchArray[1].trim()
+         label: label,
+         target: target
       };
    }
 
@@ -583,7 +600,7 @@ class Translator {
    _divertObjToHTML(obj) {
       return Translator.htmlTemplates.divert.replace("[seq]", obj.seq)
                                             .replace("[link]", obj.target)
-                                            .replace("[display]", obj.target);
+                                            .replace("[display]", obj.label);
    }
 
    /*
@@ -863,7 +880,7 @@ class Translator {
    
    Translator.marks = {
       knot   : /(?:^[ \t]*(#+)[ \t]*(\w[\w \t]*)(?:\((\w[\w \t,]*)\))?[ \t]*#*[ \t]*$)|(?:^[ \t]*(\w[\w \t]*)(?:\((\w[\w \t,]*)\))?[ \t]*[\f\n\r](==+|--+)$)/im,
-      option : /[ \t]*([\+\*][\+\*])[ \t]*([^\(&> \t][^\(&>\n\r\f]*)?(?:\(([\w \t-]+)\)[ \t]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))?$/im,
+      option : /^[ \t]*([\+\*])[ \t]*([^\(&> \t][^\(&>\n\r\f]*)?(?:\(([\w \t-]+)\)[ \t]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))$/im,
       divert : /-(?:(?:&gt;)|>) *(\w[\w. ]*)/im,
       talk   : /^[ \t]*:[ \t]*(\w[\w \t]*):[ \t]*([^\n\r\f]+)$/im,
       talkopen: /^[ \t]*:[ \t]*(\w[\w \t]*):[ \t]*$/im,

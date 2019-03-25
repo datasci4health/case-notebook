@@ -239,7 +239,7 @@
 Hypertensive pneumothorax is more common in tall and thin young adults (primary pneumothorax) or in patients with chronic pulmonary diseases or chest trauma (secondary pneumothorax). On physical examination, we expect asymmetry in lung auscultation and the trachea may be dislocated to the contralateral side of the pneumothorax.</p>
 <p>Boerhaave Syndrome is more common in patients who presented vomiting before the chest pain started, were submitted to endoscopic procedures or had chest trauma.</p>
 <p>How does this information can help you to solve your case?</p>
-<p><dcc-trigger id='dcc5' type='**' link='Cycle_1.Begin' label='Back to the case' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc5' type='*' link='Cycle_1.Begin' label='Back to the case' ></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>

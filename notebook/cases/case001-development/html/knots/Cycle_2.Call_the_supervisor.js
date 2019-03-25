@@ -248,13 +248,13 @@
          <dcc-dialog>
             <p>We did not find features that increase the likelihood of myocardial ischemia. Moreover, our patient has a pleuritic chest pain that gets worse when the patient lays down.</p>
 <p>In the EKG we found ST-segment elevation in almost all leads. Also, we found a depression of the PR segment in the DII lead.</p>
-<p><dcc-trigger id='dcc3' type='**' link='Cycle_2.EKG_Analysis' label='EKG Analysis' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc3' type='*' link='Cycle_2.EKG_Analysis' label='EKG Analysis' ></dcc-trigger></p>
 <p><dcc-talk id='dcc5' character='EKG' speech='.'>
 </dcc-talk></p>
 <p><dcc-talk id='dcc7' character='Game' speech='What do you want to do?'>
 </dcc-talk>
-<dcc-trigger id='dcc9' type='**' link='Cycle_2.Order_EKG' label='Back' ></dcc-trigger>
-<dcc-trigger id='dcc11' type='**' link='Cycle_2.EKG_Analysis' label='Analyze EKG' ></dcc-trigger></p>
+<dcc-trigger id='dcc9' type='*' link='Cycle_2.Order_EKG' label='Back' ></dcc-trigger>
+<dcc-trigger id='dcc11' type='*' link='Cycle_2.EKG_Analysis' label='Analyze EKG' ></dcc-trigger></p>
          </dcc-dialog>
       </dcc-styler>
      </div>

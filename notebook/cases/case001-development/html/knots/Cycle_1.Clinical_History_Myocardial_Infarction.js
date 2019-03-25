@@ -235,7 +235,7 @@
        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff" height="420px">
        <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
           <p><img src="images/ebm-clinical-history-myocardial-infarction.png" alt="Clinical History Myocardial Infarction" /></p>
-<p><dcc-trigger id='dcc3' type='**' link='Call_the_supervisor' label='Back' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc3' type='*' link='Cycle_1.Call_the_supervisor_B' label='Back' ></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>

@@ -13,7 +13,7 @@ class DCCTrigger extends DCCBlock {
    }
    
    connectedCallback() {
-      if (this.type == "++" && !this.hasAttribute("location"))
+      if (this.type == "+" && !this.hasAttribute("location"))
          this.location = "#in";
       super.connectedCallback();
    }

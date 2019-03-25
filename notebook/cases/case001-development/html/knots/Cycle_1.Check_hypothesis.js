@@ -272,7 +272,7 @@
 <p>Patient: Doctor, I am feeling chest pain since yesterday. The <dcc-state-selector id='dcc21'>pain is continuous</dcc-state-selector> and <dcc-state-selector id='dcc23'>is located just in the middle of my chest</dcc-state-selector>, <dcc-state-selector id='dcc25'>worsening when I breathe</dcc-state-selector> and <dcc-state-selector id='dcc27'>when I lay down on my bed</dcc-state-selector>. I have <dcc-state-selector id='dcc29'>arterial hypertension</dcc-state-selector> and <dcc-state-selector id='dcc31'>I smoke 20 cigarettes</dcc-state-selector> every day. <dcc-state-selector id='dcc33'>My father had a "heart attack"</dcc-state-selector> at my age and I am very worried about it.</p>
 <p>You perform physical examination: <dcc-state-selector id='dcc35'>cardiac and pulmonary auscultation are normal</dcc-state-selector>; <dcc-state-selector id='dcc37'>chest pain does not worse with palpation of the thorax</dcc-state-selector>; <dcc-state-selector id='dcc39'>there is no jugular stasis</dcc-state-selector> <dcc-state-selector id='dcc41'>nor lower limb edema</dcc-state-selector>.</p>
 </dcc-group-selector>
-<p><dcc-trigger id='dcc45' type='**' link='Cycle_1.Review_hypothesis' label='Submit' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc45' type='*' link='Cycle_1.Review_hypothesis' label='Submit' ></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>

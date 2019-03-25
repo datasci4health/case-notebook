@@ -4,7 +4,7 @@ Start
 ## Case 001 (start,dialog_left)
 :NURSE Agnes: Doctor, we have a man (51 years old) who entered the emergency department reporting chest pain. His vital signs are ABP: 144x92mmHG; HR: 78bpm; RR: 21rpm; Temp: 37oC; O2Sat: 98%.
 
-** Let us go! -> Cycle 1.Begin
+* Let us go! -> Cycle 1.Begin
 
 Cycle 1
 =======
@@ -17,16 +17,16 @@ Cycle 1
 
 :Jacinto:What do you want to do?
 
-** Generate hypothesis
-** More information
-** Call the supervisor -> Call the supervisor A
+* -> Generate hypothesis
+* -> More information
+* Call the supervisor -> Call the supervisor A
 
 ## Generate hypothesis (input)
 What is your main diagnostic hypothesis?
 :PATIENT Jakob:.
 {?1 hypothesis:mesh#pericarditis,myopericarditis,pericardial inflammation,pericardial infection,pericardial effusion;infarction,myocardial infarction,coronary syndrome,acute coronary syndrome,ischemia,myocardial ischemia,coronary insufficiency,angina,angina pectoris}
 
-** Submit hypothesis -> Check hypothesis
+* Submit hypothesis -> Check hypothesis
 
 ## More information (information)
 
@@ -35,8 +35,8 @@ What is your main diagnostic hypothesis?
 
 :Jacinto:What do you want to do?
 
-** Generate hypothesis -> Generate hypothesis
-** Call the supervisor -> Call the supervisor A
+* Generate hypothesis -> Generate hypothesis
+* Call the supervisor -> Call the supervisor A
 
 ## Call the supervisor A (detailed)
 :SUPERVISOR Harry:
@@ -45,19 +45,19 @@ Hi! I am glad that you called me. Chest pain is an important complaint at the em
 The best way to find out what is happening with your patient, my young padawan, is to gather as much information as possible through history taking and physical examination. We need to search for the signs and symptoms that can guide our clinical reasoning process by changing the pre-test probabilities of each disease.
 ::
 
-** See likelihood tables -> Call the supervisor B 
+* See likelihood tables -> Call the supervisor B 
 
 ## Call the supervisor B (detailed)
 :SUPERVISOR Harry:.
 Do you know the concept of Likelihood ratio (LR)? -> Likelihood Ratio
 
-++ Clinical History Myocardial Infarction
-++ Physical Examination Myocardial Infarction
-++ Clinical History Aortic Dissection
-++ Physical Examination Aortic Dissection
-++ Pulmonary Embolism Wells Criteria
++ -> Clinical History Myocardial Infarction
++ -> Physical Examination Myocardial Infarction
++ -> Clinical History Aortic Dissection
++ -> Physical Examination Aortic Dissection
++ -> Pulmonary Embolism Wells Criteria
 
-** Continue talking -> Call the supervisor C 
+* Continue talking -> Call the supervisor C 
 
 ## Call the supervisor C (detailed)
 :SUPERVISOR Harry:.
@@ -67,38 +67,38 @@ Boerhaave Syndrome is more common in patients who presented vomiting before the 
 
 How does this information can help you to solve your case?
 
-** Back to the case -> Begin
+* Back to the case -> Begin
 
 ## Likelihood Ratio (detailed)
 
 Likelihood ratio (LR) - like sensitivity and specificity, LR describe the discriminatory power of features in a clinical context, estimating the probability of disease. When the LR is higher than 1, the feature increases the probability; when lower than 1, reduces it.
 
-** Back -> Call the supervisor
+* Back -> Call the supervisor B
 
 ## Clinical History Myocardial Infarction (detailed)
 ![Clinical History Myocardial Infarction](images/ebm-clinical-history-myocardial-infarction.png)
 
-** Back -> Call the supervisor
+* Back -> Call the supervisor B
 
 ## Physical Examination Myocardial Infarction (detailed)
 ![Physical Examination Myocardial Infarction](images/ebm-physical-examination-myocardial-infarction.png)
 
-** Back -> Call the supervisor
+* Back -> Call the supervisor B
 
 ## Clinical History Aortic Dissection (detailed)
 ![Clinical History Aortic Dissection](images/ebm-clinical-history-aortic-dissection.png)
 
-** Back -> Call the supervisor
+* Back -> Call the supervisor B
 
 ## Physical Examination Aortic Dissection (detailed)
 ![Physical Examination Aortic Dissection](images/ebm-physical-examination-aortic-dissection.png)
 
-** Back -> Call the supervisor
+* Back -> Call the supervisor B
 
 ## Pulmonary Embolism Wells Criteria (detailed)
 ![Pulmonary Embolism Wells Criteria](images/ebm-pulmonary-embolism-wells-criteria.png)
 
-** Back -> Call the supervisor
+* Back -> Call the supervisor B
 
 ## Check hypothesis (selector)
 
@@ -112,14 +112,14 @@ Patient: Doctor, I am feeling chest pain since yesterday. The {pain is continuou
 You perform physical examination: {cardiac and pulmonary auscultation are normal#-}; {chest pain does not worse with palpation of the thorax#=}; {there is no jugular stasis#=} {nor lower limb edema#=}.
 }}
 
-** Submit -> Review hypothesis 
+* Submit -> Review hypothesis 
 
 ## Review hypothesis (input)
 If you whant to review your hypothesis, type below the new hypothesis.
 :PATIENT Jakob:.
 {?1 hypothesis:mesh#pericarditis,myopericarditis,pericardial inflammation,pericardial infection,pericardial effusion;infarction,myocardial infarction,coronary syndrome,acute coronary syndrome,ischemia,myocardial ischemia,coronary insufficiency,angina,angina pectoris}
 
-** Submit -> Cycle 2.Order EKG
+* Submit -> Cycle 2.Order EKG
 
 Cycle 2
 =======
@@ -131,38 +131,38 @@ The blood pressure is symmetric in the four limbs.
 
 :EKG:.
 
-** Magnify -> Magnify EKG
+* Magnify -> Magnify EKG
 
 :Game: What do you want to do?
-** Generate hypothesis
-** More information
-** Call the supervisor
+* -> Generate hypothesis
+* -> More information
+* -> Call the supervisor
 
 
 ## Magnify EKG (magnify_exam)
 
 :EKG:.
 
-** Return -> Order EKG
+* Return -> Order EKG
 
 ## Generate hypothesis (input)
 What is your main diagnostic hypothesis?
 :PATIENT Jakob:.
 {?1 hypothesis:mesh#pericarditis,myopericarditis,pericardial inflammation,pericardial infection,pericardial effusion;infarction,myocardial infarction,coronary syndrome,acute coronary syndrome,ischemia,myocardial ischemia,coronary insufficiency,angina,angina pectoris}
 
-** Submit hypothesis -> Check hypothesis
+* Submit hypothesis -> Check hypothesis
 
 ## More information (decision_exam)
 
 ![EKG Description](images/ekg-description.png)
 
-** EKG Analysis
+* EKG Analysis
 
 :EKG:.
 
 :Game: What do you want to do?
-** Back -> Order EKG
-** Analyze EKG -> EKG Analysis
+* Back -> Order EKG
+* Analyze EKG -> EKG Analysis
 
 ## EKG Analysis (marker_exam)
 
@@ -176,7 +176,7 @@ What is your main diagnostic hypothesis?
    <dcc-image-marker id="VI" label="VI" coords="1010,460,1130,538" image="images/ekg-detail-01.png"></dcc-image-marker>
 </dcc-group-marker>
 
-** Return -> Order EKG
+* Return -> Order EKG
 
 ## Call the supervisor (decision_exam)
 
@@ -184,13 +184,13 @@ We did not find features that increase the likelihood of myocardial ischemia. Mo
 
 In the EKG we found ST-segment elevation in almost all leads. Also, we found a depression of the PR segment in the DII lead.
 
-** EKG Analysis
+* -> EKG Analysis
 
 :EKG:.
 
 :Game: What do you want to do?
-** Back -> Order EKG
-** Analyze EKG -> EKG Analysis
+* Back -> Order EKG
+* Analyze EKG -> EKG Analysis
 
 ## Check hypothesis (marker_exam)
 
@@ -204,14 +204,14 @@ In the EKG we found ST-segment elevation in almost all leads. Also, we found a d
    <dcc-image-marker id="VI" label="VI" coords="1010,460,1130,538" image="images/ekg-detail-01.png"></dcc-image-marker>
 </dcc-group-marker>
 
-** Submit -> Review hypothesis
+* Submit -> Review hypothesis
 
 ## Review hypothesis (input)
 If you whant to review your hypothesis, type below the new hypothesis.
 :PATIENT Jakob:.
 {?1 hypothesis:mesh#pericarditis,myopericarditis,pericardial inflammation,pericardial infection,pericardial effusion;infarction,myocardial infarction,coronary syndrome,acute coronary syndrome,ischemia,myocardial ischemia,coronary insufficiency,angina,angina pectoris}
 
-** Submit -> Final.Final report
+* Submit -> Final.Final report
 
 Final
 =====
@@ -222,9 +222,9 @@ Congratulations, my young Dr. you could helped your patient providing his diagno
 
 :Computer:Select a final report level:
 
-** Level 1
-** Level 2a
-** Level 3a
+* -> Level 1
+* -> Level 2a
+* -> Level 3a
 
 ## Level 1 (detailed)
 
@@ -232,8 +232,8 @@ Congratulations, my young Dr. you could helped your patient providing his diagno
 
 Our patient complained about chest pain, located in the middle of his chest, worsening when he breaths and when he lay down on his bed. Both features increases the probability of pericardial disease, especially acute pericarditis. Although patient´s father died of a "heart attack", there were no chest pain features that increase the probability of myocardial infarction, as the pain did not irradiate to arms, the pain was not described as a pressure, neither complaining about nausea, vomiting or shortness of breath. Another differential diagnosis to consider is myopericarditis, but we not be able to find heart failure signs (pulmonary and cardiac auscultation were normal) and the patient did not complain about dyspnea. So, at the level 1, the answer to our open-ended question was Acute Pericarditis.
 
-** Next -> Level 2a
-** Return -> Final report
+* Next -> Level 2a
+* Return -> Final report
 
 ## Level 2a (detailed)
 
@@ -261,8 +261,8 @@ You perform physical examination: {cardiac and pulmonary auscultation are normal
 }}
 </div>
 
-** Next -> Level 2b
-** Return -> Final report
+* Next -> Level 2b
+* Return -> Final report
 
 ## Level 2b (detailed)
 
@@ -272,8 +272,8 @@ In acute pericarditis, patients are usually young, most cases are reported under
 
 In clinical history, two features increase the probability of the chest pain being related to a pericardial disease: worsening with breathing; and worsening when the patient lay down. 
 
-** Next -> Level 2c
-** Return -> Final report
+* Next -> Level 2c
+* Return -> Final report
 
 ## Level 2c (detailed)
 
@@ -281,8 +281,8 @@ As the patient has arterial hypertension, is smoker and his father died of a "he
 
 In physical examination in patients with acute pericarditis, we may find pericardial rub, one of the diagnostic criteria. So, when we did not find it, the probability of the disease is reduced, but did not exclude the diagnosis. It is crucial to look for the other diagnostic criteria.
 
-** Next -> Level 3a
-** Return -> Final report
+* Next -> Level 3a
+* Return -> Final report
 
 ## Level 3a (detailed)
 
@@ -290,8 +290,8 @@ My young Dr, the EKG interpretation was very helpful to solve our case.
 
 We found a diffuse ST-segment elevation, and a PR-segment depression in DII lead.  These findings, associated to the clinical scenario, strongly indicate the main hypothesis of Acute Pericarditis.
 
-** Next -> Level 3b
-** Return -> Final report
+* Next -> Level 3b
+* Return -> Final report
 
 ## Level 3b (detailed)
 
@@ -299,8 +299,8 @@ My young Dr, the EKG interpretation was very helpful to solve our case.
 
 We found a diffuse ST-segment elevation, and a PR-segment depression in DII lead.  These findings, associated to the clinical scenario, strongly indicate the main hypothesis of Acute Pericarditis.
 
-** Next -> Level 3c
-** Return -> Final report
+* Next -> Level 3c
+* Return -> Final report
 
 ## Level 3c (detailed)
 <div style="font-size: 18px">
@@ -313,4 +313,4 @@ Cooper LT, Imazio M. Management of myopericarditis. Expert Rev Cardiovasc Ther 2
 Our patient fullfill the following criteria: 1 and 3. So, acute pericarditis is the main diagnostic hypothesis.
 </div>
 
-** Return -> Final report  
+* Return -> Final report  

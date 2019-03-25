@@ -271,8 +271,8 @@ You perform physical examination: <dcc-state-selector id='dcc73' answer='-'>card
 
 
 </div>
-<p><dcc-trigger id='dcc83' type='**' link='Final.Level_2b' label='Next' ></dcc-trigger>
-<dcc-trigger id='dcc85' type='**' link='Final.Final_report' label='Return' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc83' type='*' link='Final.Level_2b' label='Next' ></dcc-trigger>
+<dcc-trigger id='dcc85' type='*' link='Final.Final_report' label='Return' ></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>

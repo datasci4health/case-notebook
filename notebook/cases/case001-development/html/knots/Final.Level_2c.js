@@ -236,8 +236,8 @@
        <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
           <p>As the patient has arterial hypertension, is smoker and his father died of a "heart attack" we could consider myocardial infarction as one of the diagnosis. But considering chest pain features of our patient, there is no one that increases this possibility. So, these features may lead us to cognitive error if we consider myocardial infarction as the main diagnosis (which is wrong). </p>
 <p>In physical examination in patients with acute pericarditis, we may find pericardial rub, one of the diagnostic criteria. So, when we did not find it, the probability of the disease is reduced, but did not exclude the diagnosis. It is crucial to look for the other diagnostic criteria.</p>
-<p><dcc-trigger id='dcc3' type='**' link='Final.Level_3a' label='Next' ></dcc-trigger>
-<dcc-trigger id='dcc5' type='**' link='Final.Final_report' label='Return' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc3' type='*' link='Final.Level_3a' label='Next' ></dcc-trigger>
+<dcc-trigger id='dcc5' type='*' link='Final.Final_report' label='Return' ></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>

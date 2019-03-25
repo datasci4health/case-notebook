@@ -250,12 +250,12 @@
 <p>The blood pressure is symmetric in the four limbs. </p>
 <p><dcc-talk id='dcc3' character='EKG' speech='.'>
 </dcc-talk></p>
-<p><dcc-trigger id='dcc5' type='**' link='Cycle_2.Magnify_EKG' label='Magnify' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc5' type='*' link='Cycle_2.Magnify_EKG' label='Magnify' ></dcc-trigger></p>
 <p><dcc-talk id='dcc7' character='Game' speech='What do you want to do?'>
 </dcc-talk>
-<dcc-trigger id='dcc9' type='**' link='Cycle_2.Generate_hypothesis' label='Generate hypothesis' ></dcc-trigger>
-<dcc-trigger id='dcc11' type='**' link='Cycle_2.More_information' label='More information' ></dcc-trigger>
-<dcc-trigger id='dcc13' type='**' link='Cycle_2.Call_the_supervisor' label='Call the supervisor' ></dcc-trigger></p>
+<dcc-trigger id='dcc9' type='*' link='Cycle_2.Generate_hypothesis' label='Generate hypothesis' ></dcc-trigger>
+<dcc-trigger id='dcc11' type='*' link='Cycle_2.More_information' label='More information' ></dcc-trigger>
+<dcc-trigger id='dcc13' type='*' link='Cycle_2.Call_the_supervisor' label='Call the supervisor' ></dcc-trigger></p>
          </dcc-dialog>
       </dcc-styler>
      </div>
