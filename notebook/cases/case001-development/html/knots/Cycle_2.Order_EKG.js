@@ -198,11 +198,10 @@
          id="image1266"
          height="831"
          width="1305"
-         xlink:href="/home/santanche/../../../AppData/Roaming/Adobe/CoreSync/cloudnative/DCX/e27460192ae7991f367783de1525beab/1/v1/blob/266/26632e75-7734-426f-845c-9e7546affd06" />
+         xlink:href="" />
     </pattern>
   </defs>
   <image
-     sodipodi:absref="/home/santanche/git/case-notebook/notebook/templates/jacinto/svgs/images/hospital-background.png"
      xlink:href="images/hospital-background.png"
      width="1136.7474"
      height="597.91913"
@@ -245,16 +244,18 @@
        id="description"
        class="cls-15"
        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff">
-      <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
+      <dcc-styler xstyle="out" locations="talk-image-1;action-1;action-2;action-3">
          <dcc-dialog>
             <p>Our patient denies any recent long trip, immobilization or surgery.</p>
 <p>The blood pressure is symmetric in the four limbs. </p>
-<p><dcc-talk id='dcc3' character='Game' speech='What do you want to do?'>
+<p><dcc-talk id='dcc3' character='EKG' speech='.'>
+</dcc-talk></p>
+<p><dcc-trigger id='dcc5' type='*' link='Cycle_2.Magnify_EKG' label='Magnify' ></dcc-trigger></p>
+<p><dcc-talk id='dcc7' character='Game' speech='What do you want to do?'>
 </dcc-talk>
-<dcc-trigger id='dcc5' type='**' link='Cycle_2.Generate_hypothesis' label='Generate hypothesis' ></dcc-trigger>
-<dcc-trigger id='dcc7' type='**' link='Cycle_2.More_information' label='More information' ></dcc-trigger>
-<dcc-trigger id='dcc9' type='**' link='Cycle_2.Call_the_supervisor' label='Call the supervisor' ></dcc-trigger></p>
-<p><dcc-trigger id='dcc11' type='++' link='Cycle_2.Magnify_EKG' label='Magnify'  location='ekg-image'></dcc-trigger></p>
+<dcc-trigger id='dcc9' type='*' link='Cycle_2.Generate_hypothesis' label='Generate hypothesis' ></dcc-trigger>
+<dcc-trigger id='dcc11' type='*' link='Cycle_2.More_information' label='More information' ></dcc-trigger>
+<dcc-trigger id='dcc13' type='*' link='Cycle_2.Call_the_supervisor' label='Call the supervisor' ></dcc-trigger></p>
          </dcc-dialog>
       </dcc-styler>
      </div>
@@ -292,8 +293,9 @@
      height="59"
      width="212"
      class="cls-15"
-     data-name="Rectangle 18"
-     id="Rectangle_18-6" />
+     visibility="hidden"
+     data-name="Action 1 Wrapper"
+     id="action-1-wrapper" />
   <rect
      style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
      y="544.35254"
@@ -302,8 +304,9 @@
      height="59"
      width="212"
      class="cls-15"
-     data-name="Rectangle 37"
-     id="Rectangle_37" />
+     visibility="hidden"
+     data-name="Action 2 Wrapper"
+     id="action-2-wrapper" />
   <rect
      style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;fill:#ba2027"
      y="544.35254"
@@ -312,8 +315,9 @@
      height="59"
      width="212"
      class="cls-15"
-     data-name="Rectangle 38"
-     id="Rectangle_38" />
+     visibility="hidden"
+     data-name="Action 3 Wrapper"
+     id="action-3-wrapper" />
   <foreignObject
      data-name="Action 1"
      x="308"
@@ -357,7 +361,7 @@
      style="font-weight:700;font-size:28px;font-family:Tahoma, Geneva, sans-serif;fill:#346e93"
      class="cls-18"
      data-name="speech"
-     id="talk-speech-1"
+     id="talk-speech-2"
      x="300"
      y="525">
     <tspan
@@ -473,13 +477,12 @@
      y="185.91272"
      style="fill:url(#pattern1818);stroke-width:1.0633601" />
   <image
-     sodipodi:absref="/home/santanche/git/case-notebook/notebook/templates/jacinto/svgs/../../../author/images/ekg-original.png"
-     xlink:href="../../../author/images/ekg-original.png"
+     xlink:href=""
      preserveAspectRatio="none"
-     id="ekg-image"
      y="185.91272"
      x="857.26068"
      height="198.84833"
-     width="311.56448" />
+     width="311.56448"
+     id="talk-image-1" />
 </svg>
 `) })();

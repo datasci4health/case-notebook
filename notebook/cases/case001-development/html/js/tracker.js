@@ -27,18 +27,18 @@ class Tracker {
    
    inputReady(topic, message) {
       this._updateVariable(topic, "");
-      console.log("input: " + message.value);
+      // console.log("input: " + message.value);
    }
    
    groupinputReady(topic, message) {
       this._updateVariable(topic, {});
       this._groupInput = MessageBus.extractLevel(topic, 2);
-      console.log("input: " + message.context);
+      // console.log("input: " + message.context);
    }
    
    subinputReady(topic, message) {
-      console.log("variables");
-      console.log(this._variables);
+      // console.log("variables");
+      // console.log(this._variables);
 
       if (this._groupInput != null) {
          const id = MessageBus.extractLevel(topic, 2);
@@ -49,12 +49,12 @@ class Tracker {
    
    inputTyped(topic, message) {
       this._updateVariable(topic, message.value);
-      console.log("input: " + message.value);
+      // console.log("input: " + message.value);
    }
    
    inputChanged(topic, message) {
       this._updateVariable(topic, message.value);
-      console.log("input: " + message.value);
+      // console.log("input: " + message.value);
    }
    
    stateChanged(topic, message) {
@@ -63,16 +63,15 @@ class Tracker {
          this._variables[this._groupInput][id].state = message.state;
       }
       
-      console.log("variables");
-      console.log(this._variables);
+      // console.log("variables");
+      // console.log(this._variables);
    }
    
    submitVariables(topic, message) {
-      for (let v in this._variables) {
-         console.log("variavel: " + v + " -- " + this._variables[v]);
-         // this._server.recordInput(v, this._variables[v]);
+      for (let v in this._variables)
          window.messageBus.ext.publish("var/" + v + "/set", this._variables[v]);
-      }
+      // console.log("variavel: " + v + " -- " + this._variables[v]);
+      // this._server.recordInput(v, this._variables[v]);
    }
    
    _updateVariable(topic, value) {
@@ -80,7 +79,7 @@ class Tracker {
        //  /^\/var\/(\w+)\//.exec(topic);
       if (v != null) {
          this._variables[v] = value;
-         console.log("update variable " + v + " with " + value);
+         // console.log("update variable " + v + " with " + value);
       }
    }
 }

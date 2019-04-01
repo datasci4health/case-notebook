@@ -1,1 +1,0 @@
-(function() { PlayerManager.instance().presentKnot(`<p>Your answer for the first hypothesis was ~hypothesis1</p>`) })();

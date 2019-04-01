@@ -18,29 +18,29 @@ class DCCBlock extends DCCBase {
    }
    
    connectedCallback() {
-      if (!this.hasAttribute("xstyle") && window.messageBus.int.hasSubscriber("dcc/request/xstyle")) {
-         window.messageBus.int.subscribe("dcc/xstyle/" + this.id, this.defineXstyle);
-         window.messageBus.int.publish("dcc/request/xstyle", this.id);
+      if (!this.hasAttribute("xstyle") && window.messageBus.page.hasSubscriber("dcc/request/xstyle")) {
+         window.messageBus.page.subscribe("dcc/xstyle/" + this.id, this.defineXstyle);
+         window.messageBus.page.publish("dcc/request/xstyle", this.id);
          this._pendingRequests++;
       }
       if (!this.hasAttribute("location") &&
-          window.messageBus.int.hasSubscriber("dcc/request/location")) {
-         window.messageBus.int.subscribe("dcc/location/" + this.id, this.defineLocation);
-         window.messageBus.int.publish("dcc/request/location", this.id);
+          window.messageBus.page.hasSubscriber("dcc/request/location")) {
+         window.messageBus.page.subscribe("dcc/location/" + this.id, this.defineLocation);
+         window.messageBus.page.publish("dcc/request/location", this.id);
          this._pendingRequests++;
       }
       this._checkRender();
    }
 
    defineXstyle(topic, message) {
-      window.messageBus.int.unsubscribe("dcc/xstyle/" + this.id, this.defineXstyle);
+      window.messageBus.page.unsubscribe("dcc/xstyle/" + this.id, this.defineXstyle);
       this.xstyle = message;
       this._pendingRequests--;
       this._checkRender();
    }
    
    defineLocation(topic, message) {
-      window.messageBus.int.unsubscribe("dcc/location/" + this.id, this.defineLocation);
+      window.messageBus.page.unsubscribe("dcc/location/" + this.id, this.defineLocation);
       this.location = message;
       this._pendingRequests--;
       this._checkRender();
@@ -127,6 +127,9 @@ class DCCBlock extends DCCBase {
          default:     render = this.xstyle;
       }
 
+      // console.log("* id: " + this.id);
+      // console.log("* location: " + this.location);
+      // console.log("* xstyle: " + this.xstyle);
       if (this.xstyle.startsWith("out") &&
           this.hasAttribute("location") && this.location != "#in") {
          presentation = document.querySelector("#" + this.location);

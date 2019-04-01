@@ -115,8 +115,8 @@ Markdown text that does not match to any expression.
 
 ## Option
 ### Markdown to Object
-* Sentence: `++ [label] ([rule]) -> [target]` or `** [label] ([rule]) -> [target]`
-* Expression: `[ \t]*([\+\*][\+\*])[ \t]*([^\(&> \t][^\(&>\n\r\f]*)?(?:\(([\w \t-]+)\)[ \t]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))?$`
+* Sentence: `+ [label] ([rule]) -> [target]` or `* [label] ([rule]) -> [target]`
+* Expression: `^[ \t]*([\+\*])[ \t]*([^\(&> \t][^\(&>\n\r\f]*)?(?:\(([\w \t-]+)\)[ \t]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))$`
   * Group #1: subtype
   * Group #2: label
   * Group #3: rule
@@ -127,11 +127,12 @@ Markdown text that does not match to any expression.
 {
    type: "option"
    subtype: "++" or "**"
-   label: <label to be displayed -- if there is not an explicit target, the label is the target>
+   label: <label to be displayed -- if there is no explicit label, the target is the label>
    rule:  <rule of the trigger -- determine its position in the knot>
-   target: <target node to divert>
+   target: <resolved target -- if there is not an explicit target, the label is the target>
 }
 ```
+`<resolved target>` - target after resolving relative links.
 ### Object to HTML
 ```
 <dcc-trigger id='dcc[seq]' type='[subtype]' link='[link].html' label='[display]' [image][location]></dcc-trigger>
@@ -146,10 +147,12 @@ Markdown text that does not match to any expression.
 * Object:
 ```
 {
-   type: "divert"
-   target: <target node to divert>
+   type: "divert",
+   label: <target>
+   target: <resolved target>
 }
 ```
+`<resolved target>` - target after resolving relative links.
 ### Object to HTML
 ```
 <dcc-trigger link='[link].html' label='[display]'></dcc-trigger>

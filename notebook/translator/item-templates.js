@@ -3,7 +3,7 @@ Translator.htmlTemplates = {
 option:
 `<dcc-trigger id='dcc[seq]' type='[subtype]' link='[link]' label='[display]' [image][location]></dcc-trigger>`,
 divert:
-`<dcc-trigger id='dcc[seq]' type='++' link='[link]' label='[display]'></dcc-trigger>`,
+`<dcc-trigger id='dcc[seq]' type='+' link='[link]' label='[display]'></dcc-trigger>`,
 talk:
 `<dcc-talk id='dcc[seq]' character='[character]' speech='[speech]'>
 </dcc-talk>`,
@@ -37,6 +37,6 @@ selctxclose:
 
 `,
 selector:
-`<dcc-state-selector id='dcc[seq]'>[expression]</dcc-state-selector>`
+`<dcc-state-selector id='dcc[seq]'[answer]>[expression]</dcc-state-selector>`
 };
 })();

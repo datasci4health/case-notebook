@@ -102,6 +102,8 @@ class PlayerManager {
    }
    
    presentKnot(knot) {
+      window.messageBus.page = new MessageBus(false);
+      
       this._mainPanel.innerHTML = knot;
 
       document.head.removeChild(this._knotScript);
@@ -109,6 +111,29 @@ class PlayerManager {
       // <TODO> Improve the strategy
       if (this._currentKnot == "entry")
          this.startGame();
+   }
+   
+   presentNote(knot) {
+      const dimensions = Utils.tools.screenDimensions();
+      // const coord = 
+      //    Utils.tools.centralize(dimensions.width * .7, dimensions.height * .7);
+      
+      let div = document.createElement("div");
+      
+      div.style.position = "absolute";
+      div.style.margin = "auto";
+      div.style.top = 0;
+      div.style.right = 0;
+      div.style.bottom = 0;
+      div.style.left = 0;
+      div.style.width = (dimensions.width * .7) + "px";
+      div.style.height = (dimensions.height * .7) + "px";
+      
+      div.innerHTML = knot;
+      
+      // console.log(div);
+      
+      this._mainPanel.appendChild(div);
    }
    
    /*
@@ -185,8 +210,8 @@ class PlayerManager {
       // <TODO> this._runningCase is provisory
       const runningCase = this._server.generateRunningCase();
       
-      console.log("************* Running case");
-      console.log(runningCase);
+      // console.log("************* Running case");
+      // console.log(runningCase);
       
       window.messageBus.ext.defineRunningCase(runningCase);
    }

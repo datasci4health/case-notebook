@@ -41,6 +41,7 @@ class Translator {
          let transObj = this._knotMdToObj(knotBlocks[kb].match(Translator.marks.knot));
          transObj.render = true;
          let label = transObj.title;
+         // console.log("Label: " + label);
          if (transObj.level == 1)
             knotCtx[0] = {label: label, obj: transObj};
          else {
@@ -53,7 +54,7 @@ class Translator {
                label = knotCtx[upper].label + "." + label;
                knotCtx[upper].obj.render = false;
             }
-            knotCtx[transObj.level-1] = label;
+            knotCtx[transObj.level-1] = {label: label, obj: transObj};
          }
          let knotId = label.replace(/ /g, "_");
          if (kb == 1)
@@ -228,9 +229,11 @@ class Translator {
          else if (compiledKnot[c].type == "context-open")
             compiledKnot[c].context = knotId + "." + compiledKnot[c].context;
          else if (compiledKnot[c].type == "option" || compiledKnot[c].type == "divert") {
+            /*
             let target = (compiledKnot[c].target != null)
                             ? compiledKnot[c].target : compiledKnot[c].label;
-            target = target.replace(/ /g, "_");
+            */
+            let target = compiledKnot[c].target.replace(/ /g, "_");
             let prefix = knotId;
             let lastDot = prefix.lastIndexOf(".");
             while (lastDot > -1) {
@@ -364,6 +367,16 @@ class Translator {
          knot.categories = matchArray[3].trim().split(",");
       else if (matchArray[5] != null)
          knot.categories = matchArray[5].trim().split(",");
+      
+      if (knot.categories != null)
+         for (let sc in Translator.specialCategories) {
+            let cat = knot.categories.indexOf(Translator.specialCategories[sc]);
+            if (cat >= 0) {
+               let category = knot.categories[cat];
+               knot.categories.splice(cat, 1);
+               knot.categories.unshift(category);
+            }
+         }
       
       if (matchArray[1] != null)
          knot.level = matchArray[1].trim().length;
@@ -508,7 +521,7 @@ class Translator {
    
    /*
     * Option Md to Obj
-    * Input: ++ [label] ([rule]) -> [target] or ** [label] ([rule]) -> [target]
+    * Input: + [label] ([rule]) -> [target] or * [label] ([rule]) -> [target]
     * Output:
     * {
     *    type: "option"
@@ -526,10 +539,18 @@ class Translator {
       
       if (matchArray[2] != null)
          option.label = matchArray[2].trim();
+      else {
+         option.label = matchArray[4].trim();
+         const lastDot = option.label.lastIndexOf(".");
+         if (lastDot > -1)
+            option.label = option.label.substr(lastDot + 1);
+      }
       if (matchArray[3] != null)
          option.rule = matchArray[3].trim();
       if (matchArray[4] != null)
          option.target = matchArray[4].trim();
+      else
+         option.target = matchArray[2].trim();
       
       return option;
    }
@@ -540,7 +561,7 @@ class Translator {
     *   <dcc-trigger id='dcc[seq]'  type='[subtype]' link='[link].html' label='[display]' [image] [location]></dcc-trigger>
     */
    _optionObjToHTML(obj) {
-      const display = (obj.label != null) ? obj.label : obj.target;
+      // const display = (obj.label != null) ? obj.label : obj.target;
       const location = (obj.rule != null) ? " location='" + obj.rule + "'" : "";
       
       const optionalImage = "";
@@ -554,7 +575,7 @@ class Translator {
       return Translator.htmlTemplates.option.replace("[seq]", obj.seq)
                                             .replace("[subtype]", obj.subtype)
                                             .replace("[link]", obj.target)
-                                            .replace("[display]", display)
+                                            .replace("[display]", obj.label)
                                             .replace("[image]", optionalImage)
                                             .replace("[location]", location);
    }
@@ -569,9 +590,16 @@ class Translator {
     * }
     */
    _divertMdToObj(matchArray) {
+      const target = matchArray[1].trim();
+      let label = target;
+      const lastDot = label.lastIndexOf(".");
+      if (lastDot > -1)
+         label = label.substr(lastDot + 1);
+      
       return {
          type: "divert",
-         target: matchArray[1].trim()
+         label: label,
+         target: target
       };
    }
 
@@ -583,7 +611,7 @@ class Translator {
    _divertObjToHTML(obj) {
       return Translator.htmlTemplates.divert.replace("[seq]", obj.seq)
                                             .replace("[link]", obj.target)
-                                            .replace("[display]", obj.target);
+                                            .replace("[display]", obj.label);
    }
 
    /*
@@ -749,6 +777,11 @@ class Translator {
          context.options = matchArray[3];
       if (matchArray[4] != null)
          context.colors = matchArray[4].trim();
+      
+      // <TODO> weak strategy -- improve
+      this._lastSelectorContext = context.context;
+      this._lastSelectorEvaluation = context.evaluation;
+      // console.log("1. last context: " + this._lastSelectorContext);
 
       return context;
    }
@@ -787,6 +820,10 @@ class Translator {
     * Output: </dcc-group-selector>
     */
    _selctxcloseObjToHTML(obj) {
+      // console.log("3. last context: " + this._lastSelectorContext);
+      // <TODO> weak strategy -- improve
+      // delete this._lastSelectorContext;
+      
       return Translator.htmlTemplates.selctxclose;
    }
 
@@ -807,6 +844,15 @@ class Translator {
       };
       if (matchArray[3] != null)
          selector.value = matchArray[3].trim();
+
+      // <TODO> weak strategy -- improve
+      if (this._lastSelectorContext) {
+         if (this._lastSelectorContext == "answers")
+            selector.present = "answer";
+         else if (this._lastSelectorContext == "player")
+            selector.present = this._lastSelectorEvaluation;
+      }
+      // console.log("2. last context: " + this._lastSelectorContext);
       return selector;
    }
    
@@ -815,8 +861,17 @@ class Translator {
     * Output: <dcc-state-selector id='dcc[seq]'>[expression]</dcc-state-selector>
     */
    _selectorObjToHTML(obj) {
+      let answer="";
+      if (obj.present) {
+         if (obj.present == "answer")
+            answer = " answer='" + obj.value + "'";
+         else
+            answer = " player='" + obj.present + "'";
+      } 
+      
       return Translator.htmlTemplates.selector.replace("[seq]", obj.seq)
-                                              .replace("[expression]", obj.expression);            
+                                              .replace("[expression]", obj.expression)
+                                              .replace("[answer]", answer);            
    }
 }
 
@@ -825,18 +880,16 @@ class Translator {
 
    Translator.marksAnnotation = {
      // knot   : /^[ \t]*==*[ \t]*(\w[\w \t]*)(?:\(([\w \t]*)\))?[ \t]*=*[ \t]*[\f\n\r]/im,
-     ctxopen : /\{\{([\w \t\+\-\*"=\:%\/]+)(?:#([\w \t\+\-\*"=\%\/]+):([\w \t\+\-\*"=\%\/,]+)(?:;([\w \t#,]+))?)?[\f\n\r]/im,
+     ctxopen : /\{\{([\w \t\+\-\*\."=\:%\/]+)(?:#([\w \t\+\-\*\."=\%\/]+):([\w \t\+\-\*"=\%\/,]+)(?:;([\w \t#,]+))?)?[\f\n\r]/im,
      ctxclose: /\}\}/im,
      annotation: /\{([\w \t\+\-\*"=\:%\/]+)(?:\(([\w \t\+\-\*"=\:%\/]+)\)[ \t]*)?(?:#([\w \t\+\-\*"=\:%\/]+))?\}/im
    };
    
    Translator.marksAnnotationInside = /([\w \t\+\-\*"]+)(?:[=\:]([\w \t%]*)(?:\/([\w \t%]*))?)?/im;
 
-   //
-   
    Translator.marks = {
       knot   : /(?:^[ \t]*(#+)[ \t]*(\w[\w \t]*)(?:\((\w[\w \t,]*)\))?[ \t]*#*[ \t]*$)|(?:^[ \t]*(\w[\w \t]*)(?:\((\w[\w \t,]*)\))?[ \t]*[\f\n\r](==+|--+)$)/im,
-      option : /[ \t]*([\+\*][\+\*])[ \t]*([^\(&> \t][^\(&>\n\r\f]*)?(?:\(([\w \t-]+)\)[ \t]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))?$/im,
+      option : /^[ \t]*([\+\*])[ \t]*([^\(&> \t][^\(&>\n\r\f]*)?(?:\(([\w \t-]+)\)[ \t]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))$/im,
       divert : /-(?:(?:&gt;)|>) *(\w[\w. ]*)/im,
       talk   : /^[ \t]*:[ \t]*(\w[\w \t]*):[ \t]*([^\n\r\f]+)$/im,
       talkopen: /^[ \t]*:[ \t]*(\w[\w \t]*):[ \t]*$/im,
@@ -849,6 +902,8 @@ class Translator {
       // annotation : 
       // score  : /^(?:<p>)?[ \t]*~[ \t]*([\+\-=\*\\%]?)[ \t]*(\w*)?[ \t]*(\w+)[ \t]*(?:<\/p>)?/im
    };
+   
+   Translator.specialCategories = ["start", "note"];
    
    Translator.contextHTML = {
       open:  /<p>(<dcc-group-selector(?:[\w \t\+\-\*"'=\%\/,]*)?>)<\/p>/igm,

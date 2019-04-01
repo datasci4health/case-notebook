@@ -13,7 +13,7 @@ class DCCTrigger extends DCCBlock {
    }
    
    connectedCallback() {
-      if (this.type == "++" && !this.hasAttribute("location"))
+      if (this.type == "+" && !this.hasAttribute("location"))
          this.location = "#in";
       super.connectedCallback();
    }
@@ -71,7 +71,6 @@ class DCCTrigger extends DCCBlock {
    }
    
    _generateTemplate(render) {
-      // let linkWeb = (this.hasAttribute("link")) ? "href='" + this.link + "' " : "";
       let linkWeb = "";
       let elements = null;
       if (this.hasAttribute("image"))

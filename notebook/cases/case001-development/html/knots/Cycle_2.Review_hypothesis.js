@@ -307,7 +307,7 @@
 </dcc-talk>
 <dcc-input id='dcc5' variable='Cycle_2.Review_hypothesis.hypothesis' rows='1' vocabulary='mesh'> 
 </dcc-input></p>
-<p><dcc-trigger id='dcc7' type='**' link='Final.Final_report' label='Submit' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc7' type='*' link='Final.Report' label='Submit' ></dcc-trigger></p>
       </dcc-styler>
     </div>
   </foreignObject>

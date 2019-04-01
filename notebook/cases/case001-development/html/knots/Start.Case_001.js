@@ -1,4 +1,5 @@
-(function() { PlayerManager.instance().presentKnot(`<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+(function() { PlayerManager.instance().presentKnot(`<script>PlayerManager.instance().startCase()</script>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    xmlns:xhtml="http://www.w3.org/1999/xhtml"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -259,8 +260,7 @@
   </text>
 </svg>
 <dcc-styler xstyle="out" locations="talk-action">
-   <script>PlayerManager.instance().startCase()</script>
-<p><dcc-talk id='dcc3' character='NURSE Agnes' speech='Doctor, we have a man (51 years old) who entered the emergency department reporting chest pain. His vital signs are ABP: 144x92mmHG; HR: 78bpm; RR: 21rpm; Temp: 37oC; O2Sat: 98%.'>
+   <p><dcc-talk id='dcc3' character='NURSE Agnes' speech='Doctor, we have a man (51 years old) who entered the emergency department reporting chest pain. His vital signs are ABP: 144x92mmHG; HR: 78bpm; RR: 21rpm; Temp: 37oC; O2Sat: 98%.'>
 </dcc-talk></p>
-<p><dcc-trigger id='dcc5' type='**' link='Cycle_1.Begin' label='Let us go!' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc5' type='*' link='Cycle_1.Begin' label='Let us go!' ></dcc-trigger></p>
 </dcc-styler>`) })();

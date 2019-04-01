@@ -9,7 +9,7 @@ class NotebookDM(object):
    DIR_CASES = "../cases/"
    DIR_SHARED = "../shared/"
    DIR_PLAYER = "../player/"
-   DIR_BUS = "../bus/"
+   DIR_INFRA = "../infra/"
    DIR_TEMPLATES = "../templates/"
    DIR_DCCS = "../dccs/components/"
    DIR_AUTHOR = "../author/"
@@ -17,6 +17,7 @@ class NotebookDM(object):
    FILE_CASE_EXTENSION = ".md"
    FILE_CASE = FILE_CASE_NAME + FILE_CASE_EXTENSION
    FILE_PLAYER = "index.html"
+   FILE_CAPSULE = "knot-capsule.html"
     
    def templateFamiliesList(self):
        directories = glob.glob(NotebookDM.DIR_TEMPLATES + "*/")
@@ -68,12 +69,12 @@ class NotebookDM(object):
       
       return versionFile
         
-   # def loadPlayer(self):
-   #   templateFile = open(NotebookDM.DIR_PLAYER + NotebookDM.FILE_PLAYER,
-   #                       "r", encoding="utf-8")
-   #   templateHTML = templateFile.read()
-   #   templateFile.close()
-   #   return templateHTML
+   def loadKnotCapsule(self):
+     capsuleFile = open(NotebookDM.DIR_AUTHOR + NotebookDM.FILE_CAPSULE,
+                         "r", encoding="utf-8")
+     capsuleHTML = capsuleFile.read()
+     capsuleFile.close()
+     return capsuleHTML
    
    def loadTemplate(self, templateFamily, templateName):
       templateHTML = ""
@@ -99,7 +100,7 @@ class NotebookDM(object):
       shutil.copytree(NotebookDM.DIR_PLAYER + "js", caseDir + "html/js")
       
       # copy bus scripts to the case 
-      for fb in glob.glob(NotebookDM.DIR_BUS + "*"):
+      for fb in glob.glob(NotebookDM.DIR_INFRA + "*"):
          shutil.copy2(fb, caseDir + "html/js")
 
       # copy template styles and scripts to the case
