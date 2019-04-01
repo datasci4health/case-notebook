@@ -4,6 +4,8 @@ RUN apt update && apt install -y apache2 python3-pip
 RUN pip3 install jupyter_kernel_gateway
 RUN rm /var/www/html/index.html
 
+COPY ./resources/apache2/000-default.conf /etc/apache2/sites-enabled/
+
 WORKDIR /var/www/html
 ADD ./notebook .
 
