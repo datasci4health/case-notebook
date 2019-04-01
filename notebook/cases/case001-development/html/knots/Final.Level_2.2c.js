@@ -234,8 +234,10 @@
        class="cls-15"
        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff" height="420px">
        <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
-          <p>Likelihood ratio (LR) - like sensitivity and specificity, LR describe the discriminatory power of features in a clinical context, estimating the probability of disease. When the LR is higher than 1, the feature increases the probability; when lower than 1, reduces it.</p>
-<p><dcc-trigger id='dcc3' type='*' link='Cycle_1.Call_the_supervisor_B' label='Back' ></dcc-trigger></p>
+          <p>As the patient has arterial hypertension, is smoker and his father died of a "heart attack" we could consider myocardial infarction as one of the diagnosis. But considering chest pain features of our patient, there is no one that increases this possibility. So, these features may lead us to cognitive error if we consider myocardial infarction as the main diagnosis (which is wrong). </p>
+<p>In physical examination in patients with acute pericarditis, we may find pericardial rub, one of the diagnostic criteria. So, when we did not find it, the probability of the disease is reduced, but did not exclude the diagnosis. It is crucial to look for the other diagnostic criteria.</p>
+<p><dcc-trigger id='dcc3' type='*' link='Final.Level_3.3a' label='Next' ></dcc-trigger>
+<dcc-trigger id='dcc5' type='*' link='Final.Report' label='Return' ></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>

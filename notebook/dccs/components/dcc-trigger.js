@@ -71,7 +71,6 @@ class DCCTrigger extends DCCBlock {
    }
    
    _generateTemplate(render) {
-      // let linkWeb = (this.hasAttribute("link")) ? "href='" + this.link + "' " : "";
       let linkWeb = "";
       let elements = null;
       if (this.hasAttribute("image"))

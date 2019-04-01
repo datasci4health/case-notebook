@@ -271,7 +271,7 @@
 <p><dcc-talk id='dcc5' character='Jacinto' speech='What do you want to do?'>
 </dcc-talk></p>
 <p><dcc-trigger id='dcc7' type='*' link='Cycle_1.Generate_hypothesis' label='Generate hypothesis' ></dcc-trigger>
-<dcc-trigger id='dcc9' type='*' link='Cycle_1.Call_the_supervisor_A' label='Call the supervisor' ></dcc-trigger></p>
+<dcc-trigger id='dcc9' type='*' link='Cycle_1.Call_the_supervisor.A' label='Call the supervisor' ></dcc-trigger></p>
          </dcc-dialog>
       </dcc-styler>
     </div>

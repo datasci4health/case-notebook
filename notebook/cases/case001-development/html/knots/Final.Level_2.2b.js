@@ -234,10 +234,11 @@
        class="cls-15"
        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff" height="420px">
        <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
-          <p>As the patient has arterial hypertension, is smoker and his father died of a "heart attack" we could consider myocardial infarction as one of the diagnosis. But considering chest pain features of our patient, there is no one that increases this possibility. So, these features may lead us to cognitive error if we consider myocardial infarction as the main diagnosis (which is wrong). </p>
-<p>In physical examination in patients with acute pericarditis, we may find pericardial rub, one of the diagnostic criteria. So, when we did not find it, the probability of the disease is reduced, but did not exclude the diagnosis. It is crucial to look for the other diagnostic criteria.</p>
-<p><dcc-trigger id='dcc3' type='*' link='Final.Level_3a' label='Next' ></dcc-trigger>
-<dcc-trigger id='dcc5' type='*' link='Final.Final_report' label='Return' ></dcc-trigger></p>
+          <p>After checking the hypothesis you reviewed your answer to: <dcc-expression expression="Cycle_1.Review_hypothesis.hypothesis"></dcc-expression>.</p>
+<p>In acute pericarditis, patients are usually young, most cases are reported under 50 years old, but it can be diagnosed at any age. There is no vital signs features that increase the probability of this condition. Some patients may present fever and tachycardia, but it´s not common signs. So, when vital signs are normal, we cannot confirm or exclude this diagnosis.</p>
+<p>In clinical history, two features increase the probability of the chest pain being related to a pericardial disease: worsening with breathing; and worsening when the patient lay down. </p>
+<p><dcc-trigger id='dcc3' type='*' link='Final.Level_2.2c' label='Next' ></dcc-trigger>
+<dcc-trigger id='dcc5' type='*' link='Final.Report' label='Return' ></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>

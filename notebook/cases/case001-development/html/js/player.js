@@ -113,6 +113,29 @@ class PlayerManager {
          this.startGame();
    }
    
+   presentNote(knot) {
+      const dimensions = Utils.tools.screenDimensions();
+      // const coord = 
+      //    Utils.tools.centralize(dimensions.width * .7, dimensions.height * .7);
+      
+      let div = document.createElement("div");
+      
+      div.style.position = "absolute";
+      div.style.margin = "auto";
+      div.style.top = 0;
+      div.style.right = 0;
+      div.style.bottom = 0;
+      div.style.left = 0;
+      div.style.width = (dimensions.width * .7) + "px";
+      div.style.height = (dimensions.height * .7) + "px";
+      
+      div.innerHTML = knot;
+      
+      // console.log(div);
+      
+      this._mainPanel.appendChild(div);
+   }
+   
    /*
     * Registry related operations
     * ***************************

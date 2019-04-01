@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+(function() { PlayerManager.instance().presentNote(`<div class="sty-note-panel">
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -121,60 +121,38 @@
        height="936.40002"
        rx="11.5"
        id="rect11"
-       style="fill:none" />
+       style="fill:#004973" />
   </g>
-  <text
-     id="EKG"
-     class="cls-3"
-     style="font-weight:700;font-size:28px;font-family:SegoeUI-Bold, 'Segoe UI';fill:#346e93"
-     x="44.119659"
-     y="35.153847">
-    <tspan
-       x="44.119659"
-       y="65.153847"
-       id="tspan14">EKG</tspan>
-  </text>
   <foreignObject
      data-name="Action"
-     y="29.752275"
-     x="195.98291"
-     height="1010.4156"
-     width="1586.4957">
-     <dcc-styler xstyle="out" locations="action">
-         {knot}
-      </dcc-styler>
-  </foreignObject>
-  <rect
-     id="Rectangle_18"
-     data-name="Rectangle 18"
-     class="cls-4"
-     width="139"
-     height="59"
-     rx="29.5"
-     x="51.529915"
-     y="1008.7504"
-     style="fill:#ba2027" />
-   <foreignObject
-     data-name="Action"
-     x="55"
-     y="1025"
-     width="130"
-     height="30">
-    <div
-       id="action"
-       class="cls-15"
-       style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;text-align:center;width:100%">
-        action
+     y="10"
+     x="30"
+     height="500"
+     width="900"
+     transform="scale(2 2)">
+     <div style="font-size:24px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff;overflow:scrool">
+        <dcc-styler xstyle="out">
+           <p><img src="images/ebm-pulmonary-embolism-wells-criteria.png" alt="Pulmonary Embolism Wells Criteria" /></p>
+<p><dcc-trigger id='dcc3' type='*' link='Call_the_supervisor_B' label='Back' ></dcc-trigger></p>
+        </dcc-styler>
      </div>
-   </foreignObject>
-  <path
-     style="fill:#346e93"
-     inkscape:connector-curvature="0"
-     d="m 1859.9402,35.358974 a 25,25 0 1 0 25,25 25,25 0 0 0 -25,-25 z m 16.512,35.335 a 1.861,1.861 0 0 1 0,2.624 l -3.553,3.554 a 1.861,1.861 0 0 1 -2.624,0 l -10.335,-10.335 -10.335,10.335 a 1.861,1.861 0 0 1 -2.624,0 l -3.553,-3.554 a 1.861,1.861 0 0 1 0,-2.624 l 10.335,-10.335 -10.335,-10.335 a 1.861,1.861 0 0 1 0,-2.624 l 3.553,-3.554 a 1.861,1.861 0 0 1 2.624,0 l 10.335,10.335 10.335,-10.335 a 1.861,1.861 0 0 1 2.624,0 l 3.553,3.554 a 1.861,1.861 0 0 1 0,2.624 l -10.335,10.335 z"
-     class="cls-6"
-     data-name="Close Window"
-     id="close-window" />
+  </foreignObject>
+   <g data-name="Close Window"
+      id="close-window">
+     <circle
+      style="opacity:1;fill:#004973;fill-opacity:1;stroke-width:1.08921933"
+      id="path828"
+      cx="1859.9829"
+      cy="60.401711"
+      r="25.042736" />
+     <path
+        style="fill:#ffffff"
+        inkscape:connector-curvature="0"
+        d="m 1859.9402,35.358974 a 25,25 0 1 0 25,25 25,25 0 0 0 -25,-25 z m 16.512,35.335 a 1.861,1.861 0 0 1 0,2.624 l -3.553,3.554 a 1.861,1.861 0 0 1 -2.624,0 l -10.335,-10.335 -10.335,10.335 a 1.861,1.861 0 0 1 -2.624,0 l -3.553,-3.554 a 1.861,1.861 0 0 1 0,-2.624 l 10.335,-10.335 -10.335,-10.335 a 1.861,1.861 0 0 1 0,-2.624 l 3.553,-3.554 a 1.861,1.861 0 0 1 2.624,0 l 10.335,10.335 10.335,-10.335 a 1.861,1.861 0 0 1 2.624,0 l 3.553,3.554 a 1.861,1.861 0 0 1 0,2.624 l -10.335,10.335 z"
+        class="cls-6"/>
+  </g>
   <foreignObject>
      <dcc-trigger action="knot/</navigate" label="Previous Knot" xstyle="out-image" location="close-window"></dcc-trigger>
   </foreignObject>
 </svg>
+</div>`) })();

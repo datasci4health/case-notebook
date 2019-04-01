@@ -41,6 +41,7 @@ class Translator {
          let transObj = this._knotMdToObj(knotBlocks[kb].match(Translator.marks.knot));
          transObj.render = true;
          let label = transObj.title;
+         // console.log("Label: " + label);
          if (transObj.level == 1)
             knotCtx[0] = {label: label, obj: transObj};
          else {
@@ -53,7 +54,7 @@ class Translator {
                label = knotCtx[upper].label + "." + label;
                knotCtx[upper].obj.render = false;
             }
-            knotCtx[transObj.level-1] = label;
+            knotCtx[transObj.level-1] = {label: label, obj: transObj};
          }
          let knotId = label.replace(/ /g, "_");
          if (kb == 1)
@@ -366,6 +367,16 @@ class Translator {
          knot.categories = matchArray[3].trim().split(",");
       else if (matchArray[5] != null)
          knot.categories = matchArray[5].trim().split(",");
+      
+      if (knot.categories != null)
+         for (let sc in Translator.specialCategories) {
+            let cat = knot.categories.indexOf(Translator.specialCategories[sc]);
+            if (cat >= 0) {
+               let category = knot.categories[cat];
+               knot.categories.splice(cat, 1);
+               knot.categories.unshift(category);
+            }
+         }
       
       if (matchArray[1] != null)
          knot.level = matchArray[1].trim().length;
@@ -770,7 +781,7 @@ class Translator {
       // <TODO> weak strategy -- improve
       this._lastSelectorContext = context.context;
       this._lastSelectorEvaluation = context.evaluation;
-      console.log("1. last context: " + this._lastSelectorContext);
+      // console.log("1. last context: " + this._lastSelectorContext);
 
       return context;
    }
@@ -841,7 +852,7 @@ class Translator {
          else if (this._lastSelectorContext == "player")
             selector.present = this._lastSelectorEvaluation;
       }
-      console.log("2. last context: " + this._lastSelectorContext);
+      // console.log("2. last context: " + this._lastSelectorContext);
       return selector;
    }
    
@@ -876,8 +887,6 @@ class Translator {
    
    Translator.marksAnnotationInside = /([\w \t\+\-\*"]+)(?:[=\:]([\w \t%]*)(?:\/([\w \t%]*))?)?/im;
 
-   //
-   
    Translator.marks = {
       knot   : /(?:^[ \t]*(#+)[ \t]*(\w[\w \t]*)(?:\((\w[\w \t,]*)\))?[ \t]*#*[ \t]*$)|(?:^[ \t]*(\w[\w \t]*)(?:\((\w[\w \t,]*)\))?[ \t]*[\f\n\r](==+|--+)$)/im,
       option : /^[ \t]*([\+\*])[ \t]*([^\(&> \t][^\(&>\n\r\f]*)?(?:\(([\w \t-]+)\)[ \t]*)?(?:-(?:(?:&gt;)|>)[ \t]*(\w[\w. \t]*))$/im,
@@ -893,6 +902,8 @@ class Translator {
       // annotation : 
       // score  : /^(?:<p>)?[ \t]*~[ \t]*([\+\-=\*\\%]?)[ \t]*(\w*)?[ \t]*(\w+)[ \t]*(?:<\/p>)?/im
    };
+   
+   Translator.specialCategories = ["start", "note"];
    
    Translator.contextHTML = {
       open:  /<p>(<dcc-group-selector(?:[\w \t\+\-\*"'=\%\/,]*)?>)<\/p>/igm,

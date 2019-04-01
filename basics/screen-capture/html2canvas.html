@@ -28,9 +28,26 @@
     </style>
     
     <script>
-       function screenCapture() {
+       async function screenCapture() {
           let captureArea = document.querySelector("#capture-area");
           let captureResult = document.querySelector("#capture-result");
+          
+          let promiseCapture = html2canvas(captureArea, {scale: 0.2});
+          
+          let canvas = await promiseCapture;
+          
+          console.log("captured");
+          captureArea.style.display = "none";
+          
+          captureResult.innerHTML = "<h1>This is the captured image:</h1>";
+          
+          canvas.style.width = "205px";
+          canvas.style.height = "153px";
+          console.log(canvas);
+          
+          captureResult.appendChild(canvas)
+          
+          /*
           html2canvas(captureArea, {scale: 0.2}).then(canvas => {
              console.log("captured");
              captureArea.style.display = "none";
@@ -43,6 +60,7 @@
              
              captureResult.appendChild(canvas)
           });
+          */
        }
     </script>
     

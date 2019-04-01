@@ -12,6 +12,8 @@ class DCCAuthorServer {
       window.messageBus.ext.subscribe("case/+/get", this.loadCase);
       this.saveCase = this.saveCase.bind(this);
       window.messageBus.ext.subscribe("case/+/set", this.saveCase);
+      this.loadKnotCapsule = this.loadKnotCapsule.bind(this);
+      window.messageBus.ext.subscribe("capsule/knot/get", this.loadKnotCapsule);
       this.loadTemplate = this.loadTemplate.bind(this);
       window.messageBus.ext.subscribe("template/+/get", this.loadTemplate);
       this.prepareCaseHTML = this.prepareCaseHTML.bind(this);
@@ -85,18 +87,16 @@ class DCCAuthorServer {
       }
    }
 
-   /*
-   async loadPlayer() {
-      const response = await fetch(DCCAuthorServer.serverAddress + "load-player", {
+   async loadKnotCapsule() {
+      const response = await fetch(DCCAuthorServer.serverAddress + "load-capsule", {
          method: "POST",
          headers:{
            "Content-Type": "application/json"
          }
       });
       const jsonResponse = await response.json();
-      return jsonResponse.player;
+      window.messageBus.ext.publish("capsule/knot", jsonResponse.capsule);
    }
-   */
 
    async loadTemplate(topic) {
       const templateCompleteName = MessageBus.extractLevel(topic, 2);

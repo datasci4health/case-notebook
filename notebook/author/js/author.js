@@ -12,6 +12,8 @@ class AuthorManager {
       this._compiledCase = null;
       this._knots = null;
       
+      this._navigator = new Navigator();
+      
       this._server = new DCCAuthorServer();
       
       this._currentTemplateFamily = "jacinto";
@@ -29,6 +31,12 @@ class AuthorManager {
 
       this._caseLoadSelected = this._caseLoadSelected.bind(this);
       this._templateFamilySelected = this._templateFamilySelected.bind(this);
+   }
+   
+   start() {
+      this._navigationPanel = document.querySelector("#navigation-panel");
+      this._knotPanel = document.querySelector("#knot-panel");
+      this._messageSpace = document.querySelector("#message-space");
    }
    
    /*
@@ -72,8 +80,8 @@ class AuthorManager {
       // const cases = await this._server.casesList(this._resourcePicker);
       const cases = await window.messageBus.ext.request("case/*/get", "", "case/*");
       this._resourcePicker.addSelectList(cases.message);
-      let knotPanel = document.querySelector("#knot-panel");
-      knotPanel.appendChild(this._resourcePicker);
+      // let knotPanel = document.querySelector("#knot-panel");
+      this._knotPanel.appendChild(this._resourcePicker);
    }
 
    /*
@@ -85,31 +93,19 @@ class AuthorManager {
       // let caseMd = await this._server.loadCase(this._currentCaseName);
       const caseMd = await window.messageBus.ext.request("case/" + this._currentCaseName + "/get", "",
                                                           "case/" + this._currentCaseName);
-      let navigationPanel  = document.querySelector("#navigation-panel");
-      let knotPanel = document.querySelector("#knot-panel");
-      knotPanel.removeChild(this._resourcePicker);
+      // let navigationPanel  = document.querySelector("#navigation-panel");
+      // let knotPanel = document.querySelector("#knot-panel");
+      this._knotPanel.removeChild(this._resourcePicker);
       
       this._compiledCase = this._translator.compileMarkdown(this._currentCaseName, caseMd.message);
       this._knots = this._compiledCase.knots;
       
-      for (let kn in this._knots) {
-         if (this._knots[kn].type == "knot") {
-            let miniature = document.createElement("div");
-            miniature.classList.add("navigation-knot");
-            miniature.classList.add("std-border");
-            const dot = this._knots[kn].title.lastIndexOf(".");
-            const title = (dot == -1) ? this._knots[kn].title : this._knots[kn].title.substring(dot);
-            if (this._knots[kn].render)
-               miniature.innerHTML = "<h3><dcc-trigger action='knot/" + kn + "/selected' xstyle='none' " +
-                                         "label = '" + title + "'>" +
-                                     "</dcc-trigger></h3>";
-            else
-               miniature.innerHTML = "<h2 style='background-color: lightgray'>" + title + "</h2>";
-            navigationPanel.appendChild(miniature);
-         }
-            
-      }
-      console.log(this._knots);
+      /*
+      this._knotPanel.style.flex = "20%";
+      this._navigationPanel.style.flex = "80%";
+      this._navigator.mountCase(this._compiledCase.knots);
+      */
+      this._navigator.mountPlainCase(this, this._compiledCase.knots);
    }
 
    /*
@@ -137,14 +133,16 @@ class AuthorManager {
                                                                  "case/" + this._currentCaseName + "/version");
          
          console.log("Case saved! Previous version: " + versionFile.message);
-         document.querySelector("#message-space").innerHTML = "Saved";
+         // document.querySelector("#message-space").innerHTML = "Saved";
+         this._messageSpace.innerHTML = "Saved";
          setTimeout(this._clearMessage, 2000);
 
          let promise = new Promise((resolve, reject) => {
             setTimeout(() => resolve("done!"), 2000);
          });
          let result = await promise;
-         document.querySelector("#message-space").innerHTML = "";
+         // document.querySelector("#message-space").innerHTML = "";
+         this._messageSpace.innerHTML = "";
       }
    }
 
@@ -152,8 +150,8 @@ class AuthorManager {
     * ACTION: control-play
     */
    async playCase() {
-      let message = document.querySelector("#message-space");
-      message.innerHTML = "Preparing...";
+      // let message = document.querySelector("#message-space");
+      this._messageSpace.innerHTML = "Preparing...";
       // await this._server.prepareCaseHTML(this._currentTemplateFamily, this._currentCaseName);
       await window.messageBus.ext.request("case/" + this._currentCaseName + "/prepare",
                                           this._currentTemplateFamily,
@@ -176,16 +174,16 @@ class AuthorManager {
       let processing = 0;
       for (let kn in htmlSet) {
          processing++;
-         message.innerHTML = "Processed: " + processing + "/" + total;
+         this._messageSpace.innerHTML = "Processed: " + processing + "/" + total;
          if (htmlSet[kn].render) {
-            // let htmlName = kn.replace(/ /igm, "_");
             let finalHTML = "";
             if (processing > 4)
                finalHTML = await this._generateHTMLBuffer(kn);
             else 
                finalHTML = await this._loadTemplate(this._currentTemplateFamily, kn);
-            // finalHTML = this._templateSet.player.replace("{knot}", finalHTML);
-            finalHTML = AuthorManager.jsonKnot.replace("{knot}", finalHTML);
+            finalHTML = (htmlSet[kn].categories && htmlSet[kn].categories.indexOf("note") >= 0)
+               ? AuthorManager.jsonNote.replace("{knot}", finalHTML)
+               : AuthorManager.jsonKnot.replace("{knot}", finalHTML);
             
             await window.messageBus.ext.request("knot/" + kn + "/set",
                                                 {caseId: this._currentCaseName,
@@ -198,7 +196,7 @@ class AuthorManager {
             */
          }
       }
-      message.innerHTML = "Finalizing...";
+      this._messageSpace.innerHTML = "Finalizing...";
       
       let caseJSON = this._translator.generateCompiledJSON(this._compiledCase);
       // await this._server.saveCaseScript(this._currentCaseName, "case.js", caseJSON);
@@ -206,7 +204,7 @@ class AuthorManager {
                                           {format: "json", source: caseJSON},
                                           "case/" + this._currentCaseName + "/set/status");
       
-      message.innerHTML = "";
+      this._messageSpace.innerHTML = "";
       
       delete this._templateSet;
       window.open("../cases/" + this._currentCaseName + "/html/index.html", "_blank");
@@ -249,6 +247,40 @@ class AuthorManager {
          this._htmlKnot = await this._generateHTML(this._knotSelected);
          this._renderKnot();
       }
+
+      // <TODO> improve this timeout solution
+      /*
+      let promise = new Promise((resolve, reject) => {
+         setTimeout(() => resolve(), 1000);
+      });
+      let result = await promise;
+      
+      if (!this._knots[this._knotSelected].miniature && this._renderSlide) {
+         let promiseCapture = html2canvas(document.querySelector('body'), {scale: 0.2});
+         this._knots[this._knotSelected].miniature = await promiseCapture;
+         this._knots[this._knotSelected].miniature.style.width = "205px";
+         this._knots[this._knotSelected].miniature.style.height = "153px";
+      }
+      const mini = document.querySelector("#mini-" + this._knotSelected.replace(/\./, "_"));
+      // mini.innerHTML = "";
+      mini.appendChild(this._knots[this._knotSelected].miniature);
+      */
+      /*
+      let promise = new Promise((resolve, reject) => {
+         setTimeout(() => resolve(), 1000);
+      });
+      let result = await promise;
+      if (!this._knots[this._knotSelected].miniature && this._renderSlide) {
+         let promiseCapture = domtoimage.toPng(this._knotPanel);
+         let dataUrl = await promiseCapture;
+         let img = new Image();
+         img.src = dataUrl;
+         img.width = 200;
+         img.height = 200;
+         const mini = document.querySelector("#mini-" + this._knotSelected.replace(/\./, "_"));
+         mini.appendChild(img);
+      }
+      */
    }
    
    /*
@@ -293,7 +325,8 @@ class AuthorManager {
             }
          }
       let finalHTML = this._translator.generateKnotHTML(this._knots[knot]);
-      for (let tp in templates)
+      // for (let tp in templates)
+      for (let tp = templates.length-1; tp >= 0; tp--)
          finalHTML = this._templateSet[templates[tp]].replace("{knot}", finalHTML);
       
       return finalHTML;
@@ -307,18 +340,17 @@ class AuthorManager {
    }
    
    _renderKnot() {
-      let knotPanel = document.querySelector("#knot-panel");
+      // let knotPanel = document.querySelector("#knot-panel");
       
       if (this._renderSlide) {
-         document.querySelector("#player-panel").innerHTML = "";
-         knotPanel.innerHTML = this._htmlKnot;
+         this._knotPanel.innerHTML = this._htmlKnot;
          
          let dccs = document.querySelectorAll("*");
          for (let d = 0; d < dccs.length; d++)
             if (dccs[d].tagName.toLowerCase().startsWith("dcc-lively-talk"))
                dccs[d].editDCC();
       } else {
-         knotPanel.innerHTML = "<div id='editor-space'></div>";
+         this._knotPanel.innerHTML = "<div id='editor-space'></div>";
          this._editor = new Quill('#editor-space', {
             theme: 'snow'
           });
@@ -336,6 +368,7 @@ class AuthorManager {
 
 (function() {
    AuthorManager.jsonKnot = "(function() { PlayerManager.instance().presentKnot(`{knot}`) })();";
+   AuthorManager.jsonNote = "(function() { PlayerManager.instance().presentNote(`{knot}`) })();";
    
-   new AuthorManager();
+   AuthorManager.author = new AuthorManager();
 })();

@@ -15,15 +15,28 @@ class DCCResourcePicker extends DCCBase {
 
       let templateHTML = 
          `<style>
+            .dsty-border-selector {
+               border-radius: 1px;
+               box-shadow: 0px 0px 0px 20px rgba(0,0,0,0.5);
+               margin: 15px;
+            }
             .dsty-border {
                border: 1px solid black;
                border-radius: 5px;
                margin: 5px;
             }
             .dsty-selector {
+               position: absolute;
+               margin: auto;
+               top: 0;
+               right: 0;
+               bottom: 0;
+               left: 0;
+               width: [width]px;
+               height: [height]px;
                overflow: hidden;
                display: flex;
-               max-width: 400px;
+               background: white;
             }
             @media (orientation: landscape) {
                .dsty-selector {
@@ -65,7 +78,7 @@ class DCCResourcePicker extends DCCBase {
                max-height: 100%;
             }
        </style>
-       <div id="presentation-dcc" class="dsty-selector dsty-border">
+       <div id="presentation-dcc" class="dsty-selector dsty-border-selector">
           <div class="dsty-selection-block">
              <select id="resource-list" size="10" class="dsty-resource-list dsty-border">
              </select>
@@ -75,11 +88,40 @@ class DCCResourcePicker extends DCCBase {
           </div>
        </div>`;
       
-      // templateHTML = templateHTML.replace("[files]", options);
+      const dialogSize = {
+         width: 400,
+         height: 300
+      };
+      
+      // const dialogPos = Utils.tools.centralize(dialogSize.width, dialogSize.height); 
+     
+      /*
+      let screen = {
+         left: (window.screenLeft != undefined) ? window.screenLeft : window.screenX,
+         top: (window.screenTop != undefined) ? window.screenTop : window.screenY,
+         width: (window.innerWidth)
+                   ? window.innerWidth
+                   : (document.documentElement.clientWidth)
+                      ? document.documentElement.clientWidth
+                      : screen.width,
+         height: (window.innerHeight)
+                    ? window.innerHeight
+                    : (document.documentElement.clientHeight)
+                       ? document.documentElement.clientHeight
+                       : screen.height
+      };
 
+      let systemZoom = screen.width / window.screen.availWidth;
+      
+      dialog.left = ((screen.width - dialog.width) / 2) / systemZoom + screen.left;
+      dialog.top = ((screen.height - dialog.height) / 2) / systemZoom + screen.top;
+      */
+      
       // building the template
       const template = document.createElement("template");
-      template.innerHTML = templateHTML;
+      template.innerHTML = templateHTML
+                              .replace("[width]", dialogSize.width)
+                              .replace("[height]", dialogSize.height);
       let shadow = this.attachShadow({mode: "open"});
       shadow.appendChild(template.content.cloneNode(true));
       

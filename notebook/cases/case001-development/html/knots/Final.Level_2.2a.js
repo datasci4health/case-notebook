@@ -234,28 +234,45 @@
        class="cls-15"
        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff" height="420px">
        <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
-          <div style="font-size: 18px">
-In the following table, we provide the diagnostic criteria for acute pericaditis and myopericarditis:
+          <div style="font-size: 14px">
+<b>Level 2</b>: At this level, we asked you to highlight in green all features that corroborate your hypothesis, in blue those are neutral and in red the ones speaking against your hypothesis.
+<br><br>
+<b>Your answer:</b>
+<br>
 
-![Clinical History Myocardial Infarction](images/ebm-pericarditis.png)
 
-Cooper LT, Imazio M. Management of myopericarditis. Expert Rev Cardiovasc Ther 2013; 11(2): 193-201.
+<dcc-group-selector id='dcc3' context='Final.Level_2.2a.player'  evaluation='Cycle_1.Check_hypothesis.symptoms' states=' ,+,=,-'>
 
-Our patient fullfill the following criteria: 1 and 3. So, acute pericarditis is the main diagnostic hypothesis.
+Nurse: Doctor, please you have to evaluate a man (<dcc-state-selector id='dcc5' player='Cycle_1.Check_hypothesis.symptoms'>51 years-old</dcc-state-selector>) who entered the emergency department reporting <dcc-state-selector id='dcc7' player='Cycle_1.Check_hypothesis.symptoms'>chest pain</dcc-state-selector>.His vital signs are <dcc-state-selector id='dcc9' player='Cycle_1.Check_hypothesis.symptoms'>ABP: 144x92mmHG</dcc-state-selector>; <dcc-state-selector id='dcc11' player='Cycle_1.Check_hypothesis.symptoms'>HR: 78bpm</dcc-state-selector>; <dcc-state-selector id='dcc13' player='Cycle_1.Check_hypothesis.symptoms'>RR: 21rpm</dcc-state-selector>; <dcc-state-selector id='dcc15' player='Cycle_1.Check_hypothesis.symptoms'>Temp: 37oC</dcc-state-selector>; <dcc-state-selector id='dcc17' player='Cycle_1.Check_hypothesis.symptoms'>O2Sat: 98%</dcc-state-selector>.
+<br>
+Patient: Doctor, I am feeling chest pain since yesterday. The <dcc-state-selector id='dcc19' player='Cycle_1.Check_hypothesis.symptoms'>pain is continuous</dcc-state-selector> and <dcc-state-selector id='dcc21' player='Cycle_1.Check_hypothesis.symptoms'>is located just in the middle of my chest</dcc-state-selector>, <dcc-state-selector id='dcc23' player='Cycle_1.Check_hypothesis.symptoms'>worsening when I breathe</dcc-state-selector> and <dcc-state-selector id='dcc25' player='Cycle_1.Check_hypothesis.symptoms'>when I lay down on my bed</dcc-state-selector>. I have <dcc-state-selector id='dcc27' player='Cycle_1.Check_hypothesis.symptoms'>arterial hypertension</dcc-state-selector> and <dcc-state-selector id='dcc29' player='Cycle_1.Check_hypothesis.symptoms'>I smoke 20 cigarettes</dcc-state-selector> every day. <dcc-state-selector id='dcc31' player='Cycle_1.Check_hypothesis.symptoms'>My father had a "heart attack"</dcc-state-selector> at my age and I am very worried about it.
+<br>
+You perform physical examination: <dcc-state-selector id='dcc33' player='Cycle_1.Check_hypothesis.symptoms'>cardiac and pulmonary auscultation are normal</dcc-state-selector>; <dcc-state-selector id='dcc35' player='Cycle_1.Check_hypothesis.symptoms'>chest pain does not worse with palpation of the thorax</dcc-state-selector>; <dcc-state-selector id='dcc37' player='Cycle_1.Check_hypothesis.symptoms'>there is no jugular stasis</dcc-state-selector> <dcc-state-selector id='dcc39' player='Cycle_1.Check_hypothesis.symptoms'>nor lower limb edema</dcc-state-selector>.
+
+
+</dcc-group-selector>
+
+
+<br><br>
+<b>Our answer:</b> 
+<br>
+
+
+<dcc-group-selector id='dcc43' context='Final.Level_2.2a.answers'  evaluation='answers' states=' ,+,=,-'>
+
+Nurse: Doctor, please you have to evaluate a man (<dcc-state-selector id='dcc45' answer='='>51 years-old</dcc-state-selector>) who entered the emergency department reporting <dcc-state-selector id='dcc47' answer='='>chest pain</dcc-state-selector>.His vital signs are <dcc-state-selector id='dcc49' answer='='>ABP: 144x92mmHG</dcc-state-selector>; <dcc-state-selector id='dcc51' answer='='>HR: 78bpm</dcc-state-selector>; <dcc-state-selector id='dcc53' answer='='>RR: 21rpm</dcc-state-selector>; <dcc-state-selector id='dcc55' answer='='>Temp: 37oC</dcc-state-selector>; <dcc-state-selector id='dcc57' answer='='>O2Sat: 98%</dcc-state-selector>.
+<br>
+Patient: Doctor, I am feeling chest pain since yesterday. The <dcc-state-selector id='dcc59' answer='='>pain is continuous</dcc-state-selector> and <dcc-state-selector id='dcc61' answer='='>is located just in the middle of my chest</dcc-state-selector>, <dcc-state-selector id='dcc63' answer='+'>worsening when I breathe</dcc-state-selector> and <dcc-state-selector id='dcc65' answer='+'>when I lay down on my bed</dcc-state-selector>. I have <dcc-state-selector id='dcc67' answer='-'>arterial hypertension</dcc-state-selector> and <dcc-state-selector id='dcc69' answer='-'>I smoke 20 cigarettes</dcc-state-selector> every day. <dcc-state-selector id='dcc71' answer='-'>My father had a "heart attack"</dcc-state-selector> at my age and I am very worried about it.
+<br>
+You perform physical examination: <dcc-state-selector id='dcc73' answer='-'>cardiac and pulmonary auscultation are normal</dcc-state-selector>; <dcc-state-selector id='dcc75' answer='='>chest pain does not worse with palpation of the thorax</dcc-state-selector>; <dcc-state-selector id='dcc77' answer='='>there is no jugular stasis</dcc-state-selector> <dcc-state-selector id='dcc79' answer='='>nor lower limb edema</dcc-state-selector>.
+
+
+</dcc-group-selector>
+
+
 </div>
-<p><dcc-trigger id='dcc3' type='*' link='Final.Final_report' label='Return' ></dcc-trigger></p>
-<div style="font-size: 18px">
-In the following table, we provide the diagnostic criteria for acute pericaditis and myopericarditis:
-
-![Clinical History Myocardial Infarction](images/ebm-pericarditis.png)
-
-Cooper LT, Imazio M. Management of myopericarditis. Expert Rev Cardiovasc Ther 2013; 11(2): 193-201.
-
-Our patient fullfill the following criteria: 1 and 3. So, acute pericarditis is the main diagnostic hypothesis.
-</div>
-<ul>
-<li>Return -&gt; Final report  </li>
-</ul>
+<p><dcc-trigger id='dcc83' type='*' link='Final.Level_2.2b' label='Next' ></dcc-trigger>
+<dcc-trigger id='dcc85' type='*' link='Final.Report' label='Return' ></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>

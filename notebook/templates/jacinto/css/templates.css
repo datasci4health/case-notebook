@@ -8,10 +8,10 @@
 .dcc-trigger-template {
    border: 1px solid lightgray;
    border-radius: 5px;
-   margin: 5px;
+   margin: 1px;
    color: #eeee;   
-   padding: 14px 25px;
-   text-align: center;
+   padding: 2px 2px;
+   /* text-align: center; */
    text-decoration: none;
    display: inline-block;
 }
@@ -28,26 +28,4 @@
    font-family:Tahoma, Geneva, sans-serif;
    fill:#707070;
    stroke:none;
-}
-
-/* Selector DCC */
-
-.dcc-state-selector-template:hover {
-   cursor: pointer;
-}
-
-.dcc-state-selector-0-template {
-   background-color: lightgrey;
-}
-
-.dcc-state-selector-1-template {
-   background-color: green;
-}
-
-.dcc-state-selector-2-template {
-   background-color: blue;
-}
-
-.dcc-state-selector-3-template {
-   background-color: red;
 }

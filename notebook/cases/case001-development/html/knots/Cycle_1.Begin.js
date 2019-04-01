@@ -272,7 +272,7 @@
 </dcc-talk></p>
 <p><dcc-trigger id='dcc7' type='*' link='Cycle_1.Generate_hypothesis' label='Generate hypothesis' ></dcc-trigger>
 <dcc-trigger id='dcc9' type='*' link='Cycle_1.More_information' label='More information' ></dcc-trigger>
-<dcc-trigger id='dcc11' type='*' link='Cycle_1.Call_the_supervisor_A' label='Call the supervisor' ></dcc-trigger></p>
+<dcc-trigger id='dcc11' type='*' link='Cycle_1.Call_the_supervisor.A' label='Call the supervisor' ></dcc-trigger></p>
          </dcc-dialog>
       </dcc-styler>
     </div>

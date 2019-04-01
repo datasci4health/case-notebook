@@ -56,44 +56,44 @@ All the internal paths are mapped to the external paths prefixing the path by: `
 * `template_family/*/get` - Returns the list of the available template families.
 
   response topic: `template_family/*`
-           message: {<template_family id>: <template_family icon>}
+           message: `{<template_family id>: <template_family icon>}`
 
 ### Entity: `template`
 * `template/<template_family id>.<template id>/get` - Loads and returns the HTML of the template.
 
   response topic: `template/<template_family id>.<template id>`
-           message: <template HTML>
+           message: `<template HTML>`
 
 
 ### Entity: `case`
 * `case/*/get` - Returns the list of the available cases.
 
   response topic: `case/*`
-           message: {<case id>: <case icon>}
+           message: `{<case id>: <case icon>}`
 
 * `case/<case id>/get` - Loads and returns the markdown of the case.
 
   response topic: `case/<case id>`
-           message: <case markdown>
+           message: `<case markdown>`
 
 * `case/<case id>/set` - Saves the case in a markdown or object format (according to the format specified in the message).
 
-  message: {format: "markdown" | "json", source: <case source>}
+  message: `{format: "markdown" | "json", source: <case source>}`
 
   * markdown format
 
     response topic: `case/<case id>/version`
-           message: <version id> - id of the previous case version.
+           message: `<version id>` - id of the previous case version.
 
   * object format
 
     response topic: `case/<case id>/set/status`
-           message: <status> - status of the opperation.
+           message: `<status>` - status of the opperation.
 
 * `case/<case id>/set` - Saves the markdown of the case.
 
   response topic: `case/<case id>/version`
-           message: <version id> - id of the previous case version.
+           message: `<version id>` - id of the previous case version.
 
 
 * `case/<case id>/prepare` - Prepares the environment where the case will run in HTML.
@@ -101,7 +101,7 @@ All the internal paths are mapped to the external paths prefixing the path by: `
   message: `{templateFamily: <template_family id>}` - template family to generate the HTML version of the case.
 
   response topic: `case/<case id>/prepare/status`
-           message: <status> - status of the preparation.
+           message: `<status>` - status of the preparation.
 ### Entity: `knot`
 `<knot title>` - The title given by the author to the knot in the case.
 `<knot id>` - Uniquely identifies a knot. Derived from the knot title replacing spaces for underscores (as we do not use spaces in the topics).
@@ -115,9 +115,8 @@ All the internal paths are mapped to the external paths prefixing the path by: `
   message: `{caseId: <case id>, format: "html", source: <html source>}`
 
 * `knot/<knot id>/navigate` - The player navigates to a specific knot.
-"knot/</navigate"
-      "knot/<</navigate"
-      "
+* `knot/</navigate`
+* `knot/<</navigate`
 
 ### Entity: `variable`
 
@@ -132,18 +131,15 @@ Variable input cycle:
 
 * `var/<variable>/typed` - Notifies that the user typed part of an input.
 
-  message: `{sourceType: "dcc-input",
-             value: "<value>"}`
+  message: `{sourceType: "dcc-input", value: <value>}`
 
 * `var/<variable>/changed` - Notifies a change em the input variable.
 
-  message: `{sourceType: "dcc-input",
-             value: "<value>"}`
+  message: `{sourceType: "dcc-input", value: <value>}`
 
 * `var/<variable>/set` - Notifies the input of a value by the user related to a `<variable>`.
 
-  message: `{sourceType: "dcc-input",
-             value: "<value>"}`
+  message: `{sourceType: "dcc-input", value: "<value>"}`
 
 ## Messages Not Persisted
 

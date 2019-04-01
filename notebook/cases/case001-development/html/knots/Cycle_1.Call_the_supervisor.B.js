@@ -234,19 +234,16 @@
        class="cls-15"
        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff" height="420px">
        <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
-          <p>
-
-<dcc-talk id='dcc3' character='SUPERVISOR Harry'>
-
-
-Hi! I am glad that you called me. Chest pain is an important complaint at the emergency department and we have to exclude the fatal causes: myocardial infarction (MI), acute aortic dissection (AAD), pulmonary embolism PE), hypertensive pneumothorax (HP), and Boerhaave Syndrome (BS).</p>
-<p>The best way to find out what is happening with your patient, my young padawan, is to gather as much information as possible through history taking and physical examination. We need to search for the signs and symptoms that can guide our clinical reasoning process by changing the pre-test probabilities of each disease.
-
-
+          <p><dcc-talk id='dcc3' character='SUPERVISOR Harry' speech='.'>
 </dcc-talk>
-
-</p>
-<p><dcc-trigger id='dcc7' type='*' link='Cycle_1.Call_the_supervisor_B' label='See likelihood tables' ></dcc-trigger></p>
+<strong>Likelihood Tables</strong></p>
+<p>Do you know the concept of Likelihood ratio (LR)? <dcc-trigger id='dcc5' type='+' link='Cycle_1.Call_the_supervisor.Likelihood_Ratio' label='Likelihood Ratio'></dcc-trigger></p>
+<p><dcc-trigger id='dcc7' type='+' link='Cycle_1.Call_the_supervisor.Clinical_History_Myocardial_Infarction' label='Clinical History Myocardial Infarction' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc9' type='+' link='Cycle_1.Call_the_supervisor.Physical_Examination_Myocardial_Infarction' label='Physical Examination Myocardial Infarction' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc11' type='+' link='Cycle_1.Call_the_supervisor.Clinical_History_Aortic_Dissection' label='Clinical History Aortic Dissection' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc13' type='+' link='Cycle_1.Call_the_supervisor.Physical_Examination_Aortic_Dissection' label='Physical Examination Aortic Dissection' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc15' type='+' link='Cycle_1.Call_the_supervisor.Pulmonary_Embolism_Wells_Criteria' label='Pulmonary Embolism Wells Criteria' ></dcc-trigger></p>
+<p><dcc-trigger id='dcc17' type='*' link='Cycle_1.Call_the_supervisor.C' label='Continue talking' ></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>

@@ -234,12 +234,19 @@
        class="cls-15"
        style="font-size:20px;font-family:Tahoma, Geneva, sans-serif;color:#ffffff" height="420px">
        <dcc-styler xstyle="out" locations="action-1;action-2;action-3">
-          <p>Congratulations, my young Dr. you could helped your patient providing his diagnosis. Now, Let's review all levels of this case.</p>
-<p><dcc-talk id='dcc3' character='Computer' speech='Select a final report level:'>
-</dcc-talk></p>
-<p><dcc-trigger id='dcc5' type='*' link='Final.Level_1' label='Level 1' ></dcc-trigger>
-<dcc-trigger id='dcc7' type='*' link='Final.Level_2a' label='Level 2a' ></dcc-trigger>
-<dcc-trigger id='dcc9' type='*' link='Final.Level_3a' label='Level 3a' ></dcc-trigger></p>
+          <p>
+
+<dcc-talk id='dcc3' character='SUPERVISOR Harry'>
+
+
+Hi! I am glad that you called me. Chest pain is an important complaint at the emergency department and we have to exclude the fatal causes: myocardial infarction (MI), acute aortic dissection (AAD), pulmonary embolism PE), hypertensive pneumothorax (HP), and Boerhaave Syndrome (BS).</p>
+<p>The best way to find out what is happening with your patient, my young padawan, is to gather as much information as possible through history taking and physical examination. We need to search for the signs and symptoms that can guide our clinical reasoning process by changing the pre-test probabilities of each disease.
+
+
+</dcc-talk>
+
+</p>
+<p><dcc-trigger id='dcc7' type='*' link='Cycle_1.Call_the_supervisor.B' label='See likelihood tables' ></dcc-trigger></p>
        </dcc-styler>
      </div>
   </foreignObject>
