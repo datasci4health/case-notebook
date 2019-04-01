@@ -60,7 +60,13 @@
          <div class="sty-message-space" id="message-space"></div>
       </div>
       <div class="sty-work-panel">
-         <div id="navigation-panel" class="sty-navigation-panel std-border"></div>
+         <div id="navigation-block" class="sty-navigation-block std-border">
+            <div id="navigation-panel" class="sty-navigation-panel"></div>
+            <div id="navigator-expansion" class="sty-navigation-expansion">
+               <dcc-trigger id="button-expand" action="control/navigator/expand" label="Expand" image="icons/icon-expand.svg"></dcc-trigger>
+               <dcc-trigger id="button-retract" action="control/navigator/retract" label="Retract" image="icons/icon-retract.svg" style="display:none"></dcc-trigger>
+            </div>
+         </div>
          <div id="knot-panel" class="sty-knot-panel std-border"></div>
       </div>
    </div>
