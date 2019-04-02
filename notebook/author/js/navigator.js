@@ -4,39 +4,24 @@
 
 class Navigator {
 
-/*
-async _checkMiniatures() {
-   const knotPanel = document.querySelector("#knot-panel");
-   
-   if (this._knots != null) {
-      for (let kn in this._knots) {
-         if (this._knots[kn].render && !this._knots[kn].miniature) {
-            let htmlKnot = await this._author._generateHTML(kn);
-            knotPanel.innerHTML = htmlKnot;
-            let promiseCapture = html2canvas(knotPanel, {scale: 0.2});
-            this._knots[kn].miniature = await promiseCapture;
-            // this._knots[kn].miniature = canvas.toDataURL();
-         }
-      }
-   }
-}
-*/
-   
 constructor() {
-   this._mountTreeClicked = this._mountTreeClicked.bind(this);
+   this.expandClicked = this.expandClicked.bind(this);
+   window.messageBus.ext.subscribe("control/navigator/expand", this.expandClicked);
+   this.retractClicked = this.retractClicked.bind(this);
+   window.messageBus.ext.subscribe("control/navigator/retract", this.retractClicked);
 }
    
 async mountPlainCase(author, knots) {
    this._author = author;
    this._knots = knots;
    this._navigationPanel = document.querySelector("#navigation-panel");
+   this._knotPanel = document.querySelector("#knot-panel");
+
+   this._navigationPanel.innerHTML = "";
+   document.querySelector("#navigation-block").style.flex = "15%";
+   this._knotPanel.style.flex = "75%";
    
    this._capsule = await window.messageBus.ext.request("capsule/knot/get", "", "capsule/knot");
-   
-   let openTree = this._createKnotEntry("_opentree_");
-   openTree.innerHTML = "<h2 style='color: white; background-color: black; cursor: pointer'>Gordon&gt;</h2>";
-   openTree.addEventListener("click", this._mountTreeClicked);
-   this._navigationPanel.appendChild(openTree);
    
    for (let kn in this._knots) {
       if (this._knots[kn].type == "knot") {
@@ -75,8 +60,16 @@ async _createMiniature(kn) {
    return iframe;
 }
 
-async _mountTreeClicked(event) {
+async expandClicked(topic, message) {
    this.mountTreeCase(this._author, this._knots);
+   document.querySelector("#button-expand").style.display = "none";
+   document.querySelector("#button-retract").style.display = "initial";
+}
+
+async retractClicked(topic, message) {
+   this.mountPlainCase(this._author, this._knots);
+   document.querySelector("#button-expand").style.display = "initial";
+   document.querySelector("#button-retract").style.display = "none";
 }
 
 async mountTreeCase(author, knots) {
@@ -88,8 +81,8 @@ async mountTreeCase(author, knots) {
    this._capsule = await window.messageBus.ext.request("capsule/knot/get", "", "capsule/knot");
    
    this._navigationPanel.innerHTML = "";
+   document.querySelector("#navigation-block").style.flex = "80%";
    this._knotPanel.style.flex = "20%";
-   this._navigationPanel.style.flex = "80%";
    
    // building the visual tree
    let tree = {level: 0, children: []};
@@ -100,6 +93,7 @@ async mountTreeCase(author, knots) {
    for (let k in this._knots) {
       if (!this._knots[k].categories || this._knots[k].categories.indexOf("note") < 0) {
          let newKnot = {id: "mini-" + k.replace(/\./g, "_"),
+                        knotid: k,
                         title: this._knots[k].title,
                         level: this._knots[k].level};
          if (previousKnot == null || newKnot.level == previousKnot.level)
@@ -129,11 +123,6 @@ async mountTreeCase(author, knots) {
    console.log(tree);
    
    // set the dimensions and margins of the graph
-   /*
-   let margin = {top: 10, right: 10, bottom: 10, left: 10},
-     width = 2048 - margin.left - margin.right,
-     height = 1200 - margin.top - margin.bottom;
-   */
    let margin = {top: 10, right: 10, bottom: 10, left: 10},
        width = tree.width,
        height = tree.height;
@@ -154,16 +143,6 @@ async mountTreeCase(author, knots) {
    
    var root = d3.hierarchy(tree).sum(function(d){return 1});
 
-   /*
-   d3.treemap()
-     .size([width, height])
-     .tile(d3.treemapSliceDice)
-     .paddingTop(28)
-     .paddingRight(7)
-     .paddingInner(3)
-     (root);
-   */
-
    let gs =
       svg
       .selectAll("rect")
@@ -171,14 +150,6 @@ async mountTreeCase(author, knots) {
       .enter()
       .append("g");
    
-   /*
-   gs.append("rect")
-      .attr('x', function (d) { return d.x0; })
-      .attr('y', function (d) { return d.y0; })
-      .attr('width', function (d) { return d.x1 - d.x0; })
-      .attr('height', function (d) { return d.y1 - d.y0; })
-      .style("opacity", function(d){ return 0.5});
-   */
    gs.append("rect")
       .attr("x", function (d) { return d.data.x; })
       .attr("y", function (d) { return d.data.y; })
@@ -186,15 +157,6 @@ async mountTreeCase(author, knots) {
       .attr("height", function (d) { return d.data.height; })
       .style("opacity", function(d){ return 0.5});
    
-   /*
-   gs.append("foreignObject")
-      .attr('x', function (d) { return d.x0; })
-      .attr('y', function (d) { return d.y0; })
-      .attr("id", function(d){ return d.data.id; })
-      .attr("width", function (d) { return d.x1 - d.x0; })
-      .attr("height", function (d) { return d.y1 - d.y0; });
-   */
-
    gs.append("foreignObject")
      .attr("x", function (d) { return d.data.x; })
      .attr("y", function (d) { return d.data.y + d.data.titleSize; })
@@ -202,29 +164,26 @@ async mountTreeCase(author, knots) {
      .attr("width", function (d) { return d.data.width; })
      .attr("height", function (d) { return d.data.height; });
    
-   /*
-   svg
-     .selectAll("text")
-     .data(root.descendants().filter(function(d){return d.depth>=1}))
-     .enter()
-     .append("text")
-     .attr("x", function(d){ return d.x0+5})
-     .attr("y", function(d){ return d.y0+20})
-     .text(function(d){ return d.data.title; })
-     .attr("font-size", function(d) {return ((4-d.data.level) * 10) + "px"})
-     .attr("fill", "white");
-   */
-   
-   svg
-      .selectAll("text")
+   svg.selectAll("text")
       .data(root.descendants().filter(function(d){return d.depth>=1}))
       .enter()
       .append("text")
+      .attr("id", function(d) {return "t_" + d.data.id})
       .attr("x", function(d){ return d.data.x + 5})
       .attr("y", function(d){ return d.data.y + 20})
       .text(function(d){ return d.data.title; })
       .attr("font-size", function(d) {return d.data.titleSize + "px"})
-      .attr("fill", "white");
+      .attr("fill", "white")
+      .attr("cursor", "pointer")
+      .on("click", function(d) {window.messageBus.ext.publish("knot/" + d.data.knotid + "/selected")})
+      .on("mouseover", function(d) {
+         let t = document.querySelector("#t_" + d.data.id);
+         t.removeChild(t.firstChild);
+         t.innerHTML = d.data.title + "[+]"})
+      .on("mouseout", function(d) {
+         let t = document.querySelector("#t_" + d.data.id);
+         t.removeChild(t.firstChild);
+         t.innerHTML = d.data.title});
    
    for (let kn in this._knots) {
       if (this._knots[kn].render) {
