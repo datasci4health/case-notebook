@@ -30,10 +30,9 @@ async mountPlainCase(author, knots) {
          const dot = this._knots[kn].title.lastIndexOf(".");
          const title = (dot == -1) ? this._knots[kn].title : this._knots[kn].title.substring(dot);
          if (this._knots[kn].render) {
-            miniature.innerHTML = "<h3 style='margin: 0px'><dcc-trigger action='knot/" + kn + "/selected' xstyle='none' " +
+            miniature.innerHTML = "<h3 style='margin: 0px'><dcc-trigger action='knot/" + kn + "/selected' xstyle='sty-navigation-knot-cover' " +
                                        "label = '" + title + "'>" +
-                                  "</dcc-trigger></h3>" +
-                                  "<div class='sty-navigation-knot-cover'></div>";
+                                  "</dcc-trigger></h3>";
             let iframe = await this._createMiniature(kn);
             miniature.appendChild(iframe);
          } else

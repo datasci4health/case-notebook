@@ -8,6 +8,8 @@ class AuthorManager {
    constructor() {
       window.messageBus.page = new MessageBus(false);
       
+      this._knotGenerateCounter = 2;
+      
       this._translator = new Translator();
       this._compiledCase = null;
       this._knots = null;
@@ -60,6 +62,8 @@ class AuthorManager {
          case "control/case/load": this.selectCase();
                                    break;
          case "control/case/save": this.saveCase();
+                                   break;
+         case "control/knot/new":  this.newKnot();
                                    break;
          case "control/knot/edit": this.editKnot();
                                    break;
@@ -126,7 +130,28 @@ class AuthorManager {
       while (k < knotIds.length && !this._knots[knotIds[k]].render)
          k++;
       
-      window.messageBus.ext.publish("knot/" + knotIds[k] + "/selected")
+      window.messageBus.ext.publish("knot/" + knotIds[k] + "/selected");
+   }
+   
+   /*
+    * ACTION: control/knot/new
+    */
+   async newKnot() {
+      console.log(this._knots);
+      this._knotSelected = "Knot_" + this._knotGenerateCounter;
+      let newKnot = {type: "knot",
+                     title: "Knot " + this._knotGenerateCounter,
+                     level: 1,
+                     render: true,
+                     _source: "# Knot " + this._knotGenerateCounter + "\n\n"};
+      this._knotGenerateCounter++;
+      this._knots[this._knotSelected] = newKnot;
+      this._translator.extractKnotAnnotations(this._knots[this._knotSelected]);
+      this._translator.compileKnotMarkdown(this._knots, this._knotSelected);
+      this._htmlKnot = await this._generateHTML(this._knotSelected);
+      await this._navigator.mountPlainCase(this, this._compiledCase.knots);
+      window.messageBus.ext.publish("knot/" + this._knotSelected + "/selected");
+      console.log(this._knots);
    }
    
    /*
@@ -270,7 +295,16 @@ class AuthorManager {
     * ACTION: knot-selected
     */
    async selectKnot(topic, message) {
+      if (this._miniPrevious)
+         this._miniPrevious.classList.remove("sty-selected-knot");
+      
       const knotId = MessageBus.extractLevel(topic, 2);
+      
+      const miniature = document.querySelector("#mini-" + knotId.replace(/\./g, "_"));
+      miniature.classList.add("sty-selected-knot");
+      
+      this._miniPrevious = miniature;
+            
       if (knotId != null) {
          this._checkKnotModification();
          this._knotSelected = knotId;
