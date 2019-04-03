@@ -1,5 +1,34 @@
 @charset "UTF-8";
 
+/* Knot (template) */
+/*******************/
+
+.template-knot {
+   display: flex;
+   flex-direction: column;
+   font-size: 20pt;
+   width: 100%;
+   padding: 20px;
+}
+
+.template-knot p {
+   margin-top: 5px;
+   margin-bottom: 5px;
+   margin-left: 0px;
+   margin-right: 0px;   
+}
+
+.template-knot img {
+   max-width: 200px;
+   max-height: 200px;   
+}
+
+.template-knot dcc-trigger {
+  display: block;
+  flex: 10%;
+  max-width: 50%;
+}
+
 /* Panel Left Picture (template) */
 /*********************************/
 

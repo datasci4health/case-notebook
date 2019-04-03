@@ -92,8 +92,17 @@ body {
    height: 100%;
 }
 
-.navigation-knot {
+.sty-navigation-knot {
    max-width: 100%;
+}
+
+.sty-navigation-knot-cover {
+   
+}
+
+.sty-navigation-knot-cover:hover {
+   max-width: 100%;
+   background: rgba(0, 0, 0, 0.3);
 }
 
 .sty-knot-panel {

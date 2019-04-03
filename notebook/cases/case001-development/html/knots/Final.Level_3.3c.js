@@ -244,18 +244,6 @@ Cooper LT, Imazio M. Management of myopericarditis. Expert Rev Cardiovasc Ther 2
 Our patient fullfill the following criteria: 1 and 3. So, acute pericarditis is the main diagnostic hypothesis.
 </div>
 <p><dcc-trigger id='dcc3' type='*' link='Final.Report' label='Return' ></dcc-trigger></p>
-<div style="font-size: 18px">
-In the following table, we provide the diagnostic criteria for acute pericaditis and myopericarditis:
-
-![Clinical History Myocardial Infarction](images/ebm-pericarditis.png)
-
-Cooper LT, Imazio M. Management of myopericarditis. Expert Rev Cardiovasc Ther 2013; 11(2): 193-201.
-
-Our patient fullfill the following criteria: 1 and 3. So, acute pericarditis is the main diagnostic hypothesis.
-</div>
-<ul>
-<li>Return -&gt; Final.Report  </li>
-</ul>
        </dcc-styler>
      </div>
   </foreignObject>
