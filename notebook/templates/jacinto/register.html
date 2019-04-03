@@ -11,13 +11,13 @@
         <p>Name: <input type="text" id="nameInput"></input></p>
         <p>Age: <input type="text" id="ageInput"></input></p>
         <div class="central-buttons">
-           <dcc-trigger action="control/register" label="Sign In"></dcc-trigger>
+           <dcc-trigger action="control/register" label="Register"></dcc-trigger>
         </div>
       </div>
 
       <div id="signed-user"  style="display:none">
         <div class="central-buttons">
-           <dcc-trigger action="knot/<</navigate" label="Proceed"></dcc-trigger>
+           <dcc-trigger link="<<" label="Proceed"></dcc-trigger>
         </div>
       </div>
 

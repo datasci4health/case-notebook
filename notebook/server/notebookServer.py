@@ -6,6 +6,7 @@ import datetime
 
 class NotebookDM(object):
     
+   DIR_MODELS = "../models/"
    DIR_CASES = "../cases/"
    DIR_SHARED = "../shared/"
    DIR_PLAYER = "../player/"
@@ -13,23 +14,42 @@ class NotebookDM(object):
    DIR_TEMPLATES = "../templates/"
    DIR_DCCS = "../dccs/components/"
    DIR_AUTHOR = "../author/"
+   
    FILE_CASE_NAME = "case"
    FILE_CASE_EXTENSION = ".md"
    FILE_CASE = FILE_CASE_NAME + FILE_CASE_EXTENSION
    FILE_PLAYER = "index.html"
    FILE_CAPSULE = "knot-capsule.html"
+   
+   BLANK_MODEL = "blank"
+   TEMPORARY_CASE = "_temporary"
     
    def templateFamiliesList(self):
        directories = glob.glob(NotebookDM.DIR_TEMPLATES + "*/")
        directories = [d.replace("\\", "/") for d in directories]  # adaptation for Windows
        directories = [d.replace(NotebookDM.DIR_TEMPLATES, "") for d in directories]
+       directories.sort()
        return [d.replace("/", "") for d in directories]
 
    def casesList(self):
        directories = glob.glob(NotebookDM.DIR_CASES + "*/")
        directories = [d.replace("\\", "/") for d in directories]  # adaptation for Windows
        directories = [d.replace(NotebookDM.DIR_CASES, "") for d in directories]
-       return [d.replace("/", "") for d in directories]
+       directories = [d.replace("/", "") for d in directories]
+       if NotebookDM.TEMPORARY_CASE in directories:
+          directories.remove(NotebookDM.TEMPORARY_CASE)
+       directories.sort()
+       return directories
+    
+   def newCase(self):
+       temporaryCase = NotebookDM.DIR_CASES + NotebookDM.TEMPORARY_CASE
+      
+       if os.path.isdir(temporaryCase):
+          shutil.rmtree(temporaryCase)
+       shutil.copytree(NotebookDM.DIR_MODELS + NotebookDM.BLANK_MODEL,
+                       temporaryCase)
+       
+       return NotebookDM.TEMPORARY_CASE
     
    def loadCase(self, caseName):
        caseDir = NotebookDM.DIR_CASES + caseName + "/"
@@ -38,7 +58,10 @@ class NotebookDM(object):
        authorImages = NotebookDM.DIR_AUTHOR + "images"
        if os.path.isdir(authorImages):
           shutil.rmtree(authorImages)
-       shutil.copytree(caseDir + "images", authorImages)
+       if os.path.isdir(caseDir + "images"):
+          shutil.copytree(caseDir + "images", authorImages)
+       else:
+          os.mkdir(authorImages)
        for fi in glob.glob(NotebookDM.DIR_SHARED + "images/*"):
           shutil.copy2(fi, authorImages)
        
@@ -69,6 +92,15 @@ class NotebookDM(object):
       
       return versionFile
         
+   def renameCase(self, oldName, newName):
+       status = "ok"
+       if os.path.isdir(NotebookDM.DIR_CASES + newName):
+          status = "duplicate"
+       else:
+          os.rename(NotebookDM.DIR_CASES + oldName, NotebookDM.DIR_CASES + newName)
+       
+       return status
+    
    def loadKnotCapsule(self):
      capsuleFile = open(NotebookDM.DIR_AUTHOR + NotebookDM.FILE_CAPSULE,
                          "r", encoding="utf-8")
@@ -118,19 +150,6 @@ class NotebookDM(object):
             shutil.copy2(fi, caseDir + "html/images")
       for fi in glob.glob(NotebookDM.DIR_SHARED + "images/*"):
          shutil.copy2(fi, caseDir + "html/images")
-      
-      # copy general case start files to the case directory
-      # playerTemplateFile = open(
-      #    NotebookDM.DIR_PLAYER + NotebookDM.FILE_PLAYER, "r", encoding="utf-8")
-      # playerTemplate = playerTemplateFile.read();
-      # playerTemplateFile.close()
-      # files = ["index", "signin", "register", "report"]
-      # for f in files:
-      #    htmlSourceFile = open((NotebookDM.DIR_TEMPLATES + templateFamily + "/" + "{}.html").format(f), "r", encoding="utf-8")
-      #    htmlTargetFile = open((caseDir + "html/{}.html").format(f), "w", encoding="utf-8")
-      #    htmlTargetFile.write(playerTemplate.format(knot = htmlSourceFile.read()))
-      #    htmlSourceFile.close()
-      #    htmlTargetFile.close()
         
    def saveKnotHTML(self, caseName, htmlName, content):
       self.saveFile(NotebookDM.DIR_CASES + caseName + "/html/knots/" + htmlName, content)

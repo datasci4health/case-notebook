@@ -4,7 +4,6 @@ class DCCResourcePicker extends DCCBase {
    constructor() {
       super();
       
-      this._listeners = [];
       this._selectList = null;
       this._listWeb = null;
    }

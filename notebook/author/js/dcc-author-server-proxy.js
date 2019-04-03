@@ -8,10 +8,14 @@ class DCCAuthorServer {
       window.messageBus.ext.subscribe("template_family/*/get", this.templateFamiliesList);
       this.casesList = this.casesList.bind(this);
       window.messageBus.ext.subscribe("case/*/get", this.casesList);
+      this.newCase = this.newCase.bind(this);
+      window.messageBus.ext.subscribe("case/_temporary/new", this.newCase);
       this.loadCase = this.loadCase.bind(this);
       window.messageBus.ext.subscribe("case/+/get", this.loadCase);
       this.saveCase = this.saveCase.bind(this);
       window.messageBus.ext.subscribe("case/+/set", this.saveCase);
+      this.renameCase = this.renameCase.bind(this);
+      window.messageBus.ext.subscribe("case/+/rename", this.renameCase);
       this.loadKnotCapsule = this.loadKnotCapsule.bind(this);
       window.messageBus.ext.subscribe("capsule/knot/get", this.loadKnotCapsule);
       this.loadTemplate = this.loadTemplate.bind(this);
@@ -56,6 +60,17 @@ class DCCAuthorServer {
       window.messageBus.ext.publish("case/*", finalCasesList);
    }
    
+   async newCase() {
+      const response = await fetch(DCCAuthorServer.serverAddress + "new-case", {
+         method: "POST",
+         headers:{
+           "Content-Type": "application/json"
+         }
+      });
+      const jsonResponse = await response.json();
+      window.messageBus.ext.publish("case/" + jsonResponse.caseName + "/set/status", "ok");
+   }
+
    async loadCase(topic) {
       const caseName = MessageBus.extractLevel(topic, 2);
       if (caseName != "*") {
@@ -85,6 +100,20 @@ class DCCAuthorServer {
          const jsonResponse = await response.json();
          window.messageBus.ext.publish("case/" + caseName + "/version", jsonResponse.versionFile);
       }
+   }
+
+   async renameCase(topic, message) {
+      const oldName = MessageBus.extractLevel(topic, 2);
+      const response = await fetch(DCCAuthorServer.serverAddress + "rename-case", {
+         method: "POST",
+         body: JSON.stringify({"oldName": oldName,
+                               "newName": message.newName}),
+         headers:{
+           "Content-Type": "application/json"
+         }
+      });
+      const jsonResponse = await response.json();
+      window.messageBus.ext.publish("case/" + oldName + "/rename/status", jsonResponse.status);
    }
 
    async loadKnotCapsule() {
