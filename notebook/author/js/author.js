@@ -96,8 +96,9 @@ class AuthorManager {
     * ACTION: control-load (2)
     */
    async _caseNameSelected(topic, message) {
+      console.log(topic);
       this._temporaryCase = false;
-      window.messageBus.ext.unsubscribe("control/case/selected", this._caseLoad);
+      window.messageBus.ext.unsubscribe("control/case/selected", this._caseNameSelected);
       this._caseLoad(message.selected);
       this._knotPanel.removeChild(this._resourcePicker);
    }
@@ -137,21 +138,19 @@ class AuthorManager {
     * ACTION: control/knot/new
     */
    async newKnot() {
-      console.log(this._knots);
-      this._knotSelected = "Knot_" + this._knotGenerateCounter;
+      const knotId = "Knot_" + this._knotGenerateCounter;
       let newKnot = {type: "knot",
                      title: "Knot " + this._knotGenerateCounter,
                      level: 1,
                      render: true,
                      _source: "# Knot " + this._knotGenerateCounter + "\n\n"};
       this._knotGenerateCounter++;
-      this._knots[this._knotSelected] = newKnot;
-      this._translator.extractKnotAnnotations(this._knots[this._knotSelected]);
-      this._translator.compileKnotMarkdown(this._knots, this._knotSelected);
-      this._htmlKnot = await this._generateHTML(this._knotSelected);
+      this._knots[knotId] = newKnot;
+      this._translator.extractKnotAnnotations(this._knots[knotId]);
+      this._translator.compileKnotMarkdown(this._knots, knotId);
+      this._htmlKnot = await this._generateHTML(knotId);
       await this._navigator.mountPlainCase(this, this._compiledCase.knots);
       window.messageBus.ext.publish("knot/" + this._knotSelected + "/selected");
-      console.log(this._knots);
    }
    
    /*

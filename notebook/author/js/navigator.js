@@ -57,7 +57,9 @@ async _createMiniature(kn) {
    let iframe = document.createElement('iframe');
    iframe.width = Navigator.standardDimensions.miniWidth;
    iframe.height = Navigator.standardDimensions.miniHeight;
-   iframe.srcdoc = this._capsule.message.replace("{knot}", htmlKnot);
+   iframe.srcdoc = this._capsule.message.replace(/{width}/g, Navigator.standardDimensions.miniWidth)
+                                        .replace(/{height}/g, Navigator.standardDimensions.miniHeight-6)
+                                        .replace("{knot}", htmlKnot);
    return iframe;
 }
 
