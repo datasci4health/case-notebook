@@ -8,6 +8,8 @@ class DCCAuthorServer {
       window.messageBus.ext.subscribe("template_family/*/get", this.templateFamiliesList);
       this.casesList = this.casesList.bind(this);
       window.messageBus.ext.subscribe("case/*/get", this.casesList);
+      this.modelsList = this.modelsList.bind(this);
+      window.messageBus.ext.subscribe("model/*/get", this.modelsList);
       this.newCase = this.newCase.bind(this);
       window.messageBus.ext.subscribe("case/_temporary/new", this.newCase);
       this.loadCase = this.loadCase.bind(this);
@@ -44,7 +46,22 @@ class DCCAuthorServer {
          finalFamiliesList[families[f]] = "icons/mono-slide.svg";
       window.messageBus.ext.publish("template_family/*", finalFamiliesList);
    }
-   
+
+   async modelsList() {
+      const response = await fetch(DCCAuthorServer.serverAddress + "models-list", {
+         method: "POST",
+         headers:{
+           "Content-Type": "application/json"
+         }
+      });
+      const jsonResponse = await response.json();
+      const models = jsonResponse.modelsList;
+      let finalModelsList = {};
+      for (var f in models)
+         finalModelsList[models[f]] = "icons/mono-slide.svg";
+      window.messageBus.ext.publish("model/*", finalModelsList);
+   }
+
    async casesList() {
       const response = await fetch(DCCAuthorServer.serverAddress + "cases-list", {
          method: "POST",

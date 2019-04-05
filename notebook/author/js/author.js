@@ -31,8 +31,9 @@ class AuthorManager {
       this.selectKnot = this.selectKnot.bind(this);
       window.messageBus.ext.subscribe("knot/+/selected", this.selectKnot);
 
-      this._caseNameSelected = this._caseNameSelected.bind(this);
       this._templateFamilySelected = this._templateFamilySelected.bind(this);
+      this.newKnot = this.newKnot.bind(this);
+      this._caseNameSelected = this._caseNameSelected.bind(this);
       
       this._temporaryCase = true;
    }
@@ -63,7 +64,7 @@ class AuthorManager {
                                    break;
          case "control/case/save": this.saveCase();
                                    break;
-         case "control/knot/new":  this.newKnot();
+         case "control/knot/new":  this.modelLoad();
                                    break;
          case "control/knot/edit": this.editKnot();
                                    break;
@@ -114,7 +115,7 @@ class AuthorManager {
    }
 
    /*
-    * ACTION: control-load (2)
+    * ACTION: control-load (3)
     */
    async _caseLoad(caseName) {
       this._currentCaseName = caseName;
@@ -135,9 +136,26 @@ class AuthorManager {
    }
    
    /*
-    * ACTION: control/knot/new
+    * ACTION: control/knot/new (1)
     */
-   async newKnot() {
+   async modelLoad() {
+      this._resourcePicker = new DCCResourcePicker();
+      this._resourcePicker.resource = "model";
+      
+      window.messageBus.ext.subscribe("control/model/selected", this.newKnot);
+      
+      const models = await window.messageBus.ext.request("model/*/get", "", "model/*");
+      this._resourcePicker.addSelectList(models.message);
+      this._knotPanel.appendChild(this._resourcePicker);
+   }
+
+   /*
+    * ACTION: control/knot/new (2)
+    */
+   async newKnot(topic, message) {
+      window.messageBus.ext.unsubscribe("control/model/selected", this.newKnot);
+      this._knotPanel.removeChild(this._resourcePicker);
+      
       const knotId = "Knot_" + this._knotGenerateCounter;
       let newKnot = {type: "knot",
                      title: "Knot " + this._knotGenerateCounter,

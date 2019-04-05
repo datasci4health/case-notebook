@@ -30,6 +30,13 @@ class NotebookDM(object):
        directories = [d.replace(NotebookDM.DIR_TEMPLATES, "") for d in directories]
        directories.sort()
        return [d.replace("/", "") for d in directories]
+    
+   def modelsList(self):
+       directories = glob.glob(NotebookDM.DIR_MODELS + "*/")
+       directories = [d.replace("\\", "/") for d in directories]  # adaptation for Windows
+       directories = [d.replace(NotebookDM.DIR_MODELS, "") for d in directories]
+       directories.sort()
+       return [d.replace("/", "") for d in directories]
 
    def casesList(self):
        directories = glob.glob(NotebookDM.DIR_CASES + "*/")
