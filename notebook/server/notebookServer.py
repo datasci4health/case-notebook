@@ -4,16 +4,18 @@ import os
 import uuid
 import datetime
 
+# <MIGRATION> parts of this code indicated with the <MIGRATION> tah
+#             are temporary solutions during migration to harena-space
 class NotebookDM(object):
     
    DIR_MODELS = "../models/"
    DIR_CASES = "../cases/"
    DIR_SHARED = "../shared/"
-   DIR_PLAYER = "../player/"
+   DIR_PLAYER = "../../../harena-space/player/" # <MIGRATION>
    DIR_INFRA = "../infra/"
    DIR_TEMPLATES = "../templates/"
    DIR_DCCS = "../dccs/components/"
-   DIR_AUTHOR = "../author/"
+   DIR_AUTHOR = "../../../harena-space/author/" # <MIGRATION>
    
    FILE_CASE_NAME = "case"
    FILE_CASE_EXTENSION = ".md"
@@ -62,6 +64,7 @@ class NotebookDM(object):
        caseDir = NotebookDM.DIR_CASES + caseName + "/"
        
        # build an author images directory combining cases and shared images
+       # <MIGRATION>
        authorImages = NotebookDM.DIR_AUTHOR + "images"
        if os.path.isdir(authorImages):
           shutil.rmtree(authorImages)
@@ -71,6 +74,7 @@ class NotebookDM(object):
           os.mkdir(authorImages)
        for fi in glob.glob(NotebookDM.DIR_SHARED + "images/*"):
           shutil.copy2(fi, authorImages)
+       # </MIGRATION>
        
        # retrieve the case file
        caseMd = open(NotebookDM.DIR_CASES + caseName + "/" + NotebookDM.FILE_CASE, "r", encoding="utf-8")
@@ -157,6 +161,8 @@ class NotebookDM(object):
             shutil.copy2(fi, caseDir + "html/images")
       for fi in glob.glob(NotebookDM.DIR_SHARED + "images/*"):
          shutil.copy2(fi, caseDir + "html/images")
+
+      return os.path.abspath(caseDir);
         
    def saveKnotHTML(self, caseName, htmlName, content):
       self.saveFile(NotebookDM.DIR_CASES + caseName + "/html/knots/" + htmlName, content)
