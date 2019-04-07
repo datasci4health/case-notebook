@@ -175,6 +175,9 @@ class Translator {
       
       let knot = knotSet[knotId];
       
+      if (knot.categories)
+         delete knot.categories;
+      
       let mdfocus = knot._preparedSource;
       knot.content = [];
       let compiledKnot = knot.content;
@@ -213,9 +216,10 @@ class Translator {
             } else
                compiledKnot.push(transObj);
             
-            if (matchStart + matchSize >= mdfocus.length)
+            if (matchStart + matchSize >= mdfocus.length) {
                matchStart = -1;
-            else
+               mdfocus = "";
+            } else
                mdfocus = mdfocus.substring(matchStart + matchSize);
          }
       } while (matchStart > -1);

@@ -248,8 +248,8 @@ Level 1 (detailed)
 
 Our patient complained about chest pain, located in the middle of his chest, worsening when he breaths and when he lay down on his bed. Both features increases the probability of pericardial disease, especially acute pericarditis. Although patient´s father died of a "heart attack", there were no chest pain features that increase the probability of myocardial infarction, as the pain did not irradiate to arms, the pain was not described as a pressure, neither complaining about nausea, vomiting or shortness of breath. Another differential diagnosis to consider is myopericarditis, but we not be able to find heart failure signs (pulmonary and cardiac auscultation were normal) and the patient did not complain about dyspnea. So, at the level 1, the answer to our open-ended question was Acute Pericarditis.
 
-* Next -> Level 2a
-* Return -> Final report
+* Next -> Level 2.2a
+* Return -> Report
 
 Level 2
 -------

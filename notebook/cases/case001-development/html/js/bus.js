@@ -41,12 +41,6 @@ class MessageBus {
    }
    
    async publish(topic, message) {
-      /*
-      if (this._externalized)
-         console.log("== external topic: " + topic);
-      else
-         console.log("   -- internal topic: " + topic);
-      */
       for (let l in this._listeners)
          if (this.matchTopic(l, topic))
             this._listeners[l].callback(topic, message);
@@ -62,13 +56,6 @@ class MessageBus {
             extTopic = this._runningCase.runningId + "/" + topic;
          }
          
-         /*
-         console.log("### REST: " + extTopic);
-         console.log(extMessage);
-         
-         console.log("server: " + MessageBus.serverAddress + "/message");
-         */
-         
          const response = await fetch(MessageBus.serverAddress + "/message", {
             method: "POST",
             body: JSON.stringify({"topic": extTopic,
@@ -78,9 +65,7 @@ class MessageBus {
               "Content-Type": "application/json"
             }
           });
-          // console.log(response);
           const status = await response.json();
-          // console.log(status);
       }
    }
    
@@ -109,15 +94,26 @@ class MessageBus {
             resolve({topic: topic, message: message, callback: callback});
          };
          this.subscribe(responseTopic, callback);
-         /*
-         this.subscribe(responseTopic,
-                        (topic, message) => resolve({topic: topic, message: message}));
-         */
          this.publish(requestTopic, requestMessage);
       });
       
       let returnMessage = await promise;
       this.unsubscribe(responseTopic, returnMessage.callback);
+      
+      return {topic: returnMessage.topic,
+              message: returnMessage.message};
+   }
+
+   async waitMessage(topic) {
+      let promise = new Promise((resolve, reject) => {
+         const callback = function(topic, message) {
+            resolve({topic: topic, message: message, callback: callback});
+         };
+         this.subscribe(topic, callback);
+      });
+      
+      let returnMessage = await promise;
+      this.unsubscribe(topic, returnMessage.callback);
       
       return {topic: returnMessage.topic,
               message: returnMessage.message};

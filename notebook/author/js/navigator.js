@@ -30,13 +30,14 @@ async mountPlainCase(author, knots) {
          const dot = this._knots[kn].title.lastIndexOf(".");
          const title = (dot == -1) ? this._knots[kn].title : this._knots[kn].title.substring(dot);
          if (this._knots[kn].render) {
-            miniature.innerHTML = "<h3><dcc-trigger action='knot/" + kn + "/selected' xstyle='none' " +
+            miniature.innerHTML = "<h3 style='margin: 0px'><dcc-trigger action='knot/" + kn + "/selected' xstyle='sty-navigation-knot-cover' " +
                                        "label = '" + title + "'>" +
                                   "</dcc-trigger></h3>";
             let iframe = await this._createMiniature(kn);
             miniature.appendChild(iframe);
          } else
-            miniature.innerHTML = "<h2 style='background-color: lightgray'>" + title + "</h2>";
+            miniature.innerHTML = "<h2 style='background-color: lightgray; margin: 5px;'>" + title + "</h2>" +
+                                  "<div class='sty-navigation-knot-cover'></div>";
          this._navigationPanel.appendChild(miniature);
       }
          
@@ -46,7 +47,7 @@ async mountPlainCase(author, knots) {
 _createKnotEntry(id) {
    let miniature = document.createElement("div");
    miniature.id = id; 
-   miniature.classList.add("navigation-knot");
+   miniature.classList.add("sty-navigation-knot");
    miniature.classList.add("std-border");
    return miniature;
 }
@@ -56,7 +57,9 @@ async _createMiniature(kn) {
    let iframe = document.createElement('iframe');
    iframe.width = Navigator.standardDimensions.miniWidth;
    iframe.height = Navigator.standardDimensions.miniHeight;
-   iframe.srcdoc = this._capsule.message.replace("{knot}", htmlKnot);
+   iframe.srcdoc = this._capsule.message.replace(/{width}/g, Navigator.standardDimensions.miniWidth)
+                                        .replace(/{height}/g, Navigator.standardDimensions.miniHeight-6)
+                                        .replace("{knot}", htmlKnot);
    return iframe;
 }
 

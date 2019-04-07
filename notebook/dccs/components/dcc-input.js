@@ -15,17 +15,7 @@ class DCCInput extends DCCBlock {
       super.connectedCallback();
       
       window.messageBus.ext.publish("var/" + this.variable + "/input/ready", DCCInput.elementTag);
-
-      // window.messageBus.ext.subscribe("get-input/" + this.variable, this.submitInput);
-      // window.messageBus.ext.subscribe("checkout", this.submitInput);
    }
-   
-   /*
-   submitInput(topic, message) {
-      const value = document.querySelector("#" + this.variable).value;
-      window.messageBus.ext.publish("input/" + this.variable, value);
-   }
-   */
    
    /*
     * Property handling
