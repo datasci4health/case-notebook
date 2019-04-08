@@ -38,8 +38,7 @@ More information (information)
 
 :Jacinto:What do you want to do?
 
-* Generate hypothesis -> Generate hypothesis
-* Call the supervisor -> Call the supervisor.A
+* Back to the case -> Cycle 1.Begin
 
 Call the supervisor
 -------------------
