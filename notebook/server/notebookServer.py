@@ -11,11 +11,13 @@ class NotebookDM(object):
    DIR_MODELS = "../models/"
    DIR_CASES = "../cases/"
    DIR_SHARED = "../shared/"
-   DIR_PLAYER = "../../../harena-space/player/" # <MIGRATION>
+   # DIR_PLAYER = "../../../harena-space/player/" <MIGRATION>
+   DIR_PLAYER = "../player/"
    DIR_INFRA = "../infra/"
    DIR_TEMPLATES = "../templates/"
    DIR_DCCS = "../dccs/components/"
-   DIR_AUTHOR = "../../../harena-space/author/" # <MIGRATION>
+   # DIR_AUTHOR = "../../../harena-space/author/" <MIGRATION>
+   DIR_AUTHOR = "../author/"
    
    FILE_CASE_NAME = "case"
    FILE_CASE_EXTENSION = ".md"
