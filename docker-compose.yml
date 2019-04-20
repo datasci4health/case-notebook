@@ -10,6 +10,6 @@
    ports:
      - 8081:80
      - 8881:8888  
-   enviroment:  
+   environment:  
      - CASE_NOTEBOOK_SERVICE_URL=http://localhost:8888
 
