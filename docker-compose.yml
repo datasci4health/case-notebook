@@ -2,14 +2,10 @@
 
  services:
 
-  case-notebook-v1:
-   image: datasci4health/case-notebook:v1
-
-   container_name: case-notebook-v1
+  case-notebook:
+   image: datasci4health/case-notebook
+   container_name: case-notebook
    restart: always
    ports:
-     - 8081:80
-     - 8881:8888  
-   environment:  
-     - CASE_NOTEBOOK_SERVICE_URL=http://localhost:8888
-
+     - 8080:80
+     - 8880:8888  
